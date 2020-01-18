@@ -1,0 +1,140 @@
+﻿<Window
+    x:Class="Quan.Views.BrowserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Quan.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Quan.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="http://prismlibrary.com/"
+    x:Name="Browser"
+    Title="Welcom,Friend!"
+    Width="900"
+    Height="600"
+    MinWidth="{Binding WindowMinimumHeight}"
+    MinHeight="{Binding WindowMinimumWidth}"
+    AllowsTransparency="True"
+    Icon="/Quan;component/Images/Logo/logo-small.png"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+
+        <Style TargetType="{x:Type local:BrowserView}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border Padding="{Binding OuterMarginSizeThickness}">
+                            <Grid>
+                                <Border
+                                    x:Name="Container"
+                                    Background="{StaticResource BackgroundLightBrush}"
+                                    CornerRadius="{Binding WindowCornerRadius}" />
+
+                                <Border
+                                    x:Name="RadiusBorder"
+                                    Background="{StaticResource ForegroundLightBrush}"
+                                    CornerRadius="{Binding WindowCornerRadius}">
+                                    <Border.Effect>
+                                        <DropShadowEffect Opacity="0.2" ShadowDepth="0" />
+                                    </Border.Effect>
+                                </Border>
+
+
+                                <Grid>
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TitleHeightGridLength}" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <!--  Icon  -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!--  Title  -->
+                                            <ColumnDefinition Width="*" />
+                                            <!--  Windows Button  -->
+                                            <ColumnDefinition Width="Auto" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Command="{Binding MenuCommand}" Style="{StaticResource SystemIconButton}">
+                                            <Image Source="/Quan;component/Images/Logo/logo-small.png" />
+                                        </Button>
+
+                                        <Viewbox
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            Margin="5">
+                                            <StackPanel>
+                                                <TextBlock
+                                                    Margin="0,0,0,-5"
+                                                    FontFamily="{StaticResource LatoBold}"
+                                                    FontSize="{StaticResource FontSizeRegular}">
+                                                    <Run Foreground="{StaticResource WordOrangeBrush}" Text="W" /><Run Foreground="{StaticResource WordBlueBrush}" Text="O" /><Run Foreground="{StaticResource WordRedBrush}" Text="R" /><Run Foreground="{StaticResource WordGreenBrush}" Text="D" />
+                                                </TextBlock>
+                                                <TextBlock
+                                                    Foreground="{StaticResource ForegroundDarkBrush}"
+                                                    Text="By liujiahao"
+                                                    TextAlignment="Center" />
+                                            </StackPanel>
+                                        </Viewbox>
+
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Button
+                                                Command="{Binding MinimizeCommand}"
+                                                Content="_"
+                                                Style="{StaticResource WindowControlButton}" />
+                                            <Button
+                                                Command="{Binding MaximizeCommand}"
+                                                Content="[ ]"
+                                                Style="{StaticResource WindowControlButton}" />
+                                            <Button
+                                                Command="{Binding CloseCommand}"
+                                                Content="X"
+                                                Style="{StaticResource WindowCloseButton}" />
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <!--  Page Content  -->
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
+
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="{Binding CaptionHeight}"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            ResizeBorderThickness="{Binding ResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+
+
+    <Grid Background="{StaticResource ForegroundLightBrush}">
+        <Border Background="{StaticResource WordBlueBrush}">
+            <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={converters:ApplicationPageValueConverter}}">
+                <Frame.Background>
+                    <ImageBrush
+                        ImageSource="/Images/Backgrounds/emoji-background.png"
+                        TileMode="Tile"
+                        Viewport="0 0 500 500"
+                        ViewportUnits="Absolute" />
+                </Frame.Background>
+            </Frame>
+        </Border>
+    </Grid>
+</Window>
