@@ -52,7 +52,7 @@
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource AncestorType=TextBox, Mode=FindAncestor, AncestorLevel=1}}" Value="">
+                                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource AncestorType=TextBox, AncestorLevel=1, Mode=FindAncestor}}" Value="">
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -83,7 +83,7 @@
         <Setter Property="Margin" Value="0,5" />
         <Setter Property="BorderBrush" Value="{StaticResource WordBlueBrush}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
-        <Setter Property="attachedProperties:PasswordBoxProperties.MonitorPassword" Value="True" />
+        <Setter Property="attachedProperties:MonitorPasswordProperty.Value" Value="True" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -115,7 +115,7 @@
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding (attachedProperties:PasswordBoxProperties.HasText), RelativeSource={RelativeSource AncestorType=PasswordBox, AncestorLevel=1, Mode=FindAncestor}}" Value="False">
+                                        <DataTrigger Binding="{Binding Path=(attachedProperties:HasTextProperty.Value), RelativeSource={RelativeSource AncestorType=PasswordBox, Mode=FindAncestor, AncestorLevel=1}}" Value="False">
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>

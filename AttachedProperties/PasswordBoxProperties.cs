@@ -3,60 +3,42 @@ using System.Windows.Controls;
 
 namespace Quan.AttachedProperties
 {
-    public class PasswordBoxProperties
+    /// <summary>
+    /// The MonitorPassword attach property for a<see cref="PasswordBox"/> 
+    /// </summary>
+    public class MonitorPasswordProperty : BaseAttachedProperty<MonitorPasswordProperty, bool>
     {
-        public static readonly DependencyProperty MonitorPasswordProperty =
-            DependencyProperty.RegisterAttached("MonitorPassword", typeof(bool), typeof(PasswordBoxProperties), new PropertyMetadata(false, OnMonitorPasswordChanged));
-
-        private static void OnMonitorPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public override void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (d is PasswordBox passwordBox)
+            if (sender is PasswordBox passwordBox)
             {
+                //Remove any previous evens
                 passwordBox.PasswordChanged -= PasswordBoxOnPasswordChanged;
-                if (e.NewValue is bool value && value)
+
+                //If the caller set MonitorPassword to true...
+                if (e.NewValue is bool flag && flag)
                 {
-                    SetHasText(passwordBox, passwordBox.SecurePassword.Length > 0);
+                    HasTextProperty.SetValue(passwordBox);
+                    //start listening out for password changes
                     passwordBox.PasswordChanged += PasswordBoxOnPasswordChanged;
                 }
             }
         }
 
-        private static void PasswordBoxOnPasswordChanged(object sender, RoutedEventArgs e)
+        private void PasswordBoxOnPasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (sender is PasswordBox passwordBox)
-            {
-                SetHasText(passwordBox, passwordBox.SecurePassword.Length > 0);
-            }
-
+            HasTextProperty.SetValue((PasswordBox)sender);
         }
+    }
 
-        public static void SetMonitorPassword(PasswordBox element, bool value)
+    /// <summary>
+    /// The HasText attach property for a<see cref="PasswordBox"/> 
+    /// </summary>
+    public class HasTextProperty : BaseAttachedProperty<HasTextProperty, bool>
+    {
+        public static void SetValue(DependencyObject sender)
         {
-            element.SetValue(MonitorPasswordProperty, value);
-        }
-
-        public static bool GetMonitorPassword(PasswordBox element)
-        {
-            return (bool)element.GetValue(MonitorPasswordProperty);
-        }
-
-
-        public static readonly DependencyProperty HasTextProperty =
-            DependencyProperty.RegisterAttached("HasText", typeof(bool), typeof(PasswordBoxProperties), new PropertyMetadata(false));
-
-        public static void SetHasText(PasswordBox element, bool value)
-        {
-            element.SetValue(HasTextProperty, value);
-        }
-
-        //private static void SetHasText(PasswordBox element)
-        //{
-        //    element.SetValue(HasTextProperty, element.SecurePassword.Length > 0);
-        //}
-
-        public static bool GetHasText(PasswordBox element)
-        {
-            return (bool)element.GetValue(HasTextProperty);
+            SetValue(sender, ((PasswordBox)sender).SecurePassword.Length > 0);
         }
     }
 }
