@@ -5,16 +5,8 @@ using System.Windows.Markup;
 
 namespace Quan.Converters
 {
-    public abstract class BaseValueConverter<T> : MarkupExtension, IValueConverter where T : class, new()
+    public abstract class BaseValueConverter<Tsoucre, TTarget> : MarkupExtension, IValueConverter
     {
-        #region Private Members
-
-        /// <summary>
-        /// A singel static instance of the value converter
-        /// </summary>
-        private static T mConverter = null;
-
-        #endregion
 
         #region Markup Extension Methods
 
@@ -23,11 +15,7 @@ namespace Quan.Converters
         /// </summary>
         /// <param name="serviceProvider">The service provider</param>
         /// <returns></returns>
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return mConverter ?? (mConverter = new T());
-        }
-
+        public override object ProvideValue(IServiceProvider serviceProvider) => this;
         #endregion
 
 
@@ -41,7 +29,18 @@ namespace Quan.Converters
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            => Convert((Tsoucre)value, parameter, culture);
+
+
+        /// <summary>
+        /// The method to convert Tsoucre value to TTarget value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public abstract TTarget Convert(Tsoucre value, object parameter, CultureInfo culture);
 
         /// <summary>
         /// The method to convert value back to it's source type
@@ -51,7 +50,17 @@ namespace Quan.Converters
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            => ConvertBack((TTarget)value, parameter, culture);
+
+        /// <summary>
+        /// The method to convert TTarget value back to it's source Tsource
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public abstract Tsoucre ConvertBack(TTarget value, object parameter, CultureInfo culture);
 
         #endregion
 

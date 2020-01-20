@@ -111,16 +111,6 @@
                             Foreground="{StaticResource ForegroundVeryDarkBrush}"
                             IsHitTestVisible="False"
                             Text="{TemplateBinding Tag}">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=(attachedProperties:HasTextProperty.Value), RelativeSource={RelativeSource AncestorType=PasswordBox, Mode=FindAncestor, AncestorLevel=1}}" Value="False">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
                         </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>

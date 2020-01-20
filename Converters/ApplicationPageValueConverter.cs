@@ -6,27 +6,22 @@ using System.Globalization;
 
 namespace Quan.Converters
 {
-    public class ApplicationPageValueConverter : BaseValueConverter<ApplicationPageValueConverter>
+    public class ApplicationPageValueConverter : BaseValueConverter<ApplicationPage, LoginPage>
     {
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override LoginPage Convert(ApplicationPage value, object parameter, CultureInfo culture)
         {
             //Find the appropriate page
-            if (value is ApplicationPage page)
+            switch (value)
             {
-                switch (page)
-                {
-                    case ApplicationPage.login:
-                        return new LoginPage();
-                    default:
-                        Debugger.Break();
-                        return null;
-                }
+                case ApplicationPage.login:
+                    return new LoginPage();
+                default:
+                    Debugger.Break();
+                    return null;
             }
-
-            return null;
         }
 
-        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override ApplicationPage ConvertBack(LoginPage value, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
