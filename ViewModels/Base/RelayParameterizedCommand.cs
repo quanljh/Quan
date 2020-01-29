@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Quan.ViewModels
+namespace Quan.ViewModels.Base
 {
-    public class RelayCommand : ICommand
+    public class RelayParameterizedCommand : ICommand
     {
         #region Private Members
 
         /// <summary>
         /// The action to run
         /// </summary>
-        private Action mAction;
+        private Action<object> mAction;
 
         #endregion
 
@@ -35,7 +31,7 @@ namespace Quan.ViewModels
         /// <summary>
         /// Default constructor
         /// </summary>
-        public RelayCommand(Action action)
+        public RelayParameterizedCommand(Action<object> action)
         {
             mAction = action;
         }
@@ -60,7 +56,7 @@ namespace Quan.ViewModels
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            mAction();
+            mAction(parameter);
         }
 
         #endregion

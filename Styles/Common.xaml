@@ -6,5 +6,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
 </ResourceDictionary>

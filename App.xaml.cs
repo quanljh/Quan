@@ -6,6 +6,7 @@ using Quan.Views;
 using Reactive.Bindings;
 using System.Reactive.Concurrency;
 using System.Windows;
+using Quan.ViewModels.Base;
 using Unity;
 using Unity.ServiceLocation;
 

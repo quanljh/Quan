@@ -1,6 +1,7 @@
 ﻿using Quan.DataModels;
 using System.Windows;
 using System.Windows.Input;
+using Quan.ViewModels.Base;
 
 namespace Quan.ViewModels
 {
