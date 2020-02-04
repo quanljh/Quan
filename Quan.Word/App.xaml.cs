@@ -36,15 +36,20 @@ namespace Quan
             window.Show();
         }
 
+
         private void InitializeContainer()
         {
             //Because of The ReactiveProperty base on one thread
             ReactivePropertyScheduler.SetDefault(ImmediateScheduler.Instance);
             Container.RegisterInstance(typeof(IUnityContainer), Container);
             Container.RegisterInstance(typeof(IEventAggregator), EventAggregator);
-            //IoC 解耦
+
+            //Creat a UnityServiceLocator which inherits from ServiceLocatorImplBase implement the interface IServiceLocator
             var provider = new UnityServiceLocator(Container);
+            //IoC 解耦(To lose the coupling between code and the IoC container)
             ServiceLocator.SetLocatorProvider(() => provider);
+
+            //Override Activator.CreateInstance(type) to IUnityContainer and use it to resolve our viewmodels
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
         }
 
