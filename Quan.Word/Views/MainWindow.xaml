@@ -104,7 +104,10 @@
                                     </Grid>
 
                                     <!--  Page Content  -->
-                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}">
+                                    <Border
+                                        Grid.Row="1"
+                                        Padding="{Binding InnerContentPadding}"
+                                        ClipToBounds="True">
                                         <ContentPresenter Content="{TemplateBinding Content}" />
                                     </Border>
 
@@ -127,28 +130,32 @@
     </WindowChrome.WindowChrome>
 
 
-    <Grid Background="{StaticResource ForegroundLightBrush}">
+    <Border Background="{StaticResource WordBlueBrush}">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush
+                    ImageSource="/Images/Backgrounds/emoji-background.png"
+                    TileMode="Tile"
+                    Viewport="0 0 500 500"
+                    ViewportUnits="Absolute" />
+            </Grid.Background>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!--  Side Menu  -->
-        <controls:SideMenuControl>
-            <controls:ChatListControl />
-        </controls:SideMenuControl>
+            <!--  Side Menu  -->
+            <controls:SideMenuControl Width="300" quan:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static viewModels:ViewModelLocator.Instance}}">
+                <controls:ChatListControl />
+            </controls:SideMenuControl>
 
-        <Border Grid.Column="1" Background="{StaticResource WordBlueBrush}">
-            <Frame x:Name="MainFrame" Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}, Converter={converters:ApplicationPageValueConverter}}">
-                <Frame.Background>
-                    <ImageBrush
-                        ImageSource="/Images/Backgrounds/emoji-background.png"
-                        TileMode="Tile"
-                        Viewport="0 0 500 500"
-                        ViewportUnits="Absolute" />
-                </Frame.Background>
-            </Frame>
-        </Border>
-    </Grid>
+            <controls:PageHost
+                x:Name="MainFrame"
+                Grid.Column="1"
+                CurrentPage="{Binding}"
+                DataContext="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}, Converter={converters:ApplicationPageValueConverter}}" />
+
+        </Grid>
+    </Border>
 </Window>

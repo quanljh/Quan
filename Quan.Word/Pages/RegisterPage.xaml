@@ -2,10 +2,9 @@
     x:Class="Quan.Pages.RegisterPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:attachedProperties="clr-namespace:Quan.AttachedProperties"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Quan.Pages"
+    xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Register"
     Title="LoginPage"
@@ -58,7 +57,7 @@
                     <Button
                         Height="56"
                         HorizontalAlignment="Center"
-                        attachedProperties:IsBusyProperty.Value="{Binding LoginIsRunning}"
+                        local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=Page}"
                         Content="Register" />

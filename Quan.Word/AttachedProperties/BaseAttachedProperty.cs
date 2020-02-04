@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Quan.AttachedProperties
+namespace Quan
 {
     /// <summary>
     /// A base attached property to replace the vanilla WPF attached property
@@ -10,7 +10,7 @@ namespace Quan.AttachedProperties
     /// <typeparam name="Property">The type of this attached property</typeparam>
     /// where T : [baseTypeName] The type argument must be or derive from the specified base class
     public abstract class BaseAttachedProperty<Parent, Property>
-        where Parent : BaseAttachedProperty<Parent, Property>, new()
+        where Parent : new()
     {
         #region Public Events
 
@@ -18,6 +18,11 @@ namespace Quan.AttachedProperties
         /// Fired when the value changes
         /// </summary>
         public event Action<DependencyObject, DependencyPropertyChangedEventArgs> ValueChanged = (sender, e) => { };
+
+        /// <summary>
+        /// Fired when the value changes,even when the value is same
+        /// </summary>
+        public event Action<DependencyObject, object> ValueUpdated = (sender, value) => { };
 
         #endregion
 
@@ -33,8 +38,16 @@ namespace Quan.AttachedProperties
         /// The attach property for this class
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.RegisterAttached("Value", typeof(Property), typeof(BaseAttachedProperty<Parent, Property>)
-                , new PropertyMetadata(new PropertyChangedCallback(OnValuePropertyChanged)));
+            DependencyProperty.RegisterAttached(
+                "Value",
+                typeof(Property),
+                typeof(BaseAttachedProperty<Parent, Property>),
+                new UIPropertyMetadata(
+                    default(Property),
+                    new PropertyChangedCallback(OnValuePropertyChanged),
+                    new CoerceValueCallback(OnValuePropertyUpdated)));
+
+
 
         /// <summary>
         /// The callback event when the <see cref="ValueProperty"/> is changed
@@ -44,10 +57,28 @@ namespace Quan.AttachedProperties
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             //Call the parent function
-            Instansce.OnValueChanged(d, e);
+            (Instansce as BaseAttachedProperty<Parent, Property>)?.OnValueChanged(d, e);
 
             //Call event listners
-            Instansce.ValueChanged(d, e);
+            (Instansce as BaseAttachedProperty<Parent, Property>)?.ValueChanged(d, e);
+        }
+
+        /// <summary>
+        /// The callback event when the <see cref="ValueProperty"/> is changed, even if it is the same value
+        /// </summary>
+        /// <param name="d">The UI Element that had it's property changed</param>
+        /// <param name="basevalue">The value</param>
+        /// <returns></returns>
+        private static object OnValuePropertyUpdated(DependencyObject d, object basevalue)
+        {
+            //Call the parent function
+            (Instansce as BaseAttachedProperty<Parent, Property>)?.OnValueUpdated(d, basevalue);
+
+            //Call event listners
+            (Instansce as BaseAttachedProperty<Parent, Property>)?.ValueUpdated(d, basevalue);
+
+            //Return the value
+            return basevalue;
         }
 
         /// <summary>
@@ -73,10 +104,15 @@ namespace Quan.AttachedProperties
         /// </summary>
         /// <param name="sender">The UI element that this property was changed for</param>
         /// <param name="e">The arguments for this event</param>
-        public virtual void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
+        public virtual void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
 
-        }
+
+        /// <summary>
+        /// The method that is called when any attached property of this type is changed,even if the value is same
+        /// </summary>
+        /// <param name="sender">The UI element that this property was changed for</param>
+        /// <param name="value">The arguments for this event</param>
+        public virtual void OnValueUpdated(DependencyObject sender, object value) { }
 
         #endregion
     }

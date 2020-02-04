@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace Quan.Animation
+namespace Quan
 {
     public static class PageAnimations
     {

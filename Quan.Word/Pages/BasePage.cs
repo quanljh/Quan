@@ -1,20 +1,13 @@
-﻿using Quan.Animation;
-using Quan.Word.Core;
+﻿using Quan.Word.Core;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan.Pages
+namespace Quan
 {
-    public class BasePage<VM> : Page
-        where VM : ViewModelBase, new()
+
+    public class BasePage : Page
     {
-        #region Private Properties
-
-        private VM _viewModel;
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -32,18 +25,11 @@ namespace Quan.Pages
         /// </summary>
         public float SlideSeconds { get; set; } = 0.8f;
 
-        public VM ViewModel
-        {
-            get => _viewModel;
-            set
-            {
-                if (_viewModel != null && _viewModel == value) return;
-                _viewModel = value;
-
-                DataContext = _viewModel;
-            }
-        }
-
+        /// <summary>
+        /// A flag to indicate if this page should animate out on load
+        /// Usefull for when we are move the page to another frame
+        /// </summary>
+        public bool ShouldAnimateOut { get; set; }
         #endregion
 
         #region Construct
@@ -54,8 +40,6 @@ namespace Quan.Pages
                 Visibility = Visibility.Collapsed;
 
             Loaded += BasePage_Loaded;
-
-            ViewModel = new VM();
         }
 
         #endregion
@@ -64,7 +48,10 @@ namespace Quan.Pages
 
         private async void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
-            await AnimateIn();
+            if (ShouldAnimateOut)
+                await AnimateOut();
+            else
+                await AnimateIn();
         }
 
         public async Task AnimateIn()
@@ -101,6 +88,49 @@ namespace Quan.Pages
         }
 
         #endregion
+
+    }
+
+    /// <summary>
+    /// The base page with added viewmodel support
+    /// </summary>
+    /// <typeparam name="VM"></typeparam>
+    public class BasePage<VM> : BasePage
+        where VM : ViewModelBase, new()
+    {
+        #region Private Properties
+
+        private VM _viewModel;
+
+        #endregion
+
+        #region Public Properties
+
+        public VM ViewModel
+        {
+            get => _viewModel;
+            set
+            {
+                if (_viewModel != null && _viewModel == value)
+                    return;
+                _viewModel = value;
+
+                DataContext = _viewModel;
+            }
+        }
+
+        #endregion
+
+        #region Construct
+
+        public BasePage() : base()
+        {
+            //Creat a default view model
+            ViewModel = new VM();
+        }
+
+        #endregion
+
 
 
     }

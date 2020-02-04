@@ -9,5 +9,7 @@
         /// The current page of the application
         /// </summary>
         public ApplicationPage CurrentPage { get; set; } = ApplicationPage.login;
+
+        public bool SideMenuVisible { get; set; }
     }
 }

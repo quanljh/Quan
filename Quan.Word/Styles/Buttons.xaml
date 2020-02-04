@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:attachedProperties="clr-namespace:Quan.AttachedProperties"
     xmlns:converters="clr-namespace:Quan.Converters"
     xmlns:local="clr-namespace:Quan">
 
@@ -96,7 +95,7 @@
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
         <Setter Property="Padding" Value="50,10" />
         <Setter Property="Margin" Value="0,10" />
-        <Setter Property="attachedProperties:IsBusyProperty.Value" Value="False" />
+        <Setter Property="local:IsBusyProperty.Value" Value="False" />
 
 
         <Setter Property="Template">
@@ -119,14 +118,14 @@
                                 FontFamily="{TemplateBinding FontFamily}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 Text="{TemplateBinding Content}"
-                                Visibility="{TemplateBinding attachedProperties:IsBusyProperty.Value,
+                                Visibility="{TemplateBinding local:IsBusyProperty.Value,
                                                              Converter={converters:BooleanToHiddenConverter}}" />
 
                             <TextBlock
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Style="{StaticResource SpinningText}"
-                                Visibility="{TemplateBinding attachedProperties:IsBusyProperty.Value,
+                                Visibility="{TemplateBinding local:IsBusyProperty.Value,
                                                              Converter={converters:BooleanToHiddenConverter},
                                                              ConverterParameter=True}" />
                         </Grid>
