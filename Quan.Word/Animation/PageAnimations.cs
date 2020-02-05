@@ -40,7 +40,7 @@ namespace Quan
         /// <param name="page">The page to animate</param>
         /// <param name="seconds">The time the animation will take</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeOutToLeft(Page page, float seconds)
+        public static async Task SlideAndFadeOutToLeft(this Page page, float seconds)
         {
             var sb = new Storyboard();
 

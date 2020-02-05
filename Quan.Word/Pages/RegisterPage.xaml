@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Register"
-    Title="LoginPage"
+    Title="RegisterPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    x:TypeArguments="core:LoginViewModel"
+    x:TypeArguments="core:RegisterViewModel"
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -33,14 +33,14 @@
                     <!--  Sign Up header  -->
                     <TextBlock
                         FontFamily="{StaticResource LatoRegular}"
-                        FontSize="{StaticResource FontSizeLarge}"
+                        FontSize="{StaticResource FontSizeXXLarge}"
                         Foreground="{StaticResource WordBlueBrush}"
                         Text="Sign Up" />
 
                     <!--  Sign up subtext  -->
                     <TextBlock
                         Margin="0,0,0,20"
-                        FontSize="{StaticResource FontSizeRegular}"
+                        FontSize="{StaticResource FontSizeLarge}"
                         Foreground="{StaticResource ForegroundDarkBrush}"
                         Text="It's about to get fun" />
 
@@ -53,12 +53,11 @@
                         Margin="0,0,0,30"
                         Tag="Password" />
 
-                    <!--  Login button  -->
+                    <!--  Register button  -->
                     <Button
-                        Height="56"
                         HorizontalAlignment="Center"
-                        local:IsBusyProperty.Value="{Binding LoginIsRunning}"
-                        Command="{Binding LoginCommand}"
+                        local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
+                        Command="{Binding RegisterCommand}"
                         CommandParameter="{Binding ElementName=Page}"
                         Content="Register" />
 
@@ -68,6 +67,7 @@
 
             <Button
                 HorizontalAlignment="Center"
+                Command="{Binding LoginCommand}"
                 Content="Or,I already have an account..."
                 Style="{StaticResource TextButton}" />
 

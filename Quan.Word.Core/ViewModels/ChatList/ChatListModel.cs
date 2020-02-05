@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prism.Mvvm;
 
-namespace Quan.Models
+namespace Quan.Word.Core
 {
     /// <summary>
     /// A view model for the overview chat list

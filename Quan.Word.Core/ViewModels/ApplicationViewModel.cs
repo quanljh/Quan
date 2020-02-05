@@ -8,8 +8,22 @@
         /// <summary>
         /// The current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.login;
+        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.login;
 
         public bool SideMenuVisible { get; set; }
+
+        /// <summary>
+        /// Navigates to the specified page
+        /// </summary>
+        /// <param name="chat">The page to go to</param>
+        public void GoToPage(ApplicationPage page)
+        {
+            //Set the current page
+            CurrentPage = page;
+
+            //Show Side menu or not
+            SideMenuVisible = page == ApplicationPage.chat;
+
+        }
     }
 }

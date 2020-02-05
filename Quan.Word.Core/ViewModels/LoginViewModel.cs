@@ -56,12 +56,16 @@ namespace Quan.Word.Core
         {
             await RunCommand(() => LoginIsRunning, async () =>
             {
-                await Task.Delay(5000);
+                await Task.Delay(2000);
 
-                if (parameter is IHavePassword loginPage)
-                {
-                    var passwd = loginPage.SecureString.Unsecure();
-                }
+                IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.chat);
+
+                //Go to chat page
+
+                //if (parameter is IHavePassword loginPage)
+                //{
+                //    var passwd = loginPage.SecureString.Unsecure();
+                //}
             });
         }
 
@@ -77,7 +81,7 @@ namespace Quan.Word.Core
             //{
             //    vm.CurrentPage = ApplicationPage.register;
             //}
-            IoC.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.register;
+            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.register);
 
             await Task.Delay(1);
         }

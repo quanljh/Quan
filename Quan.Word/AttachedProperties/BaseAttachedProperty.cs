@@ -64,7 +64,7 @@ namespace Quan
         }
 
         /// <summary>
-        /// The callback event when the <see cref="ValueProperty"/> is changed, even if it is the same value
+        /// The callback event when the <see cref="ValueProperty"/> is changed, even if it is the same value,or the value was set at first load
         /// </summary>
         /// <param name="d">The UI Element that had it's property changed</param>
         /// <param name="basevalue">The value</param>

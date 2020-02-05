@@ -135,7 +135,14 @@
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Compile Include="ViewModels\Base\RelayParameterizedCommand.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ChatList\ChatMessage\ChatMessageListItemModel.cs" />
+    <Compile Include="ViewModels\ChatList\ChatListItemModel.cs" />
+    <Compile Include="ViewModels\ChatList\ChatMessage\ChatMessageListModel.cs" />
+    <Compile Include="ViewModels\ChatList\ChatListModel.cs" />
+    <Compile Include="ViewModels\ChatList\Design\ChatListDesignModel.cs" />
+    <Compile Include="ViewModels\ChatList\Design\ChatListItemDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatListItemViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

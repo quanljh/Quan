@@ -23,7 +23,7 @@ namespace Quan
         /// <summary>
         /// The time any slide animation take to complete
         /// </summary>
-        public float SlideSeconds { get; set; } = 0.8f;
+        public float SlideSeconds { get; set; } = 0.4f;
 
         /// <summary>
         /// A flag to indicate if this page should animate out on load
@@ -48,6 +48,7 @@ namespace Quan
 
         private async void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
+            //If we are setup to animate out on load
             if (ShouldAnimateOut)
                 await AnimateOut();
             else
@@ -81,7 +82,7 @@ namespace Quan
                 case PageAnimation.SlideAndFadeOutToleft:
 
                     //Start the Animation
-                    await PageAnimations.SlideAndFadeOutToLeft(this, SlideSeconds);
+                    await this.SlideAndFadeOutToLeft(SlideSeconds);
 
                     break;
             }

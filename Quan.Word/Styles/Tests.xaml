@@ -16,7 +16,7 @@
 
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type TextBox}">
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
-        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="Margin" Value="0,5" />
         <Setter Property="BorderBrush" Value="{StaticResource WordBlueBrush}" />
@@ -80,7 +80,7 @@
 
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type PasswordBox}">
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
-        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="Margin" Value="0,5" />
         <Setter Property="BorderBrush" Value="{StaticResource WordBlueBrush}" />
@@ -112,6 +112,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="Center"
                             FontFamily="{StaticResource LatoThin}"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{StaticResource ForegroundVeryDarkBrush}"
                             IsHitTestVisible="False"
                             Text="{TemplateBinding Tag}"

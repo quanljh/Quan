@@ -33,14 +33,14 @@
                     <!--  Sign Up header  -->
                     <TextBlock
                         FontFamily="{StaticResource LatoRegular}"
-                        FontSize="{StaticResource FontSizeLarge}"
+                        FontSize="{StaticResource FontSizeXXLarge}"
                         Foreground="{StaticResource WordBlueBrush}"
                         Text="Sign In" />
 
                     <!--  Sign up subtext  -->
                     <TextBlock
                         Margin="0,0,0,20"
-                        FontSize="{StaticResource FontSizeRegular}"
+                        FontSize="{StaticResource FontSizeLarge}"
                         Foreground="{StaticResource ForegroundDarkBrush}"
                         Text="It's about to get fun" />
 
@@ -55,8 +55,6 @@
 
                     <!--  Login button  -->
                     <Button
-                        Width="170"
-                        Height="56"
                         HorizontalAlignment="Center"
                         local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                         Command="{Binding LoginCommand}"

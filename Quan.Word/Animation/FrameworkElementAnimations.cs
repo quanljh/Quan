@@ -86,7 +86,7 @@ namespace Quan
             sb.Begin(element);
 
             //Make element visible
-            element.Visibility = Visibility.Visible;
+            element.Visibility = Visibility.Collapsed;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
@@ -113,7 +113,7 @@ namespace Quan
             sb.Begin(element);
 
             //Make element visible
-            element.Visibility = Visibility.Visible;
+            element.Visibility = Visibility.Collapsed;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
