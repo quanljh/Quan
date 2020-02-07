@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using Quan.Converters;
+using Quan.Word.Core;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Quan.Controls
@@ -35,6 +39,16 @@ namespace Quan.Controls
         public PageHost()
         {
             InitializeComponent();
+
+            //If we are in DesignMode, show the current page 
+            //as the dependency property does not fire
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                NewPage.Content =
+                    (BasePage)new ApplicationPageValueConverter().Convert(IoC.Get<ApplicationViewModel>().CurrentPage,
+                        null, null);
+            }
+
         }
         #endregion
 
@@ -49,8 +63,8 @@ namespace Quan.Controls
         {
             //Get the frames
             if (d is PageHost pageHost
-                && pageHost.NewPage is Frame newPageFrame
-                && pageHost.OldPage is Frame oldPageFrame)
+                && pageHost.NewPage is ContentControl newPageFrame
+                && pageHost.OldPage is ContentControl oldPageFrame)
             {
                 //Store the current page content as the old page
                 var oldPageContent = newPageFrame.Content;
@@ -63,7 +77,17 @@ namespace Quan.Controls
 
                 //Animate out previous page
                 if (oldPageContent is BasePage oldPage)
+                {
+                    //Tell old page to animate out 
                     oldPage.ShouldAnimateOut = true;
+
+                    //Once it done,remove it
+                    Task.Delay((int)(oldPage.SlideSeconds * 1000)).ContinueWith(t =>
+                    {
+                        Application.Current.Dispatcher?.Invoke(() => oldPageFrame.Content = null);
+                    });
+                }
+
 
                 //Set the new page content
                 newPageFrame.Content = e.NewValue;

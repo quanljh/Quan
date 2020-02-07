@@ -13,12 +13,12 @@ namespace Quan
         /// <param name="page">The page to animate</param>
         /// <param name="seconds">The time the animation will take</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeInFromRight(this Page page, float seconds)
+        public static async Task SlideAndFadeInFromRight(this ContentControl page, float seconds)
         {
             var sb = new Storyboard();
 
             //Add slide from right animation
-            sb.AddSlideFromRight(seconds, page.WindowWidth);
+            sb.AddSlideFromRight(seconds, page.ActualWidth);
 
             //Add fade in animation
             sb.AddFadeIn(seconds);
@@ -40,12 +40,12 @@ namespace Quan
         /// <param name="page">The page to animate</param>
         /// <param name="seconds">The time the animation will take</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeOutToLeft(this Page page, float seconds)
+        public static async Task SlideAndFadeOutToLeft(this ContentControl page, float seconds)
         {
             var sb = new Storyboard();
 
             //Add slide from right animation
-            sb.AddSlideToLeft(seconds, page.WindowWidth);
+            sb.AddSlideToLeft(seconds, page.ActualWidth);
 
             //Add fade in animation
             sb.AddFadeOut(seconds);

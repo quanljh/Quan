@@ -18,7 +18,7 @@
                 </Grid.RowDefinitions>
 
                 <!--  Top Menu  -->
-                <Grid Height="50" Background="{StaticResource WordBlueBrush}">
+                <Grid Height="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />

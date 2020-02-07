@@ -88,7 +88,7 @@
                                             <ColorAnimation
                                                 Storyboard.TargetName="container"
                                                 Storyboard.TargetProperty="Background.Color"
-                                                To="{StaticResource WordVeryLightBlue}"
+                                                To="{StaticResource WordVeryVeryLightBlue}"
                                                 Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>

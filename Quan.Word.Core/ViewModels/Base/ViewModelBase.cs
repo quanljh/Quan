@@ -4,8 +4,10 @@ using Prism.Events;
 using Prism.Mvvm;
 using PropertyChanged;
 using System;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Windows;
 using Unity;
 
 namespace Quan.Word.Core
@@ -32,8 +34,11 @@ namespace Quan.Word.Core
 
         protected ViewModelBase()
         {
-            Container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            {
+                Container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+                EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            }
             FinishInteractionCommand = new DelegateCommand(() => { FinishInteraction?.Invoke(); });
         }
 

@@ -1,4 +1,5 @@
 ﻿using Quan.Word.Core;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,7 +7,7 @@ using System.Windows.Controls;
 namespace Quan
 {
 
-    public class BasePage : Page
+    public class BasePage : UserControl
     {
         #region Public Properties
 
@@ -36,6 +37,10 @@ namespace Quan
 
         public BasePage()
         {
+            //Don't bother animating in design time
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
+
             if (PageLoadAnimation != PageAnimation.none)
                 Visibility = Visibility.Collapsed;
 
@@ -65,7 +70,8 @@ namespace Quan
                 case PageAnimation.SlideAndFadeInFromRight:
 
                     //Start the Animation
-                    await this.SlideAndFadeInFromRight(SlideSeconds);
+                    if (Application.Current.MainWindow != null)
+                        await this.SlideAndFadeInFromRight(SlideSeconds, width: (int)Application.Current.MainWindow.Width);
 
                     break;
             }

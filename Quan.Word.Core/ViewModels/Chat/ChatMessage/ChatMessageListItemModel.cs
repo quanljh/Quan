@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 
 namespace Quan.Word.Core
 {
     /// <summary>
     /// A view model for each chat message thread item in the a chat thread
     /// </summary>
-    public class ChatMessageListItemModel : ViewModelBase
+    public class ChatMessageListItemModel : BindableBase
     {
         /// <summary>
         /// The display name of the sender of the message

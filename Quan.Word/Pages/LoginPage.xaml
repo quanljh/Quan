@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="Page"
-    Title="LoginPage"
+    x:Name="LoginPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:TypeArguments="core:LoginViewModel"
@@ -45,7 +44,10 @@
                         Text="It's about to get fun" />
 
                     <!--  Email  -->
-                    <TextBox Tag="Email" Text="{Binding Email}" />
+                    <TextBox
+                        local:IsFocusedProperty.Value="True"
+                        Tag="Email"
+                        Text="{Binding Email}" />
 
                     <!--  Password  -->
                     <PasswordBox
@@ -59,7 +61,8 @@
                         local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=Page}"
-                        Content="Login" />
+                        Content="Login"
+                        IsDefault="True" />
 
                 </StackPanel>
 

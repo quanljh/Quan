@@ -2,12 +2,17 @@
     x:Class="Quan.Controls.ChatMessageListItemControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Quan.Converters"
+    xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <Border Padding="5">
+    <Border
+        Padding="5"
+        d:DataContext="{x:Static core:ChatMessageListItemDesignModel.Instance}"
+        Background="{StaticResource WordBlueBrush}">
         <Grid>
 
             <Grid.ColumnDefinitions>
@@ -15,6 +20,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!--  Profile picture  -->
             <Border
                 Width="40"
                 Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
@@ -24,17 +30,40 @@
                 Background="{StaticResource WordGreenBrush}"
                 BorderBrush="{StaticResource ForegroundLightBrush}"
                 BorderThickness="2"
-                CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
+                CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}}">
                 <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="{StaticResource LatoRegular}"
                     Foreground="{StaticResource ForegroundLightBrush}"
-                    Text="JH" />
+                    Text="{Binding Initials}" />
             </Border>
 
-            <!--  Speech bubble area  -->
+            <!--  Chat message container  -->
             <Grid Grid.Column="1">
+
+                <Grid.Triggers>
+
+                    <!--  Mouse over shows time  -->
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetName="ExtraDetails" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimation To="1" Duration="0:0:0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+
+                    <!--  Mouse leave hides time  -->
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetName="ExtraDetails" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimation To="0" Duration="0:0:0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Grid.Triggers>
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -42,35 +71,56 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-
-                <TextBlock
+                <!--  Time container  -->
+                <StackPanel
+                    x:Name="ExtraDetails"
                     Grid.Row="0"
                     Grid.Column="1"
-                    FontSize="{StaticResource FontSizeSmall}"
-                    Foreground="{StaticResource ForegroundLightBrush}"
-                    Text="20:54pm" />
+                    HorizontalAlignment="{Binding SentByMe, Converter={converters:SentByMeToAlignmentConverter}}"
+                    Opacity="0"
+                    Orientation="Horizontal">
 
-                <!--  Chat bubble anchor  -->
+                    <!--  Sent time  -->
+                    <TextBlock
+                        Margin="0,0,15,0"
+                        FontFamily="{StaticResource LatoRegular}"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Foreground="{StaticResource ForegroundLightBrush}"
+                        Text="{Binding MessageSentTime, Converter={converters:TimeToDisplayTimeConverter}}" />
+
+                    <!--  Read time  -->
+                    <TextBlock
+                        FontFamily="{StaticResource LatoRegular}"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Foreground="{StaticResource WordDarkBlueBrush}"
+                        Text="{Binding MessageReadTime, Converter={converters:TimeToReadTimeConverter}}" />
+                </StackPanel>
+
+
+
+                <!--  Chat bubble anchor (left)  -->
                 <Path
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="0,5,-1,0"
-                    VerticalAlignment="Center"
+                    Margin="0,0,-2,0"
                     Panel.ZIndex="1"
-                    Data="M 0 0 L 5 -5 L 5 5 L 0 0"
+                    Data="M 0 0 S 0 5 11 5 L 11 15 S 0 15 0 0"
                     Fill="White"
                     Stroke="Black"
-                    StrokeThickness="0" />
+                    StrokeThickness="0"
+                    Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}}" />
 
                 <!--  Speech bubble Rectangle  -->
                 <Border
                     Grid.Row="1"
                     Grid.Column="1"
+                    Margin="{Binding SentByMe, Converter={converters:SentByMeToMarginConverter}}"
                     Padding="8"
-                    HorizontalAlignment="Left"
-                    Background="{StaticResource ForegroundLightBrush}"
+                    HorizontalAlignment="{Binding SentByMe, Converter={converters:SentByMeToAlignmentConverter}}"
+                    Background="{Binding SentByMe, Converter={converters:SentByMeToBackgroundConverter}}"
                     CornerRadius="10">
 
                     <!--  Message Text  -->
@@ -79,10 +129,23 @@
                         FontFamily="{StaticResource LatoRegular}"
                         Foreground="{StaticResource WordDarkBlueBrush}"
                         LineHeight="20"
-                        Text="This chat app is awesome! When is it coming out?I want to share it with my friends NOW!!!"
+                        Text="{Binding Message}"
                         TextWrapping="Wrap" />
 
                 </Border>
+
+                <!--  Chat bubble anchor (right)  -->
+                <Path
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="9,0,0,0"
+                    HorizontalAlignment="Right"
+                    Panel.ZIndex="1"
+                    Data="M 0 0 S 0 5 -11 5 L-11 15 S 0 15 0 0 "
+                    Fill="{Binding SentByMe, Converter={converters:SentByMeToBackgroundConverter}}"
+                    Stroke="Black"
+                    StrokeThickness="0"
+                    Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}, ConverterParameter=True}" />
             </Grid>
         </Grid>
     </Border>

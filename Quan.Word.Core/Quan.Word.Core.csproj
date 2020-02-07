@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\PropertyChanged.Fody.3.2.5\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.3.2.5\build\PropertyChanged.Fody.props')" />
+  <Import Project="..\packages\PropertyChanged.Fody.3.2.6\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.3.2.6\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -57,8 +57,8 @@
     <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="PropertyChanged, Version=3.2.5.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.3.2.5\lib\net40\PropertyChanged.dll</HintPath>
+    <Reference Include="PropertyChanged, Version=3.2.6.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.3.2.6\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveProperty, Version=6.2.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveProperty.6.2.0\lib\net461\ReactiveProperty.dll</HintPath>
@@ -116,10 +116,13 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Unity.Abstractions, Version=5.11.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.3\lib\net46\Unity.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Unity.Abstractions.5.11.3\lib\net46\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.11.3\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.ServiceLocation.5.11.1\lib\net46\Unity.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -135,13 +138,15 @@
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Compile Include="ViewModels\Base\RelayParameterizedCommand.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
-    <Compile Include="ViewModels\ChatList\ChatMessage\ChatMessageListItemModel.cs" />
-    <Compile Include="ViewModels\ChatList\ChatListItemModel.cs" />
-    <Compile Include="ViewModels\ChatList\ChatMessage\ChatMessageListModel.cs" />
-    <Compile Include="ViewModels\ChatList\ChatListModel.cs" />
-    <Compile Include="ViewModels\ChatList\Design\ChatListDesignModel.cs" />
-    <Compile Include="ViewModels\ChatList\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListItemModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\ChatListItemModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\ChatListModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\Design\ChatListDesignModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\Design\ChatListItemDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatListItemViewModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListDesignModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListItemDesignModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
@@ -155,8 +160,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.2.5\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.2.5\build\PropertyChanged.Fody.props'))" />
     <Error Condition="!Exists('..\packages\Fody.6.1.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.1.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.2.6\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.2.6\build\PropertyChanged.Fody.props'))" />
   </Target>
   <Import Project="..\packages\Fody.6.1.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.1.0\build\Fody.targets')" />
 </Project>

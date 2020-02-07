@@ -75,6 +75,10 @@ namespace Quan
     {
         protected override async void DoAnimation(FrameworkElement element, bool value)
         {
+            ////Don't bother animating in design time
+            //if (DesignerProperties.GetIsInDesignMode(element))
+            //    return;
+
             if (value)
                 //Animate in
                 await element.SlideAndFadeInFromLeft(FirstLoad ? 0 : 0.3f, false);

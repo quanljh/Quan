@@ -7,15 +7,45 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:Quan.Word.Core"
-    x:Name="Page"
-    Title="LoginPage"
+    x:Name="ChatPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:TypeArguments="core:LoginViewModel"
     mc:Ignorable="d">
 
-    <Border>
-        <controls:ChatMessageListControl />
-    </Border>
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--  Title bar  -->
+            <RowDefinition Height="Auto" />
+
+            <!--  Chat list  -->
+            <RowDefinition Height="*" />
+
+            <!--  Message send text box  -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Title bar  -->
+        <Grid Height="50">
+            <!--  Title text  -->
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource LatoRegular}"
+                FontSize="{StaticResource FontSizeXLarge}"
+                Foreground="{StaticResource ForegroundLightBrush}"
+                Text="Parnell" />
+
+            <!--  Main Buttons  -->
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Content="{StaticResource FontAweSomeSearchIcon}" Style="{StaticResource IconButton}" />
+                <Button Content="{StaticResource FontAweSomeEllipsisVerticalIcon}" Style="{StaticResource IconButton}" />
+            </StackPanel>
+        </Grid>
+
+
+
+
+        <controls:ChatMessageListControl Grid.Row="1" />
+    </Grid>
 </local:BasePage>

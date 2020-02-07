@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Quan.Controls"
     xmlns:converters="clr-namespace:Quan.Converters"
+    xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="http://prismlibrary.com/"
+    xmlns:pages="clr-namespace:Quan.Pages"
     xmlns:quan="clr-namespace:Quan"
     xmlns:viewModels="clr-namespace:Quan.ViewModels"
     x:Name="AppWindow"
@@ -22,7 +24,6 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
-
         <Style TargetType="{x:Type local:MainWindow}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -157,6 +158,7 @@
             <controls:PageHost
                 x:Name="MainFrame"
                 Grid.Column="1"
+                d:DataContext=""
                 CurrentPage="{Binding}"
                 DataContext="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}, Converter={converters:ApplicationPageValueConverter}}" />
 

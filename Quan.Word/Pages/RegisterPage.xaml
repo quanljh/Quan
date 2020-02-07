@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Register"
-    Title="RegisterPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:TypeArguments="core:RegisterViewModel"
@@ -45,7 +44,10 @@
                         Text="It's about to get fun" />
 
                     <!--  Email  -->
-                    <TextBox Tag="Email" Text="{Binding Email}" />
+                    <TextBox
+                        local:IsFocusedProperty.Value="True"
+                        Tag="Email"
+                        Text="{Binding Email}" />
 
                     <!--  Password  -->
                     <PasswordBox
@@ -59,7 +61,8 @@
                         local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
                         Command="{Binding RegisterCommand}"
                         CommandParameter="{Binding ElementName=Page}"
-                        Content="Register" />
+                        Content="Register"
+                        IsDefault="True" />
 
                 </StackPanel>
 
