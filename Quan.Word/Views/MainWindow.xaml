@@ -162,6 +162,7 @@
                 CurrentPage="{Binding}"
                 DataContext="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}, Converter={converters:ApplicationPageValueConverter}}" />
 
+     
         </Grid>
     </Border>
 </Window>

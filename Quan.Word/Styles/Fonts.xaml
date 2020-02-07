@@ -39,4 +39,6 @@
     <system:String x:Key="FontAweSomeCogIcon">&#xf013;</system:String>
     <system:String x:Key="FontAweSomeSearchIcon">&#xf002;</system:String>
     <system:String x:Key="FontAweSomeEllipsisVerticalIcon">&#xf142;</system:String>
+    <system:String x:Key="FontAweSomePaperclipIcon">&#xf0c6;</system:String>
+    <system:String x:Key="FontAweSomeEmojiIcon">&#xf118;</system:String>
 </ResourceDictionary>

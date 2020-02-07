@@ -43,6 +43,7 @@
 
                         <TextBlock
                             x:Name="placeholder"
+                            Margin="2,0,0,0"
                             Padding="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="Center"

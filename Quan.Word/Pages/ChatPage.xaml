@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ChatPageView"
     d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignWidth="600"
     x:TypeArguments="core:LoginViewModel"
     mc:Ignorable="d">
 
@@ -38,14 +38,72 @@
 
             <!--  Main Buttons  -->
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Content="{StaticResource FontAweSomeSearchIcon}" Style="{StaticResource IconButton}" />
-                <Button Content="{StaticResource FontAweSomeEllipsisVerticalIcon}" Style="{StaticResource IconButton}" />
+                <Button Content="{StaticResource FontAweSomeSearchIcon}" Style="{StaticResource IconGrowButton}" />
+                <Button Content="{StaticResource FontAweSomeEllipsisVerticalIcon}" Style="{StaticResource IconGrowButton}" />
             </StackPanel>
         </Grid>
 
-
-
-
+        <!--  Chat list  -->
         <controls:ChatMessageListControl Grid.Row="1" />
+
+        <!--  Message send text box  -->
+        <Grid
+            Grid.Row="2"
+            MinHeight="50"
+            MaxHeight="110"
+            Background="{StaticResource ForegroundLightBrush}">
+            <Grid.ColumnDefinitions>
+
+                <!--  Attach button  -->
+                <ColumnDefinition Width="Auto" />
+
+                <!--  Text entry box  -->
+                <ColumnDefinition Width="*" />
+
+                <!--  Additional buttons  -->
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Attach button  -->
+            <Button
+                Height="{Binding MinHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                VerticalAlignment="Bottom"
+                Content="{StaticResource FontAweSomePaperclipIcon}"
+                Foreground="{StaticResource ForegroundDarkBrush}"
+                Style="{StaticResource IconGrowButton}" />
+
+            <!--  Message box  -->
+            <TextBox
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                local:IsFocusedProperty.Value="True"
+                AcceptsReturn="True"
+                AcceptsTab="True"
+                BorderThickness="0"
+                FontSize="{StaticResource FontSizeRegular}"
+                Tag="Write a message..."
+                VerticalScrollBarVisibility="Auto" />
+
+
+            <!--  Additional buttons  -->
+            <WrapPanel
+                Grid.Column="2"
+                Margin="0,0,8,0"
+                VerticalAlignment="Bottom">
+
+                <!--  Attach button  -->
+                <Button
+                    Height="{Binding MinHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                    Content="{StaticResource FontAweSomeEmojiIcon}"
+                    Foreground="{StaticResource WordOrangeBrush}"
+                    Style="{StaticResource IconGrowButton}" />
+
+                <Button
+                    Padding="8"
+                    Background="{StaticResource WordGreenBrush}"
+                    Content="Send"
+                    FontSize="{StaticResource FontSizeRegular}" />
+            </WrapPanel>
+        </Grid>
     </Grid>
 </local:BasePage>
