@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 namespace Quan.Word.Core
 {
     /// <summary>
-    /// The design-time data for a<see cref="ChatMessageListModel"/>
+    /// The design-time data for a<see cref="ChatMessageListViewModel"/>
     /// </summary>
-    public class ChatMessageListDesignModel : ChatMessageListModel
+    public class ChatMessageListDesignModel : ChatMessageListViewModel
     {
         #region Singleton
 

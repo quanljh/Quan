@@ -320,13 +320,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         SnapsToDevicePixels="True">
 
-                        <Border.RenderTransform>
-                            <ScaleTransform />
-                        </Border.RenderTransform>
-                        <Border.RenderTransformOrigin>
-                            <Point X="0.5" Y="0.5" />
-                        </Border.RenderTransformOrigin>
-
                         <Grid>
                             <Viewbox>
                                 <TextBlock
@@ -338,7 +331,16 @@
                                     FontFamily="{TemplateBinding FontFamily}"
                                     FontSize="{TemplateBinding FontSize}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                    Text="{TemplateBinding Content}" />
+                                    Text="{TemplateBinding Content}">
+
+                                    <TextBlock.RenderTransform>
+                                        <ScaleTransform />
+                                    </TextBlock.RenderTransform>
+                                    <TextBlock.RenderTransformOrigin>
+                                        <Point X="0.5" Y="0.5" />
+                                    </TextBlock.RenderTransformOrigin>
+                                </TextBlock>
+
                             </Viewbox>
                         </Grid>
                     </Border>
@@ -347,12 +349,12 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
-                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetName="contentPresenter"
                                         Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                         To="1.4"
                                         Duration="0:0:0.15" />
                                     <DoubleAnimation
-                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetName="contentPresenter"
                                         Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
                                         To="1.4"
                                         Duration="0:0:0.15" />
@@ -363,12 +365,12 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
-                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetName="contentPresenter"
                                         Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                         To="1"
                                         Duration="0:0:0.15" />
                                     <DoubleAnimation
-                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetName="contentPresenter"
                                         Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
                                         To="1"
                                         Duration="0:0:0.15" />

@@ -9,10 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <Border
-        Padding="5"
-        d:DataContext="{x:Static core:ChatMessageListItemDesignModel.Instance}"
-        Background="{StaticResource WordBlueBrush}">
+    <Border Padding="5" d:DataContext="{x:Static core:ChatMessageListItemDesignModel.Instance}">
         <Grid>
 
             <Grid.ColumnDefinitions>

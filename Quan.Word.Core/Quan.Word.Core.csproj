@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\ApplicationPage.cs" />
+    <Compile Include="DataModels\ElementHorizontalAlignment.cs" />
     <Compile Include="DataModels\PageAnimation.cs" />
     <Compile Include="Expressions\ExpressionHelpers.cs" />
     <Compile Include="IoC\IoC.cs" />
@@ -140,13 +141,16 @@
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListItemModel.cs" />
     <Compile Include="ViewModels\Chat\ChatList\ChatListItemModel.cs" />
-    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListViewModel.cs" />
     <Compile Include="ViewModels\Chat\ChatList\ChatListModel.cs" />
     <Compile Include="ViewModels\Chat\ChatList\Design\ChatListDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatList\Design\ChatListItemDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatListItemViewModel.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListItemDesignModel.cs" />
+    <Compile Include="ViewModels\PopupMenu\BasePopupMenuViewModel.cs" />
+    <Compile Include="ViewModels\PopupMenu\ChatAttachmentPopupMenuViewModel.cs" />
+    <Compile Include="ViewModels\PopupMenu\Design\ChatAttachmentPopupMenuDesignModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>

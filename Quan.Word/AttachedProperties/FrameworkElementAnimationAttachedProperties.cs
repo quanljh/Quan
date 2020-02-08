@@ -88,4 +88,27 @@ namespace Quan
 
         }
     }
+
+
+    /// <summary>
+    /// Animates a framwork element sliding up from the bottom on show
+    /// and sliding out to the bottom on hide
+    /// </summary>
+    public class AnimateSlideInFromeBottomProperty : AnimateBaseProperty<AnimateSlideInFromeBottomProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            ////Don't bother animating in design time
+            //if (DesignerProperties.GetIsInDesignMode(element))
+            //    return;
+
+            if (value)
+                //Animate in
+                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, false);
+            else
+                //Animate out
+                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, false);
+
+        }
+    }
 }

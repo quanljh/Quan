@@ -14,6 +14,7 @@ namespace Quan.Word.Core
 {
     /// <summary>
     /// A base view model that fires Property Changed events as needed
+    /// Either <see cref="AddINotifyPropertyChangedInterfaceAttribute"/> or <see cref="BindableBase"/> is fine to use.
     /// </summary>
     [AddINotifyPropertyChangedInterface]
     public abstract class ViewModelBase : BindableBase
