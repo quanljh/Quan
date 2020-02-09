@@ -133,7 +133,7 @@ namespace Quan
         #region Slide In From Bottom
 
         /// <summary>
-        /// Slides a element in from left
+        /// Slides a element in from bottom
         /// </summary>
         /// <param name="element">The element to animate</param>
         /// <param name="seconds">The time the animation will take</param>
@@ -162,7 +162,7 @@ namespace Quan
 
 
         /// <summary>
-        /// Slides a element out to the left
+        /// Slides a element out to the bottom
         /// </summary>
         /// <param name="element">The element to animate</param>
         /// <param name="seconds">The time the animation will take</param>

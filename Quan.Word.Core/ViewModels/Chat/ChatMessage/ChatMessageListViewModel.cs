@@ -22,6 +22,11 @@ namespace Quan.Word.Core
 
 
         /// <summary>
+        /// True if any popup menus are visible
+        /// </summary>
+        public bool AnyPopupVisible => AttachmentMenuVisible;
+
+        /// <summary>
         /// The view model for the attachment menu
         /// </summary>
         public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
@@ -35,6 +40,11 @@ namespace Quan.Word.Core
         /// </summary>
         public ICommand AttachButtonCommand { get; set; }
 
+        /// <summary>
+        /// The command for when the area outside of any popup is clicked
+        /// </summary>
+        public ICommand PopupClickawayCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -46,6 +56,7 @@ namespace Quan.Word.Core
         {
             // Create commands
             AttachButtonCommand = new RelayCommand(AttachmentButton);
+            PopupClickawayCommand = new RelayCommand(PopupClickaway);
 
             // Make a default menu
             AttachmentMenu = new ChatAttachmentPopupMenuViewModel();
@@ -62,6 +73,16 @@ namespace Quan.Word.Core
         {
             //Toggle menu visibility
             AttachmentMenuVisible ^= true;
+
+        }
+
+        /// <summary>
+        /// When the popup clickaway area is clicked, hide any popups
+        /// </summary>
+        public void PopupClickaway()
+        {
+            //Hide attachment menu
+            AttachmentMenuVisible = false;
 
         }
 

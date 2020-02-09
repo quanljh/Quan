@@ -18,6 +18,11 @@
         /// </summary>
         public ElementHorizontalAlignment ArrowAlignment { get; set; }
 
+        /// <summary>
+        /// The content inside of this popup menu
+        /// </summary>
+        public MenuViewModel Content { get; set; }
+
         #endregion
 
         #region Constructor

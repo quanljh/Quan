@@ -8,43 +8,54 @@
     xmlns:local="clr-namespace:Quan.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DataContext="{x:Static core:ChatAttachmentPopupMenuDesignModel.Instance}"
-    d:DesignHeight="100"
-    d:DesignWidth="200"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
 
-        <Border
-            Margin="5,0,0,0"
-            Padding="15"
-            Background="{Binding BubbleBackground, Converter={converters:StringRGBToBrushConverter}}"
-            CornerRadius="10">
-            <TextBlock
-                VerticalAlignment="Center"
-                FontFamily="{StaticResource LatoRegular}"
-                Foreground="{StaticResource WordDarkBlueBrush}"
-                Text="Text" />
+    <Grid>
+
+        <!--  Drop shadow  -->
+        <Border Margin="5,0,0,0" Background="{StaticResource ForegroundLightBrush}">
+            <Border.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=BubbleContainer}" />
+            </Border.OpacityMask>
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="5"
+                    RenderingBias="Quality"
+                    ShadowDepth="2"
+                    Color="{StaticResource WordLightBlue}" />
+            </Border.Effect>
         </Border>
 
-        <Path
-            Grid.Row="1"
-            Margin="15,-1,15,0"
-            HorizontalAlignment="{Binding ArrowAlignment, Converter={converters:HorizontalAlignmentConverter}}"
-            Panel.ZIndex="1"
-            Data="M 0 0 L 10 10 L 20 0"
-            Fill="{Binding BubbleBackground, Converter={converters:StringRGBToBrushConverter}}"
-            Stroke="Black"
-            StrokeThickness="0" />
+        <!--  BubbleContent  -->
+        <Grid x:Name="BubbleContainer">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Grid.Effect>
-            <DropShadowEffect
-                BlurRadius="5"
-                RenderingBias="Quality"
-                ShadowDepth="2"
-                Color="{StaticResource WordLightBlue}" />
-        </Grid.Effect>
+
+            <Border
+                Grid.Row="0"
+                Margin="5,0,0,0"
+                Padding="12"
+                Background="{Binding BubbleBackground, Converter={converters:StringRGBToBrushConverter}}"
+                CornerRadius="10">
+
+                <ContentControl Content="{Binding Converter={converters:PopupContentConverter}}" />
+            </Border>
+
+            <Path
+                Grid.Row="1"
+                Margin="15,-1,15,0"
+                HorizontalAlignment="{Binding ArrowAlignment, Converter={converters:HorizontalAlignmentConverter}}"
+                Panel.ZIndex="1"
+                Data="M 0 0 L 10 10 L 20 0"
+                Fill="{Binding BubbleBackground, Converter={converters:StringRGBToBrushConverter}}"
+                Stroke="Black"
+                StrokeThickness="0" />
+        </Grid>
+
+
+
     </Grid>
 </UserControl>

@@ -3,10 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Quan.Controls"
+    xmlns:converters="clr-namespace:Quan.Converters"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Quan.Pages"
     x:Name="ChatPageView"
     d:DesignHeight="450"
     d:DesignWidth="600"
@@ -25,8 +27,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <Border
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Panel.ZIndex="1"
+            Background="Transparent"
+            Visibility="{Binding AnyPopupVisible, Converter={converters:BooleanToCollapsedConverter}, ConverterParameter=True}">
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding PopupClickawayCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>
+        </Border>
+
         <!--  Title bar  -->
-        <Grid Height="50">
+        <Grid Grid.Row="0" Height="50">
             <!--  Title text  -->
             <TextBlock
                 HorizontalAlignment="Center"
@@ -51,6 +64,7 @@
             Grid.Row="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
+            Panel.ZIndex="2"
             local:AnimateSlideInFromeBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource AncestorType={x:Type local:BasePage}, AncestorLevel=1}}"
             DataContext="{Binding AttachmentMenu}" />
 
@@ -59,6 +73,7 @@
             Grid.Row="2"
             MinHeight="50"
             MaxHeight="110"
+            Panel.ZIndex="3"
             Background="{StaticResource ForegroundLightBrush}">
             <Grid.ColumnDefinitions>
 

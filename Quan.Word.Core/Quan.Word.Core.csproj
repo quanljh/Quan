@@ -129,8 +129,11 @@
   <ItemGroup>
     <Compile Include="DataModels\ApplicationPage.cs" />
     <Compile Include="DataModels\ElementHorizontalAlignment.cs" />
+    <Compile Include="DataModels\IconType.cs" />
+    <Compile Include="DataModels\MenuItemType.cs" />
     <Compile Include="DataModels\PageAnimation.cs" />
     <Compile Include="Expressions\ExpressionHelpers.cs" />
+    <Compile Include="Icons\IconTypeExtensions.cs" />
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecureStringHelpers.cs" />
@@ -148,6 +151,10 @@
     <Compile Include="ViewModels\Chat\ChatListItemViewModel.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListItemDesignModel.cs" />
+    <Compile Include="ViewModels\Menu\Design\MenuDesignModel.cs" />
+    <Compile Include="ViewModels\Menu\Design\MenuItemDesignModel.cs" />
+    <Compile Include="ViewModels\Menu\MenuViewModel.cs" />
+    <Compile Include="ViewModels\Menu\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\PopupMenu\BasePopupMenuViewModel.cs" />
     <Compile Include="ViewModels\PopupMenu\ChatAttachmentPopupMenuViewModel.cs" />
     <Compile Include="ViewModels\PopupMenu\Design\ChatAttachmentPopupMenuDesignModel.cs" />
