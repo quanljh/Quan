@@ -23,7 +23,7 @@ namespace Quan
         {
             InitializeContainer();
 
-            InitializeIoCContainer();
+            ApplicationSetup();
 
             var window = Container.Resolve<MainWindow>();
             if (window.DataContext is ViewModelBase vb)
@@ -54,10 +54,13 @@ namespace Quan
         }
 
 
-        private void InitializeIoCContainer()
+        private void ApplicationSetup()
         {
             //Setup IoC
             IoC.SetUp();
+
+            // Bind a UI Manager
+            IoC.Kernel.Bind<IUImanager>().ToConstant(new UIManager());
 
             //Current.MainWindow = new MainWindow();
             //Current.MainWindow.Show();

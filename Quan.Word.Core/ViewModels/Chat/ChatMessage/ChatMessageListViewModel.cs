@@ -45,6 +45,11 @@ namespace Quan.Word.Core
         /// </summary>
         public ICommand PopupClickawayCommand { get; set; }
 
+        /// <summary>
+        /// The command for when user clicks the send button
+        /// </summary>
+        public ICommand SendCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -57,6 +62,7 @@ namespace Quan.Word.Core
             // Create commands
             AttachButtonCommand = new RelayCommand(AttachmentButton);
             PopupClickawayCommand = new RelayCommand(PopupClickaway);
+            SendCommand = new RelayCommand(Send);
 
             // Make a default menu
             AttachmentMenu = new ChatAttachmentPopupMenuViewModel();
@@ -83,6 +89,19 @@ namespace Quan.Word.Core
         {
             //Hide attachment menu
             AttachmentMenuVisible = false;
+        }
+
+        /// <summary>
+        /// When the user clicks the send button,send the message
+        /// </summary>
+        public async void Send()
+        {
+            await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+            {
+                Title = "Send Message",
+                Message = "Thank you for writing a nice message :)",
+                OkText = "OK"
+            });
 
         }
 

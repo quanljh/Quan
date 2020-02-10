@@ -125,6 +125,7 @@
                 <Button
                     Padding="8"
                     Background="{StaticResource WordGreenBrush}"
+                    Command="{Binding SendCommand}"
                     Content="Send"
                     FontSize="{StaticResource FontSizeRegular}" />
             </WrapPanel>

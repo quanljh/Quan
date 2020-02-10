@@ -8,9 +8,9 @@
         /// <summary>
         /// The current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.login;
+        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.chat;
 
-        public bool SideMenuVisible { get; set; } = false;
+        public bool SideMenuVisible { get; set; } = true;
 
         /// <summary>
         /// Navigates to the specified page

@@ -14,6 +14,10 @@ namespace Quan.Word.Core
         /// </summary>
         public static IKernel Kernel { get; private set; } = new StandardKernel();
 
+        /// <summary>
+        /// A shortcut to access the <see cref="IUImanager"/>
+        /// </summary>
+        public static IUImanager UI => IoC.Get<IUImanager>();
 
         #endregion
 
