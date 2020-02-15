@@ -102,7 +102,6 @@ namespace Quan.Word.Core
                 Message = "Thank you for writing a nice message :)",
                 OkText = "OK"
             });
-
         }
 
         #endregion

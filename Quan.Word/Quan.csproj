@@ -183,6 +183,7 @@
     <Compile Include="AttachedProperties\IsFocusedAttachedProperty.cs" />
     <Compile Include="AttachedProperties\ButtonAttachedProperty.cs" />
     <Compile Include="AttachedProperties\FrameworkElementAnimationAttachedProperties.cs" />
+    <Compile Include="AttachedProperties\PanelChildMarginProperty.cs" />
     <Compile Include="AttachedProperties\NoFrameHistoryProperty.cs" />
     <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
     <Compile Include="Controls\BubbleContent.xaml.cs">
@@ -206,10 +207,14 @@
     <Compile Include="Controls\PageHost.xaml.cs">
       <DependentUpon>PageHost.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SideMenuControl.xaml.cs">
       <DependentUpon>SideMenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToCollapsedConverter.cs" />
+    <Compile Include="Converters\StringToSexConverter.cs" />
     <Compile Include="Converters\IconTypeToFontAwesomeConverter.cs" />
     <Compile Include="Converters\MenuItemTypeVisibilityConverter.cs" />
     <Compile Include="Converters\PopupContentConverter.cs" />
@@ -218,6 +223,7 @@
     <Compile Include="Converters\SentByMeToBackgroundConverter.cs" />
     <Compile Include="Converters\SentByMeToMarginConverter.cs" />
     <Compile Include="Converters\SentByMeToAlignmentConverter.cs" />
+    <Compile Include="Converters\DateTimeToDisplayTimeConverter.cs" />
     <Compile Include="Converters\TimeToReadTimeConverter.cs" />
     <Compile Include="Converters\TimeToDisplayTimeConverter.cs" />
     <Compile Include="Converters\IoCConverter.cs" />
@@ -232,9 +238,13 @@
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IoC\UIManager.cs" />
+    <Compile Include="Models\PatientUIModel.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DataGridPage.xaml.cs">
+      <DependentUpon>DataGridPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -242,7 +252,9 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Class1.cs" />
     <Compile Include="ViewModels\DialogWindowViewModel.cs" />
+    <Compile Include="ViewModels\DataGridPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -281,6 +293,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SideMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -297,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\DataGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\RegisterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -304,6 +324,10 @@
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Scroll.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -411,6 +435,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Samples\aijiang.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

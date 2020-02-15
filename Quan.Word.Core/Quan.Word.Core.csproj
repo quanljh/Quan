@@ -152,8 +152,9 @@
     <Compile Include="ViewModels\Chat\ChatListItemViewModel.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListDesignModel.cs" />
     <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListItemDesignModel.cs" />
+    <Compile Include="ViewModels\Dialogs\Design\MessageBoxDialogDesignModel.cs" />
     <Compile Include="ViewModels\Dialogs\MessageBoxDialogViewModel.cs" />
-    <Compile Include="ViewModels\Dialogs\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Dialogs\BaseDialogViewModel.cs" />
     <Compile Include="ViewModels\Menu\Design\MenuDesignModel.cs" />
     <Compile Include="ViewModels\Menu\Design\MenuItemDesignModel.cs" />
     <Compile Include="ViewModels\Menu\MenuViewModel.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="ViewModels\PopupMenu\Design\ChatAttachmentPopupMenuDesignModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

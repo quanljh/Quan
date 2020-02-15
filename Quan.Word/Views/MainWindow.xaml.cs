@@ -38,5 +38,23 @@ namespace Quan.Views
 
             return (IntPtr)0;
         }
+
+        private void MainWindow_OnDeactivated(object sender, EventArgs e)
+        {
+            //Show overlay if we lose focus
+            if (DataContext is MainWindowViewModel vm)
+            {
+                vm.DimmedOverlayVisible = true;
+            }
+        }
+
+        private void MainWindow_OnActivated(object sender, EventArgs e)
+        {
+            //Hide overlay if we are focused
+            if (DataContext is MainWindowViewModel vm)
+            {
+                vm.DimmedOverlayVisible = false;
+            }
+        }
     }
 }

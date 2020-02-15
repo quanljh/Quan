@@ -69,6 +69,10 @@ namespace Quan.Word.Core
 
         public GridLength TitleHeightGridLength => new GridLength(CaptionHeight + ResizeBorder);
 
+        /// <summary>
+        /// True if we should show the settings menu
+        /// </summary>
+        public bool DimmedOverlayVisible { get; set; }
 
         #endregion
 

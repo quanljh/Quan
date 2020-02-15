@@ -3,6 +3,7 @@ using Quan.Word.Core;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Quan
 {
@@ -40,13 +41,13 @@ namespace Quan
         /// <summary>
         /// The Title for this dialog
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; set; } = "Default Title";
 
         #endregion
 
         #region Public Commands
 
-
+        public ICommand OKCommand { get; private set; }
 
         #endregion
 
@@ -60,6 +61,9 @@ namespace Quan
             //Create a new dialog window
             mDialogWindow = new DialogWindow();
             mDialogWindow.ViewModel = new DialogWindowViewModel(mDialogWindow);
+
+            //Create a new Command
+            OKCommand = new RelayCommand(() => mDialogWindow.Close());
         }
 
         #endregion
@@ -87,7 +91,7 @@ namespace Quan
                     mDialogWindow.ViewModel.WindowMinimumHeight = WindowMinimumHeight;
                     mDialogWindow.ViewModel.WindowMinimumWidth = WindowMinimumWidth;
                     mDialogWindow.ViewModel.CaptionHeight = TitleHeight;
-                    mDialogWindow.ViewModel.Title = viewModel.Title ?? Title;
+                    mDialogWindow.ViewModel.Title = string.IsNullOrEmpty(viewModel.Title) ? Title : viewModel.Title;
 
                     //Set this control to the dialog window content
                     mDialogWindow.ViewModel.Content = this;

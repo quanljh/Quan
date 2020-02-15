@@ -70,7 +70,7 @@ namespace Quan.Word.Core
         private async Task Login()
         {
             //Go to login page
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.login);
+            IoC.Application.GoToPage(ApplicationPage.login);
 
             await Task.Delay(1);
         }

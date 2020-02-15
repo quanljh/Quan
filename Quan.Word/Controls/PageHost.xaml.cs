@@ -45,7 +45,7 @@ namespace Quan.Controls
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 NewPage.Content =
-                    (BasePage)new ApplicationPageValueConverter().Convert(IoC.Get<ApplicationViewModel>().CurrentPage,
+                    (BasePage)new ApplicationPageValueConverter().Convert(IoC.Application.CurrentPage,
                         null, null);
             }
 

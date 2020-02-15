@@ -19,5 +19,10 @@
         /// The register page
         /// </summary>
         register = 2,
+
+        /// <summary>
+        /// The datagrid page
+        /// </summary>
+        datagrid = 3
     }
 }

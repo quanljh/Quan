@@ -65,7 +65,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Panel.ZIndex="2"
-            local:AnimateSlideInFromeBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource AncestorType={x:Type local:BasePage}, AncestorLevel=1}}"
+            local:AnimateSlideInFromeBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource AncestorType={x:Type local:BasePage}}}"
             DataContext="{Binding AttachmentMenu}" />
 
         <!--  Message send text box  -->

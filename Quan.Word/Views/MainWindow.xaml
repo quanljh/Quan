@@ -18,7 +18,9 @@
     Height="600"
     MinWidth="{Binding WindowMinimumWidth}"
     MinHeight="{Binding WindowMinimumHeight}"
+    Activated="MainWindow_OnActivated"
     AllowsTransparency="True"
+    Deactivated="MainWindow_OnDeactivated"
     Icon="/Quan;component/Images/Logo/logo-small.png"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -150,8 +152,26 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!--  Setting page  -->
+            <controls:SettingsControl
+                Grid.ColumnSpan="2"
+                Panel.ZIndex="9"
+                quan:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.SettingsMenuVisible, Source={x:Static viewModels:ViewModelLocator.Instance}}" />
+
+            <!--  Dimmed overlay  -->
+            <Border
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Panel.ZIndex="10"
+                Opacity="0.3">
+                <Border quan:AnimateFadeInProperty.Value="{Binding DimmedOverlayVisible}" Background="{StaticResource ForegroundVeryDarkBrush}" />
+            </Border>
+
             <!--  Side Menu  -->
-            <controls:SideMenuControl Width="300" quan:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static viewModels:ViewModelLocator.Instance}}">
+            <controls:SideMenuControl
+                Grid.Column="0"
+                Width="300"
+                quan:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static viewModels:ViewModelLocator.Instance}}">
                 <controls:ChatListControl />
             </controls:SideMenuControl>
 

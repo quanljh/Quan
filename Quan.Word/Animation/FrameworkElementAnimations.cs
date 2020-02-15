@@ -32,8 +32,9 @@ namespace Quan
             //Start animating
             sb.Begin(element);
 
-            //Make element visible
-            element.Visibility = Visibility.Visible;
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
@@ -61,11 +62,16 @@ namespace Quan
             //Start animating
             sb.Begin(element);
 
-            //Make element visible
-            element.Visibility = Visibility.Visible;
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
+
+            // Make element invisible
+            element.Visibility = Visibility.Hidden;
+
         }
 
         #endregion
@@ -93,8 +99,9 @@ namespace Quan
             //Start animating
             sb.Begin(element);
 
-            //Make element visible
-            element.Visibility = Visibility.Visible;
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
@@ -121,8 +128,9 @@ namespace Quan
             //Start animating
             sb.Begin(element);
 
-            //Make element visible
-            element.Visibility = Visibility.Visible;
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
@@ -153,8 +161,9 @@ namespace Quan
             //Start animating
             sb.Begin(element);
 
-            //Make element visible
-            element.Visibility = Visibility.Visible;
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
@@ -182,14 +191,73 @@ namespace Quan
             //Start animating
             sb.Begin(element);
 
-            //Make element visible
-            element.Visibility = Visibility.Visible;
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
+
+            //Wait for it finish
+            await Task.Delay((int)(seconds * 1000));
+
+            // Make element invisible
+            element.Visibility = Visibility.Hidden;
+        }
+
+        #endregion
+
+        #region Fade In / Out
+
+        /// <summary>
+        /// Fades in an element
+        /// </summary>
+        /// <param name="element">The element to animate</param>
+        /// <param name="seconds">The time the animation will take</param>
+        /// <returns></returns>
+        public static async Task FadeIn(this FrameworkElement element, float seconds = 0.3f)
+        {
+            var sb = new Storyboard();
+
+            //Add fade in animation
+            sb.AddFadeIn(seconds);
+
+            //Start animating
+            sb.Begin(element);
+
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //Wait for it finish
             await Task.Delay((int)(seconds * 1000));
         }
 
-        #endregion
 
+        /// <summary>
+        /// Fades out an element
+        /// </summary>
+        /// <param name="element">The element to animate</param>
+        /// <param name="seconds">The time the animation will take</param>
+        /// <returns></returns>
+        public static async Task FadeOut(this FrameworkElement element, float seconds = 0.3f)
+        {
+            var sb = new Storyboard();
+
+            //Add fade in animation
+            sb.AddFadeOut(seconds);
+
+            //Start animating
+            sb.Begin(element);
+
+            //Make element visible only if we are animating
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
+
+            //Wait for it finish
+            await Task.Delay((int)(seconds * 1000));
+
+            //Fully hide the element
+            element.Visibility = Visibility.Collapsed;
+        }
+
+        #endregion
     }
 }

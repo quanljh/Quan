@@ -58,7 +58,7 @@ namespace Quan.Word.Core
             {
                 await Task.Delay(2000);
 
-                IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.chat);
+                IoC.Application.GoToPage(ApplicationPage.chat);
 
                 //Go to chat page
 
@@ -81,7 +81,7 @@ namespace Quan.Word.Core
             //{
             //    vm.CurrentPage = ApplicationPage.register;
             //}
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.register);
+            IoC.Application.GoToPage(ApplicationPage.register);
 
             await Task.Delay(1);
         }

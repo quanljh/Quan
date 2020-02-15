@@ -22,6 +22,9 @@ namespace Quan.Converters
                 case ApplicationPage.chat:
                     return new ChatPage();
 
+                case ApplicationPage.datagrid:
+                    return new DataGridPage();
+
                 default:
                     Debugger.Break();
                     return null;

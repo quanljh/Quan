@@ -24,6 +24,7 @@
     <system:String x:Key="FontAweSomeEllipsisVerticalIcon">&#xf142;</system:String>
     <system:String x:Key="FontAweSomePaperclipIcon">&#xf0c6;</system:String>
     <system:String x:Key="FontAweSomeEmojiIcon">&#xf118;</system:String>
+    <system:String x:Key="FontAweSomeArrowleftIcon">&#xf060;</system:String>
 
     <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
         <Setter Property="FontFamily" Value="{StaticResource LatoThin}" />
