@@ -21,10 +21,13 @@
     <system:String x:Key="FontAweSomePictureIcon">&#xf1c5;</system:String>
     <system:String x:Key="FontAweSomeCogIcon">&#xf013;</system:String>
     <system:String x:Key="FontAweSomeSearchIcon">&#xf002;</system:String>
+    <system:String x:Key="FontAwesomeEllipsisIcon">&#xf141;</system:String>
     <system:String x:Key="FontAweSomeEllipsisVerticalIcon">&#xf142;</system:String>
     <system:String x:Key="FontAweSomePaperclipIcon">&#xf0c6;</system:String>
     <system:String x:Key="FontAweSomeEmojiIcon">&#xf118;</system:String>
     <system:String x:Key="FontAweSomeArrowleftIcon">&#xf060;</system:String>
+    <system:String x:Key="FontAwesomeTickIcon">&#xf00c;</system:String>
+    <system:String x:Key="FontAwesomeCloseIcon">&#xf00d;</system:String>
 
     <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
         <Setter Property="FontFamily" Value="{StaticResource LatoThin}" />

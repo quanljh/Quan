@@ -1,7 +1,7 @@
 ﻿namespace Quan.Word.Core
 {
     /// <summary>
-    /// Details for a message box dialog
+    /// The design-time data for a <see cref="MessageBoxDialogDesignModel"/>
     /// </summary>
     public class MessageBoxDialogDesignModel : MessageBoxDialogViewModel
     {

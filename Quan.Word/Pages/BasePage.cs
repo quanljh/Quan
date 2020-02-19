@@ -71,7 +71,7 @@ namespace Quan
 
                     //Start the Animation
                     if (Application.Current.MainWindow != null)
-                        await this.SlideAndFadeInFromRight(SlideSeconds, width: (int)Application.Current.MainWindow.Width);
+                        await this.SlideAndFadeIn(AnimationSlideInDirection.Right, false, SlideSeconds, size: (int)Application.Current.MainWindow.Width);
 
                     break;
             }
@@ -88,7 +88,7 @@ namespace Quan
                 case PageAnimation.SlideAndFadeOutToleft:
 
                     //Start the Animation
-                    await this.SlideAndFadeOutToLeft(SlideSeconds);
+                    await this.SlideAndFadeOut(AnimationSlideInDirection.Left, SlideSeconds);
 
                     break;
             }

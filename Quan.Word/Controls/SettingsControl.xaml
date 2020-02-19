@@ -7,8 +7,7 @@
     xmlns:local="clr-namespace:Quan.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:quan="clr-namespace:Quan"
-    d:DesignHeight="400"
-    d:DesignWidth="800"
+    d:DataContext="{x:Static core:SettingsDesignModel.Instance}"
     mc:Ignorable="d">
 
     <Border Padding="20" Background="{StaticResource ForegroundLightBrush}">
@@ -50,17 +49,17 @@
             <!--  Main Content  -->
             <Grid
                 Grid.Row="1"
-                Width="700"
+                Width="600"
                 VerticalAlignment="Top">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="260" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
 
                 <!--  Profile Picture  -->
-                <Grid Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Margin="0,0,10,0">
+                <Grid Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Margin="0,0,30,0">
 
                     <!--  Mask for rounded corners  -->
                     <Border
@@ -81,59 +80,13 @@
 
 
                 <!--  Profile details  -->
-                <Grid Grid.Column="1" quan:PanelChildMarginProperty.Value="15 8">
+                <StackPanel Grid.Column="1" quan:TextEntryWidthMathcherProperty.Value="True">
+                    <local:TextEntryControl DataContext="{Binding Name}" />
+                    <local:TextEntryControl DataContext="{Binding Username}" />
+                    <local:TextEntryControl DataContext="{Binding Password}" />
+                    <local:TextEntryControl DataContext="{Binding Email}" />
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <!--  Labels  -->
-                    <TextBlock FontFamily="{StaticResource LatoRegular}" Text="Name" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        FontFamily="{StaticResource LatoRegular}"
-                        Text="Username" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        FontFamily="{StaticResource LatoRegular}"
-                        Text="Password" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        FontFamily="{StaticResource LatoRegular}"
-                        Text="Email" />
-
-                    <!--  Content  -->
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="quanljh" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="quan" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Text="********" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Text="quanljh@gmail.com" />
-
-                </Grid>
+                </StackPanel>
 
             </Grid>
         </Grid>

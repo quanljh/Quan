@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Quan
@@ -15,19 +16,16 @@ namespace Quan
         #region Protected Properties
 
         /// <summary>
-        /// True if this is the very first time the value has been update
+        /// True if this is the very first time the value has been updated
         /// Used to make sure we run the logic at least once during first load
         /// </summary>
-        protected bool mFirstFire = true;
-
-        #endregion
-
-        #region Public Properties
+        protected Dictionary<DependencyObject, bool> mAlreadyLoaded = new Dictionary<DependencyObject, bool>();
 
         /// <summary>
-        /// A flag indicating if this is the first time this property has been loaded
+        /// The most recent value used if we get a value changed before we do the first load
         /// </summary>
-        public bool FirstLoad { get; set; } = true;
+        protected Dictionary<DependencyObject, bool> mFirstLoadValue = new Dictionary<DependencyObject, bool>();
+
 
         #endregion
 
@@ -38,15 +36,15 @@ namespace Quan
                 return;
 
             //Don't fire when the value doesn't change
-            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire)
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && mAlreadyLoaded.ContainsKey(sender))
                 return;
 
-            // No longer first fire
-            mFirstFire = false;
-
             //On first load...
-            if (FirstLoad)
+            if (!mAlreadyLoaded.ContainsKey(sender))
             {
+                // Flag that we are in first load but have not finished it
+                mAlreadyLoaded[sender] = false;
+
                 //Start off hidden before we decide how to animate
                 //If we are to be animated out initially
                 if (!(bool)value)
@@ -65,18 +63,21 @@ namespace Quan
                     await Task.Delay(5);
 
                     //Do desired animation
-                    DoAnimation(element, (bool)value);
+                    DoAnimation(element, mFirstLoadValue.ContainsKey(sender) ? mFirstLoadValue[sender] : (bool)value, true);
 
-                    //No longer in first load
-                    FirstLoad = false;
+                    // Flag that we have finished first load
+                    mAlreadyLoaded[sender] = true;
                 };
 
                 // Hook into the loaded event of the element
                 element.Loaded += onLoaded;
             }
+            // If we have started a first load but not fired the animation yet, update the property
+            else if (mAlreadyLoaded[sender] == false)
+                mFirstLoadValue[sender] = (bool)value;
             else
                 //Do desired animation
-                DoAnimation(element, (bool)value);
+                DoAnimation(element, (bool)value, false);
 
         }
 
@@ -85,7 +86,8 @@ namespace Quan
         /// </summary>
         /// <param name="element">The element</param>
         /// <param name="value">The new value</param>
-        protected virtual void DoAnimation(FrameworkElement element, bool value)
+        /// <param name="firstLoad">Ture if the element is in first load</param>
+        protected virtual void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
 
         }
@@ -97,18 +99,14 @@ namespace Quan
     /// </summary>
     public class AnimateSlideInFromeLeftProperty : AnimateBaseProperty<AnimateSlideInFromeLeftProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
-            ////Don't bother animating in design time
-            //if (DesignerProperties.GetIsInDesignMode(element))
-            //    return;
-
             if (value)
-                //Animate in
-                await element.SlideAndFadeInFromLeft(FirstLoad ? 0 : 0.3f, false);
+                // Animate in
+                await element.SlideAndFadeIn(AnimationSlideInDirection.Left, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
             else
-                //Animate out
-                await element.SlideAndFadeOutToLeft(FirstLoad ? 0 : 0.3f, false);
+                // Animate out
+                await element.SlideAndFadeOut(AnimationSlideInDirection.Left, firstLoad ? 0 : 0.3f, keepMargin: false);
 
         }
     }
@@ -120,19 +118,14 @@ namespace Quan
     /// </summary>
     public class AnimateSlideInFromeBottomProperty : AnimateBaseProperty<AnimateSlideInFromeBottomProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
-            ////Don't bother animating in design time
-            //if (DesignerProperties.GetIsInDesignMode(element))
-            //    return;
-
             if (value)
-                //Animate in
-                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, false);
+                // Animate in
+                await element.SlideAndFadeIn(AnimationSlideInDirection.Bottom, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
             else
-                //Animate out
-                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, false);
-
+                // Animate out
+                await element.SlideAndFadeOut(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: false);
         }
     }
 
@@ -144,14 +137,14 @@ namespace Quan
     /// </summary>
     public class AnimateSlideInFromBottomMarginProperty : AnimateBaseProperty<AnimateSlideInFromBottomMarginProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 // Animate in
-                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                await element.SlideAndFadeIn(AnimationSlideInDirection.Bottom, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: true);
             else
                 // Animate out
-                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                await element.SlideAndFadeOut(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: true);
         }
     }
 
@@ -162,19 +155,14 @@ namespace Quan
     /// </summary>
     public class AnimateFadeInProperty : AnimateBaseProperty<AnimateFadeInProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
-            ////Don't bother animating in design time
-            //if (DesignerProperties.GetIsInDesignMode(element))
-            //    return;
-
             if (value)
-                //Animate in
-                await element.FadeIn(FirstLoad ? 0 : 0.3f);
+                // Animate in
+                await element.FadeIn(firstLoad, firstLoad ? 0 : 0.3f);
             else
-                //Animate out
-                await element.FadeOut(FirstLoad ? 0 : 0.3f);
-
+                // Animate out
+                await element.FadeOut(firstLoad ? 0 : 0.3f);
         }
     }
 }

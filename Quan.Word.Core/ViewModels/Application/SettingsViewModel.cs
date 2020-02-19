@@ -15,6 +15,30 @@ namespace Quan.Word.Core
     /// </summary>
     public class SettingsViewModel : ViewModelBase
     {
+        #region Public Properties
+
+        /// <summary>
+        /// The current users name
+        /// </summary>
+        public TextEntryViewModel Name { get; set; }
+
+        /// <summary>
+        /// The current users username
+        /// </summary>
+        public TextEntryViewModel Username { get; set; }
+
+        /// <summary>
+        /// The current users password
+        /// </summary>
+        public TextEntryViewModel Password { get; set; }
+
+        /// <summary>
+        /// The current users email
+        /// </summary>
+        public TextEntryViewModel Email { get; set; }
+
+        #endregion
+
         #region Public Commands
 
         /// <summary>
@@ -39,6 +63,11 @@ namespace Quan.Word.Core
             // Create commands
             OpenCommand = new RelayCommand(Open);
             CloseCommand = new RelayCommand(Close);
+
+            Name = new TextEntryViewModel { Label = "Name", OriginalText = "quanljh" };
+            Username = new TextEntryViewModel { Label = "Username", OriginalText = "quan" };
+            Password = new TextEntryViewModel { Label = "Password", OriginalText = "********" };
+            Email = new TextEntryViewModel { Label = "Email", OriginalText = "quan@gmail.com" };
         }
 
         #endregion

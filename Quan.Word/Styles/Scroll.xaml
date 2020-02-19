@@ -109,6 +109,7 @@
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
                 <Setter Property="MinWidth" Value="0" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
                 <Setter Property="Height" Value="14" />
                 <Setter Property="MinHeight" Value="{Binding Height, RelativeSource={RelativeSource Self}}" />
                 <Setter Property="Margin" Value="0,-14,0,0" />
@@ -127,6 +128,7 @@
                                 <Track
                                     x:Name="PART_Track"
                                     Height="8"
+                                    VerticalAlignment="Bottom"
                                     IsEnabled="{TemplateBinding IsMouseOver}">
                                     <Track.DecreaseRepeatButton>
                                         <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Opacity="0" />
