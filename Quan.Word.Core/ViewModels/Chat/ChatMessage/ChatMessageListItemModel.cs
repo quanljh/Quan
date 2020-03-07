@@ -103,5 +103,17 @@ namespace Quan.Word.Core
             set => SetProperty(ref _messageSentTime, value);
         }
 
+        /// <summary>
+        /// A flag indicating if this item was added since the first main list of items was created
+        /// Used as a flag fo animating in
+        /// </summary>
+        private bool _newItem;
+
+        public bool NewItem
+        {
+            get => _newItem;
+            set => SetProperty(ref _newItem, value);
+        }
+
     }
 }

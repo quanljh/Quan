@@ -104,13 +104,16 @@
 
             <!--  Message box  -->
             <TextBox
+                x:Name="MessageText"
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 local:IsFocusedProperty.Value="True"
                 AcceptsReturn="True"
                 AcceptsTab="True"
+                AutoWordSelection="True"
                 BorderThickness="0"
                 FontSize="{StaticResource FontSizeRegular}"
+                PreviewKeyDown="MessageText_OnPreviewKeyDown"
                 Tag="Write a message..."
                 Text="{Binding PendingMessageText, UpdateSourceTrigger=PropertyChanged}"
                 VerticalScrollBarVisibility="Auto" />
@@ -134,7 +137,9 @@
                     Background="{StaticResource WordGreenBrush}"
                     Command="{Binding SendCommand}"
                     Content="Send"
-                    FontSize="{StaticResource FontSizeRegular}" />
+                    Focusable="False"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    IsDefault="True" />
             </WrapPanel>
         </Grid>
     </Grid>

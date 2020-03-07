@@ -172,4 +172,22 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="SelectableTextBlockStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="TextBlock.LineHeight" Value="20" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="-2,0" />
+        <!--
+            The Padding -2,0,0,0 is required because the TextBox
+            seems to have an inherent "Padding" of about 2 pixels.
+            Without the Padding property,
+            the text seems to be 2 pixels to the left
+            compared to a TextBlock
+        -->
+    </Style>
+
 </ResourceDictionary>

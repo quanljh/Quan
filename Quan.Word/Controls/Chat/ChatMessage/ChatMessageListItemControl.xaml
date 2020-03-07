@@ -121,12 +121,12 @@
                     CornerRadius="10">
 
                     <!--  Message Text  -->
-                    <TextBlock
+                    <TextBox
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource LatoRegular}"
                         Foreground="{StaticResource WordDarkBlueBrush}"
-                        LineHeight="20"
-                        Text="{Binding Message}"
+                        Style="{StaticResource SelectableTextBlockStyle}"
+                        Text="{Binding Message, Mode=OneWay}"
                         TextWrapping="Wrap" />
 
                 </Border>

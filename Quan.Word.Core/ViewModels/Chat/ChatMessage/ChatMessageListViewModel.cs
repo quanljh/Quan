@@ -112,9 +112,10 @@ namespace Quan.Word.Core
                 MessageSentTime = DateTime.UtcNow,
                 SentByMe = true,
                 SenderName = "quanljh",
+                NewItem = true
             });
-  
-            
+
+
 
             // Clear the pending message text
             PendingMessageText = string.Empty;

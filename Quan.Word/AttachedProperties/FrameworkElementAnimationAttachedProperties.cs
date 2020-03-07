@@ -46,9 +46,7 @@ namespace Quan
                 mAlreadyLoaded[sender] = false;
 
                 //Start off hidden before we decide how to animate
-                //If we are to be animated out initially
-                if (!(bool)value)
-                    element.Visibility = Visibility.Hidden;
+                element.Visibility = Visibility.Hidden;
 
                 //Creat a single self-unhookable event
                 //for the elements Loaded event
@@ -126,6 +124,20 @@ namespace Quan
             else
                 // Animate out
                 await element.SlideAndFadeOut(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: false);
+        }
+    }
+
+
+    /// <summary>
+    /// Animates a framwork element sliding up from the bottom on load
+    /// if the value is true
+    /// </summary>
+    public class AnimateSlideInFromeBottomOnLoadProperty : AnimateBaseProperty<AnimateSlideInFromeBottomOnLoadProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
+        {
+            // Animate in
+            await element.SlideAndFadeIn(AnimationSlideInDirection.Bottom, !value, !value ? 0 : 0.3f, false);
         }
     }
 
