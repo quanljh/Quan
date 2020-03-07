@@ -4,7 +4,7 @@ using System;
 namespace Quan.Word.Core
 {
     /// <summary>
-    /// A view model for each chat message thread item in the a chat thread
+    /// A view model for each Chat message thread item in the a Chat thread
     /// </summary>
     public class ChatMessageListItemModel : BindableBase
     {
@@ -20,7 +20,7 @@ namespace Quan.Word.Core
         }
 
         /// <summary>
-        /// The latest message from this chat
+        /// The latest message from this Chat
         /// </summary>
         private string _message;
 

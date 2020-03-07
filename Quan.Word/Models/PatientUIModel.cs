@@ -62,6 +62,14 @@ namespace Quan
         }
 
 
+        private string _patientJoukyouKbn;
+
+        public string PatientJoukyouKbn
+        {
+            get => _patientJoukyouKbn;
+            set => SetProperty(ref _patientJoukyouKbn, value);
+        }
+
 
     }
 }

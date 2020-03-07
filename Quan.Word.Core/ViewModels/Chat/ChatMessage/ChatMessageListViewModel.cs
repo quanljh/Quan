@@ -1,17 +1,18 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Quan.Word.Core
 {
     /// <summary>
-    /// A view model for a chat message thread list
+    /// A view model for a Chat message thread list
     /// </summary>
     public class ChatMessageListViewModel : ViewModelBase
     {
         #region Public Properties
 
         /// <summary>
-        /// The chat thread items for the list 
+        /// The Chat thread items for the list 
         /// </summary>
         public ObservableCollection<ChatMessageListItemModel> Items { get; set; }
 
@@ -19,7 +20,6 @@ namespace Quan.Word.Core
         /// True to show the attachment menu, false to hide it
         /// </summary>
         public bool AttachmentMenuVisible { get; set; }
-
 
         /// <summary>
         /// True if any popup menus are visible
@@ -30,6 +30,11 @@ namespace Quan.Word.Core
         /// The view model for the attachment menu
         /// </summary>
         public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
+
+        /// <summary>
+        /// The text for the current message being written
+        /// </summary>
+        public string PendingMessageText { get; set; }
 
         #endregion
 
@@ -94,14 +99,25 @@ namespace Quan.Word.Core
         /// <summary>
         /// When the user clicks the send button,send the message
         /// </summary>
-        public async void Send()
+        public void Send()
         {
-            await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+            if (Items == null)
+                Items = new ObservableCollection<ChatMessageListItemModel>();
+
+            // Fake send a new message
+            Items.Add(new ChatMessageListItemModel
             {
-                Title = "Send Message",
-                Message = "Thank you for writing a nice message :)",
-                OkText = "OK"
+                Initials = "Quan",
+                Message = PendingMessageText,
+                MessageSentTime = DateTime.UtcNow,
+                SentByMe = true,
+                SenderName = "quanljh",
             });
+  
+            
+
+            // Clear the pending message text
+            PendingMessageText = string.Empty;
         }
 
         #endregion

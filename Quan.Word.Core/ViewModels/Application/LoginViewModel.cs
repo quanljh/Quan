@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -14,7 +15,7 @@ namespace Quan.Word.Core
         public string Email { get; set; }
 
         /// <summary>
-        /// A flag indication if the login command is running
+        /// A flag indication if the Login command is running
         /// </summary>
         public bool LoginIsRunning { get; set; }
 
@@ -23,12 +24,12 @@ namespace Quan.Word.Core
         #region Commands
 
         /// <summary>
-        /// The command to login
+        /// The command to Login
         /// </summary>
         public ICommand LoginCommand { get; set; }
 
         /// <summary>
-        /// The command to register for a new account
+        /// The command to Register for a new account
         /// </summary>
         public ICommand RegisterCommand { get; set; }
 
@@ -56,32 +57,36 @@ namespace Quan.Word.Core
         {
             await RunCommand(() => LoginIsRunning, async () =>
             {
-                await Task.Delay(2000);
+                // TODO: Fake a Login...
+                await Task.Delay(1000);
 
-                IoC.Application.GoToPage(ApplicationPage.chat);
+                // OK successfully logged in... now get users data
+                // TODO: Ask server for users info
 
-                //Go to chat page
+                // TODO: Remove this with real information pulled from our database in future
+                IoC.Settings.Name = new TextEntryViewModel { Label = "Name", OriginalText = $"quanljh {DateTime.Now.ToLocalTime()}" };
+                IoC.Settings.Username = new TextEntryViewModel { Label = "Username", OriginalText = "quan" };
+                IoC.Settings.Password = new PasswordEntryViewModel { Label = "Password", FakePassword = "********" };
+                IoC.Settings.Email = new TextEntryViewModel { Label = "Email", OriginalText = "quanljh@gmail.com" };
 
-                //if (parameter is IHavePassword loginPage)
-                //{
-                //    var passwd = loginPage.SecureString.Unsecure();
-                //}
+
+                IoC.Application.GoToPage(ApplicationPage.Chat);
             });
         }
 
         /// <summary>
-        /// Takes the user to the register page
+        /// Takes the user to the Register page
         /// </summary>
         /// <returns></returns>
         private async Task Register()
         {
-            //TODO: Go to register page?
+            //TODO: Go to Register page?
             //if (Application.Current.MainWindow is BrowserView browserView &&
             //    browserView.DataContext is BrowserViewModel vm)
             //{
-            //    vm.CurrentPage = ApplicationPage.register;
+            //    vm.CurrentPage = ApplicationPage.Register;
             //}
-            IoC.Application.GoToPage(ApplicationPage.register);
+            IoC.Application.GoToPage(ApplicationPage.Register);
 
             await Task.Delay(1);
         }

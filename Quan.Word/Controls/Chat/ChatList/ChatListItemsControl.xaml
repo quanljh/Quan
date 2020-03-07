@@ -18,6 +18,12 @@
 
                         <!--  Content  -->
                         <Border x:Name="backgroud" Background="{StaticResource ForegroundLightBrush}">
+
+                            <!--  Click to open message  -->
+                            <Border.InputBindings>
+                                <MouseBinding Command="{Binding OpenMessageCommand}" MouseAction="LeftClick" />
+                            </Border.InputBindings>
+
                             <Grid x:Name="container" Background="Transparent">
                                 <Grid.ColumnDefinitions>
                                     <!--  Profile picture  -->

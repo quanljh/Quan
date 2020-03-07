@@ -36,6 +36,7 @@ namespace Quan.Views
         }
 
         #endregion
+
         #region Constructor
 
         /// <summary>

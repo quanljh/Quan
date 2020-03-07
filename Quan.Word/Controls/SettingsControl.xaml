@@ -59,7 +59,10 @@
 
 
                 <!--  Profile Picture  -->
-                <Grid Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Margin="0,0,30,0">
+                <Grid
+                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    Margin="0,0,30,0"
+                    VerticalAlignment="Top">
 
                     <!--  Mask for rounded corners  -->
                     <Border
@@ -83,9 +86,13 @@
                 <StackPanel Grid.Column="1" quan:TextEntryWidthMathcherProperty.Value="True">
                     <local:TextEntryControl DataContext="{Binding Name}" />
                     <local:TextEntryControl DataContext="{Binding Username}" />
-                    <local:TextEntryControl DataContext="{Binding Password}" />
+                    <local:PasswordEntryControl DataContext="{Binding Password}" />
                     <local:TextEntryControl DataContext="{Binding Email}" />
 
+                    <Button
+                        Command="{Binding LogoutCommand}"
+                        Content="{Binding LogoutButtonText}"
+                        FontSize="{StaticResource FontSizeRegular}" />
                 </StackPanel>
 
             </Grid>

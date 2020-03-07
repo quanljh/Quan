@@ -30,13 +30,8 @@ namespace Quan.Word.Core
         //    set => SetProperty(ref _borderless, mWindow.WindowState == WindowState.Maximized || mDockPosition != WindowDockPosition.Undocked);
         //}
 
-        private int _resizeBorder = 6;
 
-        public int ResizeBorder
-        {
-            get => _resizeBorder;
-            set => SetProperty(ref _resizeBorder, value);
-        }
+        public int ResizeBorder => mWindow.WindowState == WindowState.Maximized ? 0 : 6;
 
         private int _outerMarginSize = 10;
 

@@ -20,24 +20,24 @@ namespace Quan.Word.Core
         /// </summary>
         public ChatListDesignModel()
         {
-            Items = new ObservableCollection<ChatListItemModel>()
+            Items = new ObservableCollection<ChatListItemViewModel>()
             {
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Initials = "JH",
                     Name = "Quan",
-                    Message = "This new chat app is awesome! I bet it will be fast too",
+                    Message = "This new Chat app is awesome! I bet it will be fast too",
                     ProfilePictureRGB = "#3099c5",
                     NewContentAvailable = true
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Jesse",
                     Initials = "JA",
                     Message = "Hey dude, here are the new icons",
                     ProfilePictureRGB = "#fe4503"
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Parnell",
                     Initials = "PL",
@@ -45,42 +45,42 @@ namespace Quan.Word.Core
                     ProfilePictureRGB = "#00d405",
                     IsSelected = true,
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Luke",
                     Initials = "LM",
-                    Message = "This chat app is awesome! I bet it will be fast too",
+                    Message = "This Chat app is awesome! I bet it will be fast too",
                     ProfilePictureRGB = "#3099c5"
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Jesse",
                     Initials = "JA",
                     Message = "Hey dude, here are the new icons",
                     ProfilePictureRGB = "#fe4503"
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Parnell",
                     Initials = "PL",
                     Message = "The new server is up, got 192.168.1.1",
                     ProfilePictureRGB = "#00d405"
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Luke",
                     Initials = "LM",
-                    Message = "This chat app is awesome! I bet it will be fast too",
+                    Message = "This Chat app is awesome! I bet it will be fast too",
                     ProfilePictureRGB = "#3099c5"
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Jesse",
                     Initials = "JA",
                     Message = "Hey dude, here are the new icons",
                     ProfilePictureRGB = "#fe4503"
                 },
-                new ChatListItemModel
+                new ChatListItemViewModel
                 {
                     Name = "Parnell",
                     Initials = "PL",

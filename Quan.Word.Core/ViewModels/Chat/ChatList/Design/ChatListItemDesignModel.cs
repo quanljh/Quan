@@ -1,6 +1,6 @@
 ﻿namespace Quan.Word.Core
 {
-    public class ChatListItemDesignModel : ChatListItemModel
+    public class ChatListItemDesignModel : ChatListItemViewModel
     {
         #region Singleton
 
@@ -20,7 +20,7 @@
         {
             Initials = "JH";
             Name = "Quan";
-            Message = "This new chat app is awesome! I bet it will be fast too";
+            Message = "This new Chat app is awesome! I bet it will be fast too";
             ProfilePictureRGB = "#3099c5";
         }
 

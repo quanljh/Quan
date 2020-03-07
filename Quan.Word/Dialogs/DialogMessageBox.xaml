@@ -19,6 +19,8 @@
             VerticalAlignment="Center"
             Command="{Binding OKCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDialogUserControl}}}"
             Content="{Binding OkText}"
-            FontSize="{StaticResource FontSizeSmall}" />
+            FontSize="{StaticResource FontSizeSmall}"
+            IsCancel="True"
+            IsDefault="True" />
     </StackPanel>
 </local:BaseDialogUserControl>

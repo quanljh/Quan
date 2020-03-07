@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace Quan.Word.Core
 {
     /// <summary>
-    /// The view model for a register page
+    /// The view model for a Register page
     /// </summary>
     public class RegisterViewModel : ViewModelBase
     {
@@ -17,7 +17,7 @@ namespace Quan.Word.Core
         public string Email { get; set; }
 
         /// <summary>
-        /// A flag indication if the register command is running
+        /// A flag indication if the Register command is running
         /// </summary>
         public bool RegisterIsRunning { get; set; }
 
@@ -26,12 +26,12 @@ namespace Quan.Word.Core
         #region Commands
 
         /// <summary>
-        /// The command to login
+        /// The command to Login
         /// </summary>
         public ICommand LoginCommand { get; set; }
 
         /// <summary>
-        /// The command to register for a new account
+        /// The command to Register for a new account
         /// </summary>
         public ICommand RegisterCommand { get; set; }
 
@@ -51,7 +51,7 @@ namespace Quan.Word.Core
         #region Method
 
         /// <summary>
-        /// Attempts to register a new user
+        /// Attempts to Register a new user
         /// </summary>
         /// <param name="parameter">The <see cref="SecureString"/> passed in from the view for the users password </param>
         /// <returns></returns>
@@ -64,13 +64,13 @@ namespace Quan.Word.Core
         }
 
         /// <summary>
-        /// Takes the user to the login page
+        /// Takes the user to the Login page
         /// </summary>
         /// <returns></returns>
         private async Task Login()
         {
-            //Go to login page
-            IoC.Application.GoToPage(ApplicationPage.login);
+            //Go to Login page
+            IoC.Application.GoToPage(ApplicationPage.Login);
 
             await Task.Delay(1);
         }

@@ -9,6 +9,15 @@ namespace Quan
 
     public class BasePage : UserControl
     {
+        #region Private Member
+
+        /// <summary>
+        /// The View Model associated with this page
+        /// </summary>
+        private object mViewModel;
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -31,6 +40,27 @@ namespace Quan
         /// Usefull for when we are move the page to another frame
         /// </summary>
         public bool ShouldAnimateOut { get; set; }
+
+        public object ViewModelObject
+        {
+            get => mViewModel;
+            set
+            {
+                // If nothing has changed, return
+                if (mViewModel == value)
+                    return;
+
+                // Update the value
+                mViewModel = value;
+
+                // Fire the view model changed method
+                OnViewModelChanged();
+
+                // Set the data context for this page
+                DataContext = mViewModel;
+            }
+        }
+
         #endregion
 
         #region Construct
@@ -96,6 +126,14 @@ namespace Quan
 
         #endregion
 
+        /// <summary>
+        /// Fired when the view model changed
+        /// </summary>
+        protected virtual void OnViewModelChanged()
+        {
+
+        }
+
     }
 
     /// <summary>
@@ -105,40 +143,45 @@ namespace Quan
     public class BasePage<VM> : BasePage
         where VM : ViewModelBase, new()
     {
-        #region Private Properties
-
-        private VM _viewModel;
-
-        #endregion
-
         #region Public Properties
 
+        /// <summary>
+        /// The view model associated with this page
+        /// </summary>
         public VM ViewModel
         {
-            get => _viewModel;
-            set
-            {
-                if (_viewModel != null && _viewModel == value)
-                    return;
-                _viewModel = value;
-
-                DataContext = _viewModel;
-            }
+            get => (VM)ViewModelObject;
+            set => ViewModelObject = value;
         }
 
         #endregion
 
         #region Construct
 
-        public BasePage() : base()
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+
+        public BasePage()
         {
             //Creat a default view model
-            ViewModel = new VM();
+            ViewModel = IoC.Get<VM>();
+        }
+
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use, if any</param>
+        public BasePage(VM specificViewModel = null) : base()
+        {
+            if (specificViewModel != null)
+                ViewModel = specificViewModel;
+            else
+                //Creat a default view model
+                ViewModel = IoC.Get<VM>();
         }
 
         #endregion
-
-
 
     }
 }

@@ -6,23 +6,23 @@
     public enum ApplicationPage
     {
         /// <summary>
-        /// The initial login page
+        /// The initial Login page
         /// </summary>
-        login = 0,
+        Login = 0,
 
         /// <summary>
-        /// The main chat page
+        /// The main Chat page
         /// </summary>
-        chat = 1,
+        Chat = 1,
 
         /// <summary>
-        /// The register page
+        /// The Register page
         /// </summary>
-        register = 2,
+        Register = 2,
 
         /// <summary>
-        /// The datagrid page
+        /// The Datagrid page
         /// </summary>
-        datagrid = 3
+        Datagrid = 3
     }
 }

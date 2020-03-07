@@ -178,9 +178,8 @@
             <controls:PageHost
                 x:Name="MainFrame"
                 Grid.Column="1"
-                d:DataContext=""
-                CurrentPage="{Binding}"
-                DataContext="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}, Converter={converters:ApplicationPageValueConverter}}" />
+                CurrentPage="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}}"
+                CurrentPageViewModel="{Binding ApplicationViewModel.CurrentPageViewModel, Source={x:Static viewModels:ViewModelLocator.Instance}}" />
 
 
         </Grid>

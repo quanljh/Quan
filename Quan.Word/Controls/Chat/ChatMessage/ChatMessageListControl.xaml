@@ -6,14 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:quan="clr-namespace:Quan"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Border
-        Padding="10,0,20,0"
-        VerticalAlignment="Bottom"
-        DataContext="{x:Static core:ChatMessageListDesignModel.Instance}">
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Border VerticalAlignment="Bottom" d:DataContext="{x:Static core:ChatMessageListDesignModel.Instance}">
+        <ScrollViewer
+            Padding="5,0"
+            quan:ScrollToBottomOnLoadProperty.Value="True"
+            Style="{StaticResource ScrollViewerForChatPage}"
+            VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

@@ -7,6 +7,7 @@ namespace Quan
 {
     public static class PageAnimations
     {
+        private static string a;
         /// <summary>
         /// Slides a page in from right
         /// </summary>

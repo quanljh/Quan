@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:Quan.Converters"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="DataGridPageView"
@@ -17,10 +18,11 @@
     <Border Padding="20">
         <DataGrid
             AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
             CanUserResizeRows="False"
             ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
             HorizontalScrollBarVisibility="Auto"
-            IsReadOnly="True"
             ItemsSource="{Binding PatientCollection}"
             VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
@@ -44,6 +46,32 @@
                     Width="60"
                     Binding="{Binding PatientSex, Converter={converters:StringToSexConverter}}"
                     Header="性別" />
+                <DataGridTemplateColumn
+                    Width="100"
+                    CanUserSort="True"
+                    Header="状況"
+                    SortMemberPath="PatientJoukyouKbn">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label
+                                Padding="0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={converters:stringToPatientJyokyoConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                DisplayMemberPath="JyokyoName"
+                                Foreground="Black"
+                                IsEditable="False"
+                                ItemsSource="{Binding Path=Root.JokyoCollection}"
+                                SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="JyokyoCode" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Border>

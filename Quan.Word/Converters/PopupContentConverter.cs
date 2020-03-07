@@ -13,6 +13,8 @@ namespace Quan.Converters
     {
         public override object Convert(ChatAttachmentPopupMenuViewModel value, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return null;
             return new VerticalMenu { DataContext = value.Content };
         }
 
