@@ -31,7 +31,7 @@ namespace Quan.Word.Core
             WindowMinimumWidth = 250;
 
             //Make title bar smaller
-            CaptionHeight = 30;
+            TitleHeight = 30;
         }
 
         #endregion

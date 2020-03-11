@@ -15,11 +15,12 @@ namespace Quan.Views
         {
             InitializeComponent();
 
-            SourceInitialized += OnSourceInitialized;
+            //SourceInitialized += OnSourceInitialized;
 
             DataContext = new MainWindowViewModel(this);
         }
 
+        // Old version to resolve window maximize
         private void OnSourceInitialized(object sender, EventArgs e)
         {
             IntPtr handle = new WindowInteropHelper(this).Handle;
@@ -32,7 +33,6 @@ namespace Quan.Views
             {
                 case 0x0024:
                     WindowMaximizeHelper.WmGetMinMaxInfo(hwnd, lParam, (int)MinWidth, (int)MinHeight);
-                    handled = true;
                     break;
             }
 
@@ -44,7 +44,7 @@ namespace Quan.Views
             //Show overlay if we lose focus
             if (DataContext is MainWindowViewModel vm)
             {
-                vm.DimmedOverlayVisible = true;
+                vm.DimmableOverlayVisible = true;
             }
         }
 
@@ -53,7 +53,7 @@ namespace Quan.Views
             //Hide overlay if we are focused
             if (DataContext is MainWindowViewModel vm)
             {
-                vm.DimmedOverlayVisible = false;
+                vm.DimmableOverlayVisible = false;
             }
         }
     }

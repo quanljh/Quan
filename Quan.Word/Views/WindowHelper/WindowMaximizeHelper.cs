@@ -31,6 +31,8 @@ namespace Quan.Views
                 mmi.ptMaxPosition.y = Math.Abs(rcWorkArea.top - rcMonitorArea.top);
                 mmi.ptMaxSize.x = Math.Abs(rcWorkArea.right - rcWorkArea.left);
                 mmi.ptMaxSize.y = Math.Abs(rcWorkArea.bottom - rcWorkArea.top);
+                mmi.ptMaxTrackSize.x = Math.Abs(rcWorkArea.Width);
+                mmi.ptMaxTrackSize.y = Math.Abs(rcWorkArea.Height);
                 mmi.ptMinTrackSize.x = minWidth;
                 mmi.ptMinTrackSize.y = minHeight;
             }

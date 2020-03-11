@@ -115,5 +115,26 @@ namespace Quan.Word.Core
             set => SetProperty(ref _newItem, value);
         }
 
+        /// <summary>
+        /// The attachment to the message, if it is of an image type
+        /// </summary>
+        private ChatMessageListItemImageAttachmentModel _imageAttachment;
+
+        public ChatMessageListItemImageAttachmentModel ImageAttachment
+        {
+            get => _imageAttachment;
+            set => SetProperty(ref _imageAttachment, value);
+        }
+
+        /// <summary>
+        /// A flag indicating if we have any message text or not
+        /// </summary>
+        public bool HasMessage => Message != null;
+
+        /// <summary>
+        /// A flag indicating if we have an image attached to this message
+        /// </summary>
+        public bool HasMessageAttachment => ImageAttachment != null;
+
     }
 }

@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:quan="clr-namespace:Quan"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <Border Padding="5" d:DataContext="{x:Static core:ChatMessageListItemDesignModel.Instance}">
@@ -63,19 +64,16 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+
 
                 <!--  Time container  -->
                 <StackPanel
                     x:Name="ExtraDetails"
                     Grid.Row="0"
-                    Grid.Column="1"
+                    Margin="10,0,0,0"
                     HorizontalAlignment="{Binding SentByMe, Converter={converters:SentByMeToAlignmentConverter}}"
                     Opacity="0"
                     Orientation="Horizontal">
@@ -97,52 +95,72 @@
                 </StackPanel>
 
 
-
-                <!--  Chat bubble anchor (left)  -->
-                <Path
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="0,0,-2,0"
-                    Panel.ZIndex="1"
-                    Data="M 0 0 S 0 5 11 5 L 11 15 S 0 15 0 0"
-                    Fill="White"
-                    Stroke="Black"
-                    StrokeThickness="0"
-                    Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}}" />
-
-                <!--  Speech bubble Rectangle  -->
+                <!--  Image Attachment  -->
                 <Border
                     Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="{Binding SentByMe, Converter={converters:SentByMeToMarginConverter}}"
-                    Padding="8"
+                    Margin="0,0,0,10"
                     HorizontalAlignment="{Binding SentByMe, Converter={converters:SentByMeToAlignmentConverter}}"
-                    Background="{Binding SentByMe, Converter={converters:SentByMeToBackgroundConverter}}"
-                    CornerRadius="10">
-
-                    <!--  Message Text  -->
-                    <TextBox
-                        VerticalAlignment="Center"
-                        FontFamily="{StaticResource LatoRegular}"
-                        Foreground="{StaticResource WordDarkBlueBrush}"
-                        Style="{StaticResource SelectableTextBlockStyle}"
-                        Text="{Binding Message, Mode=OneWay}"
-                        TextWrapping="Wrap" />
-
+                    CornerRadius="10"
+                    Visibility="{Binding HasMessageAttachment, Converter={converters:BooleanToCollapsedConverter}, ConverterParameter=True}">
+                    <Image
+                        MaxWidth="600"
+                        quan:ClipFromBorderProperty.Value="True"
+                        DataContext="{Binding ImageAttachment}"
+                        Source="{Binding LocalFilePath}" />
                 </Border>
 
-                <!--  Chat bubble anchor (right)  -->
-                <Path
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="9,0,0,0"
-                    HorizontalAlignment="Right"
-                    Panel.ZIndex="1"
-                    Data="M 0 0 S 0 5 -11 5 L-11 15 S 0 15 0 0 "
-                    Fill="{Binding SentByMe, Converter={converters:SentByMeToBackgroundConverter}}"
-                    Stroke="Black"
-                    StrokeThickness="0"
-                    Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}, ConverterParameter=True}" />
+
+                <!--  Message Text  -->
+                <Grid Grid.Row="2" Visibility="{Binding HasMessage, Converter={converters:BooleanToCollapsedConverter}, ConverterParameter=True}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  Chat bubble anchor (left)  -->
+                    <Path
+                        Grid.Column="0"
+                        Margin="0,0,-2,0"
+                        Panel.ZIndex="1"
+                        Data="M 0 0 S 0 5 11 5 L 11 15 S 0 15 0 0"
+                        Fill="White"
+                        Stroke="Black"
+                        StrokeThickness="0"
+                        Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}}" />
+
+                    <!--  Speech bubble Rectangle  -->
+                    <Border
+                        Grid.Column="1"
+                        Margin="{Binding SentByMe, Converter={converters:SentByMeToMarginConverter}}"
+                        Padding="8"
+                        HorizontalAlignment="{Binding SentByMe, Converter={converters:SentByMeToAlignmentConverter}}"
+                        Background="{Binding SentByMe, Converter={converters:SentByMeToBackgroundConverter}}"
+                        CornerRadius="10">
+
+                        <!--  Message Text  -->
+                        <TextBox
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource LatoRegular}"
+                            Foreground="{StaticResource WordDarkBlueBrush}"
+                            Style="{StaticResource SelectableTextBlockStyle}"
+                            Text="{Binding Message, Mode=OneWay}"
+                            TextWrapping="Wrap" />
+
+                    </Border>
+
+                    <!--  Chat bubble anchor (right)  -->
+                    <Path
+                        Grid.Column="2"
+                        Margin="9,0,0,0"
+                        HorizontalAlignment="Right"
+                        Panel.ZIndex="1"
+                        Data="M 0 0 S 0 5 -11 5 L-11 15 S 0 15 0 0 "
+                        Fill="{Binding SentByMe, Converter={converters:SentByMeToBackgroundConverter}}"
+                        Stroke="Black"
+                        StrokeThickness="0"
+                        Visibility="{Binding SentByMe, Converter={converters:BooleanToHiddenConverter}, ConverterParameter=True}" />
+                </Grid>
             </Grid>
         </Grid>
     </Border>

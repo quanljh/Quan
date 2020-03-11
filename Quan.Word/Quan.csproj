@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Quan</RootNamespace>
     <AssemblyName>Quan</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -159,11 +159,11 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Unity.Abstractions, Version=5.11.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Abstractions.5.11.3\lib\net46\Unity.Abstractions.dll</HintPath>
+    <Reference Include="Unity.Abstractions, Version=5.11.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.4\lib\net46\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.3\lib\net46\Unity.Container.dll</HintPath>
+      <HintPath>..\packages\Unity.5.11.4\lib\net46\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ServiceLocation, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.ServiceLocation.5.11.1\lib\net46\Unity.ServiceLocation.dll</HintPath>
@@ -183,6 +183,7 @@
     <Compile Include="Animation\StoryboardHelpers.cs" />
     <Compile Include="AttachedProperties\BaseAttachedProperty.cs" />
     <Compile Include="AttachedProperties\ScrollViewerAttachedProperties.cs" />
+    <Compile Include="AttachedProperties\BorderAttachedProperty.cs" />
     <Compile Include="AttachedProperties\TextEntryWidthMathcherProperty.cs" />
     <Compile Include="AttachedProperties\TextAttachedProperty.cs" />
     <Compile Include="AttachedProperties\ButtonAttachedProperty.cs" />
@@ -264,7 +265,6 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Class1.cs" />
     <Compile Include="ViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\DataGridPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -277,6 +277,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\WindowHelper\WindowMaximizeHelper.cs" />
+    <Compile Include="Views\WindowHelper\WindowResizer.cs" />
     <Page Include="Controls\BubbleContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -463,8 +464,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.6.1.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.1.0\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.2.6\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.2.6\build\PropertyChanged.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.1.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.1.1\build\Fody.targets'))" />
   </Target>
-  <Import Project="..\packages\Fody.6.1.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.1.0\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.6.1.1\build\Fody.targets" Condition="Exists('..\packages\Fody.6.1.1\build\Fody.targets')" />
 </Project>

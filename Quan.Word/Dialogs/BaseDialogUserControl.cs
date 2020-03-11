@@ -90,7 +90,7 @@ namespace Quan
                     //Match controls expected sizes to the dialog window view model
                     mDialogWindow.ViewModel.WindowMinimumHeight = WindowMinimumHeight;
                     mDialogWindow.ViewModel.WindowMinimumWidth = WindowMinimumWidth;
-                    mDialogWindow.ViewModel.CaptionHeight = TitleHeight;
+                    mDialogWindow.ViewModel.TitleHeight = TitleHeight;
                     mDialogWindow.ViewModel.Title = string.IsNullOrEmpty(viewModel.Title) ? Title : viewModel.Title;
 
                     //Set this control to the dialog window content

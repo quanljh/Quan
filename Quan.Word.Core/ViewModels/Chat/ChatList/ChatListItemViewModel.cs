@@ -165,6 +165,10 @@ namespace Quan.Word.Core
                     {
                         Message = "A received message",
                         Initials = Initials,
+                        ImageAttachment = new ChatMessageListItemImageAttachmentModel()
+                        {
+                            ThumbnaiUrl = "http://www.quanljh.com"
+                        },
                         MessageSentTime = DateTime.UtcNow,
                         ProfilePictureRGB = "FF0000",
                         SenderName = "Parnell",
