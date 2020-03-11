@@ -94,6 +94,16 @@
                         Text="{Binding MessageReadTime, Converter={converters:TimeToReadTimeConverter}}" />
                 </StackPanel>
 
+                <Border
+                    Grid.Row="1"
+                    HorizontalAlignment="{Binding SentByMe, Converter={converters:SentByMeToAlignmentConverter}}"
+                    VerticalAlignment="Top">
+                    <TextBlock
+                        DataContext="{Binding ImageAttachment}"
+                        Foreground="{StaticResource ForegroundLightBrush}"
+                        Style="{StaticResource SpinningText}"
+                        Visibility="{Binding ImageLoaded, Converter={converters:BooleanToCollapsedConverter}, FallbackValue=Collapsed}" />
+                </Border>
 
                 <!--  Image Attachment  -->
                 <Border
@@ -105,8 +115,9 @@
                     <Image
                         MaxWidth="600"
                         quan:ClipFromBorderProperty.Value="True"
+                        quan:FadeInImageOnLoadProperty.Value="True"
                         DataContext="{Binding ImageAttachment}"
-                        Source="{Binding LocalFilePath}" />
+                        Source="{Binding LocalFilePath, NotifyOnTargetUpdated=True}" />
                 </Border>
 
 

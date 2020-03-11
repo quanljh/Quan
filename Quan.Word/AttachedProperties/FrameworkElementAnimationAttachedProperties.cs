@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Quan
 {
@@ -88,6 +89,33 @@ namespace Quan
         protected virtual void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
 
+        }
+    }
+
+
+    /// <summary>
+    /// Fade In an image once the source changes
+    /// </summary>
+    public class FadeInImageOnLoadProperty : AnimateBaseProperty<FadeInImageOnLoadProperty>
+    {
+        public override void OnValueUpdated(DependencyObject sender, object value)
+        {
+            base.OnValueUpdated(sender, value);
+
+            // Make sure we have an image
+            if (!(sender is Image image))
+                return;
+
+            // If we want to animate in...
+            if ((bool)value)
+                image.TargetUpdated += Image_TargetUpdated;
+            else
+                image.TargetUpdated -= Image_TargetUpdated;
+        }
+
+        private async void Image_TargetUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+            await (sender as Image).FadeIn(false);
         }
     }
 

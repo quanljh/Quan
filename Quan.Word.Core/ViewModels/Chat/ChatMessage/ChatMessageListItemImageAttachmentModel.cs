@@ -1,4 +1,6 @@
-﻿namespace Quan.Word.Core
+﻿using System.Threading.Tasks;
+
+namespace Quan.Word.Core
 {
     /// <summary>
     /// A view model for each Chat message thread items attachment
@@ -50,10 +52,18 @@
                 //      Set LocalFilePath value
                 //
                 //      For now, just set the file path directory
-                LocalFilePath = "/Images/Samples/aijiang.jpg";
+                Task.Delay(2000).ContinueWith(t => LocalFilePath = "/Images/Samples/aijiang.jpg");
             }
         }
 
+        /// <summary>
+        /// The local file path on this machine to the downloaded thumbnail
+        /// </summary>
         public string LocalFilePath { get; set; }
+
+        /// <summary>
+        /// Indicates if an image has loaded
+        /// </summary>
+        public bool ImageLoaded => LocalFilePath != null;
     }
 }

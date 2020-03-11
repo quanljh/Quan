@@ -455,7 +455,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Samples\aijiang.jpg" />
   </ItemGroup>
