@@ -114,6 +114,8 @@ namespace Quan.Word.Core
 
             IoC.Application.GoToPage(ApplicationPage.Chat, new ChatMessageListViewModel
             {
+                DisplayTitle = "Quanljh",
+
                 Items = new ObservableCollection<ChatMessageListItemModel>()
                 {
                     new ChatMessageListItemModel

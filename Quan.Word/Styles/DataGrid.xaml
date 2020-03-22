@@ -25,6 +25,17 @@
         </RadialGradientBrush.GradientStops>
     </RadialGradientBrush>
 
+    <Style x:Key="TextCenterStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TextLeftStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="5,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <!--  Regular Datagrid column header style  -->
     <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -34,6 +45,42 @@
         <Setter Property="Background" Value="{StaticResource DataGrid.Header.Background}" />
         <Setter Property="Height" Value="30" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
+    </Style>
+
+    <!--  Regular Datagrid row header style  -->
+    <Style x:Key="DataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="BorderBrush" Value="{StaticResource ForegroundDarkBrush}" />
+        <Setter Property="Background" Value="{StaticResource DataGrid.Header.Background}" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
+    </Style>
+
+    <!--  Regular Datagrid row style  -->
+    <!--<Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource WordGreenBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <!--  Regular Datagrid cell style  -->
+    <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="BorderBrush" Value="{StaticResource ForegroundDarkBrush}" />
+        <Setter Property="Background" Value="{StaticResource ForegroundLightBrush}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=IsSelected}" Value="True">
+                <Setter Property="Background" Value="{StaticResource WordGreenBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
 
@@ -71,7 +118,7 @@
                                         </Grid.RowDefinitions>
                                         <Border
                                             Width="30"
-                                            BorderBrush="#FF688CAF"
+                                            BorderBrush="{StaticResource ForegroundDarkBrush}"
                                             BorderThickness="0,0,1,1">
                                             <Button
                                                 Background="{StaticResource DataGrid.Header.Background}"

@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Quan.Pages"
     xmlns:quan="clr-namespace:Quan"
     d:DesignWidth="300"
     mc:Ignorable="d">
@@ -150,13 +151,18 @@
                         CornerRadius="10">
 
                         <!--  Message Text  -->
-                        <TextBox
-                            VerticalAlignment="Center"
-                            FontFamily="{StaticResource LatoRegular}"
+                        <RichTextBox
+                            x:Name="MessageText"
+                            quan:AutoAdjustTextProperty.Value="True"
+                            quan:FindAndSelectProperty.Value="{Binding Path=DataContext.SearchText, RelativeSource={RelativeSource AncestorType=pages:ChatPage, AncestorLevel=1}}"
                             Foreground="{StaticResource WordDarkBlueBrush}"
-                            Style="{StaticResource SelectableTextBlockStyle}"
-                            Text="{Binding Message, Mode=OneWay}"
-                            TextWrapping="Wrap" />
+                            Style="{StaticResource SelectableTextBlockStyle}">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="{Binding Message, Mode=OneWay}" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
 
                     </Border>
 

@@ -20,6 +20,7 @@
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="5"
+                    Opacity="0.5"
                     RenderingBias="Quality"
                     ShadowDepth="2"
                     Color="{StaticResource WordLightBlue}" />

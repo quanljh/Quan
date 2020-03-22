@@ -34,11 +34,14 @@ namespace Quan
                 foreach (var child in panel.Children)
                 {
                     // Ignore any non-text entry controls
-                    if (!(child is TextEntryControl control))
+                    if (!(child is TextEntryControl control) && !(child is PasswordEntryControl))
                         continue;
 
+                    // Get the label from the text entry or password entry
+                    var label = child is TextEntryControl ? (child as TextEntryControl).Label : (child as PasswordEntryControl).Label;
+
                     // Set it's margin to the given value
-                    control.Label.SizeChanged += (sss, eee) =>
+                    label.SizeChanged += (sss, eee) =>
                     {
                         // Update widths
                         SetWidths(panel);
@@ -61,11 +64,15 @@ namespace Quan
             foreach (var child in panel.Children)
             {
                 // Ignore any non-text entry controls
-                if (!(child is TextEntryControl control))
+                if (!(child is TextEntryControl) && !(child is PasswordEntryControl))
                     continue;
 
+                // Get the label from the text entry or password entry
+                var label = child is TextEntryControl ? (child as TextEntryControl).Label : (child as PasswordEntryControl).Label;
+
+
                 // Find if this value is larger than the other controls
-                maxSize = Math.Max(maxSize, control.Label.RenderSize.Width + control.Label.Margin.Left + control.Label.Margin.Right);
+                maxSize = Math.Max(maxSize, label.RenderSize.Width + label.Margin.Left + label.Margin.Right);
             }
 
             // Create a grid length converter
@@ -74,12 +81,12 @@ namespace Quan
             // For each child...
             foreach (var child in panel.Children)
             {
-                // Ignore any non-text entry controls
-                if (!(child is TextEntryControl control))
-                    continue;
-
-                // Set each controls LabelWidth value to the max size
-                control.LabelWidth = gridLength;
+                if (child is TextEntryControl text)
+                    // Set each controls LabelWidth value to the max size
+                    text.LabelWidth = gridLength;
+                else if (child is PasswordEntryControl pass)
+                    // Set each controls LabelWidth value to the max size
+                    pass.LabelWidth = gridLength;
             }
         }
     }

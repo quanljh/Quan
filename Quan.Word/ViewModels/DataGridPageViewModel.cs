@@ -1,9 +1,12 @@
 ﻿using Prism.Mvvm;
 using Quan.Word.Core;
-using Reactive.Bindings;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Quan
 {
@@ -36,11 +39,17 @@ namespace Quan
 
         public ObservableCollection<PatientUIModel> PatientCollection { get; set; }
 
+        public ICollectionView patientCollectionView { get; set; }
+
+        public PatientUIModel SelectedPatient { get; set; }
+
         #endregion
 
         #region Commands
 
-        public ReactiveCommand ChangeStatesCommand { get; set; }
+        public ICommand ChangeStatesCommand { get; set; }
+
+        public ICommand ChangeRowCommand { get; set; }
 
         #endregion
 
@@ -121,10 +130,23 @@ namespace Quan
                 },
             };
 
-            ChangeStatesCommand = new ReactiveCommand();
+            patientCollectionView = CollectionViewSource.GetDefaultView(PatientCollection);
 
-            ChangeStatesCommand.Subscribe(async () => await wait());
+            ChangeStatesCommand = new RelayCommand(async () => await wait());
+
+            SelectedPatient = PatientCollection.FirstOrDefault();
+
+            ChangeRowCommand = new RelayCommand(ChangeRow);
+
+            //patientCollectionView.Filter = x =>
+            //{
+            //    if (!(x is PatientUIModel patient))
+            //        return false;
+            //    return patient.PatientNo != "4";
+            //};
         }
+
+
 
         #endregion
 
@@ -133,6 +155,25 @@ namespace Quan
         public async Task wait()
         {
             await Task.Delay(3000);
+        }
+
+        private void ChangeRow()
+        {
+            var newPatient = new PatientUIModel()
+            {
+                PatientNo = "6",
+                PatientName = "大森紀彦",
+                PatientKanaName = "ｵｵﾓﾘﾉﾘﾋｺ",
+                PatientBirth = new DateTime(1975, 08, 22),
+                PatientSex = "1",
+                PatientJoukyouKbn = "2"
+            };
+
+            Enumerable.Range(0, 1000).ToList().ForEach(f => { PatientCollection.Add(newPatient); });
+
+
+            //PatientCollection[4] = newPatient;
+            //SelectedPatient = newPatient;
         }
 
         #endregion

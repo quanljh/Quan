@@ -136,5 +136,18 @@ namespace Quan.Word.Core
         /// </summary>
         public bool HasMessageAttachment => ImageAttachment != null;
 
+
+        /// <summary>
+        /// The text to search for
+        /// </summary>
+        private string _searchText;
+
+        public string SearchText
+        {
+            get => _searchText;
+            set => SetProperty(ref _searchText, value);
+        }
+
+
     }
 }

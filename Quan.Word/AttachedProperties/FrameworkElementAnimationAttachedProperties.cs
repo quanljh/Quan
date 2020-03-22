@@ -190,6 +190,25 @@ namespace Quan
 
 
     /// <summary>
+    /// Animates a framework element sliding up from the Top on show
+    /// and sliding out to the Top on hide
+    /// NOTE: Keeps the margin
+    /// </summary>
+    public class AnimateSlideInFromTopProperty : AnimateBaseProperty<AnimateSlideInFromTopProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
+        {
+            if (value)
+                // Animate in
+                await element.SlideAndFadeIn(AnimationSlideInDirection.Top, firstLoad, firstLoad ? 0 : 0.3f, false);
+            else
+                // Animate out
+                await element.SlideAndFadeOut(AnimationSlideInDirection.Top, firstLoad ? 0 : 0.3f, false);
+        }
+    }
+
+
+    /// <summary>
     /// Animates a framwork element fade in on show
     /// and fade out on hide
     /// </summary>

@@ -24,6 +24,8 @@ namespace Quan.Word.Core
         /// </summary>
         public ChatMessageListDesignModel()
         {
+            DisplayTitle = "Parnell";
+
             Items = new ObservableCollection<ChatMessageListItemModel>()
             {
                 new ChatMessageListItemModel

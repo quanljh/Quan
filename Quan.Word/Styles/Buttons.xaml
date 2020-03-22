@@ -8,7 +8,7 @@
         <!--  Order is important  -->
         <ResourceDictionary Source="Colors.xaml" />
         <ResourceDictionary Source="Fonts.xaml" />
-        <ResourceDictionary Source="Tests.xaml" />
+        <ResourceDictionary Source="Texts.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--  Hoverless Button  -->
@@ -304,9 +304,9 @@
         <Setter Property="Background" Value="{StaticResource WordTransparentBlueBrush}" />
         <Setter Property="Foreground" Value="{StaticResource BackgroundLightBrush}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBigger}" />
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
-        <Setter Property="Padding" Value="30" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
 
@@ -321,27 +321,24 @@
                         SnapsToDevicePixels="True">
 
                         <Grid>
-                            <Viewbox>
-                                <TextBlock
-                                    x:Name="contentPresenter"
-                                    Margin="{TemplateBinding Padding}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Focusable="False"
-                                    FontFamily="{TemplateBinding FontFamily}"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                    Text="{TemplateBinding Content}">
+                            <TextBlock
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontSize="{TemplateBinding FontSize}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Text="{TemplateBinding Content}">
 
-                                    <TextBlock.RenderTransform>
-                                        <ScaleTransform />
-                                    </TextBlock.RenderTransform>
-                                    <TextBlock.RenderTransformOrigin>
-                                        <Point X="0.5" Y="0.5" />
-                                    </TextBlock.RenderTransformOrigin>
-                                </TextBlock>
-
-                            </Viewbox>
+                                <TextBlock.RenderTransform>
+                                    <ScaleTransform />
+                                </TextBlock.RenderTransform>
+                                <TextBlock.RenderTransformOrigin>
+                                    <Point X="0.5" Y="0.5" />
+                                </TextBlock.RenderTransformOrigin>
+                            </TextBlock>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

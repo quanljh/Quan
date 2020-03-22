@@ -9,9 +9,12 @@
     <FontFamily x:Key="LatoBold">pack://application;,,,/Fonts/#Lato Bold</FontFamily>
     <FontFamily x:Key="FontAwesome">pack://application;,,,/Fonts/#FontAwesome</FontFamily>
 
+    <system:Double x:Key="FontSizeVeryVerySmall">6</system:Double>
+    <system:Double x:Key="FontSizeVerySmall">8</system:Double>
     <system:Double x:Key="FontSizeSmaller">10</system:Double>
     <system:Double x:Key="FontSizeSmall">12</system:Double>
     <system:Double x:Key="FontSizeRegular">14</system:Double>
+    <system:Double x:Key="FontSizeBigger">16</system:Double>
     <system:Double x:Key="FontSizeLarge">20</system:Double>
     <system:Double x:Key="FontSizeXLarge">24</system:Double>
     <system:Double x:Key="FontSizeXXLarge">30</system:Double>
@@ -28,6 +31,8 @@
     <system:String x:Key="FontAweSomeArrowleftIcon">&#xf060;</system:String>
     <system:String x:Key="FontAwesomeTickIcon">&#xf00c;</system:String>
     <system:String x:Key="FontAwesomeCloseIcon">&#xf00d;</system:String>
+    <system:String x:Key="FontAwesomeAngleUpIcon">&#xf106;</system:String>
+    <system:String x:Key="FontAwesomeAngleDownIcon">&#xf107;</system:String>
 
     <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
         <Setter Property="FontFamily" Value="{StaticResource LatoThin}" />

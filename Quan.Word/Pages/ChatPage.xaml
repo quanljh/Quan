@@ -40,21 +40,102 @@
         </Border>
 
         <!--  Title bar  -->
-        <Grid Grid.Row="0" Height="50">
-            <!--  Title text  -->
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontFamily="{StaticResource LatoRegular}"
-                FontSize="{StaticResource FontSizeXLarge}"
-                Foreground="{StaticResource ForegroundLightBrush}"
-                Text="Parnell" />
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <!--  Main Buttons  -->
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Content="{StaticResource FontAweSomeSearchIcon}" Style="{StaticResource IconGrowButton}" />
-                <Button Content="{StaticResource FontAweSomeEllipsisVerticalIcon}" Style="{StaticResource IconGrowButton}" />
-            </StackPanel>
+            <!--  Title bar  -->
+            <Grid>
+                <!--  Title text  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource LatoRegular}"
+                    FontSize="{StaticResource FontSizeXLarge}"
+                    Foreground="{StaticResource ForegroundLightBrush}"
+                    Text="{Binding DisplayTitle}" />
+
+                <!--  Main Buttons  -->
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button
+                        Command="{Binding OpenSearchCommand}"
+                        Content="{StaticResource FontAweSomeSearchIcon}"
+                        Style="{StaticResource IconGrowButton}" />
+                    <Button Content="{StaticResource FontAweSomeEllipsisVerticalIcon}" Style="{StaticResource IconGrowButton}" />
+                </StackPanel>
+            </Grid>
+
+            <!--  Search Overlay  -->
+            <Grid Grid.Row="1" local:AnimateSlideInFromTopProperty.Value="{Binding SearchIsOpen}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Search box  -->
+                <TextBox
+                    Grid.Column="0"
+                    Height="30"
+                    Margin="5"
+                    local:FocusProperty.Value="{Binding SearchIsOpen}"
+                    AutoWordSelection="True"
+                    BorderThickness="0"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Style="{StaticResource CornerTextBox}"
+                    Tag="Search Text..."
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <!--  Clear text on Esc  -->
+                        <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
+                        <!--  Search text on Enter  -->
+                        <KeyBinding Key="Escape" Command="{Binding ClearSearchCommand}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <WrapPanel Grid.Column="1" VerticalAlignment="Center">
+
+                    <!--  Search Result Count  -->
+                    <TextBlock
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        Foreground="{StaticResource ForegroundLightBrush}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}/{1}">
+                                <Binding FallbackValue="0" Path="RecentCount" />
+                                <Binding FallbackValue="3" Path="TotalCounts" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                    <!--  Find previous Button  -->
+                    <Button
+                        Height="22"
+                        Content="{StaticResource FontAwesomeAngleUpIcon}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        Style="{StaticResource IconGrowButton}" />
+
+                    <!--  Find next Button  -->
+                    <Button
+                        Height="22"
+                        Content="{StaticResource FontAwesomeAngleDownIcon}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        Style="{StaticResource IconGrowButton}" />
+
+                </WrapPanel>
+
+                <!--  Close Search Button  -->
+                <Button
+                    Grid.Column="2"
+                    Height="40"
+                    Command="{Binding CloseSearchCommand}"
+                    Content="{StaticResource FontAwesomeCloseIcon}"
+                    Foreground="{StaticResource WordOrangeBrush}"
+                    Style="{StaticResource IconGrowButton}" />
+            </Grid>
         </Grid>
 
         <!--  Chat list  -->

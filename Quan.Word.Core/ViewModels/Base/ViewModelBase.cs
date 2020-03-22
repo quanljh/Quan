@@ -1,4 +1,5 @@
-﻿using CommonServiceLocator;
+﻿using AutoMapper;
+using CommonServiceLocator;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -26,6 +27,8 @@ namespace Quan.Word.Core
 
         public IUnityContainer Container { get; }
 
+        public IMapper Mapper { get; }
+
 
         #region Action
 
@@ -39,6 +42,7 @@ namespace Quan.Word.Core
             {
                 Container = ServiceLocator.Current.GetInstance<IUnityContainer>();
                 EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+                Mapper = ServiceLocator.Current.GetInstance<IMapper>();
             }
             FinishInteractionCommand = new DelegateCommand(() => { FinishInteraction?.Invoke(); });
         }

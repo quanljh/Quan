@@ -8,6 +8,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:Quan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Quan.Pages"
     x:Name="DataGridPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -15,64 +16,91 @@
     FontFamily="Meiryo UI"
     FontSize="{StaticResource FontSizeRegular}"
     mc:Ignorable="d">
-    <Border Padding="20">
-        <DataGrid
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            CanUserResizeRows="False"
-            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-            HorizontalScrollBarVisibility="Auto"
-            ItemsSource="{Binding PatientCollection}"
-            VerticalScrollBarVisibility="Auto">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="100"
-                    Binding="{Binding PatientNo}"
-                    Header="患者番号" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding PatientName}"
-                    Header="患者氏名" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding PatientKanaName}"
-                    Header="フリガナ" />
-                <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding PatientBirth, Converter={converters:DateTimeToDisplayTimeConverter}}"
-                    Header="生年月日" />
-                <DataGridTextColumn
-                    Width="60"
-                    Binding="{Binding PatientSex, Converter={converters:StringToSexConverter}}"
-                    Header="性別" />
-                <DataGridTemplateColumn
-                    Width="100"
-                    CanUserSort="True"
-                    Header="状況"
-                    SortMemberPath="PatientJoukyouKbn">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label
-                                Padding="0"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Content="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={converters:stringToPatientJyokyoConverter}}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox
-                                DisplayMemberPath="JyokyoName"
-                                Foreground="Black"
-                                IsEditable="False"
-                                ItemsSource="{Binding Path=Root.JokyoCollection}"
-                                SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="JyokyoCode" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Border>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Padding="20">
+            <DataGrid
+                Height="400"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserResizeRows="False"
+                CellStyle="{StaticResource DataGridCellStyle}"
+                ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                GridLinesVisibility="None"
+                ItemsSource="{Binding PatientCollection}"
+                RowHeaderStyle="{StaticResource DataGridRowHeaderStyle}"
+                SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding PatientNo}"
+                        ElementStyle="{StaticResource TextLeftStyle}"
+                        Header="患者番号"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="120"
+                        Binding="{Binding PatientName}"
+                        ElementStyle="{StaticResource TextCenterStyle}"
+                        Header="患者氏名"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="120"
+                        Binding="{Binding PatientKanaName}"
+                        ElementStyle="{StaticResource TextCenterStyle}"
+                        Header="フリガナ"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="150"
+                        Binding="{Binding PatientBirth, Converter={converters:DateTimeToDisplayTimeConverter}}"
+                        ElementStyle="{StaticResource TextLeftStyle}"
+                        Header="生年月日"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="60"
+                        Binding="{Binding PatientSex, Converter={converters:StringToSexConverter}}"
+                        ElementStyle="{StaticResource TextCenterStyle}"
+                        Header="性別"
+                        IsReadOnly="True" />
+                    <DataGridTemplateColumn
+                        Width="100"
+                        CanUserSort="True"
+                        Header="状況"
+                        SortMemberPath="PatientJoukyouKbn">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={converters:stringToPatientJyokyoConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox
+                                    DisplayMemberPath="JyokyoName"
+                                    Foreground="Black"
+                                    IsEditable="False"
+                                    ItemsSource="{Binding Path=DataContext.JokyoCollection, RelativeSource={RelativeSource AncestorType={x:Type pages:DataGridPage}}}"
+                                    SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="JyokyoCode" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Button
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding ChangeRowCommand}"
+                Content="Change Row" />
+        </Grid>
+    </Grid>
 </local:BasePage>

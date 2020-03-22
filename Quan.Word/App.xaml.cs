@@ -1,6 +1,8 @@
-﻿using CommonServiceLocator;
+﻿using AutoMapper;
+using CommonServiceLocator;
 using Prism.Events;
 using Prism.Mvvm;
+using Quan.Mapper;
 using Quan.Views;
 using Quan.Word.Core;
 using Reactive.Bindings;
@@ -36,13 +38,19 @@ namespace Quan
             window.Show();
         }
 
-
         private void InitializeContainer()
         {
             //Because of The ReactiveProperty base on one thread
             ReactivePropertyScheduler.SetDefault(ImmediateScheduler.Instance);
             Container.RegisterInstance(typeof(IUnityContainer), Container);
             Container.RegisterInstance(typeof(IEventAggregator), EventAggregator);
+
+            // Initialize a mapper configuartion
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<QuanMapperProfile>());
+            // Create a mapper
+            var mapper = config.CreateMapper();
+            // Register the mapper instance
+            Container.RegisterInstance(typeof(IMapper), mapper);
 
             //Creat a UnityServiceLocator which inherits from ServiceLocatorImplBase implement the interface IServiceLocator
             var provider = new UnityServiceLocator(Container);

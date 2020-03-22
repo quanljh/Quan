@@ -79,6 +79,77 @@
         </Setter>
     </Style>
 
+    <Style
+        x:Key="CornerTextBox"
+        BasedOn="{StaticResource BaseStyle}"
+        TargetType="{x:Type TextBox}">
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="BorderBrush" Value="{StaticResource WordBlueBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Background" Value="{StaticResource ForegroundLightBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundVeryDarkBrush}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Grid>
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10"
+                            SnapsToDevicePixels="True">
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Focusable="False"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden" />
+                        </Border>
+
+                        <TextBlock
+                            x:Name="placeholder"
+                            Margin="2,0,0,0"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{StaticResource ForegroundVeryDarkBrush}"
+                            IsHitTestVisible="False"
+                            Text="{TemplateBinding Tag}">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource AncestorType=TextBox, AncestorLevel=1, Mode=FindAncestor}}" Value="">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FF7EB4EA" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FF569DE5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type PasswordBox}">
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}" />
@@ -172,13 +243,15 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="SelectableTextBlockStyle" TargetType="{x:Type TextBox}">
+    <Style x:Key="SelectableTextBlockStyle" TargetType="{x:Type RichTextBox}">
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextBlock.LineHeight" Value="20" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="-2,0" />
         <!--
