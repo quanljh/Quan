@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows;
 using Unity;
+using Unity.ServiceLocation;
 
 namespace Quan.Word.Core
 {
@@ -38,12 +39,14 @@ namespace Quan.Word.Core
 
         protected ViewModelBase()
         {
-            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            {
+            // Don't set when we are in design-mode
+            if (ServiceLocator.IsLocationProviderSet)
+            { 
                 Container = ServiceLocator.Current.GetInstance<IUnityContainer>();
                 EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
                 Mapper = ServiceLocator.Current.GetInstance<IMapper>();
             }
+
             FinishInteractionCommand = new DelegateCommand(() => { FinishInteraction?.Invoke(); });
         }
 

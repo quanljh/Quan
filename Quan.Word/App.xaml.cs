@@ -45,19 +45,19 @@ namespace Quan
             Container.RegisterInstance(typeof(IUnityContainer), Container);
             Container.RegisterInstance(typeof(IEventAggregator), EventAggregator);
 
-            // Initialize a mapper configuartion
+            // Initialize a mapper configuration
             var config = new MapperConfiguration(cfg => cfg.AddProfile<QuanMapperProfile>());
             // Create a mapper
             var mapper = config.CreateMapper();
             // Register the mapper instance
             Container.RegisterInstance(typeof(IMapper), mapper);
 
-            //Creat a UnityServiceLocator which inherits from ServiceLocatorImplBase implement the interface IServiceLocator
+            //Create a UnityServiceLocator which inherits from ServiceLocatorImplBase implement the interface IServiceLocator
             var provider = new UnityServiceLocator(Container);
             //IoC 解耦(To lose the coupling between code and the IoC container)
             ServiceLocator.SetLocatorProvider(() => provider);
 
-            //Override Activator.CreateInstance(type) to IUnityContainer and use it to resolve our viewmodels
+            //Override Activator.CreateInstance(type) to IUnityContainer and use it to resolve our view models
             ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
         }
 
