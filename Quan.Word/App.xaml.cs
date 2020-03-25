@@ -23,9 +23,14 @@ namespace Quan
         private EventAggregator EventAggregator { get; } = new EventAggregator();
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            // Initialize Unity Container
             InitializeContainer();
 
+            // Setup the main application
             ApplicationSetup();
+
+            // Log it 
+            IoC.Logger.Log("Application starting up...");
 
             var window = Container.Resolve<MainWindow>();
             if (window.DataContext is ViewModelBase vb)
@@ -69,6 +74,9 @@ namespace Quan
 
             // Bind a UI Manager
             IoC.Kernel.Bind<IUImanager>().ToConstant(new UIManager());
+
+            // Bind a logger
+            IoC.Kernel.Bind<ILogFactory>().ToConstant(new BaseLogFactory());
 
             //Current.MainWindow = new MainWindow();
             //Current.MainWindow.Show();

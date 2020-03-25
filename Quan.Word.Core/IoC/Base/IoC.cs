@@ -17,7 +17,12 @@ namespace Quan.Word.Core
         /// <summary>
         /// A shortcut to access the <see cref="IUImanager"/>
         /// </summary>
-        public static IUImanager UI => IoC.Get<IUImanager>();
+        public static IUImanager UI => Get<IUImanager>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="ILogFactory"/>
+        /// </summary>
+        public static ILogFactory Logger => Get<ILogFactory>();
 
         /// <summary>
         /// A shortcut to access the <see cref="ApplicationViewModel"/>
@@ -47,7 +52,7 @@ namespace Quan.Word.Core
         }
 
         /// <summary>
-        /// Binds all singleton view modles
+        /// Binds all singleton view models
         /// </summary>
         private static void BindViewModels()
         {
@@ -59,7 +64,6 @@ namespace Quan.Word.Core
         }
 
         #endregion
-
 
         /// <summary>
         /// Gets a service from the IoC,of the specified type
