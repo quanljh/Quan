@@ -5,9 +5,9 @@ using System.Text;
 namespace Quan.Word.Core
 {
     /// <summary>
-    /// The severity of the log message
+    /// The level of details to output for a logger
     /// </summary>
-    public enum LogFactoryLevel
+    public enum LogOutputLevel
     {
         /// <summary>
         /// Logs everything
@@ -30,13 +30,13 @@ namespace Quan.Word.Core
         Normal = 4,
 
         /// <summary>
-        /// Log only critical errors and warnings, no general information
+        /// Log only critical errors and warnings and success, but no general information
         /// </summary>
         Critical = 5,
 
         /// <summary>
         /// The logger will never output anything
         /// </summary>
-        Nothing = 6,
+        Nothing = 7,
     }
 }

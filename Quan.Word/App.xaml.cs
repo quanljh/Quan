@@ -30,7 +30,13 @@ namespace Quan
             ApplicationSetup();
 
             // Log it 
-            IoC.Logger.Log("Application starting up...");
+            IoC.Logger.Log("This is Debug",LogLevel.Debug);
+            IoC.Logger.Log("This is Verbose", LogLevel.Verbose);
+            IoC.Logger.Log("This is Informative", LogLevel.Infomative);
+            IoC.Logger.Log("This is Warning", LogLevel.Warning);
+            IoC.Logger.Log("This is Error", LogLevel.Error);
+            IoC.Logger.Log("This is Success", LogLevel.Success);
+
 
             var window = Container.Resolve<MainWindow>();
             if (window.DataContext is ViewModelBase vb)

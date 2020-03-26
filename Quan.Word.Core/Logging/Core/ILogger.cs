@@ -14,6 +14,6 @@ namespace Quan.Word.Core
         /// </summary>
         /// <param name="message">The message being log</param>
         /// <param name="level">The level of the log message</param>
-        void Log(string message, LogFactoryLevel level);
+        void Log(string message, LogLevel level);
     }
 }

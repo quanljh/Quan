@@ -16,7 +16,7 @@ namespace Quan.Word.Core
         /// <summary>
         /// Fires whenever a new log arrives
         /// </summary>
-        event Action<(string Message, LogFactoryLevel level)> NewLog;
+        event Action<(string Message, LogLevel level)> NewLog;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace Quan.Word.Core
         /// <summary>
         /// The level of logging to output
         /// </summary>
-        LogFactoryLevel LogOutputLevel { get; set; }
+        LogOutputLevel LogOutputLevel { get; set; }
 
         /// <summary>
         /// If true, includes the origin of where the log message was logged from
@@ -57,7 +57,7 @@ namespace Quan.Word.Core
         /// <param name="origin">The method/function this message was logged in</param>
         /// <param name="filePath">The code filename that this message was logged from</param>
         /// <param name="lineNumber">The line of code in the filename this message was logged from</param>
-        void Log(string message, LogFactoryLevel level = LogFactoryLevel.Infomative, [CallerMemberName] string origin = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0);
+        void Log(string message, LogLevel level = LogLevel.Infomative, [CallerMemberName] string origin = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0);
 
         #endregion
     }
