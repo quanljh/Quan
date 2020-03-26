@@ -25,6 +25,16 @@ namespace Quan.Word.Core
         public static ILogFactory Logger => Get<ILogFactory>();
 
         /// <summary>
+        /// A shortcut to access the <see cref="IFileManager"/>
+        /// </summary>
+        public static IFileManager File => Get<IFileManager>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="ITaskManager"/>
+        /// </summary>
+        public static ITaskManager Task => Get<ITaskManager>();
+
+        /// <summary>
         /// A shortcut to access the <see cref="ApplicationViewModel"/>
         /// </summary>
         public static ApplicationViewModel Application => IoC.Get<ApplicationViewModel>();

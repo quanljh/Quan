@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Unity.Interception.Utilities;
 
 namespace Quan.Word.Core
 {
@@ -56,10 +57,14 @@ namespace Quan.Word.Core
         /// <summary>
         /// Default constructor
         /// </summary>
-        public BaseLogFactory()
+        /// <param name="loggers">The loggers to add to the factory, on top of the stock loggers already included</param>
+        public BaseLogFactory(ILogger[] loggers)
         {
             // Add console logger
             AddLogger(new DebugLogger());
+
+            // Add any others passed in
+            loggers?.ForEach(AddLogger);
         }
 
         #endregion
@@ -120,7 +125,7 @@ namespace Quan.Word.Core
 
             // If the user wants to know where the log originated from
             if (IncludeLogOriginDetails)
-                message = $"[{Path.GetFileName(filePath)} > {origin}() > Line {lineNumber}]{Environment.NewLine}{message}";
+                message = $"{message}  [{Path.GetFileName(filePath)} > {origin}() > Line {lineNumber}]{Environment.NewLine}";
 
             // Log to 
             mLoggers.ForEach(logger => logger.Log(message, level));

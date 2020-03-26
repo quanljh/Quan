@@ -168,7 +168,7 @@
                 Grid.ColumnSpan="2"
                 Panel.ZIndex="10"
                 Opacity="0.3">
-                <Border quan:AnimateFadeInProperty.Value="{Binding DimmedOverlayVisible}" Background="{StaticResource ForegroundVeryDarkBrush}" />
+                <Border quan:AnimateFadeInProperty.Value="{Binding DimmableOverlayVisible}" Background="{StaticResource ForegroundVeryDarkBrush}" />
             </Border>
 
             <!--  Side Menu  -->

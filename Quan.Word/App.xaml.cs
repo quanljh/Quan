@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using CommonServiceLocator;
 using Prism.Events;
 using Prism.Mvvm;
@@ -30,12 +31,12 @@ namespace Quan
             ApplicationSetup();
 
             // Log it 
-            IoC.Logger.Log("This is Debug",LogLevel.Debug);
-            IoC.Logger.Log("This is Verbose", LogLevel.Verbose);
-            IoC.Logger.Log("This is Informative", LogLevel.Infomative);
-            IoC.Logger.Log("This is Warning", LogLevel.Warning);
-            IoC.Logger.Log("This is Error", LogLevel.Error);
-            IoC.Logger.Log("This is Success", LogLevel.Success);
+            IoC.Logger.Log("This is Debug", LogLevel.Debug);
+
+            IoC.Task.Run(() =>
+            {
+                throw new ArgumentNullException("oooops");
+            });
 
 
             var window = Container.Resolve<MainWindow>();
@@ -78,11 +79,22 @@ namespace Quan
             //Setup IoC
             IoC.SetUp();
 
+            // Bind a logger
+            IoC.Kernel.Bind<ILogFactory>().ToConstant(new BaseLogFactory(new ILogger[]
+            {
+                // TODO: Add ApplicationSettings so we can set/edit a log location
+                //       For now just log to the path where this application is running
+                new FileLogger("log.txt"),
+            }));
+
+            // Add our task manager
+            IoC.Kernel.Bind<ITaskManager>().ToConstant(new TaskManager());
+
+            // Bind a file manager
+            IoC.Kernel.Bind<IFileManager>().ToConstant(new FileManager());
+
             // Bind a UI Manager
             IoC.Kernel.Bind<IUImanager>().ToConstant(new UIManager());
-
-            // Bind a logger
-            IoC.Kernel.Bind<ILogFactory>().ToConstant(new BaseLogFactory());
 
             //Current.MainWindow = new MainWindow();
             //Current.MainWindow.Show();
