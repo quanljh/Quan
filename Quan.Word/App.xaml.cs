@@ -1,6 +1,6 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using CommonServiceLocator;
+using Quan;
 using Prism.Events;
 using Prism.Mvvm;
 using Quan.Mapper;
@@ -32,12 +32,6 @@ namespace Quan
 
             // Log it 
             IoC.Logger.Log("This is Debug", LogLevel.Debug);
-
-            IoC.Task.Run(() =>
-            {
-                throw new ArgumentNullException("oooops");
-            });
-
 
             var window = Container.Resolve<MainWindow>();
             if (window.DataContext is ViewModelBase vb)
@@ -76,6 +70,9 @@ namespace Quan
 
         private void ApplicationSetup()
         {
+            // Setup the Dna Framework
+            Framework.Startup();
+
             //Setup IoC
             IoC.SetUp();
 
@@ -84,7 +81,7 @@ namespace Quan
             {
                 // TODO: Add ApplicationSettings so we can set/edit a log location
                 //       For now just log to the path where this application is running
-                new FileLogger("log.txt"),
+                new Word.Core.FileLogger("Oldlog.txt"),
             }));
 
             // Add our task manager

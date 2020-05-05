@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan", "Quan.Word\Quan.csproj", "{2F1B45B9-ACA1-4305-B1D8-9FB1B7FA2C78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan.Word.Core", "Quan.Word.Core\Quan.Word.Core.csproj", "{58A94F33-D048-4DB8-BA0B-9F509A0B8559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quan.Word.Core", "Quan.Word.Core\Quan.Word.Core.csproj", "{58A94F33-D048-4DB8-BA0B-9F509A0B8559}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

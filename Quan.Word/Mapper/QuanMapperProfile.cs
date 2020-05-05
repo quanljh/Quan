@@ -1,7 +1,7 @@
 ﻿/************************************************************************************
 * Copyright (c) 2020 quanljh@gmail.com All Rights Reserved.
 * Author        :  quanljh
-* NameSpece     :  Quan.Mapper
+* NameSpace     :  Quan.Mapper
 * FileName      :  QuanMapperProfile
 * CreateTime    :  3/18/2020 10:32:35 PM
 ************************************************************************************/
