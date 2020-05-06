@@ -1,17 +1,12 @@
 ﻿<Window
-    x:Class="Quan.Views.MainWindow"
+    x:Class="Quan.Word.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Quan.Controls"
-    xmlns:converters="clr-namespace:Quan.Converters"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Quan.Views"
+    xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="http://prismlibrary.com/"
-    xmlns:pages="clr-namespace:Quan.Pages"
-    xmlns:quan="clr-namespace:Quan"
-    xmlns:viewModels="clr-namespace:Quan.ViewModels"
     x:Name="AppWindow"
     Title="Welcom,Friend!"
     Width="900"
@@ -157,10 +152,10 @@
             </Grid.ColumnDefinitions>
 
             <!--  Setting page  -->
-            <controls:SettingsControl
+            <local:SettingsControl
                 Grid.ColumnSpan="2"
                 Panel.ZIndex="9"
-                quan:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.SettingsMenuVisible, Source={x:Static viewModels:ViewModelLocator.Instance}}" />
+                local:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.SettingsMenuVisible, Source={x:Static local:ViewModelLocator.Instance}}" />
 
             <!--  Dimmed overlay  -->
             <Border
@@ -168,22 +163,22 @@
                 Grid.ColumnSpan="2"
                 Panel.ZIndex="10"
                 Opacity="0.3">
-                <Border quan:AnimateFadeInProperty.Value="{Binding DimmableOverlayVisible}" Background="{StaticResource ForegroundVeryDarkBrush}" />
+                <Border local:AnimateFadeInProperty.Value="{Binding DimmableOverlayVisible}" Background="{StaticResource ForegroundVeryDarkBrush}" />
             </Border>
 
             <!--  Side Menu  -->
-            <controls:SideMenuControl
+            <local:SideMenuControl
                 Grid.Column="0"
                 Width="300"
-                quan:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static viewModels:ViewModelLocator.Instance}}">
-                <controls:ChatListControl />
-            </controls:SideMenuControl>
+                local:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static local:ViewModelLocator.Instance}}">
+                <local:ChatListControl />
+            </local:SideMenuControl>
 
-            <controls:PageHost
+            <local:PageHost
                 x:Name="MainFrame"
                 Grid.Column="1"
-                CurrentPage="{Binding ApplicationViewModel.CurrentPage, Source={x:Static viewModels:ViewModelLocator.Instance}}"
-                CurrentPageViewModel="{Binding ApplicationViewModel.CurrentPageViewModel, Source={x:Static viewModels:ViewModelLocator.Instance}}" />
+                CurrentPage="{Binding ApplicationViewModel.CurrentPage, Source={x:Static local:ViewModelLocator.Instance}}"
+                CurrentPageViewModel="{Binding ApplicationViewModel.CurrentPageViewModel, Source={x:Static local:ViewModelLocator.Instance}}" />
 
 
         </Grid>

@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:Quan.Converters"
-    xmlns:local="clr-namespace:Quan">
+    xmlns:local="clr-namespace:Quan.Word">
 
     <ResourceDictionary.MergedDictionaries>
         <!--  Order is important  -->
@@ -120,7 +119,7 @@
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 Text="{TemplateBinding Content}"
                                 Visibility="{TemplateBinding local:IsBusyProperty.Value,
-                                                             Converter={converters:BooleanToHiddenConverter}}" />
+                                                             Converter={local:BooleanToHiddenConverter}}" />
 
                             <TextBlock
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -128,7 +127,7 @@
                                 FontSize="{TemplateBinding FontSize}"
                                 Style="{StaticResource SpinningText}"
                                 Visibility="{TemplateBinding local:IsBusyProperty.Value,
-                                                             Converter={converters:BooleanToHiddenConverter},
+                                                             Converter={local:BooleanToHiddenConverter},
                                                              ConverterParameter=True}" />
                         </Grid>
                     </Border>

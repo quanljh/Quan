@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Quan
+namespace Quan.Word
 {
     public class JyokyoUIModel : BindableBase
     {

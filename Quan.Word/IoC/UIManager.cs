@@ -1,9 +1,9 @@
-﻿using Quan.Views;
+﻿
 using Quan.Word.Core;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// The applications implementation of the <see cref="IUImanager"/>

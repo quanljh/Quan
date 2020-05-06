@@ -1,9 +1,9 @@
-﻿using Quan.Controls;
+﻿
 using Quan.Word.Core;
 using System;
 using System.Globalization;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     /// <summary>
     /// A converter that takes in a <see cref="ViewModelBase"/>and returns the specific UI control

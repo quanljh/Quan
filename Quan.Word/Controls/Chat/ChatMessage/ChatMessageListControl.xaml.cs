@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 
 // ReSharper disable once CheckNamespace
-namespace Quan.Controls
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for ChatMessageListControl.xaml

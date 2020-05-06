@@ -1,11 +1,10 @@
-﻿using Quan.Converters;
-using Quan.Word.Core;
+﻿using Quan.Word.Core;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan.Controls
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for PageHost.xaml

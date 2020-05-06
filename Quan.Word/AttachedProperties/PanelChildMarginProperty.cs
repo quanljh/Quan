@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// The NoFrameHistory attached property for creating a <see cref="Frame"/> that never shows navigation

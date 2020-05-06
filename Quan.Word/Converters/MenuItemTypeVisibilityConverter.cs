@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     /// <summary>
     /// A converter that takes in a <see cref="MenuItemType"/>and returns a <see cref="Visibility"/>

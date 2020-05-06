@@ -1,7 +1,7 @@
 ﻿using Quan.Word.Core;
 using System.Security;
 
-namespace Quan.Pages
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for LoginPage.xaml

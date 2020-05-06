@@ -1,4 +1,4 @@
-﻿namespace Quan
+﻿namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for DialogMessageBox.xaml

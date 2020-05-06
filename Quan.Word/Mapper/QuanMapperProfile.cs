@@ -8,7 +8,7 @@
 
 using AutoMapper;
 
-namespace Quan.Mapper
+namespace Quan.Word
 {
     /// <summary>
     ///

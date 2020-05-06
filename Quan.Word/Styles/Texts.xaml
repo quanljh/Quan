@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:Quan.Converters"
-    xmlns:local="clr-namespace:Quan">
+    xmlns:local="clr-namespace:Quan.Word">
 
     <Style
         x:Key="HeaderText"
@@ -189,7 +188,7 @@
                             IsHitTestVisible="False"
                             Text="{TemplateBinding Tag}"
                             Visibility="{TemplateBinding local:HasTextProperty.Value,
-                                                         Converter={converters:BooleanToHiddenConverter}}" />
+                                                         Converter={local:BooleanToHiddenConverter}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">

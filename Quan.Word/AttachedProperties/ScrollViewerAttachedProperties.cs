@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// Scorll an items control to the bottom when the data context changes

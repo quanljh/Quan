@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// A base class to run any animation method when a boolean is set to true

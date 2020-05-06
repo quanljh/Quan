@@ -1,10 +1,10 @@
 ﻿<UserControl
-    x:Class="Quan.Controls.ChatMessageListControl"
+    x:Class="Quan.Word.ChatMessageListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Quan.Controls"
+    xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:quan="clr-namespace:Quan"
     d:DesignHeight="450"
@@ -13,14 +13,14 @@
     <Border VerticalAlignment="Bottom" d:DataContext="{x:Static core:ChatMessageListDesignModel.Instance}">
         <ScrollViewer
             Padding="5,0"
-            quan:AutoScrollToBottomProperty.Value="True"
-            quan:ScrollToBottomOnLoadProperty.Value="True"
+            local:AutoScrollToBottomProperty.Value="True"
+            local:ScrollToBottomOnLoadProperty.Value="True"
             Style="{StaticResource ScrollViewerForChatPage}"
             VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:ChatMessageListItemControl quan:AnimateSlideInFromeBottomOnLoadProperty.Value="{Binding NewItem}" />
+                        <local:ChatMessageListItemControl local:AnimateSlideInFromeBottomOnLoadProperty.Value="{Binding NewItem}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

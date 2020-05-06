@@ -1,14 +1,11 @@
 ﻿<local:BasePage
-    x:Class="Quan.Pages.ChatPage"
+    x:Class="Quan.Word.ChatPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Quan.Controls"
-    xmlns:converters="clr-namespace:Quan.Converters"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Quan"
+    xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:Quan.Pages"
     x:Name="ChatPageView"
     d:DataContext="{x:Static core:ChatMessageListDesignModel.Instance}"
     d:DesignHeight="450"
@@ -33,7 +30,7 @@
             Grid.RowSpan="2"
             Panel.ZIndex="1"
             Background="Transparent"
-            Visibility="{Binding AnyPopupVisible, Converter={converters:BooleanToCollapsedConverter}, ConverterParameter=True}">
+            Visibility="{Binding AnyPopupVisible, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}">
             <Border.InputBindings>
                 <MouseBinding Command="{Binding PopupClickawayCommand}" MouseAction="LeftClick" />
             </Border.InputBindings>
@@ -139,7 +136,7 @@
         </Grid>
 
         <!--  Chat list  -->
-        <controls:ChatMessageListControl
+        <local:ChatMessageListControl
             x:Name="ChatMessageList"
             Grid.Row="1"
             DataContext="{Binding}" />
@@ -151,7 +148,7 @@
             VerticalAlignment="Bottom"
             Panel.ZIndex="2"
             local:AnimateSlideInFromeBottomProperty.Value="{Binding AttachmentMenuVisible}">
-            <controls:BubbleContent DataContext="{Binding AttachmentMenu}" />
+            <local:BubbleContent DataContext="{Binding AttachmentMenu}" />
         </Border>
 
 

@@ -1,7 +1,6 @@
-﻿using Quan.Word.Core;
-using System.Windows;
+﻿using System.Windows;
 
-namespace Quan.Views
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for DialogWindow.xaml

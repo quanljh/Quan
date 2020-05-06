@@ -1,8 +1,7 @@
-﻿using Quan.Pages;
-using Quan.Word.Core;
+﻿using Quan.Word.Core;
 using System.Diagnostics;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     /// <summary>
     /// Converts the <see cref="ApplicationPage"/> to an actual view/page

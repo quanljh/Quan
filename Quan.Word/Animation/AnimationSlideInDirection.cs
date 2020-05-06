@@ -6,7 +6,7 @@
 * CreateTime    :  2/16/2020 4:57:51 PM
 ************************************************************************************/
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// The direction an animation slides in (the slide out direction is reversed)

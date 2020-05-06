@@ -1,11 +1,11 @@
-﻿using Quan.Views;
+﻿
 using Quan.Word.Core;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// The base class for any content that is being used inside of a <see cref="DialogWindow"/>

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan.Controls
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for PasswordEntryControl.xaml

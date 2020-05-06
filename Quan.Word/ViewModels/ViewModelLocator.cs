@@ -1,6 +1,6 @@
 ﻿using Quan.Word.Core;
 
-namespace Quan.ViewModels
+namespace Quan.Word
 {
     public class ViewModelLocator
     {

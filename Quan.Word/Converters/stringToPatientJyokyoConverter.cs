@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     public class stringToPatientJyokyoConverter : BaseValueConverter<string, string>
     {

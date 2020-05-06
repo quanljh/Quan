@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     /// <summary>
     /// A converter that takes in a boolean and inverts it

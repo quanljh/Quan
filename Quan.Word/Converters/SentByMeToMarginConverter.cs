@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     /// <summary>
     /// A converter that takes in a boolean if a message was sent by me, then set left margin

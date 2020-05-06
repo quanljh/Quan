@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     public abstract class BaseValueConverter<Tsoucre, TTarget> : MarkupExtension, IValueConverter
     {

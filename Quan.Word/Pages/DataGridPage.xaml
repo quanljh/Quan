@@ -1,14 +1,12 @@
 ﻿<local:BasePage
-    x:Class="Quan.Pages.DataGridPage"
+    x:Class="Quan.Word.DataGridPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:Quan.Converters"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:local="clr-namespace:Quan"
+    xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:Quan.Pages"
     x:Name="DataGridPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -56,13 +54,13 @@
                         IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="150"
-                        Binding="{Binding PatientBirth, Converter={converters:DateTimeToDisplayTimeConverter}}"
+                        Binding="{Binding PatientBirth, Converter={local:DateTimeToDisplayTimeConverter}}"
                         ElementStyle="{StaticResource TextLeftStyle}"
                         Header="生年月日"
                         IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="60"
-                        Binding="{Binding PatientSex, Converter={converters:StringToSexConverter}}"
+                        Binding="{Binding PatientSex, Converter={local:StringToSexConverter}}"
                         ElementStyle="{StaticResource TextCenterStyle}"
                         Header="性別"
                         IsReadOnly="True" />
@@ -76,7 +74,7 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={converters:stringToPatientJyokyoConverter}}" />
+                                    Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={local:stringToPatientJyokyoConverter}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
@@ -85,7 +83,7 @@
                                     DisplayMemberPath="JyokyoName"
                                     Foreground="Black"
                                     IsEditable="False"
-                                    ItemsSource="{Binding Path=DataContext.JokyoCollection, RelativeSource={RelativeSource AncestorType={x:Type pages:DataGridPage}}}"
+                                    ItemsSource="{Binding Path=DataContext.JokyoCollection, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridPage}}}"
                                     SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="JyokyoCode" />
                             </DataTemplate>

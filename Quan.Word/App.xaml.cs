@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using CommonServiceLocator;
-using Quan;
 using Prism.Events;
 using Prism.Mvvm;
-using Quan.Mapper;
-using Quan.Views;
 using Quan.Word.Core;
 using Reactive.Bindings;
 using System.Reactive.Concurrency;
@@ -12,7 +9,7 @@ using System.Windows;
 using Unity;
 using Unity.ServiceLocation;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -71,7 +68,7 @@ namespace Quan
         private void ApplicationSetup()
         {
             // Setup the Dna Framework
-            Framework.Startup();
+            //Framework.Startup();
 
             //Setup IoC
             IoC.SetUp();
@@ -81,7 +78,7 @@ namespace Quan
             {
                 // TODO: Add ApplicationSettings so we can set/edit a log location
                 //       For now just log to the path where this application is running
-                new Word.Core.FileLogger("Oldlog.txt"),
+                new FileLogger("Oldlog.txt"),
             }));
 
             // Add our task manager

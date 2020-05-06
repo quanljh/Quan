@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// Helpers to animate framework elements in specific ways

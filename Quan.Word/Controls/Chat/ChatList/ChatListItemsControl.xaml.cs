@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 // ReSharper disable once CheckNamespace
-namespace Quan.Controls
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for ChatListItemsControl.xaml

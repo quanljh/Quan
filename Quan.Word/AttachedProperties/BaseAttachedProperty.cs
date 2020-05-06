@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// A base attached property to replace the vanilla WPF attached property

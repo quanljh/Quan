@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Quan.Controls
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for ChatMessageListItemControl.xaml

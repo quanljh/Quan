@@ -1,7 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 
-namespace Quan
+namespace Quan.Word
 {
     public class PatientUIModel : BindableBase
     {

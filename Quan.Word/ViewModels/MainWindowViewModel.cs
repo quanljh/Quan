@@ -1,7 +1,8 @@
-﻿using System.Windows;
+﻿using Quan.Word.Core;
+using System.Windows;
 using System.Windows.Input;
 
-namespace Quan.Word.Core
+namespace Quan.Word
 {
     public class MainWindowViewModel : ViewModelBase
     {

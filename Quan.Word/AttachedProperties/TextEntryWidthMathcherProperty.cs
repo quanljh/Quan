@@ -1,9 +1,8 @@
-﻿using Quan.Controls;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// Match the label width of all text entry controls inside this panel

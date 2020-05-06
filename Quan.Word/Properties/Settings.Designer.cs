@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quan.Properties {
+namespace Quan.Word.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

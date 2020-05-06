@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace Quan.Pages
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for ChatPage.xaml

@@ -9,7 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using Control = System.Windows.Controls.Control;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// The IsBusy attached property for a anything that wants to flag if the control is busy

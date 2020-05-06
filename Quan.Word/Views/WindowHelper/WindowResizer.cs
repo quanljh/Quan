@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-namespace Quan
+namespace Quan.Word
 {
     /// <summary>
     /// The dock position of the window

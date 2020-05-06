@@ -1,7 +1,7 @@
 ﻿using Quan.Word.Core;
 using System.Windows.Controls;
 
-namespace Quan.Controls
+namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for SettingsControl.xaml

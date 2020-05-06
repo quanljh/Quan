@@ -1,4 +1,4 @@
-﻿namespace Quan.Pages
+﻿namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for DataGridPage.xaml

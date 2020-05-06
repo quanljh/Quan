@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-namespace Quan.Views
+namespace Quan.Word
 {
     public static class WindowMaximizeHelper
     {

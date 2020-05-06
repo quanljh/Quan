@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace Quan.Converters
+namespace Quan.Word
 {
     /// <summary>
     /// Converts a string name to a service pulled from the IoC container
