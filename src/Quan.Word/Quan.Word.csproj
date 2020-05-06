@@ -8,8 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2F1B45B9-ACA1-4305-B1D8-9FB1B7FA2C78}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Quan</RootNamespace>
-    <AssemblyName>Quan</AssemblyName>
+    <RootNamespace>Quan.Word</RootNamespace>
+    <AssemblyName>Quan.Word</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -63,6 +63,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -407,6 +411,9 @@
     </PackageReference>
     <PackageReference Include="PropertyChanged.Fody">
       <Version>3.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Quan.Framework">
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveProperty">
       <Version>7.0.0</Version>

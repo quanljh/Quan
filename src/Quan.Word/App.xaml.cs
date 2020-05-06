@@ -68,7 +68,9 @@ namespace Quan.Word
         private void ApplicationSetup()
         {
             // Setup the Dna Framework
-            //Framework.Startup();
+            new DefaultFrameworkConstruction()
+                .UseFileLogger("QuanLog.txt")
+                .Build();
 
             //Setup IoC
             IoC.SetUp();
@@ -78,7 +80,7 @@ namespace Quan.Word
             {
                 // TODO: Add ApplicationSettings so we can set/edit a log location
                 //       For now just log to the path where this application is running
-                new FileLogger("Oldlog.txt"),
+                new Core.FileLogger("Oldlog.txt"),
             }));
 
             // Add our task manager
