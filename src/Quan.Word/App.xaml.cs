@@ -2,9 +2,11 @@
 using CommonServiceLocator;
 using Prism.Events;
 using Prism.Mvvm;
+using Quan.Web;
 using Quan.Word.Core;
 using Reactive.Bindings;
 using System.Reactive.Concurrency;
+using System.Threading.Tasks;
 using System.Windows;
 using Unity;
 using Unity.ServiceLocation;
@@ -72,6 +74,12 @@ namespace Quan.Word
                 .UseFileLogger("QuanLog.txt")
                 .Build();
 
+            Task.Run(async () =>
+            {
+                var result = await WebRequests.PostAsync<SettingsDataModel>("http://localhost:5000/test", new SettingsDataModel() { Id = "from client", Name = "quan.word", Value = "ha" });
+                var a = result;
+            });
+
             //Setup IoC
             IoC.SetUp();
 
@@ -96,5 +104,13 @@ namespace Quan.Word
             //Current.MainWindow.Show();
         }
 
+        public class SettingsDataModel
+        {
+            public string Id { get; set; }
+
+            public string Name { get; set; }
+
+            public string Value { get; set; }
+        }
     }
 }

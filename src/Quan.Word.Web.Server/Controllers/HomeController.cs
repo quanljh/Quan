@@ -46,6 +46,10 @@ namespace Quan.Word.Web.Server
 
         #endregion
 
+        /// <summary>
+        /// Basic welcome page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             // Make sure we have the database
@@ -75,11 +79,6 @@ namespace Quan.Word.Web.Server
                 firstDatabase = mContext.Settings.FirstOrDefault();
 
             }
-            return View();
-        }
-
-        public IActionResult Error()
-        {
             return View();
         }
 
@@ -115,7 +114,10 @@ namespace Quan.Word.Web.Server
         }
 
 
-
+        /// <summary>
+        /// Log the user out
+        /// </summary>
+        /// <returns></returns>
         [Route("logout")]
         public async Task<IActionResult> SignOutAsync()
         {
@@ -150,6 +152,18 @@ namespace Quan.Word.Web.Server
             }
 
             return Content("Failed to login", "text/html");
+        }
+
+
+        [Route("test")]
+        public SettingsDataModel Test([FromBody]SettingsDataModel model)
+        {
+            return new SettingsDataModel()
+            {
+                Id = "some id",
+                Name = "Luke",
+                Value = "10"
+            };
         }
     }
 }
