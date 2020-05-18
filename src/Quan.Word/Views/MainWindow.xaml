@@ -16,7 +16,7 @@
     Activated="MainWindow_OnActivated"
     AllowsTransparency="True"
     Deactivated="MainWindow_OnDeactivated"
-    Icon="/Quan;component/Images/Logo/logo-small.png"
+    Icon="/Images/Logo/logo-small.png"
     SnapsToDevicePixels="True"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
