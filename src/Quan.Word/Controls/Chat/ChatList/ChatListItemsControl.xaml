@@ -2,7 +2,6 @@
     x:Class="Quan.Word.ChatListItemsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Word"

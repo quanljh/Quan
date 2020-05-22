@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using Microsoft.Extensions.Configuration;
 
 namespace Quan.Word.Web.Server
 {
@@ -23,5 +24,11 @@ namespace Quan.Word.Web.Server
         /// The service provider for this application
         /// </summary>
         public static IServiceProvider Provider { get; set; }
+
+        /// <summary>
+        /// The configuration manager for the application
+        /// </summary>
+        public static IConfiguration Configuration { get; set; }
+
     }
 }

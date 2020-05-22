@@ -5,9 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Quan.Word.Web.Server
 {
+    /// <summary>
+    /// Manages the standard web server pagess
+    /// </summary>
     public class HomeController : Controller
     {
         #region Protected Members
@@ -156,7 +160,7 @@ namespace Quan.Word.Web.Server
 
 
         [Route("test")]
-        public SettingsDataModel Test([FromBody]SettingsDataModel model)
+        public SettingsDataModel Test([FromBody] SettingsDataModel model)
         {
             return new SettingsDataModel()
             {
