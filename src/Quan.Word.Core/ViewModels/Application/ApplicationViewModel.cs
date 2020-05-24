@@ -8,12 +8,12 @@
         /// <summary>
         /// The current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Chat;
+        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Login;
 
         /// <summary>
         /// True if the side menu should be shown
         /// </summary>
-        public bool SideMenuVisible { get; set; } = true;
+        public bool SideMenuVisible { get; set; }
 
         /// <summary>
         /// True if the settings menu should be shown

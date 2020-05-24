@@ -1,25 +1,27 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Quan.Word.Web.Server
 {
     public class Startup
     {
+        // Called by Program.cs UseStartup
         public Startup(IConfiguration configuration)
         {
             IoCContainer.Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the host before the Configure method to configure the app's services.
+        // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add ApplicationDbContext to DI
@@ -29,6 +31,7 @@ namespace Quan.Word.Web.Server
             // AddIdentity adds cookie based authentication
             // Adds scoped classes for things like UserManager, SignInManager, PasswordHashes etc...
             // NOTE: Automatically adds the validated user from a cookie to the HttpContext.User
+            // Return: IdentityBuilder
             // https://github.com/aspnet/Identity/blob/master/src/Identity/IdentityServiceCollectionExtensions.cs
             services.AddIdentity<ApplicationUser, IdentityRole>()
 

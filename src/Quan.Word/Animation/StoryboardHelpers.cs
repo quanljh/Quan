@@ -16,14 +16,19 @@ namespace Quan.Word
         /// </summary>
         /// <param name="storyboard">The storyboard to add the animation to</param>
         /// <param name="seconds">The time the animation will take</param>
-        public static void AddFadeIn(this Storyboard storyboard, float seconds)
+        /// <param name="from">The opacity of the started status</param>
+        public static void AddFadeIn(this Storyboard storyboard, float seconds, bool from = false)
         {
             var animation = new DoubleAnimation()
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
-                From = 0,
                 To = 1,
             };
+
+            // Animate from if requested
+            if (from)
+                animation.From = 0;
+
             Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
             storyboard.Children.Add(animation);
         }

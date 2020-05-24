@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <UserSecretsId>736657ec-8dc6-4e1e-9086-71e5ac190da8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
-    <PackageReference Include="Fody" Version="6.1.1">
+    <PackageReference Include="Fody" Version="6.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -15,7 +16,8 @@
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
-    <PackageReference Include="ReactiveProperty" Version="7.0.0" />
+    <PackageReference Include="Quan.Framework" Version="1.0.2" />
+    <PackageReference Include="ReactiveProperty" Version="7.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />

@@ -10,6 +10,6 @@ namespace Quan.Word.Core
         /// <summary>
         /// The secure password
         /// </summary>
-        SecureString SecureString { get; }
+        SecureString SecurePassword { get; }
     }
 }

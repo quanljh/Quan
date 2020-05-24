@@ -60,7 +60,7 @@
                         HorizontalAlignment="Center"
                         local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                         Command="{Binding LoginCommand}"
-                        CommandParameter="{Binding ElementName=Page}"
+                        CommandParameter="{Binding ElementName=LoginPageView}"
                         Content="Login"
                         IsDefault="True" />
 

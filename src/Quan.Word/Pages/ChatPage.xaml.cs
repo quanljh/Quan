@@ -47,7 +47,7 @@ namespace Quan.Word
             //Fade in chat message list
             base.OnViewModelChanged();
             var storyboard = new Storyboard();
-            storyboard.AddFadeIn(1);
+            storyboard.AddFadeIn(1, true);
             storyboard.Begin(ChatMessageList);
 
             //Make the message box focused

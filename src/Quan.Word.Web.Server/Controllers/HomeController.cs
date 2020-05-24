@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Quan.Word.Web.Server
 {
@@ -41,6 +40,8 @@ namespace Quan.Word.Web.Server
         /// Default constructor
         /// </summary>
         /// <param name="context">The injected context</param>
+        /// <param name="userManager">The Identity sign in manager</param>
+        /// <param name="signInManager">The Identity user manager</param>
         public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             mContext = context;
@@ -59,6 +60,7 @@ namespace Quan.Word.Web.Server
             // Make sure we have the database
             mContext.Database.EnsureCreated();
 
+            // Make sure we have no settings already...
             if (!mContext.Settings.Any())
             {
                 mContext.Settings.Add(new SettingsDataModel()
@@ -96,7 +98,9 @@ namespace Quan.Word.Web.Server
             var result = await mUserManager.CreateAsync(new ApplicationUser()
             {
                 UserName = "quanljh",
-                Email = "quanljh@gmail.com"
+                Email = "quanljh@gmail.com",
+                FirstName = "quan",
+                LastName = "ljh"
             }, "password");
 
             if (result.Succeeded)

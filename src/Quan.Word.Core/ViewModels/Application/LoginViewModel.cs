@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Quan.Web;
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -57,19 +57,61 @@ namespace Quan.Word.Core
         {
             await RunCommand(() => LoginIsRunning, async () =>
             {
-                // TODO: Fake a Login...
-                await Task.Delay(1000);
+                // Call the server and attempt to login with credentials
+                // TODO: Move all URLs and API routes to static class in core
+                var result =
+                    await WebRequests.PostAsync<ApiResponse<LoginResultApiModel>>(
+                        "http://localhost:5000/api/login",
+                        new LoginCredentialsApiModel
+                        {
+                            UsernameOrEmail = Email,
+                            Password = (parameter as IHavePassword)?.SecurePassword.Unsecure()
+                        });
+
+                // If there was no response, bad data, or a response with a error message...
+                if (result?.ServerResponse == null || !result.ServerResponse.Successful)
+                {
+                    // Default error message
+                    // TODO: Localize strings
+                    var message = "Unknown error from server call";
+
+                    // If we got a response from the server..
+                    if (result?.ServerResponse != null)
+                        // Set message to servers response
+                        message = result.ServerResponse.ErrorMessage;
+                    // If we have a result but deserialize failed...
+                    else if (!string.IsNullOrWhiteSpace(result?.RawServerResponse))
+                        // Set error message
+                        message = $"Unexpected response from server. {result.RawServerResponse}";
+                    // If we have a result but no server response details at all...
+                    else if (result != null)
+                        // Set message to standard HTTP server response details
+                        message =
+                            $"Failed to communicate with server. Status code {result.StatusCode}. {result.StatusDescription}";
+
+                    // Display error
+                    await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                    {
+                        // TODO: Localize strings
+                        Title = "Login Failed",
+                        Message = message
+                    });
+
+                    // We are done
+                    return;
+                }
+
+
 
                 // OK successfully logged in... now get users data
-                // TODO: Ask server for users info
+                var userData = result.ServerResponse.Response;
 
-                // TODO: Remove this with real information pulled from our database in future
-                IoC.Settings.Name = new TextEntryViewModel { Label = "Name", OriginalText = $"quanljh {DateTime.Now.ToLocalTime()}" };
-                IoC.Settings.Username = new TextEntryViewModel { Label = "Username", OriginalText = "quan" };
+                IoC.Settings.Name = new TextEntryViewModel { Label = "Name", OriginalText = $"{userData.FirstName} {userData.LastName}" };
+                IoC.Settings.Username = new TextEntryViewModel { Label = "Username", OriginalText = userData.UserName };
                 IoC.Settings.Password = new PasswordEntryViewModel { Label = "Password", FakePassword = "********" };
-                IoC.Settings.Email = new TextEntryViewModel { Label = "Email", OriginalText = "quanljh@gmail.com" };
+                IoC.Settings.Email = new TextEntryViewModel { Label = "Email", OriginalText = userData.Email };
 
-
+                // Go to chat page
                 IoC.Application.GoToPage(ApplicationPage.Chat);
             });
         }

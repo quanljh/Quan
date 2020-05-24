@@ -392,7 +392,7 @@
       <Version>2.0.5</Version>
     </PackageReference>
     <PackageReference Include="Fody">
-      <Version>6.1.1</Version>
+      <Version>6.1.2</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -412,7 +412,7 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="ReactiveProperty">
-      <Version>7.0.0</Version>
+      <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.4.1</Version>

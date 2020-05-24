@@ -31,6 +31,6 @@ namespace Quan.Word
         /// <summary>
         /// The secure password for this Login page
         /// </summary>
-        public SecureString SecureString => PasswordBox.SecurePassword;
+        public SecureString SecurePassword => PasswordBox.SecurePassword;
     }
 }

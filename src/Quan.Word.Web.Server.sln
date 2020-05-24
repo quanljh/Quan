@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quan.Word.Web.Server", "Quan.Word.Web.Server/Quan.Word.Web.Server.csproj", "{8142F367-6793-4E79-985B-8B7FC483BA79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quan.Word.Web.Server", "Quan.Word.Web.Server\Quan.Word.Web.Server.csproj", "{8142F367-6793-4E79-985B-8B7FC483BA79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quan.Word.Core", "Quan.Word.Core\Quan.Word.Core.csproj", "{980FE8CC-04E7-4195-9B5F-21CEEDA7A420}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8142F367-6793-4E79-985B-8B7FC483BA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8142F367-6793-4E79-985B-8B7FC483BA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8142F367-6793-4E79-985B-8B7FC483BA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{980FE8CC-04E7-4195-9B5F-21CEEDA7A420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{980FE8CC-04E7-4195-9B5F-21CEEDA7A420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{980FE8CC-04E7-4195-9B5F-21CEEDA7A420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{980FE8CC-04E7-4195-9B5F-21CEEDA7A420}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

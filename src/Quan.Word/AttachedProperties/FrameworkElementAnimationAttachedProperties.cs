@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,19 +15,18 @@ namespace Quan.Word
     public abstract class AnimateBaseProperty<Parent> : BaseAttachedProperty<Parent, bool>
         where Parent : BaseAttachedProperty<Parent, bool>, new()
     {
-
         #region Protected Properties
 
         /// <summary>
         /// True if this is the very first time the value has been updated
         /// Used to make sure we run the logic at least once during first load
         /// </summary>
-        protected Dictionary<DependencyObject, bool> mAlreadyLoaded = new Dictionary<DependencyObject, bool>();
+        protected Dictionary<WeakReference, bool> mAlreadyLoaded = new Dictionary<WeakReference, bool>();
 
         /// <summary>
         /// The most recent value used if we get a value changed before we do the first load
         /// </summary>
-        protected Dictionary<DependencyObject, bool> mFirstLoadValue = new Dictionary<DependencyObject, bool>();
+        protected Dictionary<WeakReference, bool> mFirstLoadValue = new Dictionary<WeakReference, bool>();
 
 
         #endregion
@@ -36,20 +37,29 @@ namespace Quan.Word
             if (!(sender is FrameworkElement element))
                 return;
 
+            // Try and get the already loaded reference
+            var alreadyLoadedReference = mAlreadyLoaded.FirstOrDefault(f => f.Key.Target == sender);
+
+            // Try and get the first reference
+            var firstLoadReference = mFirstLoadValue.FirstOrDefault(f => f.Key.Target == sender);
+
             //Don't fire when the value doesn't change
-            if ((bool)sender.GetValue(ValueProperty) == (bool)value && mAlreadyLoaded.ContainsKey(sender))
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && alreadyLoadedReference.Key != null)
                 return;
 
             //On first load...
-            if (!mAlreadyLoaded.ContainsKey(sender))
+            if (alreadyLoadedReference.Key == null)
             {
+                // Create weak reference that allows the garbage collector to collect the DependencyObject while still allowing we to access
+                var weakReference = new WeakReference(sender);
+
                 // Flag that we are in first load but have not finished it
-                mAlreadyLoaded[sender] = false;
+                mAlreadyLoaded[weakReference] = false;
 
                 //Start off hidden before we decide how to animate
                 element.Visibility = Visibility.Hidden;
 
-                //Creat a single self-unhookable event
+                //Create a single self-unhookable event
                 //for the elements Loaded event
                 RoutedEventHandler onLoaded = null;
                 onLoaded = async (ss, ee) =>
@@ -61,19 +71,23 @@ namespace Quan.Word
                     // and their width/heights correctly calculated
                     await Task.Delay(5);
 
+                    // Refresh the first load value in case it changed
+                    // since the 5ms delay
+                    firstLoadReference = mFirstLoadValue.FirstOrDefault(f => f.Key.Target == sender);
+
                     //Do desired animation
-                    DoAnimation(element, mFirstLoadValue.ContainsKey(sender) ? mFirstLoadValue[sender] : (bool)value, true);
+                    DoAnimation(element, firstLoadReference.Key != null ? firstLoadReference.Value : (bool)value, true);
 
                     // Flag that we have finished first load
-                    mAlreadyLoaded[sender] = true;
+                    mAlreadyLoaded[weakReference] = true;
                 };
 
                 // Hook into the loaded event of the element
                 element.Loaded += onLoaded;
             }
             // If we have started a first load but not fired the animation yet, update the property
-            else if (mAlreadyLoaded[sender] == false)
-                mFirstLoadValue[sender] = (bool)value;
+            else if (alreadyLoadedReference.Value == false)
+                mFirstLoadValue[new WeakReference(sender)] = (bool)value;
             else
                 //Do desired animation
                 DoAnimation(element, (bool)value, false);
