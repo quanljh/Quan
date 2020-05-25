@@ -21,6 +21,7 @@ namespace Quan.Word.Web.Server
 
         /// <summary>
         /// Default constructor, expecting database options passed in
+        /// <see cref="DbContext"/> must have an instance of <see cref="DbContextOptions"/> in order to perfom any work.
         /// </summary>
         /// <param name="options">The database context options</param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

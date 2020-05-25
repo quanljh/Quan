@@ -360,6 +360,10 @@
       <Project>{58a94f33-d048-4db8-ba0b-9f509a0b8559}</Project>
       <Name>Quan.Word.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Quan.Word.Relational\Quan.Word.Relational.csproj">
+      <Project>{e03c6aef-528d-4206-b83c-b7c468a50f2e}</Project>
+      <Name>Quan.Word.Relational</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logo\icon.ico" />

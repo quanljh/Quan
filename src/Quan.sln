@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan.Word", "Quan.Word\Quan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quan.Word.Core", "Quan.Word.Core\Quan.Word.Core.csproj", "{58A94F33-D048-4DB8-BA0B-9F509A0B8559}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan.Word.Relational", "Quan.Word.Relational\Quan.Word.Relational.csproj", "{E03C6AEF-528D-4206-B83C-B7C468A50F2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{58A94F33-D048-4DB8-BA0B-9F509A0B8559}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58A94F33-D048-4DB8-BA0B-9F509A0B8559}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58A94F33-D048-4DB8-BA0B-9F509A0B8559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03C6AEF-528D-4206-B83C-B7C468A50F2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03C6AEF-528D-4206-B83C-B7C468A50F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03C6AEF-528D-4206-B83C-B7C468A50F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03C6AEF-528D-4206-B83C-B7C468A50F2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

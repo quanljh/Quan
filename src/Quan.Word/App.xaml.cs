@@ -72,6 +72,7 @@ namespace Quan.Word
             // Setup the Dna Framework
             new DefaultFrameworkConstruction()
                 .UseFileLogger("QuanLog.txt")
+                .UseClientDataStore()
                 .Build();
 
             Task.Run(async () =>

@@ -20,11 +20,12 @@ namespace Quan.Word.Web.Server
             IoCContainer.Configuration = configuration;
         }
 
-        // This method gets called by the host before the Configure method to configure the app's services.
-        // Use this method to add services to the container.
+        /// <summary>
+        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <param name="services">The Dependency Injection container</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add ApplicationDbContext to DI
+            // Add ApplicationDbContext to Dependency Injection supported by EntityFrameworkCore
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection")));
 
