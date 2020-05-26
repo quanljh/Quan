@@ -6,7 +6,7 @@ namespace Quan.Word
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        #region Field
+        #region Private Members
 
         /// <summary>
         /// The window this view model controls
@@ -35,7 +35,7 @@ namespace Quan.Word
 
         #endregion
 
-        #region Properties
+        #region Public Properties
         /// <summary>
         /// The smallest width the window can go to
         /// </summary>
@@ -45,6 +45,11 @@ namespace Quan.Word
         /// The smallest height the window can go to
         /// </summary>
         public double WindowMinimumHeight { get; set; } = 500;
+
+        /// <summary>
+        /// True if the window is currently being moved/dragged
+        /// </summary>
+        public bool BeingMoved { get; set; }
 
         /// <summary>
         /// True if the window should be borderless because it is docked or maximized
@@ -118,12 +123,24 @@ namespace Quan.Word
 
         #region Commands
 
+        /// <summary>
+        /// The command to minimize the window
+        /// </summary>
         public ICommand MinimizeCommand { get; set; }
 
+        /// <summary>
+        /// The command to maximize the window
+        /// </summary>
         public ICommand MaximizeCommand { get; set; }
 
+        /// <summary>
+        /// The command to close the window
+        /// </summary>
         public ICommand CloseCommand { get; set; }
 
+        /// <summary>
+        /// The command to show the system menu of the window
+        /// </summary>
         public ICommand MenuCommand { get; set; }
 
         #endregion
@@ -133,8 +150,15 @@ namespace Quan.Word
         public MainWindowViewModel(Window window)
         {
             mWindow = window;
-            mWindow.StateChanged += (Sender, e) => { WindowResized(); };
-            //Command
+
+            // Listen out for the window resizing
+            mWindow.StateChanged += (s, e) =>
+            {
+                // Fire off events for all properties that are affected by a resize
+                WindowResized();
+            };
+
+            // Create Commands
             MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
             MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
             CloseCommand = new RelayCommand(() => mWindow.Close());
@@ -153,10 +177,20 @@ namespace Quan.Word
                 WindowResized();
             };
 
+            // On window being moved/dragged
+            mWindowResizer.WindowStartedMove += () =>
+            {
+                // Update being moved flag
+                BeingMoved = true;
+            };
+
             // Fix dropping an undocked window at top which should be positioned at the
             // very top of screen
             mWindowResizer.WindowFinishedMove += () =>
             {
+                // Update being moved flag
+                BeingMoved = false;
+
                 // Check for moved to top of window and not at an edge
                 if (mDockPosition == WindowDockPosition.Undocked && mWindow.Top == mWindowResizer.CurrentScreenSize.Top)
                     // If so, move it to the true top (the border size)
@@ -183,19 +217,13 @@ namespace Quan.Word
             RaisePropertyChanged(nameof(WindowCornerRadius));
         }
 
+        /// <summary>
+        /// Gets the current mouse position on the screen
+        /// </summary>
+        /// <returns></returns>
         public Point GetMousePosition()
         {
-            var position = Mouse.GetPosition(mWindow);
-
-            if (mWindow.WindowState == WindowState.Maximized)
-            {
-                return new Point(position.X - ResizeBorder, position.Y - ResizeBorder);
-            }
-            else
-            {
-                return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
-            }
-
+            return mWindowResizer.GetCursorPosition();
         }
 
         #endregion

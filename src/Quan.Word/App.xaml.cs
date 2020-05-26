@@ -6,6 +6,7 @@ using Quan.Word.Core;
 using Quan.Word.Relational;
 using Reactive.Bindings;
 using System.Reactive.Concurrency;
+using System.Threading.Tasks;
 using System.Windows;
 using Unity;
 using Unity.ServiceLocation;
@@ -20,13 +21,21 @@ namespace Quan.Word
         private IUnityContainer Container { get; } = new UnityContainer();
 
         private EventAggregator EventAggregator { get; } = new EventAggregator();
-        private void App_OnStartup(object sender, StartupEventArgs e)
+
+        /// <summary>
+        /// Custom startup so we load our IoC immediately before anything else
+        /// </summary>
+        /// <param name="e"></param>
+        protected override async void OnStartup(StartupEventArgs e)
         {
+            // Let the base application do what it needs
+            base.OnStartup(e);
+
             // Initialize Unity Container
             InitializeContainer();
 
             // Setup the main application
-            ApplicationSetup();
+            await ApplicationSetupAsync();
 
             // Log it 
             IoC.Logger.Log("This is Debug", LogLevel.Debug);
@@ -66,7 +75,7 @@ namespace Quan.Word
         }
 
 
-        private void ApplicationSetup()
+        private async Task ApplicationSetupAsync()
         {
             // Setup the Dna Framework
             new DefaultFrameworkConstruction()
@@ -95,8 +104,7 @@ namespace Quan.Word
             IoC.Kernel.Bind<IUImanager>().ToConstant(new UIManager());
 
             // Ensure the client data store
-            var clientDataStore = Framework.Service<IClientDataStore>();
-
+            await IoC.ClientDataStore.EnsureDataStoreAsync();
         }
 
         public class SettingsDataModel

@@ -17,17 +17,8 @@
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
     <PackageReference Include="Quan.Framework" Version="1.0.3" />
-    <PackageReference Include="ReactiveProperty" Version="7.0.1" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="ReactiveProperty" Version="7.1.0" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1" />
-    <PackageReference Include="System.Security.AccessControl" Version="4.7.0" />
-    <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="4.7.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Unity" Version="5.11.7" />
     <PackageReference Include="Unity.Abstractions" Version="5.11.6" />
     <PackageReference Include="Unity.Container" Version="5.11.8" />

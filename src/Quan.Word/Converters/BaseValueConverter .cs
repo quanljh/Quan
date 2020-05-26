@@ -5,7 +5,7 @@ using System.Windows.Markup;
 
 namespace Quan.Word
 {
-    public abstract class BaseValueConverter<Tsoucre, TTarget> : MarkupExtension, IValueConverter
+    public abstract class BaseValueConverter<TSoucre, TTarget> : MarkupExtension, IValueConverter
     {
 
         #region Markup Extension Methods
@@ -16,6 +16,7 @@ namespace Quan.Word
         /// <param name="serviceProvider">The service provider</param>
         /// <returns></returns>
         public override object ProvideValue(IServiceProvider serviceProvider) => this;
+
         #endregion
 
 
@@ -30,7 +31,7 @@ namespace Quan.Word
         /// <param name="culture"></param>
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => Convert((Tsoucre)value, parameter, culture);
+            => Convert((TSoucre)value, parameter, culture);
 
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Quan.Word
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public abstract TTarget Convert(Tsoucre value, object parameter, CultureInfo culture);
+        public abstract TTarget Convert(TSoucre value, object parameter, CultureInfo culture);
 
         /// <summary>
         /// The method to convert value back to it's source type
@@ -60,7 +61,7 @@ namespace Quan.Word
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public abstract Tsoucre ConvertBack(TTarget value, object parameter, CultureInfo culture);
+        public abstract TSoucre ConvertBack(TTarget value, object parameter, CultureInfo culture);
 
         #endregion
 

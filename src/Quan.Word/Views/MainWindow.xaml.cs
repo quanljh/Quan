@@ -13,29 +13,7 @@ namespace Quan.Word
         public MainWindow()
         {
             InitializeComponent();
-
-            //SourceInitialized += OnSourceInitialized;
-
             DataContext = new MainWindowViewModel(this);
-        }
-
-        // Old version to resolve window maximize
-        private void OnSourceInitialized(object sender, EventArgs e)
-        {
-            IntPtr handle = new WindowInteropHelper(this).Handle;
-            HwndSource.FromHwnd(handle)?.AddHook(WindowProc);
-        }
-
-        private IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            switch (msg)
-            {
-                case 0x0024:
-                    WindowMaximizeHelper.WmGetMinMaxInfo(hwnd, lParam, (int)MinWidth, (int)MinHeight);
-                    break;
-            }
-
-            return (IntPtr)0;
         }
 
         private void MainWindow_OnDeactivated(object sender, EventArgs e)
