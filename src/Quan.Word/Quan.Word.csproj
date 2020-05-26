@@ -413,7 +413,7 @@
       <Version>3.2.8</Version>
     </PackageReference>
     <PackageReference Include="Quan.Framework">
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="ReactiveProperty">
       <Version>7.0.1</Version>
@@ -422,13 +422,13 @@
       <Version>4.4.1</Version>
     </PackageReference>
     <PackageReference Include="Unity">
-      <Version>5.11.6</Version>
+      <Version>5.11.7</Version>
     </PackageReference>
     <PackageReference Include="Unity.Abstractions">
-      <Version>5.11.5</Version>
+      <Version>5.11.6</Version>
     </PackageReference>
     <PackageReference Include="Unity.Container">
-      <Version>5.11.7</Version>
+      <Version>5.11.8</Version>
     </PackageReference>
     <PackageReference Include="Unity.Interception">
       <Version>5.11.1</Version>

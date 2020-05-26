@@ -2,11 +2,10 @@
 using CommonServiceLocator;
 using Prism.Events;
 using Prism.Mvvm;
-using Quan.Web;
 using Quan.Word.Core;
+using Quan.Word.Relational;
 using Reactive.Bindings;
 using System.Reactive.Concurrency;
-using System.Threading.Tasks;
 using System.Windows;
 using Unity;
 using Unity.ServiceLocation;
@@ -75,12 +74,6 @@ namespace Quan.Word
                 .UseClientDataStore()
                 .Build();
 
-            Task.Run(async () =>
-            {
-                var result = await WebRequests.PostAsync<SettingsDataModel>("http://localhost:5000/test", new SettingsDataModel() { Id = "from client", Name = "quan.word", Value = "ha" });
-                var a = result;
-            });
-
             //Setup IoC
             IoC.SetUp();
 
@@ -101,8 +94,9 @@ namespace Quan.Word
             // Bind a UI Manager
             IoC.Kernel.Bind<IUImanager>().ToConstant(new UIManager());
 
-            //Current.MainWindow = new MainWindow();
-            //Current.MainWindow.Show();
+            // Ensure the client data store
+            var clientDataStore = Framework.Service<IClientDataStore>();
+
         }
 
         public class SettingsDataModel
