@@ -14,7 +14,7 @@ namespace Quan.Word.Core
         /// <summary>
         /// Determines if the current user has logged in credentials
         /// </summary>
-        bool HasCredentialsAsync();
+        bool HasCredentials();
 
         /// <summary>
         /// Makes sure the client data store is correctly set up

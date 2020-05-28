@@ -6,6 +6,7 @@
 * CreateTime    :  2/15/2020 3:44:22 PM
 ************************************************************************************/
 
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Quan.Word.Core
@@ -66,6 +67,11 @@ namespace Quan.Word.Core
         /// </summary>
         public ICommand ClearUserDataCommand { get; set; }
 
+        /// <summary>
+        /// Loads the settings data from the client data store
+        /// </summary>
+        public ICommand LoadCommand { get; set; }
+
 
         #endregion
 
@@ -81,12 +87,9 @@ namespace Quan.Word.Core
             CloseCommand = new RelayCommand(Close);
             LogoutCommand = new RelayCommand(Logout);
             ClearUserDataCommand = new RelayCommand(ClearUserData);
+            LoadCommand = new RelayCommand(async () => await LoadAsync());
 
-            // TODO: Remove this once th real back-end is ready
-            Name = new TextEntryViewModel { Label = "Name", OriginalText = "quanljh" };
-            Username = new TextEntryViewModel { Label = "Username", OriginalText = "quan" };
-            Password = new PasswordEntryViewModel { Label = "Password", FakePassword = "********" };
-            Email = new TextEntryViewModel { Label = "Email", OriginalText = "quan@gmail.com" };
+
 
             // TODO: Get from localization
             LogoutButtonText = "Logout";
@@ -139,6 +142,20 @@ namespace Quan.Word.Core
             Username = null;
             Password = null;
             Email = null;
+        }
+
+        /// <summary>
+        /// Sets the settings view model properties based on the data in the client data store
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadAsync()
+        {
+            var storedCredentials = await IoC.ClientDataStore.GetLoginCredetntialsAsync();
+
+            Name = new TextEntryViewModel { Label = "Name", OriginalText = $"{storedCredentials?.FirstName} {storedCredentials?.LastName}" };
+            Username = new TextEntryViewModel { Label = "Username", OriginalText = storedCredentials?.UserName };
+            Password = new PasswordEntryViewModel { Label = "Password", FakePassword = "********" };
+            Email = new TextEntryViewModel { Label = "Email", OriginalText = storedCredentials?.Email };
         }
 
     }

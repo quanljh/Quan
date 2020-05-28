@@ -7,6 +7,7 @@
 ************************************************************************************/
 
 using AutoMapper;
+using Quan.Word.Core;
 
 namespace Quan.Word
 {
@@ -23,6 +24,7 @@ namespace Quan.Word
         public QuanMapperProfile()
         {
             CreateMap<PatientUIModel, PatientUIModel>().ReverseMap();
+            CreateMap<LoginResultApiModel, LoginCredentialsDataModel>().ReverseMap();
         }
 
         #endregion

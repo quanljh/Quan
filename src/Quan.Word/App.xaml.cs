@@ -40,6 +40,15 @@ namespace Quan.Word
             // Log it 
             IoC.Logger.Log("This is Debug", LogLevel.Debug);
 
+            // Setup the application view model based on if we are logged in
+            IoC.Application.GoToPage(
+                // If we are logged in...
+                IoC.ClientDataStore.HasCredentials() ?
+                    // Go to chat page
+                    ApplicationPage.Chat :
+                    // Otherwise, go to login page
+                    ApplicationPage.Login);
+
             var window = Container.Resolve<MainWindow>();
             if (window.DataContext is ViewModelBase vb)
             {
@@ -105,6 +114,10 @@ namespace Quan.Word
 
             // Ensure the client data store
             await IoC.ClientDataStore.EnsureDataStoreAsync();
+
+            // Load new settings
+            await IoC.Settings.LoadAsync();
+
         }
 
         public class SettingsDataModel

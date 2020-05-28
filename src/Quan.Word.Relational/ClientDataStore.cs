@@ -40,7 +40,7 @@ namespace Quan.Word.Relational
         /// Store and retrieves information about the client application
         /// such as login credentials, messages, settings and so on
         /// </summary>
-        public bool HasCredentialsAsync()
+        public bool HasCredentials()
         {
             return mDbContext.LoginCredentials.Any();
         }

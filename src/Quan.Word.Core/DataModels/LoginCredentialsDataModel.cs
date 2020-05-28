@@ -17,17 +17,17 @@ namespace Quan.Word.Core
         /// <summary>
         /// The users name
         /// </summary>
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// The users first name
         /// </summary>
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// The users last name
         /// </summary>
-        public string Lastname { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// The users email
