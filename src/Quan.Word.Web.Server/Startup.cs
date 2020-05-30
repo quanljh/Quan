@@ -70,6 +70,9 @@ namespace Quan.Word.Web.Server
                 option.Password.RequireLowercase = true;
                 option.Password.RequireUppercase = false;
                 option.Password.RequireNonAlphanumeric = false;
+
+                // Make sure users have uqiue Email address
+                option.User.RequireUniqueEmail = true;
             });
 
             // Change login URL

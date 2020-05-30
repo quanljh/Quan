@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Quan.Word.Core;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +14,7 @@ using System.Threading.Tasks;
 namespace Quan.Word.Web.Server
 {
 
-    public class AuthorizeTokenAttribute : AuthorizeAttribute
-    {
-        public AuthorizeTokenAttribute()
-        {
-            AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme;
-        }
-    }
+
 
 
     /// <summary>
@@ -64,6 +59,84 @@ namespace Quan.Word.Web.Server
         }
 
         #endregion
+
+        /// <summary>
+        /// Tries to register for a new account on the server
+        /// </summary>
+        /// <param name="registerCredentialsApiModel">The registeration details</param>
+        /// <returns>Returns the result of the register request</returns>
+        [Route("api/register")]
+        public async Task<ApiResponse<RegisterResultApiModel>> RegisterAsync([FromBody] RegisterCredentialsApiModel registerCredentials)
+        {
+            // TODO: Localize all strings
+            // The message when we fail to login
+            var invalidErrorMessage = "Please provide all required details to register for an account";
+
+            // The error response for a failed login
+            var errorResponse = new ApiResponse<RegisterResultApiModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage
+            };
+
+            // If we have no credentials...
+            if (registerCredentials == null)
+                // Return failed respionse
+                return errorResponse;
+
+            // Make sure we have a user name
+            if (registerCredentials?.Username == null || string.IsNullOrWhiteSpace(registerCredentials.Username))
+                // Return error message to user
+                return errorResponse;
+
+            // Create the desired user from the given details
+            var user = new ApplicationUser()
+            {
+                UserName = registerCredentials.Username,
+                FirstName = registerCredentials.FirstName,
+                LastName = registerCredentials.LastName,
+                Email = registerCredentials.Email
+            };
+
+            // Try and create a usesr
+            var result = await mUserManager.CreateAsync(user, registerCredentials?.Password);
+
+            // If the registration was successful...
+            if (result.Succeeded)
+            {
+                // Get the user details
+                var userIdentity = await mUserManager.FindByEmailAsync(registerCredentials.Username);
+
+                // Generate an email verification code
+                var emailVerificationCode = mUserManager.GenerateEmailConfirmationTokenAsync(user);
+
+                // TODO: Email the user the verification code
+
+                // Return valid response containing all users details
+                return new ApiResponse<RegisterResultApiModel>()
+                {
+                    Response = new RegisterResultApiModel()
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        UserName = user.UserName,
+                        Token = user.GenerateJwtToken()
+                    }
+                };
+            }
+            // Otherwise if it failed..
+            else
+                // Return the failed response
+                return new ApiResponse<RegisterResultApiModel>()
+                {
+                    // Aggregate all errors into a single error string
+                    ErrorMessage = result.Errors?.ToList()
+                        .Select(f => f.Description)
+                        .Aggregate((a, b) => $"{a}{Environment.NewLine}{b}")
+
+                };
+        }
 
         [Route("api/login")]
         public async Task<ApiResponse<LoginResultApiModel>> LogInAsync([FromBody] LoginCredentialsApiModel loginCredentials)
@@ -119,33 +192,6 @@ namespace Quan.Word.Web.Server
             var username = user.UserName;
 
 
-            // Set our tokens claims
-            var claims = new[]
-            {
-                // Unique ID for this token
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                
-                // The username using the Identity name so it fills out the HttpContext.User.Identity.Name value
-                new Claim(ClaimsIdentity.DefaultNameClaimType, username),
-            };
-
-            // Create the credentials used to generate the token
-            var credentials = new SigningCredentials(
-                // Get the secret key from configuration
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(IoCContainer.Configuration["Jwt:SecretKey"])),
-                // Use HS256 algorithm
-                SecurityAlgorithms.HmacSha256);
-
-            // Generate the Jwt token
-            var token = new JwtSecurityToken(
-                IoCContainer.Configuration["Jwt:Issuer"],
-                IoCContainer.Configuration["Jwt:Audience"],
-                claims,
-                signingCredentials: credentials,
-                // Expire if not used for 3 months
-                expires: DateTime.Now.AddMonths(3)
-                );
-
             // Return token to user
             return new ApiResponse<LoginResultApiModel>
             {
@@ -156,7 +202,7 @@ namespace Quan.Word.Web.Server
                     LastName = user.LastName,
                     Email = user.Email,
                     UserName = user.UserName,
-                    Token = new JwtSecurityTokenHandler().WriteToken(token)
+                    Token = user.GenerateJwtToken()
                 }
             };
         }

@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="Register"
-    d:DesignHeight="450"
+    x:Name="RegisterPageView"
+    d:DesignHeight="500"
     d:DesignWidth="800"
     x:TypeArguments="core:RegisterViewModel"
     mc:Ignorable="d">
@@ -43,11 +43,14 @@
                         Foreground="{StaticResource ForegroundDarkBrush}"
                         Text="It's about to get fun" />
 
-                    <!--  Email  -->
+                    <!--  Username  -->
                     <TextBox
                         local:IsFocusedProperty.Value="True"
-                        Tag="Email"
-                        Text="{Binding Email}" />
+                        Tag="Username"
+                        Text="{Binding Username}" />
+
+                    <!--  Email  -->
+                    <TextBox Tag="Email" Text="{Binding Email}" />
 
                     <!--  Password  -->
                     <PasswordBox
@@ -60,7 +63,7 @@
                         HorizontalAlignment="Center"
                         local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
                         Command="{Binding RegisterCommand}"
-                        CommandParameter="{Binding ElementName=Page}"
+                        CommandParameter="{Binding ElementName=RegisterPageView}"
                         Content="Register"
                         IsDefault="True" />
 

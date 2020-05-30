@@ -1,16 +1,4 @@
-﻿//-------------------------------------------------------------------
-// Copyright (c) 2020 EMSystems LTD. All Rights Reserved.
-// ネームスペース      ：Quan.Word.Converters
-// ファイル名称        ：BooleanToBorderThicknessConverter
-// 新規作成者          ：EM-劉嘉豪
-// 新規作成日          ：2020/05/26 14:28:10
-// ファイルメモ        ：
-
-/*-< 変更履歴 >------------------------------------------------------
-*/
-//-------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
