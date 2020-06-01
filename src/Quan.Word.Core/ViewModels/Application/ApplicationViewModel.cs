@@ -1,4 +1,6 @@
-﻿namespace Quan.Word.Core
+﻿using System.Threading.Tasks;
+
+namespace Quan.Word.Core
 {
     /// <summary>
     /// The application state as a view model
@@ -52,6 +54,22 @@
             //Show Side menu or not
             SideMenuVisible = page == ApplicationPage.Chat;
 
+        }
+
+        /// <summary>
+        /// Handles what happens when we have successfully logged in
+        /// </summary>
+        /// <param name="loginResult">The results from the successful login</param>
+        public async Task HandleSuccessfulLoginAsync(LoginResultApiModel loginResult)
+        {
+            // Store this in the client data store
+            await IoC.ClientDataStore.SaveLoginCredentialsAsync(Mapper.Map<LoginCredentialsDataModel>(loginResult));
+
+            // Load new settings
+            await IoC.Settings.LoadAsync();
+
+            // Go to chat page
+            IoC.Application.GoToPage(ApplicationPage.Chat);
         }
     }
 }

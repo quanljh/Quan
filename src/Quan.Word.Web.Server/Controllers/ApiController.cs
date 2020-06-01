@@ -63,7 +63,7 @@ namespace Quan.Word.Web.Server
         /// <summary>
         /// Tries to register for a new account on the server
         /// </summary>
-        /// <param name="registerCredentialsApiModel">The registeration details</param>
+        /// <param name="registerCredentials">The registeration details</param>
         /// <returns>Returns the result of the register request</returns>
         [Route("api/register")]
         public async Task<ApiResponse<RegisterResultApiModel>> RegisterAsync([FromBody] RegisterCredentialsApiModel registerCredentials)

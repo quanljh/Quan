@@ -2,6 +2,7 @@
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Quan.Word.Core.ApiModels;
 
 namespace Quan.Word.Core
 {
@@ -39,7 +40,7 @@ namespace Quan.Word.Core
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayParameterizedCommand(async parameter => await Login(parameter));
+            LoginCommand = new RelayParameterizedCommand(async parameter => await LoginAsync(parameter));
 
             RegisterCommand = new RelayCommand(async () => await Register());
         }
@@ -53,7 +54,7 @@ namespace Quan.Word.Core
         /// </summary>
         /// <param name="parameter">The <see cref="SecureString"/> passed in from the view for the users password </param>
         /// <returns></returns>
-        public async Task Login(object parameter)
+        public async Task LoginAsync(object parameter)
         {
             await RunCommand(() => LoginIsRunning, async () =>
             {
@@ -68,50 +69,17 @@ namespace Quan.Word.Core
                             Password = (parameter as IHavePassword)?.SecurePassword.Unsecure()
                         });
 
-                // If there was no response, bad data, or a response with a error message...
-                if (result?.ServerResponse == null || !result.ServerResponse.Successful)
-                {
-                    // Default error message
-                    // TODO: Localize strings
-                    var message = "Unknown error from server call";
-
-                    // If we got a response from the server..
-                    if (result?.ServerResponse != null)
-                        // Set message to servers response
-                        message = result.ServerResponse.ErrorMessage;
-                    // If we have a result but deserialize failed...
-                    else if (!string.IsNullOrWhiteSpace(result?.RawServerResponse))
-                        // Set error message
-                        message = $"Unexpected response from server. {result.RawServerResponse}";
-                    // If we have a result but no server response details at all...
-                    else if (result != null)
-                        // Set message to standard HTTP server response details
-                        message =
-                            $"Failed to communicate with server. Status code {result.StatusCode}. {result.StatusDescription}";
-
-                    // Display error
-                    await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
-                    {
-                        // TODO: Localize strings
-                        Title = "Login Failed",
-                        Message = message
-                    });
-
+                // If the response has an error...
+                if (await result.DisplayErrorIfFailedAsync("Login Failed"))
                     // We are done
                     return;
-                }
 
                 // OK successfully logged in... now get users data
-                var userData = result.ServerResponse.Response;
+                var loginResult = result.ServerResponse.Response;
 
-                // Store this in the client data store
-                await IoC.ClientDataStore.SaveLoginCredentialsAsync(Mapper.Map<LoginCredentialsDataModel>(userData));
-
-                // Load new settings
-                await IoC.Settings.LoadAsync();
-
-                // Go to chat page
-                IoC.Application.GoToPage(ApplicationPage.Chat);
+                // Let the application view model handle what happens
+                // with the successful login
+                await IoC.Application.HandleSuccessfulLoginAsync(loginResult);
             });
         }
 
