@@ -117,11 +117,11 @@ namespace Quan.Word.Web.Server
                 {
                     Response = new RegisterResultApiModel()
                     {
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Email = user.Email,
-                        UserName = user.UserName,
-                        Token = user.GenerateJwtToken()
+                        FirstName = userIdentity.FirstName,
+                        LastName = userIdentity.LastName,
+                        Email = userIdentity.Email,
+                        UserName = userIdentity.UserName,
+                        Token = userIdentity.GenerateJwtToken()
                     }
                 };
             }
