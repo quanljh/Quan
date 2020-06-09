@@ -13,6 +13,7 @@
     x:TypeArguments="local:DataGridPageViewModel"
     FontFamily="Meiryo UI"
     FontSize="{StaticResource FontSizeRegular}"
+    Loaded="DataGridPage_OnLoaded"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +22,8 @@
         </Grid.RowDefinitions>
         <Border Padding="20">
             <DataGrid
-                Height="400"
+                x:Name="DataGridControl"
+                Height="500"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
@@ -29,10 +31,25 @@
                 CellStyle="{StaticResource DataGridCellStyle}"
                 ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
                 GridLinesVisibility="None"
-                ItemsSource="{Binding PatientCollection}"
+                ItemsSource="{Binding PatientCollectionView}"
                 RowHeaderStyle="{StaticResource DataGridRowHeaderStyle}"
                 SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                VerticalScrollBarVisibility="Auto">
+                VerticalScrollBarVisibility="Auto"
+                VirtualizingPanel.CacheLength="50,50"
+                VirtualizingPanel.CacheLengthUnit="Item"
+                VirtualizingPanel.IsVirtualizing="True"
+                VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                VirtualizingPanel.ScrollUnit="Item"
+                VirtualizingPanel.VirtualizationMode="Recycling">
+                <DataGrid.GroupStyle>
+                    <GroupStyle ContainerStyleSelector="{StaticResource GroupStyleSelector}">
+                        <GroupStyle.Panel>
+                            <ItemsPanelTemplate>
+                                <DataGridRowsPresenter />
+                            </ItemsPanelTemplate>
+                        </GroupStyle.Panel>
+                    </GroupStyle>
+                </DataGrid.GroupStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="100"

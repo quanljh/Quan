@@ -5,8 +5,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using Quan.Word.ViewHelper;
 
 namespace Quan.Word
 {
@@ -35,11 +38,13 @@ namespace Quan.Word
     {
         #region Properties
 
+        public DataGridPage DataGridPage;
+
         public ObservableCollection<JyokyoUIModel> JokyoCollection { get; set; }
 
         public ObservableCollection<PatientUIModel> PatientCollection { get; set; }
 
-        public ICollectionView patientCollectionView { get; set; }
+        public ICollectionView PatientCollectionView { get; set; }
 
         public PatientUIModel SelectedPatient { get; set; }
 
@@ -47,7 +52,7 @@ namespace Quan.Word
 
         #region Commands
 
-        public ICommand ChangeStatesCommand { get; set; }
+        public ICommand TestCommand { get; set; }
 
         public ICommand ChangeRowCommand { get; set; }
 
@@ -90,6 +95,7 @@ namespace Quan.Word
                     PatientKanaName = "ｱﾍﾞｼﾝｿﾞｳ",
                     PatientBirth = new DateTime(1965,07,05),
                     PatientSex = "1",
+                    Group = "123",
                     PatientJoukyouKbn = "1"
                 },
                 new PatientUIModel()
@@ -99,6 +105,7 @@ namespace Quan.Word
                     PatientKanaName = "ﾔﾏｼﾊﾞﾉﾘﾀｶ",
                     PatientBirth = new DateTime(1973,02,01),
                     PatientSex = "1",
+                    Group = "123",
                     PatientJoukyouKbn = "2"
                 },
                 new PatientUIModel()
@@ -108,6 +115,7 @@ namespace Quan.Word
                     PatientKanaName = "ﾖﾈﾔﾏｱｷﾗ",
                     PatientBirth = new DateTime(1983,04,15),
                     PatientSex = "1",
+                    Group = "123",
                     PatientJoukyouKbn = "3"
                 },
                 new PatientUIModel()
@@ -117,12 +125,49 @@ namespace Quan.Word
                     PatientKanaName = "ｶﾅﾔﾏｻｸﾗｺ",
                     PatientBirth = new DateTime(1988,03,22),
                     PatientSex = "0",
+                    Group = "123",
                     PatientJoukyouKbn = "4"
                 },
                 new PatientUIModel()
                 {
                     PatientNo = "5",
-                    PatientName = "田中稚香",
+                    PatientName = "田中稚香5",
+                    PatientKanaName = "ﾀﾅｶﾁｶ",
+                    PatientBirth = new DateTime(1986,05,02),
+                    PatientSex = "0",
+                    PatientJoukyouKbn = "3"
+                },
+                new PatientUIModel()
+                {
+                    PatientNo = "6",
+                    PatientName = "田中稚香6",
+                    PatientKanaName = "ﾀﾅｶﾁｶ",
+                    PatientBirth = new DateTime(1986,05,02),
+                    PatientSex = "0",
+                    PatientJoukyouKbn = "3"
+                },
+                new PatientUIModel()
+                {
+                    PatientNo = "7",
+                    PatientName = "田中稚香7",
+                    PatientKanaName = "ﾀﾅｶﾁｶ",
+                    PatientBirth = new DateTime(1986,05,02),
+                    PatientSex = "0",
+                    PatientJoukyouKbn = "3"
+                },
+                new PatientUIModel()
+                {
+                    PatientNo = "8",
+                    PatientName = "田中稚香8",
+                    PatientKanaName = "ﾀﾅｶﾁｶ",
+                    PatientBirth = new DateTime(1986,05,02),
+                    PatientSex = "0",
+                    PatientJoukyouKbn = "3"
+                },
+                new PatientUIModel()
+                {
+                    PatientNo = "9",
+                    PatientName = "田中稚香9",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
                     PatientSex = "0",
@@ -130,13 +175,28 @@ namespace Quan.Word
                 },
             };
 
-            patientCollectionView = CollectionViewSource.GetDefaultView(PatientCollection);
+            for (int i = 0; i < 100; i++)
+            {
+                PatientCollection.Add(new PatientUIModel()
+                {
+                    PatientNo = "9",
+                    PatientName = $"田中稚香{i + 9}",
+                    PatientKanaName = "ﾀﾅｶﾁｶ",
+                    PatientBirth = new DateTime(1986, 05, 02),
+                    PatientSex = "0",
+                    PatientJoukyouKbn = "3"
+                });
+            }
 
-            ChangeStatesCommand = new RelayCommand(async () => await wait());
+            PatientCollectionView = CollectionViewSource.GetDefaultView(PatientCollection);
+
+            TestCommand = new RelayCommand(Wait);
 
             SelectedPatient = PatientCollection.FirstOrDefault();
 
             ChangeRowCommand = new RelayCommand(ChangeRow);
+
+            PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
 
             //patientCollectionView.Filter = x =>
             //{
@@ -152,28 +212,20 @@ namespace Quan.Word
 
         #region Method
 
-        public async Task wait()
+        public void Wait()
         {
-            await Task.Delay(3000);
+            var scroll = DataGridPage.DataGridControl.FindVisualChild<ScrollViewer>();
+            scroll.ScrollChanged += ScrollOnScrollChanged;
+        }
+
+        private void ScrollOnScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            e.Handled = true;
         }
 
         private void ChangeRow()
         {
-            var newPatient = new PatientUIModel()
-            {
-                PatientNo = "6",
-                PatientName = "大森紀彦",
-                PatientKanaName = "ｵｵﾓﾘﾉﾘﾋｺ",
-                PatientBirth = new DateTime(1975, 08, 22),
-                PatientSex = "1",
-                PatientJoukyouKbn = "2"
-            };
-
-            Enumerable.Range(0, 1000).ToList().ForEach(f => { PatientCollection.Add(newPatient); });
-
-
-            //PatientCollection[4] = newPatient;
-            //SelectedPatient = newPatient;
+            PatientCollectionView.Refresh();
         }
 
         #endregion
