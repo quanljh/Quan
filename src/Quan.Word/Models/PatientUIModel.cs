@@ -70,16 +70,20 @@ namespace Quan.Word
             set => SetProperty(ref _patientJoukyouKbn, value);
         }
 
-        /// <summary>
-        /// グループ
-        /// </summary>
-        private string _group;
+        private string _patientNote;
 
-        public string Group
+        public string PatientNote
         {
-            get => _group;
-            set => SetProperty(ref _group, value);
+            get => _patientNote;
+            set => SetProperty(ref _patientNote, value);
         }
 
+        private string _patientComment;
+
+        public string PatientComment
+        {
+            get => _patientComment;
+            set => SetProperty(ref _patientComment, value);
+        }
     }
 }

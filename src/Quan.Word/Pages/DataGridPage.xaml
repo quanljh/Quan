@@ -42,7 +42,7 @@
                 VirtualizingPanel.ScrollUnit="Item"
                 VirtualizingPanel.VirtualizationMode="Recycling">
                 <DataGrid.GroupStyle>
-                    <GroupStyle ContainerStyleSelector="{StaticResource GroupStyleSelector}">
+                    <GroupStyle ContainerStyle="{StaticResource UketsukeDataGridView.GroupHeaderStyle}">
                         <GroupStyle.Panel>
                             <ItemsPanelTemplate>
                                 <DataGridRowsPresenter />
@@ -103,6 +103,54 @@
                                     ItemsSource="{Binding Path=DataContext.JokyoCollection, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridPage}}}"
                                     SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="JyokyoCode" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="100"
+                        CanUserSort="True"
+                        Header="メモ"
+                        SortMemberPath="PatientNote">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding PatientNote, UpdateSourceTrigger=LostFocus}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox
+                                    Height="30"
+                                    Padding="0"
+                                    VerticalContentAlignment="Center"
+                                    FontSize="{StaticResource FontSizeRegular}"
+                                    Text="{Binding PatientNote, UpdateSourceTrigger=LostFocus}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="100"
+                        CanUserSort="True"
+                        Header="コメント"
+                        SortMemberPath="PatientComment">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox
+                                    Height="30"
+                                    Padding="0"
+                                    VerticalContentAlignment="Center"
+                                    FontSize="{StaticResource FontSizeRegular}"
+                                    Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>

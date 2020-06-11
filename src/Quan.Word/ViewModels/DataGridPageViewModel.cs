@@ -44,7 +44,7 @@ namespace Quan.Word
 
         public ObservableCollection<PatientUIModel> PatientCollection { get; set; }
 
-        public ICollectionView PatientCollectionView { get; set; }
+        public ListCollectionView PatientCollectionView { get; set; }
 
         public PatientUIModel SelectedPatient { get; set; }
 
@@ -95,8 +95,8 @@ namespace Quan.Word
                     PatientKanaName = "ｱﾍﾞｼﾝｿﾞｳ",
                     PatientBirth = new DateTime(1965,07,05),
                     PatientSex = "1",
-                    Group = "123",
-                    PatientJoukyouKbn = "1"
+                    PatientJoukyouKbn = "1",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -105,8 +105,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾔﾏｼﾊﾞﾉﾘﾀｶ",
                     PatientBirth = new DateTime(1973,02,01),
                     PatientSex = "1",
-                    Group = "123",
-                    PatientJoukyouKbn = "2"
+                    PatientJoukyouKbn = "2",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -115,8 +115,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾖﾈﾔﾏｱｷﾗ",
                     PatientBirth = new DateTime(1983,04,15),
                     PatientSex = "1",
-                    Group = "123",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -125,8 +125,8 @@ namespace Quan.Word
                     PatientKanaName = "ｶﾅﾔﾏｻｸﾗｺ",
                     PatientBirth = new DateTime(1988,03,22),
                     PatientSex = "0",
-                    Group = "123",
-                    PatientJoukyouKbn = "4"
+                    PatientJoukyouKbn = "4",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -135,7 +135,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
                     PatientSex = "0",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -144,7 +145,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
                     PatientSex = "0",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -153,7 +155,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
                     PatientSex = "0",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -162,7 +165,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
                     PatientSex = "0",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "1111"
                 },
                 new PatientUIModel()
                 {
@@ -171,7 +175,8 @@ namespace Quan.Word
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
                     PatientSex = "0",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "1111"
                 },
             };
 
@@ -184,11 +189,14 @@ namespace Quan.Word
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986, 05, 02),
                     PatientSex = "0",
-                    PatientJoukyouKbn = "3"
+                    PatientJoukyouKbn = "3",
+                    PatientNote = "2222"
                 });
             }
 
-            PatientCollectionView = CollectionViewSource.GetDefaultView(PatientCollection);
+            PatientCollectionView = (ListCollectionView)CollectionViewSource.GetDefaultView(PatientCollection);
+
+            PatientCollectionView.IsLiveGrouping = true;
 
             TestCommand = new RelayCommand(Wait);
 
@@ -196,7 +204,10 @@ namespace Quan.Word
 
             ChangeRowCommand = new RelayCommand(ChangeRow);
 
-            PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
+            PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("PatientNote"));
+
+            //PatientCollectionView.LiveGroupingProperties.Add("PatientNote");
+
 
             //patientCollectionView.Filter = x =>
             //{
