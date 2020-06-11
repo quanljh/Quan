@@ -8,6 +8,15 @@ namespace Quan.Word
 {
     public partial class DragDrop
     {
+        #region Public properties
+
+        /// <summary>
+        /// The default data format which will be used for the drag and drop actions
+        /// </summary>
+        public static DataFormat DataFormat { get; } = DataFormats.GetDataFormat("Quan.DragDrop");
+
+        #endregion
+
         #region Attached Properties
 
         /// <summary>
@@ -39,6 +48,29 @@ namespace Quan.Word
                 typeof(EventType),
                 typeof(DragDrop),
                 new PropertyMetadata(EventType.Auto, DropEventTypeChanged));
+
+        /// <summary>
+        /// The drag drop copy key state property (default None).
+        /// So the drag drop action is
+        /// - Move, within the same control or from one to another, if the drag drop key state is None
+        /// - Copy, from one to another control with the given drag drop key state
+        /// </summary>
+        public static readonly DependencyProperty DragDropCopyKeyStateProperty =
+            DependencyProperty.RegisterAttached(
+                "DragDropCopyKeyState",
+                typeof(DragDropKeyStates),
+                typeof(DragDrop),
+                new PropertyMetadata(default(DragDropKeyStates)));
+
+        /// <summary>
+        /// Gets or sets the data format which will be used for the drag and drop actions
+        /// </summary>
+        public static readonly DependencyProperty DataFormatProperty =
+            DependencyProperty.RegisterAttached(
+                "DataFormat",
+                typeof(DataFormat),
+                typeof(DragDrop),
+                new PropertyMetadata(DataFormat));
 
         #region Attached Properties accessors
 
@@ -100,6 +132,46 @@ namespace Quan.Word
         public static void SetDropEventType(DependencyObject target, EventType value)
         {
             target.SetValue(DropEventTypeProperty, value);
+        }
+
+        /// <summary>
+        /// Gets whether the control can be used as drop target
+        /// </summary>
+        /// <param name="target">The target control</param>
+        /// <returns></returns>
+        public static DragDropKeyStates GetDragDropCopyKeyState(UIElement target)
+        {
+            return (DragDropKeyStates)target.GetValue(DragDropCopyKeyStateProperty);
+        }
+
+        /// <summary>
+        /// Gets whether the control can be used as drop target
+        /// </summary>
+        /// <param name="target">The target control</param>
+        /// <param name="value">The new value</param>
+        public static void SetDragDropCopyKeyState(UIElement target, DragDropKeyStates value)
+        {
+            target.SetValue(DragDropCopyKeyStateProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the data format which will be used for the drag and drop actions
+        /// </summary>
+        /// <param name="source">The source control</param>
+        /// <returns></returns>
+        public static DataFormat GetDataFormat(UIElement source)
+        {
+            return (DataFormat)source.GetValue(DataFormatProperty);
+        }
+
+        /// <summary>
+        /// Sets the data format which will be used for the drag and drop actions
+        /// </summary>
+        /// <param name="source">The source control</param>
+        /// <param name="value">The new value</param>
+        public static void SetDataFormat(UIElement source, DataFormat value)
+        {
+            source.SetValue(DataFormatProperty, value);
         }
 
         #endregion

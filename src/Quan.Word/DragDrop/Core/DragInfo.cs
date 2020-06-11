@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -25,6 +26,24 @@ namespace Quan.Word
             VisualSource = sender as UIElement;
             DragStartPosition = e.GetPosition(VisualSource);
             DragDropCopyKeyStates = DragDrop.GetDragDropCopyKeyState(VisualSource);
+
+            // Set data format
+            var dataFormat = DragDrop.GetDataFormat(VisualSource);
+            if (dataFormat != null)
+                DataFormat = dataFormat;
+
+            var sourceElement = e.OriginalSource as UIElement;
+
+            // If we can't cast object as a UIElement it might be a FrameworkContentElement, if so try and use its parent
+            if (e.OriginalSource is FrameworkContentElement frameworkContentElement)
+                sourceElement = frameworkContentElement.Parent as UIElement;
+
+            // If source control is normal items control...
+            if (sender is ItemsControl itemsControl)
+            {
+                SourceGroup = itemsControl.FindGroup()
+            }
+
         }
 
         #endregion

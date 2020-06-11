@@ -175,6 +175,7 @@
     <Compile Include="DragDrop\DragDrop.cs" />
     <Compile Include="DragDrop\DragDrop.Properties.cs" />
     <Compile Include="DragDrop\Core\DragInfo.cs" />
+    <Compile Include="DragDrop\Extensions\ItemsControlExtensions.cs" />
     <Compile Include="IoC\UIManager.cs" />
     <Compile Include="Mapper\QuanMapperProfile.cs" />
     <Compile Include="Models\PatientUIModel.cs" />
@@ -284,10 +285,6 @@
     <Page Include="Styles\Common.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Windows.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Buttons.xaml">
       <Generator>MSBuild:Compile</Generator>

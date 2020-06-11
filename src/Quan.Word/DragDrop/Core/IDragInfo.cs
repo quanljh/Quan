@@ -12,7 +12,7 @@ namespace Quan.Word
         /// <summary>
         /// Gets or sets the data format which will be used for the drag and drop actions
         /// <see cref="DataObject"/> uses the static formats for transferring data to and
-        /// from the system clipborad, and in drag-and-drop operations.
+        /// from the system clipboard, and in drag-and-drop operations.
         /// </summary>
         DataFormat DataFormat { get; set; }
 
