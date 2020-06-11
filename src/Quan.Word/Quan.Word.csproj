@@ -171,6 +171,10 @@
     <Compile Include="Dialogs\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DragDrop\Core\IDragInfo.cs" />
+    <Compile Include="DragDrop\DragDrop.cs" />
+    <Compile Include="DragDrop\DragDrop.Properties.cs" />
+    <Compile Include="DragDrop\Core\DragInfo.cs" />
     <Compile Include="IoC\UIManager.cs" />
     <Compile Include="Mapper\QuanMapperProfile.cs" />
     <Compile Include="Models\PatientUIModel.cs" />
