@@ -118,6 +118,6 @@ namespace Quan.Word
         /// <summary>
         /// Gets the drag drop copy key state indicating the effect of the drag drop operation
         /// </summary>
-        DragDropKeyStates DragDropCopyKeyStates { get; }
+        DragDropKeyStates DragDropCopyKeyState { get; }
     }
 }

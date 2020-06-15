@@ -139,18 +139,18 @@ namespace Quan.Word
     /// <summary>
     /// The base page with added viewmodel support
     /// </summary>
-    /// <typeparam name="VM"></typeparam>
-    public class BasePage<VM> : BasePage
-        where VM : ViewModelBase, new()
+    /// <typeparam name="T"></typeparam>
+    public class BasePage<T> : BasePage
+        where T : ViewModelBase, new()
     {
         #region Public Properties
 
         /// <summary>
         /// The view model associated with this page
         /// </summary>
-        public VM ViewModel
+        public T ViewModel
         {
-            get => (VM)ViewModelObject;
+            get => (T)ViewModelObject;
             set => ViewModelObject = value;
         }
 
@@ -164,21 +164,21 @@ namespace Quan.Word
 
         public BasePage()
         {
-            //Creat a default view model
-            ViewModel = IoC.Get<VM>();
+            //Create a default view model
+            ViewModel = IoC.Get<T>();
         }
 
         /// <summary>
         /// Constructor with specific view model
         /// </summary>
         /// <param name="specificViewModel">The specific view model to use, if any</param>
-        public BasePage(VM specificViewModel = null) : base()
+        public BasePage(T specificViewModel = null) : base()
         {
             if (specificViewModel != null)
                 ViewModel = specificViewModel;
             else
                 //Creat a default view model
-                ViewModel = IoC.Get<VM>();
+                ViewModel = IoC.Get<T>();
         }
 
         #endregion

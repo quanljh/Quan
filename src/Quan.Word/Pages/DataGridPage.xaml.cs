@@ -1,8 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Quan.Word.ViewHelper;
-
-namespace Quan.Word
+﻿namespace Quan.Word
 {
     /// <summary>
     /// Interaction logic for DataGridPage.xaml
@@ -30,12 +26,8 @@ namespace Quan.Word
 
         #endregion
 
-        private void ScrollOnScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-
-        }
-
-        private void DataGridPage_OnLoaded(object sender, RoutedEventArgs e)
+        /// <inheritdoc />
+        protected override void OnViewModelChanged()
         {
             if (DataContext is DataGridPageViewModel vm)
                 vm.DataGridPage = this;

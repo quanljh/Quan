@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 
 namespace Quan.Word
 {
-    public class stringToPatientJyokyoConverter : BaseValueConverter<string, string>
+    public class StringToPatientJyokyoConverter : BaseValueConverter<string, string>
     {
         public override string Convert(string value, object parameter, CultureInfo culture)
         {
@@ -19,7 +18,7 @@ namespace Quan.Word
                 case "4":
                     return "会計待ち";
                 default:
-                    Debugger.Break();
+                    //Debugger.Break();
                     return null;
             }
         }

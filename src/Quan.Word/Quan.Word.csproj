@@ -147,7 +147,7 @@
     <Compile Include="Converters\BooleanInvertConverter.cs" />
     <Compile Include="Converters\BooleanToBorderThicknessConverter.cs" />
     <Compile Include="Converters\BooleanToCollapsedConverter.cs" />
-    <Compile Include="Converters\stringToPatientJyokyoConverter.cs" />
+    <Compile Include="Converters\StringToPatientJyokyoConverter.cs" />
     <Compile Include="Converters\StringToSexConverter.cs" />
     <Compile Include="Converters\IconTypeToFontAwesomeConverter.cs" />
     <Compile Include="Converters\MenuItemTypeVisibilityConverter.cs" />
@@ -171,11 +171,30 @@
     <Compile Include="Dialogs\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DragDrop\Core\DragAdorner.cs" />
+    <Compile Include="DragDrop\Core\DropInfo.cs" />
+    <Compile Include="DragDrop\Core\DropTargetAdorner.cs" />
+    <Compile Include="DragDrop\Core\DropTargetAdorners.cs" />
     <Compile Include="DragDrop\Core\IDragInfo.cs" />
-    <Compile Include="DragDrop\DragDrop.cs" />
-    <Compile Include="DragDrop\DragDrop.Properties.cs" />
+    <Compile Include="DragDrop\Core\IDragSource.cs" />
+    <Compile Include="DragDrop\Core\IDropInfo.cs" />
+    <Compile Include="DragDrop\Core\IDropTarget.cs" />
+    <Compile Include="DragDrop\Core\DragDrop.cs" />
+    <Compile Include="DragDrop\Core\DragDrop.Properties.cs" />
     <Compile Include="DragDrop\Core\DragInfo.cs" />
+    <Compile Include="DragDrop\Enums\Enums.cs" />
+    <Compile Include="DragDrop\Extensions\DpiHelper.cs" />
+    <Compile Include="DragDrop\Extensions\DragDropExtensions.cs" />
+    <Compile Include="DragDrop\Extensions\HitTestUtilities.cs" />
     <Compile Include="DragDrop\Extensions\ItemsControlExtensions.cs" />
+    <Compile Include="DragDrop\Extensions\RootElementFinder.cs" />
+    <Compile Include="DragDrop\Extensions\TreeViewItemExtensions.cs" />
+    <Compile Include="DragDrop\Extensions\TypeUtilities.cs" />
+    <Compile Include="DragDrop\Icons\IconFactory.cs" />
+    <Compile Include="DragDrop\Implement\DefaultDragHandler.cs" />
+    <Compile Include="DragDrop\Implement\DefaultDropHandler.cs" />
+    <Compile Include="DragDrop\Implement\DropTargetHighlightAorner.cs" />
+    <Compile Include="DragDrop\Implement\DropTargetInsertionAdorner.cs" />
     <Compile Include="IoC\UIManager.cs" />
     <Compile Include="Mapper\QuanMapperProfile.cs" />
     <Compile Include="Models\PatientUIModel.cs" />
@@ -193,7 +212,7 @@
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="StyleSelector\GroupStyleSelector.cs" />
-    <Compile Include="ViewHelper\VisualTreeExtentions.cs" />
+    <Compile Include="ViewHelper\VisualTreeExtensions.cs" />
     <Compile Include="ViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\DataGridPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -400,6 +419,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="JetBrains.Annotations">
+      <Version>2020.1.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
       <Version>2.0.1</Version>
     </PackageReference>
@@ -441,6 +463,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="DragDrop\Icons\EffectCopy.png" />
+    <Resource Include="DragDrop\Icons\EffectLink.png" />
+    <Resource Include="DragDrop\Icons\EffectMove.png" />
+    <Resource Include="DragDrop\Icons\EffectNone.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
