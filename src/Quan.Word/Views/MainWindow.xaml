@@ -130,7 +130,9 @@
                                         Grid.Row="1"
                                         Padding="{Binding InnerContentPadding}"
                                         ClipToBounds="True">
-                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                        <AdornerDecorator>
+                                            <ContentPresenter Content="{TemplateBinding Content}" />
+                                        </AdornerDecorator>
                                     </Border>
 
                                 </Grid>

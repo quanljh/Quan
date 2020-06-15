@@ -6,11 +6,13 @@ using System.Windows.Media;
 namespace Quan.Word
 {
     /// <summary>
-    /// A helper class for Dpi logicm cause Microsoft hides this with the internal flag.
+    /// A helper class for Dpi logical cause Microsoft hides this with the internal flag.
     /// </summary>
     public static class DpiHelper
     {
+        // Use to convert pixels to wpf units depended on device dpi
         private static Matrix _transformToDevice;
+        // Use to convert wpf units to pixels depended on device dpi
         private static Matrix _transformToLogical;
 
         public static double DpiX = 0d;

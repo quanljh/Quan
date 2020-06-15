@@ -357,7 +357,7 @@ namespace Quan.Word
         /// <summary>
         /// Gets or Sets the horizontal and vertical proportion at which the pointer will anchor on the DragAdorner.
         /// </summary>
-        public static readonly DependencyProperty DragMouseAnchorPointProperty
+        public static readonly DependencyProperty  DragMouseAnchorPointProperty
             = DependencyProperty.RegisterAttached(
                 "DragMouseAnchorPoint",
                 typeof(Point),

@@ -1,5 +1,4 @@
-﻿using Quan.Word.Core;
-using Quan.Word.ViewHelper;
+﻿using Quan.Word.ViewHelper;
 using System;
 using System.Collections;
 using System.Linq;
@@ -610,20 +609,24 @@ namespace Quan.Word
 
             if (useDefaultDragAdorner)
             {
+                // Get default data template by capture visual source item to image and make template
                 template = dragInfo.VisualSourceItem.GetCaptureScreenDataTemplate(dragInfo.VisualSourceFlowDirection);
             }
 
             if (template != null || templateSelector != null)
             {
-                if (dragInfo.Data is IEnumerable && !(dragInfo.Data is string))
+                if (dragInfo.Data is IEnumerable data && !(data is string))
                 {
-                    if (!useDefaultDragAdorner && ((IEnumerable)dragInfo.Data).Cast<object>().Count() <= 10)
+                    var dataList = data as object[] ?? data.Cast<object>().ToArray();
+                    if (!useDefaultDragAdorner && dataList.Count() <= 10)
                     {
-                        var itemsControl = new ItemsControl();
-                        itemsControl.ItemsSource = (IEnumerable)dragInfo.Data;
-                        itemsControl.ItemTemplate = template;
-                        itemsControl.ItemTemplateSelector = templateSelector;
-                        itemsControl.Tag = dragInfo;
+                        var itemsControl = new ItemsControl
+                        {
+                            ItemsSource = dataList,
+                            ItemTemplate = template,
+                            ItemTemplateSelector = templateSelector,
+                            Tag = dragInfo
+                        };
 
                         if (useVisualSourceItemSizeForDragAdorner)
                         {
@@ -640,11 +643,13 @@ namespace Quan.Word
                 }
                 else
                 {
-                    var contentPresenter = new ContentPresenter();
-                    contentPresenter.Content = dragInfo.Data;
-                    contentPresenter.ContentTemplate = template;
-                    contentPresenter.ContentTemplateSelector = templateSelector;
-                    contentPresenter.Tag = dragInfo;
+                    var contentPresenter = new ContentPresenter
+                    {
+                        Content = dragInfo.Data,
+                        ContentTemplate = template,
+                        ContentTemplateSelector = templateSelector,
+                        Tag = dragInfo
+                    };
 
                     if (useVisualSourceItemSizeForDragAdorner)
                     {
@@ -664,6 +669,7 @@ namespace Quan.Word
                     adornment.Opacity = GetDefaultDragAdornerOpacity(dragInfo.VisualSource);
                 }
 
+                // Get root element to make sure adorner is always on top of the root element
                 var rootElement = RootElementFinder.FindRoot(dropInfo.VisualTarget ?? dragInfo.VisualSource);
                 DragAdorner = new DragAdorner(rootElement, adornment, GetDragAdornerTranslation(dragInfo.VisualSource));
             }

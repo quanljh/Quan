@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -9,12 +10,15 @@ namespace Quan.Word
         public DragAdorner(UIElement adornedElement, UIElement adornment, Point translation, DragDropEffects effects = DragDropEffects.None)
             : base(adornedElement)
         {
-            this.Translation = translation;
-            this.m_AdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
-            this.m_AdornerLayer.Add(this);
-            this.m_Adornment = adornment;
-            this.IsHitTestVisible = false;
-            this.Effects = effects;
+            Translation = translation;
+            // An adorner layer is guaranteed to be at higher Z-order than the element being adorned
+            // so adorners are always rendered on top of the adorned element
+            m_AdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
+            if (m_AdornerLayer == null) throw new NullReferenceException("Can't find AdornerLayer on your app window, try to add it to your custom window");
+            m_AdornerLayer?.Add(this);
+            m_Adornment = adornment;
+            IsHitTestVisible = false;
+            Effects = effects;
         }
 
         public Point Translation { get; private set; }
@@ -23,25 +27,25 @@ namespace Quan.Word
 
         public Point MousePosition
         {
-            get { return this.m_MousePosition; }
+            get { return m_MousePosition; }
             set
             {
-                if (this.m_MousePosition != value)
+                if (m_MousePosition != value)
                 {
-                    this.m_MousePosition = value;
-                    this.m_AdornerLayer.Update(this.AdornedElement);
+                    m_MousePosition = value;
+                    m_AdornerLayer.Update(AdornedElement);
                 }
             }
         }
 
         public void Detatch()
         {
-            this.m_AdornerLayer.Remove(this);
+            m_AdornerLayer.Remove(this);
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            this.m_Adornment.Arrange(new Rect(finalSize));
+            m_Adornment.Arrange(new Rect(finalSize));
             return finalSize;
         }
 
@@ -49,7 +53,7 @@ namespace Quan.Word
         {
             var result = new GeneralTransformGroup();
             result.Children.Add(base.GetDesiredTransform(transform));
-            result.Children.Add(new TranslateTransform(this.MousePosition.X + this.Translation.X, this.MousePosition.Y + this.Translation.Y));
+            result.Children.Add(new TranslateTransform(MousePosition.X + Translation.X, MousePosition.Y + Translation.Y));
 
             return result;
         }
@@ -61,9 +65,9 @@ namespace Quan.Word
                 adornerMousePosition = newAdornerPosition;
             }
 
-            if (this.RenderSize.Width > 0 && this.RenderSize.Height > 0)
+            if (RenderSize.Width > 0 && RenderSize.Height > 0)
             {
-                adornerSize = this.RenderSize;
+                adornerSize = RenderSize;
             }
 
             var offsetX = adornerSize.Width * -anchorPoint.X;
@@ -76,8 +80,8 @@ namespace Quan.Word
             }
             else
             {
-                var maxAdornerPosX = this.AdornedElement.RenderSize.Width;
-                var adornerPosRightX = (adornerMousePosition.X + this.Translation.X + adornerSize.Width);
+                var maxAdornerPosX = AdornedElement.RenderSize.Width;
+                var adornerPosRightX = (adornerMousePosition.X + Translation.X + adornerSize.Width);
                 if (adornerPosRightX > maxAdornerPosX)
                 {
                     adornerMousePosition.Offset(-adornerPosRightX + maxAdornerPosX, 0);
@@ -90,27 +94,29 @@ namespace Quan.Word
             }
             else
             {
-                var maxAdornerPosY = this.AdornedElement.RenderSize.Height;
-                var adornerPosRightY = (adornerMousePosition.Y + this.Translation.Y + adornerSize.Height);
+                var maxAdornerPosY = AdornedElement.RenderSize.Height;
+                var adornerPosRightY = (adornerMousePosition.Y + Translation.Y + adornerSize.Height);
                 if (adornerPosRightY > maxAdornerPosY)
                 {
                     adornerMousePosition.Offset(0, -adornerPosRightY + maxAdornerPosY);
                 }
             }
 
-            this.MousePosition = adornerMousePosition;
-            this.InvalidateVisual();
+            // Update layout of adorner
+            MousePosition = adornerMousePosition;
+            // Move to new position
+            InvalidateVisual();
         }
 
         protected override Visual GetVisualChild(int index)
         {
-            return this.m_Adornment;
+            return m_Adornment;
         }
 
         protected override Size MeasureOverride(Size constraint)
         {
-            this.m_Adornment.Measure(constraint);
-            return this.m_Adornment.DesiredSize;
+            m_Adornment.Measure(constraint);
+            return m_Adornment.DesiredSize;
         }
 
         protected override int VisualChildrenCount

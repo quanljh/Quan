@@ -9,7 +9,7 @@ namespace Quan.Word
         public static UIElement FindRoot(DependencyObject visual)
         {
             var parentWindow = Window.GetWindow(visual);
-            var rootElement = parentWindow != null ? parentWindow.Content as UIElement : null;
+            var rootElement = parentWindow?.Content as UIElement;
             if (rootElement == null)
             {
                 if (Application.Current != null && Application.Current.MainWindow != null)

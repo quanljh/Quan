@@ -16,6 +16,7 @@ namespace Quan.Word
             AllowDrop = false;
             SnapsToDevicePixels = true;
             m_AdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
+            if (m_AdornerLayer == null) throw new NullReferenceException("Can't find AdornerLayer on your app window, try to add it to your custom window");
             m_AdornerLayer.Add(this);
         }
 
