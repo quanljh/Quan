@@ -27,7 +27,6 @@
                 local:DragDrop.IsDropTarget="True"
                 local:DragDrop.ShowAlwaysDropTargetAdorner="True"
                 local:DragDrop.UseDefaultDragAdorner="True"
-                local:DragDrop.UseDefaultEffectDataTemplate="True"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"

@@ -23,7 +23,7 @@ namespace Quan.Word
             get { return _DragAdorner; }
             set
             {
-                _DragAdorner?.Detatch();
+                _DragAdorner?.Detach();
                 _DragAdorner = value;
             }
         }
@@ -35,7 +35,7 @@ namespace Quan.Word
             get { return _EffectAdorner; }
             set
             {
-                _EffectAdorner?.Detatch();
+                _EffectAdorner?.Detach();
                 _EffectAdorner = value;
             }
         }
@@ -47,7 +47,7 @@ namespace Quan.Word
             get { return _DropTargetAdorner; }
             set
             {
-                _DropTargetAdorner?.Detatch();
+                _DropTargetAdorner?.Detach();
                 _DropTargetAdorner = value;
             }
         }
@@ -309,43 +309,7 @@ namespace Quan.Word
         }
 
 
-        private static void Scroll(DropInfo dropInfo, DragEventArgs e)
-        {
-            if (dropInfo == null || dropInfo.TargetScrollViewer == null)
-            {
-                return;
-            }
 
-            var scrollViewer = dropInfo.TargetScrollViewer;
-            var scrollingMode = dropInfo.TargetScrollingMode;
-
-            var position = e.GetPosition(scrollViewer);
-            var scrollMargin = Math.Min(scrollViewer.FontSize * 2, scrollViewer.ActualHeight / 2);
-
-            if (scrollingMode == ScrollingMode.Both || scrollingMode == ScrollingMode.HorizontalOnly)
-            {
-                if (position.X >= scrollViewer.ActualWidth - scrollMargin && scrollViewer.HorizontalOffset < scrollViewer.ExtentWidth - scrollViewer.ViewportWidth)
-                {
-                    scrollViewer.LineRight();
-                }
-                else if (position.X < scrollMargin && scrollViewer.HorizontalOffset > 0)
-                {
-                    scrollViewer.LineLeft();
-                }
-            }
-
-            if (scrollingMode == ScrollingMode.Both || scrollingMode == ScrollingMode.VerticalOnly)
-            {
-                if (position.Y >= scrollViewer.ActualHeight - scrollMargin && scrollViewer.VerticalOffset < scrollViewer.ExtentHeight - scrollViewer.ViewportHeight)
-                {
-                    scrollViewer.LineDown();
-                }
-                else if (position.Y < scrollMargin && scrollViewer.VerticalOffset > 0)
-                {
-                    scrollViewer.LineUp();
-                }
-            }
-        }
 
         #endregion
 
@@ -383,17 +347,6 @@ namespace Quan.Word
             DropTargetOnDragOver(sender, e, EventType.Bubbled);
         }
 
-
-        /// <summary>
-        /// Raise when drop item to drop target control
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private static void DropTargetOnDrop(object sender, DragEventArgs e)
-        {
-            DropTargetOnDrop(sender, e, EventType.Bubbled);
-        }
-
         /// <summary>
         /// Give visual feedback during the drag-and-drop operation
         /// </summary>
@@ -421,6 +374,15 @@ namespace Quan.Word
             }
         }
 
+        /// <summary>
+        /// Raise when drop item to drop target control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void DropTargetOnDrop(object sender, DragEventArgs e)
+        {
+            DropTargetOnDrop(sender, e, EventType.Bubbled);
+        }
 
         private static void DropTargetOnPreviewDragEnter(object sender, DragEventArgs e)
         {
@@ -453,6 +415,7 @@ namespace Quan.Word
                 CreateDragAdorner(dropInfo);
             }
 
+            // Moves DragAdorner following with mouse point
             DragAdorner?.Move(e.GetPosition(DragAdorner.AdornedElement), dragInfo != null ? GetDragMouseAnchorPoint(dragInfo.VisualSource) : default(Point), ref _adornerMousePosition, ref _adornerSize);
 
             Scroll(dropInfo, e);
@@ -475,19 +438,20 @@ namespace Quan.Word
                 UIElement adornedElement = null;
                 if (itemsControl is TabControl)
                 {
-                    adornedElement = itemsControl.FindVisualParent<TabPanel>();
+                    adornedElement = itemsControl.FindVisualChild<TabPanel>();
                 }
                 else if (itemsControl is DataGrid || (itemsControl as ListView)?.View is GridView)
                 {
-                    adornedElement = itemsControl.FindVisualParent<ScrollContentPresenter>() as UIElement ?? itemsControl.FindVisualParent<ItemsPresenter>() as UIElement ?? itemsControl;
+                    adornedElement = itemsControl.FindVisualChild<ScrollContentPresenter>() ?? itemsControl.FindVisualChild<ItemsPresenter>() ?? itemsControl;
                 }
                 else
                 {
-                    adornedElement = itemsControl.FindVisualParent<ItemsPresenter>() as UIElement ?? itemsControl.FindVisualParent<ScrollContentPresenter>() as UIElement ?? itemsControl;
+                    adornedElement = itemsControl.FindVisualChild<ItemsPresenter>() ?? itemsControl.FindVisualChild<ScrollContentPresenter>() ?? itemsControl;
                 }
 
                 if (adornedElement != null)
                 {
+
                     if (dropInfo.DropTargetAdorner == null)
                     {
                         DropTargetAdorner = null;
@@ -525,6 +489,51 @@ namespace Quan.Word
             if (!dropInfo.IsSameDragDropContextAsSource)
             {
                 e.Effects = DragDropEffects.None;
+            }
+        }
+
+        /// <summary>
+        /// Scroll layout when drag to top or bottom
+        /// </summary>
+        /// <param name="dropInfo"></param>
+        /// <param name="e"></param>
+        private static void Scroll(DropInfo dropInfo, DragEventArgs e)
+        {
+            if (dropInfo?.TargetScrollViewer == null)
+                return;
+
+            var scrollViewer = dropInfo.TargetScrollViewer;
+            var scrollingMode = dropInfo.TargetScrollingMode;
+
+            var position = e.GetPosition(scrollViewer);
+
+            // set the scroll margin as twice font size
+            var scrollMargin = Math.Min(scrollViewer.FontSize * 2, scrollViewer.ActualHeight / 2);
+
+            if (scrollingMode == ScrollingMode.Both || scrollingMode == ScrollingMode.HorizontalOnly)
+            {
+                if (position.X >= scrollViewer.ActualWidth - scrollMargin && scrollViewer.HorizontalOffset < scrollViewer.ExtentWidth - scrollViewer.ViewportWidth)
+                {
+                    scrollViewer.LineRight();
+                }
+                else if (position.X < scrollMargin && scrollViewer.HorizontalOffset > 0)
+                {
+                    scrollViewer.LineLeft();
+                }
+            }
+
+            if (scrollingMode == ScrollingMode.Both || scrollingMode == ScrollingMode.VerticalOnly)
+            {
+                // if we are at bottom of visible view port and not bottom of scroll viewer... 
+                if (position.Y >= scrollViewer.ActualHeight - scrollMargin && scrollViewer.VerticalOffset < scrollViewer.ExtentHeight - scrollViewer.ViewportHeight)
+                {
+                    scrollViewer.LineDown();
+                }
+                // if we are at top of visible view port and not top of scroll viewer
+                else if (position.Y < scrollMargin && scrollViewer.VerticalOffset > 0)
+                {
+                    scrollViewer.LineUp();
+                }
             }
         }
 
@@ -596,6 +605,10 @@ namespace Quan.Word
 
         #region Adorner
 
+        /// <summary>
+        /// Create Drag Adorner to display  the dragged item for giving user a better feedback
+        /// </summary>
+        /// <param name="dropInfo"></param>
         private static void CreateDragAdorner(DropInfo dropInfo)
         {
             var dragInfo = dropInfo.DragInfo;
@@ -675,6 +688,10 @@ namespace Quan.Word
             }
         }
 
+        /// <summary>
+        /// Create Effect Adorner to hint user where to drag.
+        /// </summary>
+        /// <param name="dropInfo"></param>
         private static void CreateEffectAdorner(DropInfo dropInfo)
         {
             var dragInfo = m_DragInfo;

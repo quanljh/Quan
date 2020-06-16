@@ -1,5 +1,4 @@
-﻿using Quan.Word.Core;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -91,7 +90,7 @@ namespace Quan.Word
         public static readonly DependencyProperty ItemsPanelOrientationProperty =
             DependencyProperty.RegisterAttached(
                 "ItemsPanelOrientation",
-                typeof(Orientation),
+                typeof(Orientation?),
                 typeof(DragDrop),
                 new PropertyMetadata(null));
 
@@ -265,6 +264,17 @@ namespace Quan.Word
                 new PropertyMetadata(0.8));
 
         /// <summary>
+        /// Gets or Sets the horizontal and vertical proportion at which the pointer will anchor on the DragAdorner.
+        /// The point used to make an offset to display DragAdorner
+        /// </summary>
+        public static readonly DependencyProperty DragMouseAnchorPointProperty
+            = DependencyProperty.RegisterAttached(
+                "DragMouseAnchorPoint",
+                typeof(Point),
+                typeof(DragDrop),
+                new PropertyMetadata(new Point(0, 1)));
+
+        /// <summary>
         /// Gets or Sets the translation transform which will be used for the DragAdorner.
         /// </summary>
         public static readonly DependencyProperty DragAdornerTranslationProperty
@@ -353,16 +363,6 @@ namespace Quan.Word
                 typeof(bool),
                 typeof(DragDrop),
                 new PropertyMetadata(false));
-
-        /// <summary>
-        /// Gets or Sets the horizontal and vertical proportion at which the pointer will anchor on the DragAdorner.
-        /// </summary>
-        public static readonly DependencyProperty  DragMouseAnchorPointProperty
-            = DependencyProperty.RegisterAttached(
-                "DragMouseAnchorPoint",
-                typeof(Point),
-                typeof(DragDrop),
-                new PropertyMetadata(new Point(0, 1)));
 
         /// <summary>
         /// Gets or Sets the brush for the DropTargetAdorner.

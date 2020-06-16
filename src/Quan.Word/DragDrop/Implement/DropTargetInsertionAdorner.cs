@@ -22,7 +22,7 @@ namespace Quan.Word
         /// <param name="drawingContext">The drawing instructions for a specific element. This context is provided to the layout system.</param>
         protected override void OnRender(DrawingContext drawingContext)
         {
-            var dropInfo = this.DropInfo;
+            var dropInfo = DropInfo;
 
             if (dropInfo.VisualTarget is ItemsControl itemsControl)
             {
@@ -72,7 +72,7 @@ namespace Quan.Word
 
                 if (itemContainer != null)
                 {
-                    var itemRect = new Rect(itemContainer.TranslatePoint(new Point(), this.AdornedElement), itemContainer.RenderSize);
+                    var itemRect = new Rect(itemContainer.TranslatePoint(new Point(), AdornedElement), itemContainer.RenderSize);
                     Point point1,
                           point2;
                     double rotation = 0;
@@ -121,7 +121,7 @@ namespace Quan.Word
                                     }
                                 }
 
-                                itemRect.Y += this.Pen.Thickness;
+                                itemRect.Y += Pen.Thickness;
                             }
                         }
 
@@ -140,7 +140,7 @@ namespace Quan.Word
                             }
                             else
                             {
-                                itemRect.X += this.Pen.Thickness;
+                                itemRect.X += Pen.Thickness;
                             }
                         }
                         else if (dropInfo.VisualTargetFlowDirection == FlowDirection.RightToLeft && dropInfo.InsertIndex != itemsCount)
@@ -151,7 +151,7 @@ namespace Quan.Word
                             }
                             else
                             {
-                                itemRect.X += this.Pen.Thickness;
+                                itemRect.X += Pen.Thickness;
                             }
                         }
 
@@ -163,9 +163,9 @@ namespace Quan.Word
                         rotation = 90;
                     }
 
-                    drawingContext.DrawLine(this.Pen, point1, point2);
-                    this.DrawTriangle(drawingContext, point1, rotation);
-                    this.DrawTriangle(drawingContext, point2, 180 + rotation);
+                    drawingContext.DrawLine(Pen, point1, point2);
+                    DrawTriangle(drawingContext, point1, rotation);
+                    DrawTriangle(drawingContext, point2, 180 + rotation);
                 }
             }
         }
@@ -175,7 +175,7 @@ namespace Quan.Word
             drawingContext.PushTransform(new TranslateTransform(origin.X, origin.Y));
             drawingContext.PushTransform(new RotateTransform(rotation));
 
-            drawingContext.DrawGeometry(this.Pen.Brush, null, m_Triangle);
+            drawingContext.DrawGeometry(Pen.Brush, null, m_Triangle);
 
             drawingContext.Pop();
             drawingContext.Pop();

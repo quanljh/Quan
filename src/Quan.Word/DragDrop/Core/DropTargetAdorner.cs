@@ -8,6 +8,30 @@ namespace Quan.Word
 
     public abstract class DropTargetAdorner : Adorner
     {
+        #region Private Members
+
+        private readonly AdornerLayer m_AdornerLayer;
+
+        #endregion
+
+        #region Public Properties
+
+        public DropInfo DropInfo { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the pen which can be used for the render process.
+        /// </summary>
+        public Pen Pen { get; set; } = new Pen(Brushes.Gray, 2);
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="adornedElement">The root element of window to get a adorner layer</param>
+        /// <param name="dropInfo">The underlying drop information of drag-and-drop actions</param>
         protected DropTargetAdorner(UIElement adornedElement, DropInfo dropInfo)
             : base(adornedElement)
         {
@@ -20,17 +44,9 @@ namespace Quan.Word
             m_AdornerLayer.Add(this);
         }
 
-        public DropInfo DropInfo { get; set; }
+        #endregion
 
-        /// <summary>
-        /// Gets or Sets the pen which can be used for the render process.
-        /// </summary>
-        public Pen Pen { get; set; } = new Pen(Brushes.Gray, 2);
-
-        public void Detatch()
-        {
-            m_AdornerLayer.Remove(this);
-        }
+        #region Methods
 
         internal static DropTargetAdorner Create(Type type, UIElement adornedElement, IDropInfo dropInfo)
         {
@@ -41,6 +57,14 @@ namespace Quan.Word
             return type.GetConstructor(new[] { typeof(UIElement), typeof(DropInfo) })?.Invoke(new object[] { adornedElement, dropInfo }) as DropTargetAdorner;
         }
 
-        private readonly AdornerLayer m_AdornerLayer;
+        /// <summary>
+        /// Clear the <see cref="AdornerLayer"/>
+        /// </summary>
+        public void Detach()
+        {
+            m_AdornerLayer.Remove(this);
+        }
+
+        #endregion
     }
 }
