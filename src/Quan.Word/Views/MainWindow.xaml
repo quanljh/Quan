@@ -28,7 +28,7 @@
                         <!--  Outer border with the drop shadow margin  -->
                         <Border
                             Padding="{Binding OuterMarginSize, FallbackValue=0}"
-                            BorderBrush="{StaticResource ForegroundDarkBrush}"
+                            BorderBrush="{StaticResource ForegroundGrayBrush}"
                             BorderThickness="{Binding FlatBorderThickness}">
                             <!--  Main window outline  -->
                             <Grid>
@@ -103,7 +103,7 @@
                                                     <Run Foreground="{StaticResource WordOrangeBrush}" Text="W" /><Run Foreground="{StaticResource WordBlueBrush}" Text="O" /><Run Foreground="{StaticResource WordRedBrush}" Text="R" /><Run Foreground="{StaticResource WordGreenBrush}" Text="D" />
                                                 </TextBlock>
                                                 <TextBlock
-                                                    Foreground="{StaticResource ForegroundDarkBrush}"
+                                                    Foreground="{StaticResource ForegroundGrayBrush}"
                                                     Text="By Quanljh"
                                                     TextAlignment="Center" />
                                             </StackPanel>

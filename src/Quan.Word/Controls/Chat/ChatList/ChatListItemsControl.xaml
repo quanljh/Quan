@@ -72,7 +72,7 @@
                                         <TextBlock
                                             Margin="0,2,0,0"
                                             FontFamily="{StaticResource LatoRegular}"
-                                            Foreground="{StaticResource ForegroundDarkBrush}"
+                                            Foreground="{StaticResource ForegroundGrayBrush}"
                                             Text="{Binding Message}"
                                             TextTrimming="CharacterEllipsis" />
                                     </StackPanel>
@@ -136,7 +136,7 @@
                             </EventTrigger>-->
 
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="container" Property="Background" Value="{StaticResource ForegroundDarkBrush}" />
+                                <Setter TargetName="container" Property="Background" Value="{StaticResource ForegroundGrayBrush}" />
                             </Trigger>
                             <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                 <Setter TargetName="backgroud" Property="Background" Value="{StaticResource WordVeryLightBlueBrush}" />

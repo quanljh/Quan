@@ -56,10 +56,7 @@
 
                 <!--  Main Buttons  -->
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button
-                        Command="{Binding OpenSearchCommand}"
-                        Content="{StaticResource FontAweSomeSearchIcon}"
-                        Style="{StaticResource IconGrowButton}" />
+                    <Button Command="{Binding OpenSearchCommand}" Content="{StaticResource FontAweSomeSearchIcon}" Style="{StaticResource IconGrowButton}" />
                     <Button Content="{StaticResource FontAweSomeEllipsisVerticalIcon}" Style="{StaticResource IconGrowButton}" />
                 </StackPanel>
             </Grid>
@@ -136,10 +133,7 @@
         </Grid>
 
         <!--  Chat list  -->
-        <local:ChatMessageListControl
-            x:Name="ChatMessageList"
-            Grid.Row="1"
-            DataContext="{Binding}" />
+        <local:ChatMessageListControl x:Name="ChatMessageList" Grid.Row="1" DataContext="{Binding}" />
 
         <!--  Attachment Menu Popup  -->
         <Border
@@ -177,7 +171,7 @@
                 VerticalAlignment="Bottom"
                 Command="{Binding AttachButtonCommand}"
                 Content="{StaticResource FontAweSomePaperclipIcon}"
-                Foreground="{StaticResource ForegroundDarkBrush}"
+                Foreground="{StaticResource ForegroundGrayBrush}"
                 Style="{StaticResource IconGrowButton}" />
 
             <!--  Message box  -->
@@ -198,10 +192,7 @@
 
 
             <!--  Additional buttons  -->
-            <WrapPanel
-                Grid.Column="2"
-                Margin="0,0,8,0"
-                VerticalAlignment="Bottom">
+            <WrapPanel Grid.Column="2" Margin="0,0,8,0" VerticalAlignment="Bottom">
 
                 <!--  Attach button  -->
                 <Button

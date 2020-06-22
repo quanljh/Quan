@@ -27,7 +27,7 @@
                     VerticalAlignment="Center"
                     Command="{Binding CloseCommand}"
                     Content="{StaticResource FontAweSomeArrowleftIcon}"
-                    Foreground="{StaticResource ForegroundDarkBrush}"
+                    Foreground="{StaticResource ForegroundGrayBrush}"
                     Style="{StaticResource IconGrowButton}" />
 
                 <TextBlock

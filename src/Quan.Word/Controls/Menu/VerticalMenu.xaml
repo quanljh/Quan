@@ -18,7 +18,7 @@
                     <Grid Visibility="{Binding Type, Converter={local:MenuItemTypeVisibilityConverter}, ConverterParameter=Header}">
 
                         <!--  Header line  -->
-                        <Border Height="0.5" Background="{StaticResource ForegroundDarkBrush}" />
+                        <Border Height="0.5" Background="{StaticResource ForegroundGrayBrush}" />
 
                         <!--  Header text  -->
                         <TextBlock
@@ -27,7 +27,7 @@
                             Background="{StaticResource ForegroundLightBrush}"
                             FontFamily="{StaticResource LatoRegular}"
                             FontSize="{StaticResource FontSizeSmall}"
-                            Foreground="{StaticResource ForegroundDarkBrush}"
+                            Foreground="{StaticResource ForegroundGrayBrush}"
                             Text="{Binding Text}" />
 
                     </Grid>
@@ -99,7 +99,7 @@
                                 Padding="5"
                                 VerticalAlignment="Center"
                                 FontFamily="{StaticResource FontAwesome}"
-                                Foreground="{StaticResource ForegroundDarkBrush}"
+                                Foreground="{StaticResource ForegroundGrayBrush}"
                                 Text="{Binding Icon, Converter={local:IconTypeToFontAwesomeConverter}}" />
 
                             <!--  Text  -->
@@ -110,7 +110,7 @@
                                 Padding="5"
                                 VerticalAlignment="Center"
                                 FontFamily="{StaticResource FontAwesome}"
-                                Foreground="{StaticResource ForegroundDarkBrush}"
+                                Foreground="{StaticResource ForegroundGrayBrush}"
                                 Text="{Binding Text}" />
                         </Grid>
                     </Border>

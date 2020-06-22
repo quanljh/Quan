@@ -11,7 +11,7 @@
 
 
     <!--  Grey underline  -->
-    <Border BorderBrush="{StaticResource ForegroundDarkBrush}" BorderThickness="0,0,0,0.5">
+    <Border BorderBrush="{StaticResource ForegroundGrayBrush}" BorderThickness="0,0,0,0.5">
 
         <Grid Background="{StaticResource ForegroundLightBrush}">
 
@@ -90,7 +90,7 @@
                     Margin="0"
                     Padding="8,5"
                     VerticalAlignment="Center"
-                    Background="{StaticResource ForegroundDarkBrush}"
+                    Background="{StaticResource ForegroundGrayBrush}"
                     Command="{Binding EditCommand}"
                     Content="{StaticResource FontAwesomeEllipsisIcon}"
                     Cursor="Hand"

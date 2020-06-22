@@ -18,7 +18,7 @@
                         Margin="0,0,10,10"
                         Padding="10"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{StaticResource ForegroundDarkBrush}"
+                        BorderBrush="{StaticResource ForegroundGrayBrush}"
                         BorderThickness="1"
                         CornerRadius="12">
                         <TextBlock Text="{TemplateBinding Content}" />

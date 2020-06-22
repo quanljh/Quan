@@ -7,6 +7,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:word="clr-namespace:Quan.Word"
     x:Name="DataGridPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -14,6 +15,22 @@
     FontFamily="Meiryo UI"
     FontSize="{StaticResource FontSizeRegular}"
     mc:Ignorable="d">
+
+    <local:BasePage.Resources>
+
+        <Style x:Key="TextOnCenter" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="TextOnLeft" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+    </local:BasePage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -48,7 +65,7 @@
                 VirtualizingPanel.ScrollUnit="Item"
                 VirtualizingPanel.VirtualizationMode="Recycling">
                 <DataGrid.GroupStyle>
-                    <GroupStyle ContainerStyle="{StaticResource UketsukeDataGridView.GroupHeaderStyle}">
+                    <GroupStyle ContainerStyle="{StaticResource DefaultGroupHeaderStyle}">
                         <GroupStyle.Panel>
                             <ItemsPanelTemplate>
                                 <DataGridRowsPresenter />
@@ -60,31 +77,31 @@
                     <DataGridTextColumn
                         Width="100"
                         Binding="{Binding PatientNo}"
-                        ElementStyle="{StaticResource TextLeftStyle}"
+                        ElementStyle="{StaticResource TextOnLeft}"
                         Header="患者番号"
                         IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="120"
                         Binding="{Binding PatientName}"
-                        ElementStyle="{StaticResource TextCenterStyle}"
+                        ElementStyle="{StaticResource TextOnCenter}"
                         Header="患者氏名"
                         IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="120"
                         Binding="{Binding PatientKanaName}"
-                        ElementStyle="{StaticResource TextCenterStyle}"
+                        ElementStyle="{StaticResource TextOnCenter}"
                         Header="フリガナ"
                         IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="150"
                         Binding="{Binding PatientBirth, Converter={local:DateTimeToDisplayTimeConverter}}"
-                        ElementStyle="{StaticResource TextLeftStyle}"
+                        ElementStyle="{StaticResource TextOnLeft}"
                         Header="生年月日"
                         IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="60"
                         Binding="{Binding PatientSex, Converter={local:StringToSexConverter}}"
-                        ElementStyle="{StaticResource TextCenterStyle}"
+                        ElementStyle="{StaticResource TextOnCenter}"
                         Header="性別"
                         IsReadOnly="True" />
                     <DataGridTemplateColumn
@@ -94,10 +111,7 @@
                         SortMemberPath="PatientJoukyouKbn">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={local:StringToPatientJyokyoConverter}}" />
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={local:StringToPatientJyokyoConverter}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
@@ -119,10 +133,7 @@
                         SortMemberPath="PatientNote">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding PatientNote, UpdateSourceTrigger=LostFocus}" />
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientNote, UpdateSourceTrigger=LostFocus}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
@@ -143,10 +154,7 @@
                         SortMemberPath="PatientComment">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>

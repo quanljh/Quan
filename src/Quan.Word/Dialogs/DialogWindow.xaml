@@ -25,7 +25,7 @@
                         <!--  Outer border with the drop shadow margin  -->
                         <Border
                             Padding="{Binding OuterMarginSize, FallbackValue=0}"
-                            BorderBrush="{StaticResource ForegroundDarkBrush}"
+                            BorderBrush="{StaticResource ForegroundGrayBrush}"
                             BorderThickness="{Binding FlatBorderThickness}">
                             <!--  Main window outline  -->
                             <Grid>
