@@ -2,14 +2,9 @@
 using Quan.Word.Core;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Quan.Word.ViewHelper;
 
 namespace Quan.Word
 {
@@ -51,8 +46,6 @@ namespace Quan.Word
         #endregion
 
         #region Commands
-
-        public ICommand TestCommand { get; set; }
 
         public ICommand ChangeRowCommand { get; set; }
 
@@ -96,7 +89,7 @@ namespace Quan.Word
                     PatientBirth = new DateTime(1965,07,05),
                     PatientSex = "1",
                     PatientJoukyouKbn = "1",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -106,7 +99,7 @@ namespace Quan.Word
                     PatientBirth = new DateTime(1973,02,01),
                     PatientSex = "1",
                     PatientJoukyouKbn = "2",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -116,7 +109,7 @@ namespace Quan.Word
                     PatientBirth = new DateTime(1983,04,15),
                     PatientSex = "1",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -124,9 +117,9 @@ namespace Quan.Word
                     PatientName = "金山桜子",
                     PatientKanaName = "ｶﾅﾔﾏｻｸﾗｺ",
                     PatientBirth = new DateTime(1988,03,22),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "4",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -134,9 +127,9 @@ namespace Quan.Word
                     PatientName = "田中稚香5",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -144,9 +137,9 @@ namespace Quan.Word
                     PatientName = "田中稚香6",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -154,9 +147,9 @@ namespace Quan.Word
                     PatientName = "田中稚香7",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -164,9 +157,9 @@ namespace Quan.Word
                     PatientName = "田中稚香8",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
                 new PatientUIModel()
                 {
@@ -174,23 +167,23 @@ namespace Quan.Word
                     PatientName = "田中稚香9",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986,05,02),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "1111"
+                    PatientAddress = "大阪"
                 },
             };
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 100; i++)
             {
                 PatientCollection.Add(new PatientUIModel()
                 {
-                    PatientNo = "9",
+                    PatientNo = $"{i + 9}",
                     PatientName = $"田中稚香{i + 9}",
                     PatientKanaName = "ﾀﾅｶﾁｶ",
                     PatientBirth = new DateTime(1986, 05, 02),
-                    PatientSex = "0",
+                    PatientSex = "2",
                     PatientJoukyouKbn = "3",
-                    PatientNote = "2222"
+                    PatientAddress = "東京"
                 });
             }
 
@@ -198,15 +191,13 @@ namespace Quan.Word
 
             PatientCollectionView.IsLiveGrouping = true;
 
-            TestCommand = new RelayCommand(Wait);
-
             SelectedPatient = PatientCollection.FirstOrDefault();
 
             ChangeRowCommand = new RelayCommand(ChangeRow);
 
-            PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("PatientNote"));
+            PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("PatientAddress"));
 
-            //PatientCollectionView.LiveGroupingProperties.Add("PatientNote");
+            PatientCollectionView.LiveGroupingProperties.Add("PatientAddress");
 
 
             //patientCollectionView.Filter = x =>
@@ -222,17 +213,6 @@ namespace Quan.Word
         #endregion
 
         #region Method
-
-        public void Wait()
-        {
-            var scroll = DataGridPage.DataGridControl.FindVisualChild<ScrollViewer>();
-            scroll.ScrollChanged += ScrollOnScrollChanged;
-        }
-
-        private void ScrollOnScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            e.Handled = true;
-        }
 
         private void ChangeRow()
         {

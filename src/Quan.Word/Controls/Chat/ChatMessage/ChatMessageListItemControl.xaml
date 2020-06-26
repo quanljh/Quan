@@ -92,15 +92,12 @@
                         Text="{Binding MessageReadTime, Converter={local:TimeToReadTimeConverter}}" />
                 </StackPanel>
 
-                <Border
-                    Grid.Row="1"
-                    HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeToAlignmentConverter}}"
-                    VerticalAlignment="Top">
+                <Border Grid.Row="1" HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeToAlignmentConverter}}" VerticalAlignment="Top">
                     <TextBlock
                         DataContext="{Binding ImageAttachment}"
                         Foreground="{StaticResource ForegroundLightBrush}"
                         Style="{StaticResource SpinningText}"
-                        Visibility="{Binding ImageLoaded, Converter={local:BooleanToCollapsedConverter}, FallbackValue=Collapsed}" />
+                        Visibility="{Binding ImageLoaded, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True, FallbackValue=Collapsed}" />
                 </Border>
 
                 <!--  Image Attachment  -->
@@ -109,7 +106,7 @@
                     Margin="0,0,0,10"
                     HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeToAlignmentConverter}}"
                     CornerRadius="10"
-                    Visibility="{Binding HasMessageAttachment, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}">
+                    Visibility="{Binding HasMessageAttachment, Converter={local:BooleanToCollapsedConverter}}">
                     <Image
                         MaxWidth="600"
                         local:ClipFromBorderProperty.Value="True"
@@ -120,7 +117,7 @@
 
 
                 <!--  Message Text  -->
-                <Grid Grid.Row="2" Visibility="{Binding HasMessage, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}">
+                <Grid Grid.Row="2" Visibility="{Binding HasMessage, Converter={local:BooleanToCollapsedConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />

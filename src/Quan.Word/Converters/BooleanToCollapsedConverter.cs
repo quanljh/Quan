@@ -8,7 +8,7 @@ namespace Quan.Word
     {
         public override Visibility Convert(bool value, object parameter, CultureInfo culture)
         {
-            if (parameter == null)
+            if (parameter != null)
                 return value ? Visibility.Collapsed : Visibility.Visible;
             return value ? Visibility.Visible : Visibility.Collapsed;
         }

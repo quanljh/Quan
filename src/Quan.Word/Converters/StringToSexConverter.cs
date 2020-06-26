@@ -14,7 +14,7 @@ namespace Quan.Word
             {
                 case "1":
                     return "男";
-                case "0":
+                case "2":
                     return "女";
 
                 default: return value;

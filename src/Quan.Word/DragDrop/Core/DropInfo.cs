@@ -27,6 +27,8 @@ namespace Quan.Word
         #region Private Members
 
         private ItemsControl itemParent;
+
+        // The item container of drop target items control
         private UIElement item;
 
         #endregion
@@ -139,13 +141,16 @@ namespace Quan.Word
 
                     if (VisualTargetOrientation == Orientation.Vertical)
                     {
+                        // Get the current position relative to the items container
                         var currentYPos = e.GetPosition(item).Y;
+                        // Get items container height
                         var targetHeight = itemRenderSize.Height;
 
                         var topGap = targetHeight * 0.25;
                         var bottomGap = targetHeight * 0.75;
                         if (currentYPos > targetHeight / 2)
                         {
+                            // If items control is tree viewer
                             if (expandedTVItem && (currentYPos < topGap || currentYPos > bottomGap))
                             {
                                 VisualTargetItem = tvItem.ItemContainerGenerator.ContainerFromIndex(0) as UIElement;

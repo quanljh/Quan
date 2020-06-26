@@ -31,15 +31,10 @@ namespace Quan.Word
                 // offset later to draw it at the end of the list.
                 ItemsControl itemParent;
 
+                // Set to drop target's items container
                 var visualTargetItem = dropInfo.VisualTargetItem;
-                if (visualTargetItem != null)
-                {
-                    itemParent = ItemsControl.ItemsControlFromItemContainer(visualTargetItem);
-                }
-                else
-                {
-                    itemParent = itemsControl;
-                }
+
+                itemParent = visualTargetItem != null ? ItemsControl.ItemsControlFromItemContainer(visualTargetItem) : itemsControl;
 
                 // this could be happen with a thread scenario where items are removed very quickly
                 if (itemParent == null)
@@ -72,6 +67,7 @@ namespace Quan.Word
 
                 if (itemContainer != null)
                 {
+                    // AdornedElement: control's ItemsPresenter
                     var itemRect = new Rect(itemContainer.TranslatePoint(new Point(), AdornedElement), itemContainer.RenderSize);
                     Point point1,
                           point2;

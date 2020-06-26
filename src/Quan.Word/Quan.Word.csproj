@@ -102,6 +102,7 @@
     <Compile Include="Animation\PageAnimations.cs" />
     <Compile Include="Animation\StoryboardHelpers.cs" />
     <Compile Include="AttachedProperties\BaseAttachedProperty.cs" />
+    <Compile Include="AttachedProperties\ExpanderAttachedProperty.cs" />
     <Compile Include="AttachedProperties\ScrollViewerAttachedProperties.cs" />
     <Compile Include="AttachedProperties\BorderAttachedProperty.cs" />
     <Compile Include="AttachedProperties\TextEntryWidthMathcherProperty.cs" />
@@ -296,6 +297,10 @@
     <Page Include="Styles\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Scroll.xaml">
       <Generator>MSBuild:Compile</Generator>

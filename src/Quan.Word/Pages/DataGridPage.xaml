@@ -33,151 +33,145 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Padding="20">
-            <DataGrid
-                x:Name="DataGridControl"
-                Height="500"
-                local:DragDrop.IsDragSource="True"
-                local:DragDrop.IsDropTarget="True"
-                local:DragDrop.ShowAlwaysDropTargetAdorner="True"
-                local:DragDrop.UseDefaultDragAdorner="True"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                CanUserReorderColumns="True"
-                CanUserResizeRows="False"
-                CellStyle="{StaticResource DataGridCellStyle}"
-                ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-                GridLinesVisibility="None"
-                ItemsSource="{Binding PatientCollectionView}"
-                RowHeaderStyle="{StaticResource DataGridRowHeaderStyle}"
-                SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                SelectionMode="Single"
-                SelectionUnit="FullRow"
-                VerticalScrollBarVisibility="Auto"
-                VirtualizingPanel.CacheLength="50,50"
-                VirtualizingPanel.CacheLengthUnit="Item"
-                VirtualizingPanel.IsVirtualizing="True"
-                VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                VirtualizingPanel.ScrollUnit="Item"
-                VirtualizingPanel.VirtualizationMode="Recycling">
-                <DataGrid.GroupStyle>
-                    <GroupStyle ContainerStyle="{StaticResource DefaultGroupHeaderStyle}">
-                        <GroupStyle.Panel>
-                            <ItemsPanelTemplate>
-                                <DataGridRowsPresenter />
-                            </ItemsPanelTemplate>
-                        </GroupStyle.Panel>
-                    </GroupStyle>
-                </DataGrid.GroupStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="100"
-                        Binding="{Binding PatientNo}"
-                        ElementStyle="{StaticResource TextOnLeft}"
-                        Header="患者番号"
-                        IsReadOnly="True" />
-                    <DataGridTextColumn
-                        Width="120"
-                        Binding="{Binding PatientName}"
-                        ElementStyle="{StaticResource TextOnCenter}"
-                        Header="患者氏名"
-                        IsReadOnly="True" />
-                    <DataGridTextColumn
-                        Width="120"
-                        Binding="{Binding PatientKanaName}"
-                        ElementStyle="{StaticResource TextOnCenter}"
-                        Header="フリガナ"
-                        IsReadOnly="True" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding PatientBirth, Converter={local:DateTimeToDisplayTimeConverter}}"
-                        ElementStyle="{StaticResource TextOnLeft}"
-                        Header="生年月日"
-                        IsReadOnly="True" />
-                    <DataGridTextColumn
-                        Width="60"
-                        Binding="{Binding PatientSex, Converter={local:StringToSexConverter}}"
-                        ElementStyle="{StaticResource TextOnCenter}"
-                        Header="性別"
-                        IsReadOnly="True" />
-                    <DataGridTemplateColumn
-                        Width="100"
-                        CanUserSort="True"
-                        Header="状況"
-                        SortMemberPath="PatientJoukyouKbn">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={local:StringToPatientJyokyoConverter}}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <ComboBox
-                                    DisplayMemberPath="JyokyoName"
-                                    Foreground="Black"
-                                    IsEditable="False"
-                                    ItemsSource="{Binding Path=DataContext.JokyoCollection, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridPage}}}"
-                                    SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="JyokyoCode" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn
-                        Width="100"
-                        CanUserSort="True"
-                        Header="メモ"
-                        SortMemberPath="PatientNote">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientNote, UpdateSourceTrigger=LostFocus}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <TextBox
-                                    Height="30"
-                                    Padding="0"
-                                    VerticalContentAlignment="Center"
-                                    FontSize="{StaticResource FontSizeRegular}"
-                                    Text="{Binding PatientNote, UpdateSourceTrigger=LostFocus}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn
-                        Width="100"
-                        CanUserSort="True"
-                        Header="コメント"
-                        SortMemberPath="PatientComment">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <TextBox
-                                    Height="30"
-                                    Padding="0"
-                                    VerticalContentAlignment="Center"
-                                    FontSize="{StaticResource FontSizeRegular}"
-                                    Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border>
+        <DataGrid
+            x:Name="PatientDataGrid"
+            Margin="20"
+            local:DragDrop.IsDragSource="True"
+            local:DragDrop.IsDropTarget="True"
+            local:DragDrop.ShowAlwaysDropTargetAdorner="True"
+            local:DragDrop.UseDefaultDragAdorner="True"
+            BorderThickness="0"
+            ItemsSource="{Binding PatientCollectionView}"
+            SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource DefaultGroupStyle}">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} - {1}人">
+                                        <Binding Mode="OneWay" Path="Name" />
+                                        <Binding Mode="OneWay" Path="ItemCount" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding PatientNo}"
+                    ElementStyle="{StaticResource TextOnLeft}"
+                    Header="患者番号"
+                    IsReadOnly="True"
+                    SortMemberPath="PatientNoForSort" />
+                <DataGridTextColumn
+                    Width="120"
+                    Binding="{Binding PatientName}"
+                    ElementStyle="{StaticResource TextOnCenter}"
+                    Header="患者氏名"
+                    IsReadOnly="True"
+                    SortMemberPath="PatientKanaName" />
+                <DataGridTextColumn
+                    Width="120"
+                    Binding="{Binding PatientKanaName}"
+                    ElementStyle="{StaticResource TextOnCenter}"
+                    Header="フリガナ"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="150"
+                    Binding="{Binding PatientBirth, Converter={local:DateTimeToDisplayTimeConverter}}"
+                    ElementStyle="{StaticResource TextOnLeft}"
+                    Header="生年月日"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="60"
+                    Binding="{Binding PatientSex, Converter={local:StringToSexConverter}}"
+                    ElementStyle="{StaticResource TextOnCenter}"
+                    Header="性別"
+                    IsReadOnly="True" />
+                <DataGridTemplateColumn
+                    Width="100"
+                    CanUserSort="True"
+                    Header="状況"
+                    SortMemberPath="PatientJoukyouKbn">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientJoukyouKbn, UpdateSourceTrigger=PropertyChanged, Converter={local:StringToPatientJyokyoConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                DisplayMemberPath="JyokyoName"
+                                Foreground="Black"
+                                IsEditable="False"
+                                ItemsSource="{Binding Path=DataContext.JokyoCollection, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridPage}}}"
+                                SelectedValue="{Binding PatientJoukyouKbn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="JyokyoCode" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="100"
+                    CanUserSort="True"
+                    Header="住所"
+                    SortMemberPath="PatientAddress">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientAddress, UpdateSourceTrigger=LostFocus}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                Height="30"
+                                Padding="0"
+                                VerticalContentAlignment="Center"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Text="{Binding PatientAddress, UpdateSourceTrigger=LostFocus}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="170"
+                    CanUserSort="True"
+                    Header="コメント"
+                    SortMemberPath="PatientComment">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PatientComment}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                Height="30"
+                                Padding="0"
+                                VerticalContentAlignment="Center"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Text="{Binding PatientComment, UpdateSourceTrigger=LostFocus}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <Grid Grid.Row="1">
-            <Button
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Command="{Binding ChangeRowCommand}"
-                Content="Change Row" />
-        </Grid>
+
+        <Button
+            Grid.Row="1"
+            Width="100"
+            Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding ChangeRowCommand}"
+            Content="Change Row"
+            FontSize="{StaticResource FontSizeRegular}" />
+
     </Grid>
 </local:BasePage>

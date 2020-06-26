@@ -16,6 +16,8 @@ namespace Quan.Word
             set => SetProperty(ref _patientNo, value);
         }
 
+        public string PatientNoForSort => PatientNo.PadLeft(10, '0');
+
         /// <summary>
         /// 患者氏名
         /// </summary>
@@ -70,12 +72,12 @@ namespace Quan.Word
             set => SetProperty(ref _patientJoukyouKbn, value);
         }
 
-        private string _patientNote;
+        private string _patientAddress;
 
-        public string PatientNote
+        public string PatientAddress
         {
-            get => _patientNote;
-            set => SetProperty(ref _patientNote, value);
+            get => _patientAddress;
+            set => SetProperty(ref _patientAddress, value);
         }
 
         private string _patientComment;
