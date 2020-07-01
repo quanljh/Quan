@@ -21,8 +21,14 @@
         Register = 2,
 
         /// <summary>
-        /// The Datagrid page
+        /// The DataGrid page
         /// </summary>
-        Datagrid = 3
+        DataGrid = 3,
+
+
+        /// <summary>
+        /// The TextBox page
+        /// </summary>
+        TextBox = 4
     }
 }

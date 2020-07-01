@@ -112,42 +112,42 @@
     <Compile Include="AttachedProperties\PanelChildMarginProperty.cs" />
     <Compile Include="AttachedProperties\NoFrameHistoryProperty.cs" />
     <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
-    <Compile Include="Controls\BubbleContent.xaml.cs">
+    <Compile Include="UserControls\BubbleContent.xaml.cs">
       <DependentUpon>BubbleContent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Chat\ChatMessage\ChatMessageListControl.xaml.cs">
+    <Compile Include="UserControls\Chat\ChatMessage\ChatMessageListControl.xaml.cs">
       <DependentUpon>ChatMessageListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Chat\ChatList\ChatListControl.xaml.cs">
+    <Compile Include="UserControls\Chat\ChatList\ChatListControl.xaml.cs">
       <DependentUpon>ChatListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Chat\ChatList\ChatListItemsControl.xaml.cs">
+    <Compile Include="UserControls\Chat\ChatList\ChatListItemsControl.xaml.cs">
       <DependentUpon>ChatListItemsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Chat\ChatMessage\ChatMessageListItemControl.xaml.cs">
+    <Compile Include="UserControls\Chat\ChatMessage\ChatMessageListItemControl.xaml.cs">
       <DependentUpon>ChatMessageListItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Input\PasswordEntryControl.xaml.cs">
+    <Compile Include="UserControls\Input\PasswordEntryControl.xaml.cs">
       <DependentUpon>PasswordEntryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Input\TextEntryControl.xaml.cs">
+    <Compile Include="UserControls\Input\TextEntryControl.xaml.cs">
       <DependentUpon>TextEntryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Menu\VerticalMenu.xaml.cs">
+    <Compile Include="UserControls\Menu\VerticalMenu.xaml.cs">
       <DependentUpon>VerticalMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PageHost.xaml.cs">
+    <Compile Include="UserControls\PageHost.xaml.cs">
       <DependentUpon>PageHost.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingsControl.xaml.cs">
+    <Compile Include="UserControls\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SideMenuControl.xaml.cs">
+    <Compile Include="UserControls\SideMenuControl.xaml.cs">
       <DependentUpon>SideMenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanInvertConverter.cs" />
     <Compile Include="Converters\BooleanToBorderThicknessConverter.cs" />
-    <Compile Include="Converters\BooleanToCollapsedConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToPatientJyokyoConverter.cs" />
     <Compile Include="Converters\StringToSexConverter.cs" />
     <Compile Include="Converters\IconTypeToFontAwesomeConverter.cs" />
@@ -164,7 +164,6 @@
     <Compile Include="Converters\IoCConverter.cs" />
     <Compile Include="Converters\ApplicationPageValueConverter.cs" />
     <Compile Include="Converters\BaseValueConverter .cs" />
-    <Compile Include="Converters\BooleanToHiddenConverter.cs" />
     <Compile Include="Dialogs\BaseDialogUserControl.cs" />
     <Compile Include="Dialogs\DialogMessageBox.xaml.cs">
       <DependentUpon>DialogMessageBox.xaml</DependentUpon>
@@ -203,6 +202,9 @@
     <Compile Include="Pages\ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TextBoxPage.xaml.cs">
+      <DependentUpon>TextBoxPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
     </Compile>
@@ -214,6 +216,7 @@
     </Compile>
     <Compile Include="StyleSelector\GroupStyleSelector.cs" />
     <Compile Include="ViewHelper\VisualTreeExtensions.cs" />
+    <Compile Include="ViewModels\TextBoxPageViewModel.cs" />
     <Compile Include="ViewModels\DialogWindowViewModel.cs" />
     <Compile Include="ViewModels\DataGridPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -226,47 +229,51 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewHelper\WindowResizer.cs" />
-    <Page Include="Controls\BubbleContent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Chat\ChatMessage\ChatMessageListControl.xaml">
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Chat\ChatList\ChatListControl.xaml">
+    <Page Include="UserControls\BubbleContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Chat\ChatList\ChatListItemsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Chat\ChatMessage\ChatMessageListItemControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Input\PasswordEntryControl.xaml">
+    <Page Include="UserControls\Chat\ChatMessage\ChatMessageListControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Input\TextEntryControl.xaml">
+    <Page Include="UserControls\Chat\ChatList\ChatListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Menu\VerticalMenu.xaml">
+    <Page Include="UserControls\Chat\ChatList\ChatListItemsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PageHost.xaml">
+    <Page Include="UserControls\Chat\ChatMessage\ChatMessageListItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SettingsControl.xaml">
+    <Page Include="UserControls\Input\PasswordEntryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Input\TextEntryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SideMenuControl.xaml">
+    <Page Include="UserControls\Menu\VerticalMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PageHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SideMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +286,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ChatPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\TextBoxPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -380,6 +391,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Quan.ControlLibrary\Quan.ControlLibrary.csproj">
+      <Project>{ed265fc5-1049-4587-9317-48e5710def6f}</Project>
+      <Name>Quan.ControlLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Quan.Word.Core\Quan.Word.Core.csproj">
       <Project>{58a94f33-d048-4db8-ba0b-9f509a0b8559}</Project>
       <Name>Quan.Word.Core</Name>

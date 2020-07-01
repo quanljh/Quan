@@ -1,0 +1,31 @@
+﻿<local:BasePage
+    x:Class="Quan.Word.TextBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://quanljh.app.com/winfx/xaml/controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Quan.Word"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="TextBoxPageView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:TypeArguments="local:TextBoxPageViewModel"
+    FontFamily="Meiryo UI"
+    FontSize="{StaticResource FontSizeRegular}"
+    mc:Ignorable="d">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <controls:QuanTextBox Width="300" Height="30" GuideText="ここに入力してください" />
+
+        <Button
+            Grid.Row="1"
+            Width="100"
+            Height="30"
+            Content="123" />
+
+    </Grid>
+</local:BasePage>

@@ -28,8 +28,11 @@ namespace Quan.Word
                 case ApplicationPage.Chat:
                     return new ChatPage(viewModel as ChatMessageListViewModel);
 
-                case ApplicationPage.Datagrid:
+                case ApplicationPage.DataGrid:
                     return new DataGridPage(viewModel as DataGridPageViewModel);
+
+                case ApplicationPage.TextBox:
+                    return new TextBoxPage(viewModel as TextBoxPageViewModel);
 
                 default:
                     Debugger.Break();
@@ -55,7 +58,10 @@ namespace Quan.Word
                 return ApplicationPage.Register;
 
             if (page is DataGridPage)
-                return ApplicationPage.Datagrid;
+                return ApplicationPage.DataGrid;
+
+            if (page is TextBoxPage)
+                return ApplicationPage.TextBox;
 
             //Alert developer of issue
             Debugger.Break();

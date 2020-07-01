@@ -177,7 +177,7 @@ namespace Quan.Word
             if (specificViewModel != null)
                 ViewModel = specificViewModel;
             else
-                //Creat a default view model
+                //Create a default view model
                 ViewModel = IoC.Get<T>();
         }
 
