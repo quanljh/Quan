@@ -39,7 +39,7 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsPrefix(@"http://quanljh.app.com/winfx/xaml/controls", "controls")]
+[assembly: XmlnsPrefix(@"http://quanljh.app.com/winfx/xaml/controls", "quan")]
 [assembly: XmlnsDefinition(@"http://quanljh.app.com/winfx/xaml/controls", "Quan.ControlLibrary")]
 
 // Version information for an assembly consists of the following four values:

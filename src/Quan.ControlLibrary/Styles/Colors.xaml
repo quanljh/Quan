@@ -46,12 +46,12 @@
 
     <!--  TextBox  -->
     <SolidColorBrush x:Key="TextBox.Background.Default" Color="#ffffff" />
-    <SolidColorBrush x:Key="TextBox.Background.Focus" Color="#ff9633" />
+    <SolidColorBrush x:Key="TextBox.Background.Focus" Color="#ff82cf" />
     <SolidColorBrush x:Key="TextBox.Foreground.Default" Color="#000000" />
     <SolidColorBrush x:Key="TextBox.Border.Default" Color="#bdbdbd" />
     <SolidColorBrush x:Key="TextBox.Border.MouseOver" Color="#3099c5" />
     <SolidColorBrush x:Key="TextBox.Border.Focus" Color="#0c6991" />
-
+    <SolidColorBrush x:Key="TextBox.Border.Error" Color="#ff4747" />
 
     <!--  DataGrid  -->
     <SolidColorBrush x:Key="DataGrid.Border.Common" Color="#bdbdbd" />

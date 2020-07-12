@@ -1,5 +1,6 @@
 ﻿using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Quan.Word
 {
@@ -87,5 +88,8 @@ namespace Quan.Word
             get => _patientComment;
             set => SetProperty(ref _patientComment, value);
         }
+
+
+        public ObservableCollection<KarteInfoModel> KarteCollection { get; set; }
     }
 }

@@ -194,11 +194,13 @@
                         <Trigger Property="SortDirection" Value="Ascending">
                             <Setter TargetName="SortArrow" Property="Data" Value="F1 M 0 5 L 5 0 L 10 5 Z " />
                             <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter Property="Foreground" Value="{StaticResource DataGrid.Background.Common}" />
                             <Setter Property="BorderBrush" Value="{StaticResource DataGrid.Background.Common}" />
                         </Trigger>
                         <Trigger Property="SortDirection" Value="Descending">
                             <Setter TargetName="SortArrow" Property="Data" Value="F1 M 0 0 L 5 5 L 10 0 Z " />
                             <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter Property="Foreground" Value="{StaticResource DataGrid.Background.Common}" />
                             <Setter Property="BorderBrush" Value="{StaticResource DataGrid.Background.Common}" />
                         </Trigger>
                         <Trigger Property="DisplayIndex" Value="0">
@@ -244,7 +246,6 @@
 
                             <DataGridRowHeader
                                 Grid.Row="0"
-                                Grid.RowSpan="2"
                                 Grid.Column="0"
                                 SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
                                 Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, FallbackValue={x:Static Visibility.Visible}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Row}}" />
@@ -409,7 +410,7 @@
         </Setter>
     </Style>
 
-    <!--  Reugular DataGrid  Group Style  -->
+    <!--  Regular DataGrid  Group Style  -->
     <Style x:Key="DefaultGroupStyle" TargetType="{x:Type GroupItem}">
         <Setter Property="Template">
             <Setter.Value>
@@ -444,7 +445,6 @@
 
     <local:DataGridGroupSelector x:Key="GroupStyleSelector" GroupHeaderStyle="{StaticResource DefaultGroupStyle}" NoGroupHeaderStyle="{StaticResource DataGrid.GroupStyle.NoGroupHeader}" />
 
-
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
@@ -475,7 +475,7 @@
         <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item" />
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="AutoGenerateColumns" Value="False" />
-        <Setter Property="SelectionMode" Value="Extended" />
+        <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="SelectionUnit" Value="FullRow" />
         <Setter Property="Template">
             <Setter.Value>
@@ -554,5 +554,40 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="InnerDataGrid" TargetType="{x:Type DataGrid}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{StaticResource DataGrid.Border.Common}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="CellStyle" Value="{StaticResource DataGridCellStyle}" />
+        <Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}" />
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeaderStyle}" />
+        <Setter Property="CanUserReorderColumns" Value="True" />
+        <Setter Property="CanUserResizeColumns" Value="True" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="ColumnHeaderHeight" Value="30" />
+        <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="RowHeight" Value="30" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
+        <Setter Property="VirtualizingPanel.CacheLength" Value="20,20" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource DataGrid.Border.Common}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource DataGrid.Border.Common}" />
+        <Setter Property="GridLinesVisibility" Value="All" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="True" />
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Item" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="SelectionMode" Value="Extended" />
+        <Setter Property="SelectionUnit" Value="FullRow" />
+    </Style>
+
 
 </ResourceDictionary>

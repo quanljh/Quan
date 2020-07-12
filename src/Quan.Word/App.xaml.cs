@@ -40,14 +40,14 @@ namespace Quan.Word
             // Log it 
             IoC.Logger.Log("This is Debug", LogLevel.Debug);
 
-            //// Setup the application view model based on if we are logged in
-            //IoC.Application.GoToPage(
-            //    // If we are logged in...
-            //    IoC.ClientDataStore.HasCredentials() ?
-            //        // Go to chat page
-            //        ApplicationPage.Chat :
-            //        // Otherwise, go to login page
-            //        ApplicationPage.Login);
+            // Setup the application view model based on if we are logged in
+            IoC.Application.GoToPage(
+                // If we are logged in...
+                IoC.ClientDataStore.HasCredentials() ?
+                    // Go to chat page
+                    ApplicationPage.Chat :
+                    // Otherwise, go to login page
+                    ApplicationPage.Login);
 
             var window = Container.Resolve<MainWindow>();
             if (window.DataContext is ViewModelBase vb)

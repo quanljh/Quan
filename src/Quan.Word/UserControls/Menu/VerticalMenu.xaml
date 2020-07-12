@@ -33,20 +33,14 @@
                     </Grid>
 
                     <!--  Menu Item  -->
-                    <Border
-                        Background="{StaticResource ForegroundLightBrush}"
-                        CornerRadius="5"
-                        Visibility="{Binding Type, Converter={local:MenuItemTypeVisibilityConverter}, ConverterParameter=TextAndIcon}">
+                    <Border Background="{StaticResource ForegroundLightBrush}" CornerRadius="5" Visibility="{Binding Type, Converter={local:MenuItemTypeVisibilityConverter}, ConverterParameter=TextAndIcon}">
 
                         <Border.Triggers>
                             <!--  Hover over blue  -->
                             <EventTrigger RoutedEvent="MouseEnter">
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation
-                                            Storyboard.TargetProperty="Background.Color"
-                                            To="{StaticResource WordBlue}"
-                                            Duration="0:0:0" />
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource WordBlue}" Duration="0:0:0" />
                                         <ColorAnimation
                                             Storyboard.TargetName="Icon"
                                             Storyboard.TargetProperty="Foreground.Color"
@@ -65,19 +59,16 @@
                             <EventTrigger RoutedEvent="MouseLeave">
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation
-                                            Storyboard.TargetProperty="Background.Color"
-                                            To="{StaticResource ForegroundLight}"
-                                            Duration="0:0:0" />
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource ForegroundLight}" Duration="0:0:0" />
                                         <ColorAnimation
                                             Storyboard.TargetName="Icon"
                                             Storyboard.TargetProperty="Foreground.Color"
-                                            To="{StaticResource ForegroundDark}"
+                                            To="{StaticResource ForegroundVeryDark}"
                                             Duration="0:0:0" />
                                         <ColorAnimation
                                             Storyboard.TargetName="Text"
                                             Storyboard.TargetProperty="Foreground.Color"
-                                            To="{StaticResource ForegroundDark}"
+                                            To="{StaticResource ForegroundVeryDark}"
                                             Duration="0:0:0" />
                                     </Storyboard>
                                 </BeginStoryboard>

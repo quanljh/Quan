@@ -2,6 +2,7 @@
     x:Class="Quan.Word.DataGridPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://quanljh.app.com/winfx/xaml/controls"
     xmlns:core="clr-namespace:Quan.Word.Core;assembly=Quan.Word.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -29,22 +30,27 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
+        <local:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
+
     </local:BasePage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <DataGrid
             x:Name="PatientDataGrid"
-            Margin="20"
+            Margin="10"
             local:DragDrop.IsDragSource="True"
             local:DragDrop.IsDropTarget="True"
             local:DragDrop.ShowAlwaysDropTargetAdorner="True"
             local:DragDrop.UseDefaultDragAdorner="True"
             BorderThickness="0"
+            FrozenColumnCount="1"
             ItemsSource="{Binding PatientCollectionView}"
+            Loaded="PatientDataGrid_OnLoaded"
+            RowDetailsVisibilityMode="Collapsed"
             SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.GroupStyle>
                 <GroupStyle ContainerStyle="{StaticResource DefaultGroupStyle}">
@@ -62,6 +68,49 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </DataGrid.GroupStyle>
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <ToggleButton
+                        Height="29"
+                        local:ExpanderRowDetailAttachedProperty.Value="True"
+                        IsChecked="{Binding Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor, AncestorLevel=1}, Path=DetailsVisibility, Converter={local:CollapsedToBooleanConverter}}"
+                        Style="{StaticResource PlusMinusToggleButton}" />
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+
+                    <DataGrid BorderThickness="0" ItemsSource="{Binding KarteCollection}" Style="{StaticResource InnerDataGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="150"
+                                Binding="{Binding ShinryouDate, Converter={local:DateTimeToDisplayTimeConverter}}"
+                                ElementStyle="{StaticResource TextOnLeft}"
+                                Header="診療日"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="{Binding Source={StaticResource BindingProxy}, Path=Data.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Binding="{Binding Doctor}"
+                                ElementStyle="{StaticResource TextOnLeft}"
+                                Header="医師"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="120"
+                                Binding="{Binding Shinryouka}"
+                                ElementStyle="{StaticResource TextOnCenter}"
+                                Header="診療科"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="120"
+                                Binding="{Binding Hoken}"
+                                ElementStyle="{StaticResource TextOnCenter}"
+                                Header="保険"
+                                IsReadOnly="True" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="100"
@@ -162,16 +211,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-
-        <Button
-            Grid.Row="1"
-            Width="100"
-            Padding="10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Command="{Binding ChangeRowCommand}"
-            Content="Change Row"
-            FontSize="{StaticResource FontSizeRegular}" />
+        <controls:QuanTextBox Grid.Row="1" Width="100" Height="30" />
 
     </Grid>
 </local:BasePage>

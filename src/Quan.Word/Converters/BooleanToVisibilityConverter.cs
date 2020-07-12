@@ -15,7 +15,7 @@ namespace Quan.Word
 
         public override bool ConvertBack(Visibility value, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return value == Visibility.Visible;
         }
     }
 
@@ -31,6 +31,19 @@ namespace Quan.Word
         public override bool ConvertBack(Visibility value, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class CollapsedToBooleanConverter : BaseValueConverter<Visibility, bool>
+    {
+        public override bool Convert(Visibility value, object parameter, CultureInfo culture)
+        {
+            return value == Visibility.Visible;
+        }
+
+        public override Visibility ConvertBack(bool value, object parameter, CultureInfo culture)
+        {
+            return value ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

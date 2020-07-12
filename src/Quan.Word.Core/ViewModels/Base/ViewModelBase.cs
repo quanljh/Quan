@@ -5,12 +5,13 @@ using Prism.Events;
 using Prism.Mvvm;
 using PropertyChanged;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Windows;
 using Unity;
-using Unity.ServiceLocation;
 
 namespace Quan.Word.Core
 {
@@ -19,16 +20,17 @@ namespace Quan.Word.Core
     /// Either <see cref="AddINotifyPropertyChangedInterfaceAttribute"/> or <see cref="BindableBase"/> is fine to use.
     /// </summary>
     [AddINotifyPropertyChangedInterface]
-    public abstract class ViewModelBase : BindableBase
+    public abstract class ViewModelBase : BindableBase, INotifyDataErrorInfo
     {
         public DelegateCommand FinishInteractionCommand { get; set; }
-
 
         public IEventAggregator EventAggregator { get; }
 
         public IUnityContainer Container { get; }
 
         public IMapper Mapper { get; }
+
+        private readonly Dictionary<string, List<string>> _errorsByPropertyName = new Dictionary<string, List<string>>();
 
 
         #region Action
@@ -41,7 +43,7 @@ namespace Quan.Word.Core
         {
             // Don't set when we are in design-mode
             if (ServiceLocator.IsLocationProviderSet)
-            { 
+            {
                 Container = ServiceLocator.Current.GetInstance<IUnityContainer>();
                 EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
                 Mapper = ServiceLocator.Current.GetInstance<IMapper>();
@@ -84,5 +86,41 @@ namespace Quan.Word.Core
         }
 
         #endregion
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return _errorsByPropertyName.ContainsKey(propertyName) ?
+                _errorsByPropertyName[propertyName] : null;
+        }
+
+        public bool HasErrors => _errorsByPropertyName.Any();
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        public void AddError(string propertyName, string error)
+        {
+            if (!_errorsByPropertyName.ContainsKey(propertyName))
+                _errorsByPropertyName[propertyName] = new List<string>();
+
+            if (!_errorsByPropertyName[propertyName].Contains(error))
+            {
+                _errorsByPropertyName[propertyName].Add(error);
+                OnErrorsChanged(propertyName);
+            }
+        }
+
+        public void ClearErrors(string propertyName)
+        {
+            if (_errorsByPropertyName.ContainsKey(propertyName))
+            {
+                _errorsByPropertyName.Remove(propertyName);
+                OnErrorsChanged(propertyName);
+            }
+        }
     }
 }

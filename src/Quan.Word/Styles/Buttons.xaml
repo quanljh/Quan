@@ -275,7 +275,7 @@
 
     <!--  IconGrow Button  -->
     <Style x:Key="IconGrowButton" BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{StaticResource WordTransparentBlueBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource BackgroundLightBrush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeBigger}" />

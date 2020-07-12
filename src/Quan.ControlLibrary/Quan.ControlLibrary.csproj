@@ -45,6 +45,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\QuanToolTip.cs" />
     <Compile Include="Converter\BaseValueConverter .cs" />
     <Compile Include="Converter\StringToVisibilityConverter.cs" />
     <Compile Include="Controls\QuanTextBox.cs" />

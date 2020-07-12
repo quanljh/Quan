@@ -1,5 +1,4 @@
-﻿using Prism.Mvvm;
-using Quan.Word.Core;
+﻿using Quan.Word.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,27 +7,6 @@ using System.Windows.Input;
 
 namespace Quan.Word
 {
-    public class JyokyoUIModel : BindableBase
-    {
-        private string _jyokyoName;
-
-        public string JyokyoName
-        {
-            get => _jyokyoName;
-            set => SetProperty(ref _jyokyoName, value);
-        }
-
-        private string _jyokyoCode;
-
-        public string JyokyoCode
-        {
-            get => _jyokyoCode;
-            set => SetProperty(ref _jyokyoCode, value);
-        }
-
-
-    }
-
     public class DataGridPageViewModel : ViewModelBase
     {
         #region Properties
@@ -42,6 +20,9 @@ namespace Quan.Word
         public ListCollectionView PatientCollectionView { get; set; }
 
         public PatientUIModel SelectedPatient { get; set; }
+
+        public ObservableCollection<DataGridColumnSettingModel> DataGridColumnSettings { get; set; } =
+            DataGridColumnSettingModel.GetDefaultDataGridColumnSettings();
 
         #endregion
 
@@ -79,6 +60,31 @@ namespace Quan.Word
                 }
             };
 
+            var karteCollection = new ObservableCollection<KarteInfoModel>()
+            {
+                new KarteInfoModel()
+                {
+                    ShinryouDate = DateTime.Now,
+                    Doctor = "藤原拓海",
+                    Shinryouka = "内科",
+                    Hoken = "医保"
+                },
+                new KarteInfoModel()
+                {
+                    ShinryouDate = DateTime.Now,
+                    Doctor = "鈴木玲奈",
+                    Shinryouka = "外科",
+                    Hoken = "国保"
+                },
+                new KarteInfoModel()
+                {
+                    ShinryouDate = DateTime.Now,
+                    Doctor = "出川哲朗",
+                    Shinryouka = "小児科",
+                    Hoken = "自賠責"
+                }
+            };
+
             PatientCollection = new ObservableCollection<PatientUIModel>()
             {
                 new PatientUIModel()
@@ -89,7 +95,8 @@ namespace Quan.Word
                     PatientBirth = new DateTime(1965,07,05),
                     PatientSex = "1",
                     PatientJoukyouKbn = "1",
-                    PatientAddress = "大阪"
+                    PatientAddress = "大阪",
+                    KarteCollection = karteCollection
                 },
                 new PatientUIModel()
                 {
@@ -99,7 +106,31 @@ namespace Quan.Word
                     PatientBirth = new DateTime(1973,02,01),
                     PatientSex = "1",
                     PatientJoukyouKbn = "2",
-                    PatientAddress = "大阪"
+                    PatientAddress = "大阪",
+                    KarteCollection = new ObservableCollection<KarteInfoModel>()
+                    {
+                        new KarteInfoModel()
+                        {
+                            ShinryouDate = DateTime.Now,
+                            Doctor = "設楽統",
+                            Shinryouka = "内科",
+                            Hoken = "医保"
+                        },
+                        new KarteInfoModel()
+                        {
+                            ShinryouDate = DateTime.Now,
+                            Doctor = "日村勇紀",
+                            Shinryouka = "脳科",
+                            Hoken = "公費"
+                        },
+                        new KarteInfoModel()
+                        {
+                            ShinryouDate = DateTime.Now,
+                            Doctor = "秋元真夏",
+                            Shinryouka = "心臓血管外科",
+                            Hoken = "介護"
+                        }
+                    }
                 },
                 new PatientUIModel()
                 {
@@ -109,7 +140,31 @@ namespace Quan.Word
                     PatientBirth = new DateTime(1983,04,15),
                     PatientSex = "1",
                     PatientJoukyouKbn = "3",
-                    PatientAddress = "大阪"
+                    PatientAddress = "大阪",
+                    KarteCollection = new ObservableCollection<KarteInfoModel>()
+                    {
+                        new KarteInfoModel()
+                        {
+                            ShinryouDate = DateTime.Now,
+                            Doctor = "橋本奈々未",
+                            Shinryouka = "内科",
+                            Hoken = "医保"
+                        },
+                        new KarteInfoModel()
+                        {
+                            ShinryouDate = DateTime.Now,
+                            Doctor = "白石麻衣",
+                            Shinryouka = "脳科",
+                            Hoken = "公費"
+                        },
+                        new KarteInfoModel()
+                        {
+                            ShinryouDate = DateTime.Now,
+                            Doctor = "生田絵梨花",
+                            Shinryouka = "心臓血管外科",
+                            Hoken = "介護"
+                        }
+                    }
                 },
                 new PatientUIModel()
                 {

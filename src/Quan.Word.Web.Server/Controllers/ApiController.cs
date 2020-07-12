@@ -1,22 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Quan.Word.Core;
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Quan.Word.Web.Server
 {
-
-
-
-
     /// <summary>
     /// Manages the Web API calls
     /// </summary>
@@ -81,11 +71,11 @@ namespace Quan.Word.Web.Server
 
             // If we have no credentials...
             if (registerCredentials == null)
-                // Return failed respionse
+                // Return failed response
                 return errorResponse;
 
             // Make sure we have a user name
-            if (registerCredentials?.Username == null || string.IsNullOrWhiteSpace(registerCredentials.Username))
+            if (string.IsNullOrWhiteSpace(registerCredentials.Username))
                 // Return error message to user
                 return errorResponse;
 
@@ -98,14 +88,14 @@ namespace Quan.Word.Web.Server
                 Email = registerCredentials.Email
             };
 
-            // Try and create a usesr
-            var result = await mUserManager.CreateAsync(user, registerCredentials?.Password);
+            // Try and create a user
+            var result = await mUserManager.CreateAsync(user, registerCredentials.Password);
 
             // If the registration was successful...
             if (result.Succeeded)
             {
                 // Get the user details
-                var userIdentity = await mUserManager.FindByEmailAsync(registerCredentials.Username);
+                var userIdentity = await mUserManager.FindByNameAsync(registerCredentials.Username);
 
                 // Generate an email verification code
                 var emailVerificationCode = mUserManager.GenerateEmailConfirmationTokenAsync(user);
