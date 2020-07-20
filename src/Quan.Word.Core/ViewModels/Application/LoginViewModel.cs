@@ -1,8 +1,8 @@
 ﻿using Quan.Web;
+using Quan.Word.Core.ApiModels;
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Quan.Word.Core.ApiModels;
 
 namespace Quan.Word.Core
 {
@@ -40,7 +40,7 @@ namespace Quan.Word.Core
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayParameterizedCommand(async parameter => await LoginAsync(parameter));
+            LoginCommand = new RelayCommand(async parameter => await LoginAsync(parameter));
 
             RegisterCommand = new RelayCommand(async () => await Register());
         }

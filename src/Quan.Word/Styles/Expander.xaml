@@ -1,12 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.Word">
 
-    <ResourceDictionary.MergedDictionaries>
-        <!--  Order is important  -->
-        <ResourceDictionary Source="Colors.xaml" />
-        <ResourceDictionary Source="Fonts.xaml" />
-        <ResourceDictionary Source="Texts.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <!--  PlusMinusToggle Button  -->
     <Style x:Key="PlusMinusToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource DataGrid.Background.Common}" />

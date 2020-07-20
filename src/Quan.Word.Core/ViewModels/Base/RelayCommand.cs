@@ -12,6 +12,11 @@ namespace Quan.Word.Core
         /// </summary>
         private Action mAction;
 
+        /// <summary>
+        /// The action with parameter to run
+        /// </summary>
+        private Action<object> mActionWithParameter;
+
         #endregion
 
         #region Public Events
@@ -36,6 +41,11 @@ namespace Quan.Word.Core
             mAction = action;
         }
 
+        public RelayCommand(Action<object> action)
+        {
+            mActionWithParameter = action;
+        }
+
         #endregion
 
         #region Command Methods
@@ -56,7 +66,10 @@ namespace Quan.Word.Core
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            mAction();
+            if (parameter != null)
+                mActionWithParameter(parameter);
+            else
+                mAction();
         }
 
         #endregion
