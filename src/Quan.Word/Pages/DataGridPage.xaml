@@ -37,7 +37,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <DataGrid
             x:Name="PatientDataGrid"
@@ -212,6 +213,19 @@
         </DataGrid>
 
         <controls:QuanTextBox Grid.Row="1" Width="100" Height="30" />
+
+        <Button
+            Grid.Row="2"
+            Width="100"
+            HorizontalAlignment="Left"
+            Command="{Binding AsyncCommand}"
+            Content="AsyncButton" />
+        <Button
+            Grid.Row="2"
+            Width="100"
+            HorizontalAlignment="Right"
+            Command="{Binding Async2Command}"
+            Content="Async2Button" />
 
     </Grid>
 </local:BasePage>

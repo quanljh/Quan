@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -24,12 +25,15 @@ namespace Quan.Word
         public ObservableCollection<DataGridColumnSettingModel> DataGridColumnSettings { get; set; } =
             DataGridColumnSettingModel.GetDefaultDataGridColumnSettings();
 
+        public bool Flag;
+
         #endregion
 
         #region Commands
 
-        public ICommand ChangeRowCommand { get; set; }
+        public ICommand AsyncCommand { get; set; }
 
+        public ICommand Async2Command { get; set; }
         #endregion
 
         #region Constructor
@@ -248,7 +252,8 @@ namespace Quan.Word
 
             SelectedPatient = PatientCollection.FirstOrDefault();
 
-            ChangeRowCommand = new RelayCommand(ChangeRow);
+            AsyncCommand = new DelegateAsyncCommand(async () => await TestAsync()).ObservesCanExecute(() => Flag);
+            AsyncCommand = new DelegateAsyncCommand(async () => await Test2Async()).ObservesCanExecute(() => Flag);
 
             PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("PatientAddress"));
 
@@ -264,14 +269,18 @@ namespace Quan.Word
         }
 
 
-
         #endregion
 
         #region Method
 
-        private void ChangeRow()
+        private async Task TestAsync()
         {
-            PatientCollectionView.Refresh();
+            await Task.Delay(5000);
+        }
+
+        private async Task Test2Async()
+        {
+            await Task.Delay(5000);
         }
 
         #endregion
