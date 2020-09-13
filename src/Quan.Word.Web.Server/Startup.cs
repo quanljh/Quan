@@ -17,6 +17,7 @@ namespace Quan.Word.Web.Server
         // Called by Program.cs UseStartup
         public Startup(IConfiguration configuration)
         {
+            // Share the configuration
             IoCContainer.Configuration = configuration;
         }
 
@@ -26,6 +27,12 @@ namespace Quan.Word.Web.Server
         /// <param name="services">The Dependency Injection container</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add SendGrid email sender
+            services.AddSendGridEmailSender();
+
+            // Add general email template sender
+            services.AddEmailTemplateSender();
+
             // Add ApplicationDbContext to Dependency Injection supported by EntityFrameworkCore
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection")));

@@ -15,7 +15,7 @@ namespace Quan.Word.Relational
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public static FrameworkConstruction UseClientDataStore(this FrameworkConstruction construction)
+        public static FrameworkConstruction AddClientDataStore(this FrameworkConstruction construction)
         {
             // Inject out SQLite EF data store
             construction.Services.AddDbContext<ClientDataStoreDbContext>(options =>

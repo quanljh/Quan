@@ -4,6 +4,7 @@ using Quan.Word.Core;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Quan.Word.Web.Server
 {
@@ -98,9 +99,13 @@ namespace Quan.Word.Web.Server
                 var userIdentity = await mUserManager.FindByNameAsync(registerCredentials.Username);
 
                 // Generate an email verification code
-                var emailVerificationCode = mUserManager.GenerateEmailConfirmationTokenAsync(user);
+                var emailVerificationCode = await mUserManager.GenerateEmailConfirmationTokenAsync(user);
 
-                // TODO: Email the user the verification code
+                // TODO: Replace with APIRoutes that will contain the static routes to use
+                var confirmationUrl = $"http://{Request.Host.Value}/api/verify/email/{HttpUtility.UrlEncode(userIdentity.Id)}/{HttpUtility.UrlEncode(emailVerificationCode)}";
+
+                // Email the user the verification code
+                await QuanEmailSender.SendUserVerificationEmailAsync(null, userIdentity.Email, confirmationUrl);
 
                 // Return valid response containing all users details
                 return new ApiResponse<RegisterResultApiModel>()
@@ -195,6 +200,33 @@ namespace Quan.Word.Web.Server
                     Token = user.GenerateJwtToken()
                 }
             };
+        }
+
+        [Route("api/verify/email/{userId}/{emailToken}")]
+        [HttpGet]
+        public async Task<ActionResult> VerifyEmailAsync(string userId, string emailToken)
+        {
+            // Get the user
+            var user = await mUserManager.FindByIdAsync(userId);
+
+            emailToken = HttpUtility.UrlDecode(emailToken);
+
+            // If the user is null
+            if (user == null)
+                // TODO: Nice UI
+                return Content("User not found");
+
+            // If we have the user
+
+            // Verify the email token
+            var result = await mUserManager.ConfirmEmailAsync(user, emailToken);
+
+            // If succeeded...
+            if (result.Succeeded)
+                return Content("Email Verified :)");
+
+            // TODO: Nice UI
+            return Content("Invalid Email Verification Token :(");
         }
 
         [AuthorizeToken]

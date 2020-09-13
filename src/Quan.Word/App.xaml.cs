@@ -88,8 +88,8 @@ namespace Quan.Word
         {
             // Setup the Dna Framework
             new DefaultFrameworkConstruction()
-                .UseFileLogger("QuanLog.txt")
-                .UseClientDataStore()
+                .AddFileLogger("QuanLog.txt")
+                .AddClientDataStore()
                 .Build();
 
             //Setup IoC
