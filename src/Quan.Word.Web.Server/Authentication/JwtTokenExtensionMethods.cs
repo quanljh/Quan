@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
+using static Quan.FrameworkDI;
 
 namespace Quan.Word.Web.Server
 {
@@ -34,15 +32,15 @@ namespace Quan.Word.Web.Server
             // Create the credentials used to generate the token
             var credentials = new SigningCredentials(
                 // Get the secret key from configuration
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(IoCContainer.Configuration["Jwt:SecretKey"])),
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
                 // Use HS256 algorithm
                 SecurityAlgorithms.HmacSha256);
 
 
             // Generate the Jwt token
             var token = new JwtSecurityToken(
-                IoCContainer.Configuration["Jwt:Issuer"],
-                IoCContainer.Configuration["Jwt:Audience"],
+                Configuration["Jwt:Issuer"],
+                Configuration["Jwt:Audience"],
                 claims,
                 signingCredentials: credentials,
                 // Expire if not used for 3 months

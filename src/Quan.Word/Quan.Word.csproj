@@ -114,6 +114,9 @@
     <Compile Include="AttachedProperties\PanelChildMarginProperty.cs" />
     <Compile Include="AttachedProperties\NoFrameHistoryProperty.cs" />
     <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
+    <Compile Include="DI\DI.cs" />
+    <Compile Include="DI\FrameworkConstructionExtensions.cs" />
+    <Compile Include="DI\UI\IUImanager.cs" />
     <Compile Include="Models\DataGridColumnSettingModel.cs" />
     <Compile Include="Models\JyokyoUIModel.cs" />
     <Compile Include="Models\KarteInfoModel.cs" />
@@ -200,7 +203,7 @@
     <Compile Include="DragDrop\Implement\DefaultDropHandler.cs" />
     <Compile Include="DragDrop\Implement\DropTargetHighlightAorner.cs" />
     <Compile Include="DragDrop\Implement\DropTargetInsertionAdorner.cs" />
-    <Compile Include="IoC\UIManager.cs" />
+    <Compile Include="DI\UI\UIManager.cs" />
     <Compile Include="Mapper\QuanMapperProfile.cs" />
     <Compile Include="Models\PatientUIModel.cs" />
     <Compile Include="Pages\BasePage.cs" />
@@ -221,11 +224,44 @@
     </Compile>
     <Compile Include="StyleSelector\GroupStyleSelector.cs" />
     <Compile Include="ViewHelper\VisualTreeExtensions.cs" />
-    <Compile Include="ViewModels\TextBoxPageViewModel.cs" />
-    <Compile Include="ViewModels\DialogWindowViewModel.cs" />
-    <Compile Include="ViewModels\DataGridPageViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="WebRequests\WebRequestResultExtensions.cs" />
+    <Compile Include="WPFViewModels\TextBoxPageViewModel.cs" />
+    <Compile Include="WPFViewModels\DialogWindowViewModel.cs" />
+    <Compile Include="WPFViewModels\DataGridPageViewModel.cs" />
+    <Compile Include="WPFViewModels\MainWindowViewModel.cs" />
+    <Compile Include="WPFViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\Application\ApplicationViewModel.cs" />
+    <Compile Include="ViewModels\Application\Design\SettingsDesignModel.cs" />
+    <Compile Include="ViewModels\Application\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Application\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Application\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Base\DelegateAsyncCommand.cs" />
+    <Compile Include="ViewModels\Base\IHavePassword.cs" />
+    <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\ChatListItemViewModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\ChatListModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\Design\ChatListDesignModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatList\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListItemImageAttachmentModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListItemModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\ChatMessageListViewModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListDesignModel.cs" />
+    <Compile Include="ViewModels\Chat\ChatMessage\Design\ChatMessageListItemDesignModel.cs" />
+    <Compile Include="ViewModels\Dialogs\BaseDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\Design\MessageBoxDialogDesignModel.cs" />
+    <Compile Include="ViewModels\Dialogs\MessageBoxDialogViewModel.cs" />
+    <Compile Include="ViewModels\Input\Design\PasswordEntryDesignModel.cs" />
+    <Compile Include="ViewModels\Input\Design\TextEntryDesignModel.cs" />
+    <Compile Include="ViewModels\Input\PasswordEntryViewModel.cs" />
+    <Compile Include="ViewModels\Input\TextEntryViewModel.cs" />
+    <Compile Include="ViewModels\Menu\Design\MenuDesignModel.cs" />
+    <Compile Include="ViewModels\Menu\Design\MenuItemDesignModel.cs" />
+    <Compile Include="ViewModels\Menu\MenuItemViewModel.cs" />
+    <Compile Include="ViewModels\Menu\MenuViewModel.cs" />
+    <Compile Include="ViewModels\PopupMenu\BasePopupMenuViewModel.cs" />
+    <Compile Include="ViewModels\PopupMenu\ChatAttachmentPopupMenuViewModel.cs" />
+    <Compile Include="ViewModels\PopupMenu\Design\ChatAttachmentPopupMenuDesignModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -453,9 +489,6 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Ninject">
-      <Version>3.3.4</Version>
-    </PackageReference>
     <PackageReference Include="Prism.Wpf">
       <Version>7.2.0.1422</Version>
     </PackageReference>
@@ -463,7 +496,7 @@
       <Version>3.2.8</Version>
     </PackageReference>
     <PackageReference Include="Quan.Framework">
-      <Version>1.0.5</Version>
+      <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Unity">
       <Version>5.11.7</Version>

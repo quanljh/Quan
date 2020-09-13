@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Quan.AspNet;
 
 namespace Quan.Word.Web.Server
 {
@@ -7,18 +8,20 @@ namespace Quan.Word.Web.Server
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Run();
+            BuildWebHost(args).Run();
         }
 
-        public static IWebHost CreateHostBuilder(string[] args)
+        public static IWebHost BuildWebHost(string[] args)
         {
-            // provides default configuration for the app such as appsettings.json and appsettings.{Environment}.json using the JSON configuration provider
-            // Secret Manager when the app runs in the Development environment
-            // Environment variables
-            // Command-line arguments
-            // Add logging providers
             return WebHost.CreateDefaultBuilder()
-                // Specify the startup type to be used by the web host
+                // Add Quan Framework
+                .UseQuanFramework(construct =>
+                {
+                    // Configure framework
+
+                    // Add file logger
+                    construct.AddFileLogger();
+                })
                 .UseStartup<Startup>()
                 .Build();
         }

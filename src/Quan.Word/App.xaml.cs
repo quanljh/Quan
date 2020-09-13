@@ -4,12 +4,12 @@ using Prism.Events;
 using Prism.Mvvm;
 using Quan.Word.Core;
 using Quan.Word.Relational;
-using Reactive.Bindings;
-using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using System.Windows;
 using Unity;
 using Unity.ServiceLocation;
+using static Quan.FrameworkDI;
+using static Quan.Word.DI;
 
 namespace Quan.Word
 {
@@ -38,12 +38,12 @@ namespace Quan.Word
             await ApplicationSetupAsync();
 
             // Log it 
-            IoC.Logger.Log("This is Debug", LogLevel.Debug);
+            Logger.LogDebugSource("Application starting...");
 
             // Setup the application view model based on if we are logged in
-            IoC.Application.GoToPage(
+            ApplicationVM.GoToPage(
                 // If we are logged in...
-                IoC.ClientDataStore.HasCredentials() ?
+                ClientDataStore.HasCredentials() ?
                     // Go to chat page
                     ApplicationPage.Chat :
                     // Otherwise, go to login page
@@ -62,8 +62,6 @@ namespace Quan.Word
 
         private void InitializeContainer()
         {
-            //Because of The ReactiveProperty base on one thread
-            ReactivePropertyScheduler.SetDefault(ImmediateScheduler.Instance);
             Container.RegisterInstance(typeof(IUnityContainer), Container);
             Container.RegisterInstance(typeof(IEventAggregator), EventAggregator);
 
@@ -86,47 +84,20 @@ namespace Quan.Word
 
         private async Task ApplicationSetupAsync()
         {
-            // Setup the Dna Framework
-            new DefaultFrameworkConstruction()
-                .AddFileLogger("QuanLog.txt")
+            // Setup the Quan Framework
+            Framework.Construct<DefaultFrameworkConstruction>()
+                .AddFileLogger()
                 .AddClientDataStore()
+                .AddQuanWordViewModels()
+                .AddQuanWordClientServices()
                 .Build();
 
-            //Setup IoC
-            IoC.SetUp();
-
-            // Bind a logger
-            IoC.Kernel.Bind<ILogFactory>().ToConstant(new BaseLogFactory(new ILogger[]
-            {
-                // TODO: Add ApplicationSettings so we can set/edit a log location
-                //       For now just log to the path where this application is running
-                new Core.FileLogger("Oldlog.txt"),
-            }));
-
-            // Add our task manager
-            IoC.Kernel.Bind<ITaskManager>().ToConstant(new TaskManager());
-
-            // Bind a file manager
-            IoC.Kernel.Bind<IFileManager>().ToConstant(new FileManager());
-
-            // Bind a UI Manager
-            IoC.Kernel.Bind<IUImanager>().ToConstant(new UIManager());
-
             // Ensure the client data store
-            await IoC.ClientDataStore.EnsureDataStoreAsync();
+            await ClientDataStore.EnsureDataStoreAsync();
 
             // Load new settings
-            await IoC.Settings.LoadAsync();
+            await SettingsVM.LoadAsync();
 
-        }
-
-        public class SettingsDataModel
-        {
-            public string Id { get; set; }
-
-            public string Name { get; set; }
-
-            public string Value { get; set; }
         }
     }
 }

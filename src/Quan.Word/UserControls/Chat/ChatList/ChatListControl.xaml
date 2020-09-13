@@ -9,7 +9,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Background="{StaticResource ForegroundLightBrush}" DataContext="{x:Static core:ChatListDesignModel.Instance}">
+    <Grid Background="{StaticResource ForegroundLightBrush}" DataContext="{x:Static local:ChatListDesignModel.Instance}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>

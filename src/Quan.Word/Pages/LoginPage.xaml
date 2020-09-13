@@ -9,15 +9,12 @@
     x:Name="LoginPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    x:TypeArguments="core:LoginViewModel"
+    x:TypeArguments="local:LoginViewModel"
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
-        <StackPanel
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            TextBlock.TextAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.TextAlignment="Center">
 
             <!--  Login main content white box  -->
             <Border
@@ -44,16 +41,10 @@
                         Text="It's about to get fun" />
 
                     <!--  Email  -->
-                    <TextBox
-                        local:IsFocusedProperty.Value="True"
-                        Tag="Email"
-                        Text="{Binding Email}" />
+                    <TextBox local:IsFocusedProperty.Value="True" Tag="Email" Text="{Binding Email}" />
 
                     <!--  Password  -->
-                    <PasswordBox
-                        x:Name="PasswordBox"
-                        Margin="0,0,0,30"
-                        Tag="Password" />
+                    <PasswordBox x:Name="PasswordBox" Margin="0,0,0,30" Tag="Password" />
 
                     <!--  Login button  -->
                     <Button

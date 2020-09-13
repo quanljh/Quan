@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using static Quan.FrameworkDI;
 
 namespace Quan.Word.Web.Server
 {
@@ -19,7 +20,7 @@ namespace Quan.Word.Web.Server
         public async Task<SendEmailResponse> SendEmailAsync(SendEmailDetails details)
         {
             // Get the SendGrid key
-            var apiKey = IoCContainer.Configuration["SendGridKey"];
+            var apiKey = Configuration["SendGridKey"];
 
             // Create a new SendGrid client
             var client = new SendGridClient(apiKey);

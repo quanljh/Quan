@@ -164,8 +164,13 @@ namespace Quan.Word
 
         public BasePage()
         {
-            //Create a default view model
-            ViewModel = IoC.Get<T>();
+            // If in design time mode...
+            if (DesignerProperties.GetIsInDesignMode(this))
+                // Just use a new instance of the VM
+                ViewModel = new T();
+            else
+                //Create a default view model
+                ViewModel = Framework.Service<T>();
         }
 
         /// <summary>
@@ -177,8 +182,15 @@ namespace Quan.Word
             if (specificViewModel != null)
                 ViewModel = specificViewModel;
             else
-                //Create a default view model
-                ViewModel = IoC.Get<T>();
+            {
+                // If in design time mode...
+                if (DesignerProperties.GetIsInDesignMode(this))
+                    // Just use a new instance of the VM
+                    ViewModel = new T();
+                else
+                    //Create a default view model
+                    ViewModel = Framework.Service<T>() ?? new T();
+            }
         }
 
         #endregion

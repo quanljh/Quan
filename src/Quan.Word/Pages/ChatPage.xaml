@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:Quan.Word"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ChatPageView"
-    d:DataContext="{x:Static core:ChatMessageListDesignModel.Instance}"
+    d:DataContext="{x:Static local:ChatMessageListDesignModel.Instance}"
     d:DesignHeight="450"
     d:DesignWidth="600"
-    x:TypeArguments="core:ChatMessageListViewModel"
+    x:TypeArguments="local:ChatMessageListViewModel"
     mc:Ignorable="d">
 
     <Grid>

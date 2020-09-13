@@ -17,7 +17,7 @@ namespace Quan.Word.Web.Server
         /// <returns></returns>
         public static async Task<SendEmailResponse> SendUserVerificationEmailAsync(string displayName, string email, string verificationUrl)
         {
-            return await new EmailTemplateSender().SendGeneralEmailAsync(new SendEmailDetails
+            return await DI.EmailTemplateSender.SendGeneralEmailAsync(new SendEmailDetails
             {
                 Content = "This is our first HTML email <b>with some bold text</b>",
                 IsHTML = true,

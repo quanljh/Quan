@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Quan.Word.Core.Enum
+namespace Quan.Word.Core
 {
     public static class EnumExtension
     {

@@ -1,7 +1,7 @@
-﻿using Quan.Word.Core;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using static Quan.Word.DI;
 
 namespace Quan.Word
 {
@@ -16,7 +16,7 @@ namespace Quan.Word
             switch (value)
             {
                 case nameof(ApplicationViewModel):
-                    return IoC.Application;
+                    return ApplicationVM;
 
                 default:
                     Debugger.Break();

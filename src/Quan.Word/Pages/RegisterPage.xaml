@@ -9,15 +9,12 @@
     x:Name="RegisterPageView"
     d:DesignHeight="500"
     d:DesignWidth="800"
-    x:TypeArguments="core:RegisterViewModel"
+    x:TypeArguments="local:RegisterViewModel"
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
-        <StackPanel
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            TextBlock.TextAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.TextAlignment="Center">
 
             <!--  Login main content white box  -->
             <Border
@@ -44,19 +41,13 @@
                         Text="It's about to get fun" />
 
                     <!--  Username  -->
-                    <TextBox
-                        local:IsFocusedProperty.Value="True"
-                        Tag="Username"
-                        Text="{Binding Username}" />
+                    <TextBox local:IsFocusedProperty.Value="True" Tag="Username" Text="{Binding Username}" />
 
                     <!--  Email  -->
                     <TextBox Tag="Email" Text="{Binding Email}" />
 
                     <!--  Password  -->
-                    <PasswordBox
-                        x:Name="PasswordBox"
-                        Margin="0,0,0,30"
-                        Tag="Password" />
+                    <PasswordBox x:Name="PasswordBox" Margin="0,0,0,30" Tag="Password" />
 
                     <!--  Register button  -->
                     <Button

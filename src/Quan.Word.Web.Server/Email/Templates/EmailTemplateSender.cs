@@ -33,7 +33,7 @@ namespace Quan.Word.Web.Server
             details.Content = templateText;
 
             // Send Email
-            return await new SendGridEmailSender().SendEmailAsync(details);
+            return await DI.EmailSender.SendEmailAsync(details);
         }
     }
 }

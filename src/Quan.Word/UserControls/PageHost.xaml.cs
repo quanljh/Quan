@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using static Quan.Word.DI;
 
 namespace Quan.Word
 {
@@ -59,7 +60,7 @@ namespace Quan.Word
             //as the dependency property does not fire
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                NewPage.Content = IoC.Application.CurrentPage.ToBasePage();
+                NewPage.Content = ApplicationVM.CurrentPage.ToBasePage();
             }
 
         }
