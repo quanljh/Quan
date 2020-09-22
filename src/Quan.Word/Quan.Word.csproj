@@ -222,7 +222,7 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StyleSelector\GroupStyleSelector.cs" />
+    <Compile Include="Styles\StyleSelector\GroupStyleSelector.cs" />
     <Compile Include="ViewHelper\VisualTreeExtensions.cs" />
     <Compile Include="WebRequests\WebRequestResultExtensions.cs" />
     <Compile Include="WPFViewModels\TextBoxPageViewModel.cs" />
@@ -475,11 +475,6 @@
     <PackageReference Include="CommonServiceLocator">
       <Version>2.0.5</Version>
     </PackageReference>
-    <PackageReference Include="Fody">
-      <Version>6.1.2</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="JetBrains.Annotations">
       <Version>2020.1.0</Version>
     </PackageReference>
@@ -491,9 +486,6 @@
     </PackageReference>
     <PackageReference Include="Prism.Wpf">
       <Version>7.2.0.1422</Version>
-    </PackageReference>
-    <PackageReference Include="PropertyChanged.Fody">
-      <Version>3.2.8</Version>
     </PackageReference>
     <PackageReference Include="Quan.Framework">
       <Version>1.0.7</Version>

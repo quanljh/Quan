@@ -12,22 +12,46 @@ namespace Quan.Word
         /// <summary>
         /// The label to identify what this value is for
         /// </summary>
-        public string Label { get; set; }
+        private string _label;
+
+        public string Label
+        {
+            get => _label;
+            set => SetProperty(ref _label, value);
+        }
 
         /// <summary>
         /// The current saved value
         /// </summary>
-        public string OriginalText { get; set; }
+        private string _originalText;
+
+        public string OriginalText
+        {
+            get => _originalText;
+            set => SetProperty(ref _originalText, value);
+        }
 
         /// <summary>
         /// The current non-commit edited text
         /// </summary>
-        public string EditedText { get; set; }
+        private string _editedText;
+
+        public string EditedText
+        {
+            get => _editedText;
+            set => SetProperty(ref _editedText, value);
+        }
 
         /// <summary>
         /// Indicates if the current text is in edit mode
         /// </summary>
-        public bool Editing { get; set; }
+        private bool _editing;
+
+        public bool Editing
+        {
+            get => _editing;
+            set => SetProperty(ref _editing, value);
+        }
 
         #endregion
 

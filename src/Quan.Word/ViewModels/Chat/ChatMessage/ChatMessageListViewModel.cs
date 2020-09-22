@@ -16,16 +16,6 @@ namespace Quan.Word
         /// </summary>
         protected string mLastSearchText;
 
-        /// <summary>
-        /// The text to search for in the search command
-        /// </summary>
-        protected string mSearchText;
-
-        /// <summary>
-        /// A flag indicating if the search dialog is open
-        /// </summary>
-        protected bool mSearchIsOpen;
-
         #endregion
 
         #region Public Properties
@@ -33,17 +23,39 @@ namespace Quan.Word
         /// <summary>
         /// The title of this chat list
         /// </summary>
-        public string DisplayTitle { get; set; }
+        private string _displayTitle;
+
+        public string DisplayTitle
+        {
+            get => _displayTitle;
+            set => SetProperty(ref _displayTitle, value);
+        }
 
         /// <summary>
         /// The Chat thread items for the list 
         /// </summary>
-        public ObservableCollection<ChatMessageListItemModel> Items { get; set; }
+        private ObservableCollection<ChatMessageListItemModel> _items;
+
+        public ObservableCollection<ChatMessageListItemModel> Items
+        {
+            get => _items;
+            set => SetProperty(ref _items, value);
+        }
 
         /// <summary>
         /// True to show the attachment menu, false to hide it
         /// </summary>
-        public bool AttachmentMenuVisible { get; set; }
+        private bool _attachmentMenuVisible;
+
+        public bool AttachmentMenuVisible
+        {
+            get => _attachmentMenuVisible;
+            set
+            {
+                if (SetProperty(ref _attachmentMenuVisible, value))
+                    RaisePropertyChanged(nameof(AnyPopupVisible));
+            }
+        }
 
         /// <summary>
         /// True if any popup menus are visible
@@ -53,27 +65,41 @@ namespace Quan.Word
         /// <summary>
         /// The view model for the attachment menu
         /// </summary>
-        public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
+        private ChatAttachmentPopupMenuViewModel _attachmentMenu;
+
+        public ChatAttachmentPopupMenuViewModel AttachmentMenu
+        {
+            get => _attachmentMenu;
+            set => SetProperty(ref _attachmentMenu, value);
+        }
 
         /// <summary>
         /// The text for the current message being written
         /// </summary>
-        public string PendingMessageText { get; set; }
+        private string _pendingMessageText;
+
+        public string PendingMessageText
+        {
+            get => _pendingMessageText;
+            set => SetProperty(ref _pendingMessageText, value);
+        }
 
         /// <summary>
         /// The text to search for when we do a search
         /// </summary>
+        private string _searchText;
+
         public string SearchText
         {
-            get => mSearchText;
+            get => _searchText;
             set
             {
                 // Check value is different
-                if (mSearchText == value)
+                if (_searchText == value)
                     return;
 
                 // Update value
-                mSearchText = value;
+                SetProperty(ref _searchText, value);
 
                 // If the search text is empty...
                 if (string.IsNullOrEmpty(SearchText))
@@ -85,20 +111,22 @@ namespace Quan.Word
         /// <summary>
         /// A flag indicating if the search dialog is open
         /// </summary>
+        private bool _searchIsOpen;
+
         public bool SearchIsOpen
         {
-            get => mSearchIsOpen;
+            get => _searchIsOpen;
             set
             {
                 // Check value has changed
-                if (mSearchIsOpen == value)
+                if (_searchIsOpen == value)
                     return;
 
                 // Update value
-                mSearchIsOpen = value;
+                SetProperty(ref _searchIsOpen, value);
 
                 // if dialog closes...
-                if (!mSearchIsOpen)
+                if (!_searchIsOpen)
                     // Clear search text
                     SearchText = string.Empty;
             }
@@ -219,7 +247,7 @@ namespace Quan.Word
         public void Search()
         {
             // Make sure we don't research the same text
-            if ((string.IsNullOrEmpty(mLastSearchText) && string.IsNullOrEmpty(mSearchText)) ||
+            if ((string.IsNullOrEmpty(mLastSearchText) && string.IsNullOrEmpty(SearchText)) ||
                 string.Equals(mLastSearchText, SearchText))
                 return;
 

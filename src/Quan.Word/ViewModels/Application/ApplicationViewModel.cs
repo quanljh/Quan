@@ -12,18 +12,35 @@ namespace Quan.Word
         /// <summary>
         /// The current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Login;
+        private ApplicationPage _currentPage = ApplicationPage.Login;
+
+        public ApplicationPage CurrentPage
+        {
+            get => _currentPage;
+            private set => SetProperty(ref _currentPage, value);
+        }
 
         /// <summary>
         /// True if the side menu should be shown
         /// </summary>
-        public bool SideMenuVisible { get; set; } = false;
+        private bool _sideMenuVisible;
+
+        public bool SideMenuVisible
+        {
+            get => _sideMenuVisible;
+            set => SetProperty(ref _sideMenuVisible, value);
+        }
 
         /// <summary>
         /// True if the settings menu should be shown
         /// </summary>
-        public bool SettingsMenuVisible { get; set; }
+        private bool _settingsMenuVisible;
 
+        public bool SettingsMenuVisible
+        {
+            get => _settingsMenuVisible;
+            set => SetProperty(ref _settingsMenuVisible, value);
+        }
 
         /// <summary>
         /// The view model to use for the current page when the CurrentPage changes
@@ -31,7 +48,13 @@ namespace Quan.Word
         ///       it is simply used to set the view model of the current page 
         ///       at the time it changes
         /// </summary>
-        public ViewModelBase CurrentPageViewModel { get; set; }
+        private ViewModelBase _currentPageViewModel;
+
+        public ViewModelBase CurrentPageViewModel
+        {
+            get => _currentPageViewModel;
+            set => SetProperty(ref _currentPageViewModel, value);
+        }
 
         /// <summary>
         /// Navigates to the specified page

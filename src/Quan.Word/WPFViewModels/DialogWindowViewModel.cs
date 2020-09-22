@@ -10,12 +10,24 @@ namespace Quan.Word
         /// <summary>
         /// The title of this dialog window
         /// </summary>
-        public string Title { get; set; }
+        private string _title;
+
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
 
         /// <summary>
         /// The content to host inside the dialog
         /// </summary>
-        public Control Content { get; set; }
+        private Control _content;
+
+        public Control Content
+        {
+            get => _content;
+            set => SetProperty(ref _content, value);
+        }
 
         #endregion
 

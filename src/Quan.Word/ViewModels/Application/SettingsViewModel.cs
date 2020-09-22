@@ -16,27 +16,57 @@ namespace Quan.Word
         /// <summary>
         /// The current users name
         /// </summary>
-        public TextEntryViewModel Name { get; set; }
+        private TextEntryViewModel _name;
+
+        public TextEntryViewModel Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
 
         /// <summary>
         /// The current users username
         /// </summary>
-        public TextEntryViewModel Username { get; set; }
+        private TextEntryViewModel _username;
+
+        public TextEntryViewModel Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value);
+        }
 
         /// <summary>
         /// The current users password
         /// </summary>
-        public PasswordEntryViewModel Password { get; set; }
+        private PasswordEntryViewModel _password;
+
+        public PasswordEntryViewModel Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
 
         /// <summary>
         /// The current users email
         /// </summary>
-        public TextEntryViewModel Email { get; set; }
+        private TextEntryViewModel _email;
+
+        public TextEntryViewModel Email
+        {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
 
         /// <summary>
         /// The text for the logout button
         /// </summary>
-        public string LogoutButtonText { get; set; }
+        private string _logoutButtonText;
+
+        public string LogoutButtonText
+        {
+            get => _logoutButtonText;
+            set => SetProperty(ref _logoutButtonText, value);
+        }
 
         #endregion
 

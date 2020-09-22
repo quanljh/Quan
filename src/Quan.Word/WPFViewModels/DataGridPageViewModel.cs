@@ -20,12 +20,24 @@ namespace Quan.Word
 
         public ListCollectionView PatientCollectionView { get; set; }
 
-        public PatientUIModel SelectedPatient { get; set; }
+        private PatientUIModel _selectedPatient;
+
+        public PatientUIModel SelectedPatient
+        {
+            get => _selectedPatient;
+            set => SetProperty(ref _selectedPatient, value);
+        }
 
         public ObservableCollection<DataGridColumnSettingModel> DataGridColumnSettings { get; set; } =
             DataGridColumnSettingModel.GetDefaultDataGridColumnSettings();
 
-        public bool Flag;
+        private bool _flag;
+
+        public bool Flag
+        {
+            get => _flag;
+            set => SetProperty(ref _flag, value);
+        }
 
         #endregion
 
@@ -255,7 +267,7 @@ namespace Quan.Word
             AsyncCommand = new DelegateAsyncCommand(async () => await TestAsync()).ObservesCanExecute(() => Flag);
             AsyncCommand = new DelegateAsyncCommand(async () => await Test2Async()).ObservesCanExecute(() => Flag);
 
-            PatientCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("PatientAddress"));
+            PatientCollectionView.GroupDescriptions?.Add(new PropertyGroupDescription("PatientAddress"));
 
             PatientCollectionView.LiveGroupingProperties.Add("PatientAddress");
 

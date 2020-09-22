@@ -19,16 +19,6 @@ namespace Quan.Word
         private WindowResizer mWindowResizer;
 
         /// <summary>
-        /// The margin around the window to allow for a drop shadow
-        /// </summary>
-        private Thickness mOuterMarginSize = new Thickness(5);
-
-        /// <summary>
-        /// The radius of the edges of the window
-        /// </summary>
-        private int mWindowRadius = 10;
-
-        /// <summary>
         /// The last known dock position
         /// </summary>
         private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
@@ -36,20 +26,39 @@ namespace Quan.Word
         #endregion
 
         #region Public Properties
+
         /// <summary>
         /// The smallest width the window can go to
         /// </summary>
-        public double WindowMinimumWidth { get; set; } = 800;
+        private double _windowMinimumWidth = 800;
+
+        public double WindowMinimumWidth
+        {
+            get => _windowMinimumWidth;
+            set => SetProperty(ref _windowMinimumWidth, value);
+        }
 
         /// <summary>
         /// The smallest height the window can go to
         /// </summary>
-        public double WindowMinimumHeight { get; set; } = 500;
+        private double _windowMinimumHeight = 500;
+
+        public double WindowMinimumHeight
+        {
+            get => _windowMinimumHeight;
+            set => SetProperty(ref _windowMinimumHeight, value);
+        }
 
         /// <summary>
         /// True if the window is currently being moved/dragged
         /// </summary>
-        public bool BeingMoved { get; set; }
+        private bool _beingMoved;
+
+        public bool BeingMoved
+        {
+            get => _beingMoved;
+            set => SetProperty(ref _beingMoved, value);
+        }
 
         /// <summary>
         /// True if the window should be borderless because it is docked or maximized
@@ -72,26 +81,38 @@ namespace Quan.Word
         /// <summary>
         /// The padding of the inner content of the main window
         /// </summary>
-        public Thickness InnerContentPadding { get; set; } = new Thickness(0);
+        private Thickness _innerContentPadding = new Thickness(0);
+
+        public Thickness InnerContentPadding
+        {
+            get => _innerContentPadding;
+            set => SetProperty(ref _innerContentPadding, value);
+        }
 
         /// <summary>
         /// The margin around the window to allow for a drop shadow
         /// </summary>
+        private Thickness _outerMarginSize = new Thickness(5);
+
         public Thickness OuterMarginSize
         {
-            // If it is maximized or docked, no border
-            get => mWindow.WindowState == WindowState.Maximized ? mWindowResizer.CurrentMonitorMargin : (Borderless ? new Thickness(0) : mOuterMarginSize);
-            set => mOuterMarginSize = value;
+            get => mWindow.WindowState == WindowState.Maximized ? mWindowResizer.CurrentMonitorMargin : (Borderless ? new Thickness(0) : _outerMarginSize);
+            set
+            {
+                if (SetProperty(ref _outerMarginSize, value))
+                    RaisePropertyChanged(nameof(ResizeBorderThickness));
+            }
         }
 
         /// <summary>
         /// The radius of the edges of the window
         /// </summary>
+        private int _windowRadius = 10;
+
         public int WindowRadius
         {
-            // If it is maximized or docked, no border
-            get => Borderless ? 0 : mWindowRadius;
-            set => mWindowRadius = value;
+            get => Borderless ? 0 : _windowRadius;
+            set => SetProperty(ref _windowRadius, value);
         }
 
         /// <summary>
@@ -104,20 +125,35 @@ namespace Quan.Word
         /// </summary>
         public CornerRadius WindowCornerRadius => new CornerRadius(WindowRadius);
 
+
         /// <summary>
         /// The height of the title bar / caption of the window
         /// </summary>
-        public int TitleHeight { get; set; } = 42;
+        private int _titleHeight = 42;
+
+        public int TitleHeight
+        {
+            get => _titleHeight;
+            set => SetProperty(ref _titleHeight, value);
+        }
+
         /// <summary>
         /// The height of the title bar / caption of the window
         /// </summary>
         public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder);
 
+
         /// <summary>
         /// True if we should have a dimmed overlay on the window
         /// such as when a popup is visible or the window is not focused
         /// </summary>
-        public bool DimmableOverlayVisible { get; set; }
+        private bool _dimmableOverlayVisible;
+
+        public bool DimmableOverlayVisible
+        {
+            get => _dimmableOverlayVisible;
+            set => SetProperty(ref _dimmableOverlayVisible, value);
+        }
 
         #endregion
 

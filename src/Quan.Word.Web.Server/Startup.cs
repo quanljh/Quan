@@ -107,9 +107,6 @@ namespace Quan.Word.Web.Server
             // Use Quan Framework
             app.UseQuanFramework();
 
-            // Setup Identity
-            app.UseAuthentication();
-
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
@@ -119,12 +116,18 @@ namespace Quan.Word.Web.Server
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            // Adds route matching to the middleware pipeline. The middleware looks at the set of endpoints defined in the app,
+            // and selects the best match based on the request
             app.UseRouting();
 
+            // Setup Identity
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            // Adds endpoint execution to the middleware pipeline. It runs the delegate associated with the selected endpoint.
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

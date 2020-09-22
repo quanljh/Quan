@@ -17,17 +17,35 @@ namespace Quan.Word
         /// <summary>
         /// The username of the user
         /// </summary>
-        public string Username { get; set; }
+        private string _username;
+
+        public string Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value);
+        }
 
         /// <summary>
         /// The email of the user
         /// </summary>
-        public string Email { get; set; }
+        private string _email;
+
+        public string Email
+        {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
 
         /// <summary>
         /// A flag indication if the Register command is running
         /// </summary>
-        public bool RegisterIsRunning { get; set; }
+        private bool _registerIsRunning;
+
+        public bool RegisterIsRunning
+        {
+            get => _registerIsRunning;
+            set => SetProperty(ref _registerIsRunning, value);
+        }
 
         #endregion
 

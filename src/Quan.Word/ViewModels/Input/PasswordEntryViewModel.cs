@@ -8,7 +8,7 @@ namespace Quan.Word
 {
     /// <summary>
     /// The view model for a password entry to edit a password 
-    /// <summary>
+    /// </summary>
     public class PasswordEntryViewModel : ViewModelBase
     {
         #region Public Properties
@@ -16,47 +16,101 @@ namespace Quan.Word
         /// <summary>
         /// The label to identify what this value is for
         /// </summary>
-        public string Label { get; set; }
+        private string _label;
+
+        public string Label
+        {
+            get => _label;
+            set => SetProperty(ref _label, value);
+        }
 
         /// <summary>
         /// The fake password display string
         /// </summary>
-        public string FakePassword { get; set; }
+        private string _fakePassword;
+
+        public string FakePassword
+        {
+            get => _fakePassword;
+            set => SetProperty(ref _fakePassword, value);
+        }
 
         /// <summary>
         /// The current password hint text
         /// </summary>
-        public string CurrentPasswordHintText { get; set; }
+        private string _currentPasswordHintText;
+
+        public string CurrentPasswordHintText
+        {
+            get => _currentPasswordHintText;
+            set => SetProperty(ref _currentPasswordHintText, value);
+        }
 
         /// <summary>
         /// The new password hint text
         /// </summary>
-        public string NewPasswordHintText { get; set; }
+        private string _newPasswordHintText;
+
+        public string NewPasswordHintText
+        {
+            get => _newPasswordHintText;
+            set => SetProperty(ref _newPasswordHintText, value);
+        }
 
         /// <summary>
         /// The confirm password hint text
         /// </summary>
-        public string ConfirmPasswordHintText { get; set; }
+        private string _confirmPasswordHintText;
+
+        public string ConfirmPasswordHintText
+        {
+            get => _confirmPasswordHintText;
+            set => SetProperty(ref _confirmPasswordHintText, value);
+        }
 
         /// <summary>
         /// The current saved password
         /// </summary>
-        public SecureString CurrentPassword { get; set; }
+        private SecureString _currentPassword;
+
+        public SecureString CurrentPassword
+        {
+            get => _currentPassword;
+            set => SetProperty(ref _currentPassword, value);
+        }
 
         /// <summary>
         /// The current non-commit edited password
         /// </summary>
-        public SecureString NewPassword { get; set; }
+        private SecureString _newPassword;
+
+        public SecureString NewPassword
+        {
+            get => _newPassword;
+            set => SetProperty(ref _newPassword, value);
+        }
 
         /// <summary>
         /// The current non-commit edited confirmed password
         /// </summary>
-        public SecureString ConfirmPassword { get; set; }
+        private SecureString _confirmPassword;
+
+        public SecureString ConfirmPassword
+        {
+            get => _confirmPassword;
+            set => SetProperty(ref _confirmPassword, value);
+        }
 
         /// <summary>
         /// Indicates if the current text is in edit mode
         /// </summary>
-        public bool Editing { get; set; }
+        private bool _editing;
+
+        public bool Editing
+        {
+            get => _editing;
+            set => SetProperty(ref _editing, value);
+        }
 
         #endregion
 

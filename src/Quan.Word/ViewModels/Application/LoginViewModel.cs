@@ -14,12 +14,24 @@ namespace Quan.Word
         /// <summary>
         /// The Email of the user
         /// </summary>
-        public string Email { get; set; }
+        private string _email;
+
+        public string Email
+        {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
 
         /// <summary>
         /// A flag indication if the Login command is running
         /// </summary>
-        public bool LoginIsRunning { get; set; }
+        private bool _loginIsRunning;
+
+        public bool LoginIsRunning
+        {
+            get => _loginIsRunning;
+            set => SetProperty(ref _loginIsRunning, value);
+        }
 
         #endregion
 

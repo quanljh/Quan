@@ -3,7 +3,6 @@ using CommonServiceLocator;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using PropertyChanged;
 using Quan.Word.Core;
 using System;
 using System.Collections;
@@ -18,9 +17,8 @@ namespace Quan.Word
 {
     /// <summary>
     /// A base view model that fires Property Changed events as needed
-    /// Either <see cref="AddINotifyPropertyChangedInterfaceAttribute"/> or <see cref="BindableBase"/> is fine to use.
+    /// Using <see cref="BindableBase"/> to raise PropertyChanged event
     /// </summary>
-    [AddINotifyPropertyChangedInterface]
     public abstract class ViewModelBase : BindableBase, INotifyDataErrorInfo
     {
         public DelegateCommand FinishInteractionCommand { get; set; }

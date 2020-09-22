@@ -8,44 +8,55 @@ namespace Quan.Word
     /// </summary>
     public class ChatMessageListItemImageAttachmentModel : ViewModelBase
     {
-        #region Private Members
-
-        /// <summary>
-        /// The thumbnail URL of this attachment
-        /// </summary>
-        private string mThumbnailUrl;
-
-        #endregion
-
         /// <summary>
         /// The title of this image file
         /// </summary>
-        public string Title { get; set; }
+        private string _title;
+
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
 
         /// <summary>
         /// The orginal file name of the attachment
         /// </summary>
-        public string FileName { get; set; }
+        private string _fileName;
+
+        public string FileName
+        {
+            get => _fileName;
+            set => SetProperty(ref _fileName, value);
+        }
 
         /// <summary>
         /// The file size in bytes of this attchment
         /// </summary>
-        public long FileSize { get; set; }
+        private long _fileSize;
+
+        public long FileSize
+        {
+            get => _fileSize;
+            set => SetProperty(ref _fileSize, value);
+        }
 
         /// <summary>
         /// The thumbnail URL of this attachment
         /// </summary>
+        private string _thumbnailUrl;
+
         public string ThumbnaiUrl
         {
-            get => mThumbnailUrl;
+            get => _thumbnailUrl;
             set
             {
                 // If value hasn't changed, return
-                if (value != null && value == mThumbnailUrl)
+                if (value != null && value == _thumbnailUrl)
                     return;
 
                 //Update value
-                mThumbnailUrl = value;
+                SetProperty(ref _thumbnailUrl, value);
 
                 //TODO: Download image from website
                 //      Save file to local storage/cache
@@ -56,10 +67,21 @@ namespace Quan.Word
             }
         }
 
+
         /// <summary>
         /// The local file path on this machine to the downloaded thumbnail
         /// </summary>
-        public string LocalFilePath { get; set; }
+        private string _localFilePath;
+
+        public string LocalFilePath
+        {
+            get => _localFilePath;
+            set
+            {
+                if (SetProperty(ref _localFilePath, value))
+                    RaisePropertyChanged(nameof(ImageLoaded));
+            }
+        }
 
         /// <summary>
         /// Indicates if an image has loaded

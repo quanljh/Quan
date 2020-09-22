@@ -13,17 +13,35 @@ namespace Quan.Word
         /// <summary>
         /// The background color of the bubble in ARGB value
         /// </summary>
-        public string BubbleBackground { get; set; }
+        private string _bubbleBackground;
+
+        public string BubbleBackground
+        {
+            get => _bubbleBackground;
+            set => SetProperty(ref _bubbleBackground, value);
+        }
 
         /// <summary>
         /// The alignment of the bubble arrow
         /// </summary>
-        public ElementHorizontalAlignment ArrowAlignment { get; set; }
+        private ElementHorizontalAlignment _arrowAlignment;
+
+        public ElementHorizontalAlignment ArrowAlignment
+        {
+            get => _arrowAlignment;
+            set => SetProperty(ref _arrowAlignment, value);
+        }
 
         /// <summary>
         /// The content inside of this popup menu
         /// </summary>
-        public MenuViewModel Content { get; set; }
+        private MenuViewModel _content;
+
+        public MenuViewModel Content
+        {
+            get => _content;
+            set => SetProperty(ref _content, value);
+        }
 
         #endregion
 
