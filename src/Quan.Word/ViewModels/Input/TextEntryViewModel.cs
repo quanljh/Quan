@@ -53,6 +53,17 @@ namespace Quan.Word
             set => SetProperty(ref _editing, value);
         }
 
+        /// <summary>
+        /// Indicates if the current control is pending an update (in progress)
+        /// </summary>
+        private bool _working;
+        public bool Working
+        {
+            get => _working;
+            set => SetProperty(ref _working, value);
+        }
+
+
         #endregion
 
         #region Public Commands

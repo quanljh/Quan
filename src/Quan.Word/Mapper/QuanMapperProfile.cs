@@ -24,7 +24,7 @@ namespace Quan.Word
         public QuanMapperProfile()
         {
             CreateMap<PatientUIModel, PatientUIModel>().ReverseMap();
-            CreateMap<LoginResultApiModel, LoginCredentialsDataModel>().ReverseMap();
+            CreateMap<UserProfileDetailsApiModel, LoginCredentialsDataModel>().ReverseMap();
         }
 
         #endregion

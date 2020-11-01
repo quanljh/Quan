@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Quan.Word.Core;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -11,6 +11,7 @@ namespace Quan.Word.Web.Server
     /// <summary>
     /// Manages the Web API calls
     /// </summary>
+    [AuthorizeToken]
     public class ApiController : Controller
     {
         #region Protected Members
@@ -42,7 +43,8 @@ namespace Quan.Word.Web.Server
         /// <param name="context">The injected context</param>
         /// <param name="userManager">The Identity sign in manager</param>
         /// <param name="signInManager">The Identity user manager</param>
-        public ApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public ApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             mContext = context;
             mUserManager = userManager;
@@ -51,13 +53,17 @@ namespace Quan.Word.Web.Server
 
         #endregion
 
+        #region Login / Register / Verify
+
         /// <summary>
         /// Tries to register for a new account on the server
         /// </summary>
-        /// <param name="registerCredentials">The registeration details</param>
+        /// <param name="registerCredentials">The registration details</param>
         /// <returns>Returns the result of the register request</returns>
+        [AllowAnonymous]
         [Route("api/register")]
-        public async Task<ApiResponse<RegisterResultApiModel>> RegisterAsync([FromBody] RegisterCredentialsApiModel registerCredentials)
+        public async Task<ApiResponse<RegisterResultApiModel>> RegisterAsync(
+            [FromBody] RegisterCredentialsApiModel registerCredentials)
         {
             // TODO: Localize all strings
             // The message when we fail to login
@@ -96,16 +102,10 @@ namespace Quan.Word.Web.Server
             if (result.Succeeded)
             {
                 // Get the user details
-                var userIdentity = await mUserManager.FindByNameAsync(registerCredentials.Username);
+                var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
 
-                // Generate an email verification code
-                var emailVerificationCode = await mUserManager.GenerateEmailConfirmationTokenAsync(user);
-
-                // TODO: Replace with APIRoutes that will contain the static routes to use
-                var confirmationUrl = $"http://{Request.Host.Value}/api/verify/email/{HttpUtility.UrlEncode(userIdentity.Id)}/{HttpUtility.UrlEncode(emailVerificationCode)}";
-
-                // Email the user the verification code
-                await QuanEmailSender.SendUserVerificationEmailAsync(null, userIdentity.Email, confirmationUrl);
+                // Send email verification
+                await SendUserEmailVerificationAsync(user);
 
                 // Return valid response containing all users details
                 return new ApiResponse<RegisterResultApiModel>()
@@ -126,22 +126,26 @@ namespace Quan.Word.Web.Server
                 return new ApiResponse<RegisterResultApiModel>()
                 {
                     // Aggregate all errors into a single error string
-                    ErrorMessage = result.Errors?.ToList()
-                        .Select(f => f.Description)
-                        .Aggregate((a, b) => $"{a}{Environment.NewLine}{b}")
-
+                    ErrorMessage = result.Errors.AggregateErrors()
                 };
         }
 
+        /// <summary>
+        /// Logs in a user token-based authentication
+        /// </summary>
+        /// <param name="loginCredentials"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
         [Route("api/login")]
-        public async Task<ApiResponse<LoginResultApiModel>> LogInAsync([FromBody] LoginCredentialsApiModel loginCredentials)
+        public async Task<ApiResponse<UserProfileDetailsApiModel>> LogInAsync(
+            [FromBody] LoginCredentialsApiModel loginCredentials)
         {
             // TODO: Localize all strings
             // The message when we fail to login
             var invalidErrorMessage = "Invalid username or password";
 
             // The error response for a failed login
-            var errorResponse = new ApiResponse<LoginResultApiModel>
+            var errorResponse = new ApiResponse<UserProfileDetailsApiModel>
             {
                 // Set error message
                 ErrorMessage = invalidErrorMessage
@@ -159,11 +163,11 @@ namespace Quan.Word.Web.Server
             var isEmail = loginCredentials.UsernameOrEmail.Contains("@");
 
             // Get the user details
-            var user = isEmail ?
+            var user = isEmail
                 // Find by email
-                await mUserManager.FindByEmailAsync(loginCredentials.UsernameOrEmail) :
+                ? await mUserManager.FindByEmailAsync(loginCredentials.UsernameOrEmail)
                 // Find by username
-                await mUserManager.FindByNameAsync(loginCredentials.UsernameOrEmail);
+                : await mUserManager.FindByNameAsync(loginCredentials.UsernameOrEmail);
 
             // if we failed find a user
             if (user == null)
@@ -188,10 +192,10 @@ namespace Quan.Word.Web.Server
 
 
             // Return token to user
-            return new ApiResponse<LoginResultApiModel>
+            return new ApiResponse<UserProfileDetailsApiModel>
             {
                 // Pass back the user details and the token
-                Response = new LoginResultApiModel
+                Response = new UserProfileDetailsApiModel
                 {
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -202,6 +206,7 @@ namespace Quan.Word.Web.Server
             };
         }
 
+        [AllowAnonymous]
         [Route("api/verify/email/{userId}/{emailToken}")]
         [HttpGet]
         public async Task<ActionResult> VerifyEmailAsync(string userId, string emailToken)
@@ -229,6 +234,142 @@ namespace Quan.Word.Web.Server
             return Content("Invalid Email Verification Token :(");
         }
 
+        #endregion
+
+        /// <summary>
+        /// Returns the users profile details based on the authentication user
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/user/profile")]
+        public async Task<ApiResponse<UserProfileDetailsApiModel>> GetUserProfileAsync()
+        {
+            // Get user claims
+            var user = await mUserManager.GetUserAsync(HttpContext.User);
+
+            // If we have no user
+            if (user == null)
+                // Return error
+                return new ApiResponse<UserProfileDetailsApiModel>
+                {
+                    // TODO: Localization
+                    ErrorMessage = "User not found"
+                };
+
+            // Return token to user
+            return new ApiResponse<UserProfileDetailsApiModel>
+            {
+                // Pass back the user details and the token
+                Response = new UserProfileDetailsApiModel()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                }
+            };
+        }
+
+        /// <summary>
+        /// Attempts to update the users profile details
+        /// </summary>
+        /// <param name="model">The user profile details to update</param>
+        /// <returns>
+        ///     Returns successful response if the update was successful,
+        ///     Otherwise returns the error reasons for the failure
+        /// </returns>
+        [Route("api/user/profile/update")]
+        public async Task<ApiResponse> UpdateUserProfileAsync([FromBody] UpdateUserProfileApiModel model)
+        {
+            #region Declare Variables
+
+            // Make a list of empty errors
+            var errors = new List<string>();
+
+            // Keep track of email change
+            var emailChanged = false;
+
+            #endregion
+
+            #region Get User
+
+            // Get the current user
+            var user = await mUserManager.GetUserAsync(HttpContext.User);
+
+            // If we have no user...
+            if (user == null)
+                return new ApiResponse
+                {
+                    // TODO: Localization
+                    ErrorMessage = "User not found"
+                };
+
+            #endregion
+
+            #region Update Profile
+
+            // If we have a first name...
+            if (model.FirstName.IsNullOrWhiteSpace())
+                // Update the profile details
+                user.FirstName = model.FirstName;
+
+            // If we have a last name...
+            if (model.LastName.IsNullOrWhiteSpace())
+                // Update the profile details
+                user.LastName = model.LastName;
+
+            // If we have a email...
+            if (model.Email.IsNullOrWhiteSpace() &&
+                // And it is not the same
+                string.Equals(model.Email.Replace(" ", ""), user.NormalizedEmail))
+            {
+                // Update the email
+                user.Email = model.Email;
+
+                // Un-verify the email
+                user.EmailConfirmed = false;
+
+                // Flag we have changed email
+                emailChanged = true;
+            }
+
+            // If we have a username...
+            if (model.UserName.IsNullOrWhiteSpace())
+                // Update the profile details
+                user.UserName = model.UserName;
+
+            #endregion
+
+            #region Save Profile
+
+            // Attempt to commit changes to data store
+            var result = await mUserManager.UpdateAsync(user);
+
+            // If successful, send out email verification
+            if (result.Succeeded)
+                // Send email verification
+                await SendUserEmailVerificationAsync(user);
+
+            #endregion
+
+            #region Respond
+
+            // If we were successful...
+            if (result.Succeeded)
+                // Return successful response
+                return new ApiResponse();
+            // Otherwise if it failed...
+            else
+            {
+                // Return the failed response
+                return new ApiResponse
+                {
+                    ErrorMessage = result.Errors.AggregateErrors()
+                };
+            }
+
+            #endregion
+        }
+
         [AuthorizeToken]
         [Route("api/private")]
         public IActionResult Private()
@@ -237,5 +378,30 @@ namespace Quan.Word.Web.Server
 
             return Ok(new { privateData = $"some secret for {user.Identity.Name}" });
         }
+
+        #region Private Helpers
+
+        /// <summary>
+        /// Sends the given user a new verify email link
+        /// </summary>
+        /// <param name="user">The user to send the link to</param>
+        /// <returns></returns>
+        private async Task SendUserEmailVerificationAsync(ApplicationUser user)
+        {
+            // Get the user details
+            var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
+
+            // Generate an email verification code
+            var emailVerificationCode = await mUserManager.GenerateEmailConfirmationTokenAsync(user);
+
+            // TODO: Replace with APIRoutes that will contain the static routes to use
+            var confirmationUrl =
+                $"http://{Request.Host.Value}/api/verify/email/{HttpUtility.UrlEncode(userIdentity.Id)}/{HttpUtility.UrlEncode(emailVerificationCode)}";
+
+            // Email the user the verification code
+            await QuanEmailSender.SendUserVerificationEmailAsync(null, userIdentity.Email, confirmationUrl);
+        }
+
+        #endregion
     }
 }

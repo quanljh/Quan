@@ -57,6 +57,7 @@ namespace Quan.Word.Web.Server
             // Add JWT Authentication for api client
             services.AddAuthentication().AddJwtBearer(options =>
             {
+                // Set validation parameters
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -79,7 +80,7 @@ namespace Quan.Word.Web.Server
                 option.Password.RequireUppercase = false;
                 option.Password.RequireNonAlphanumeric = false;
 
-                // Make sure users have uqiue Email address
+                // Make sure users have unique Email address
                 option.User.RequireUniqueEmail = true;
             });
 
@@ -99,6 +100,9 @@ namespace Quan.Word.Web.Server
                 options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
+
+            // After upgrading from 2.2 to 3.1 JSON could not handle cases with “new” property declaration.
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,6 +110,7 @@ namespace Quan.Word.Web.Server
         {
             // Use Quan Framework
             app.UseQuanFramework();
+
 
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
@@ -116,7 +121,7 @@ namespace Quan.Word.Web.Server
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             // Adds route matching to the middleware pipeline. The middleware looks at the set of endpoints defined in the app,

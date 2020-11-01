@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
 
-    <!--  Grey underline  -->
+    <!--  Grey underline  --> 
     <Border BorderBrush="{StaticResource ForegroundGrayBrush}" BorderThickness="0,0,0,0.5">
 
         <Grid Background="{StaticResource ForegroundLightBrush}">

@@ -93,9 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Quan.Framework">
-      <Version>1.0.3</Version>
+      <Version>1.0.7.2</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

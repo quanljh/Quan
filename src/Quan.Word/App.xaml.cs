@@ -6,7 +6,6 @@ using Quan.Word.Core;
 using Quan.Word.Relational;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Extensions.Configuration;
 using Unity;
 using Unity.ServiceLocation;
 using static Quan.FrameworkDI;
@@ -87,7 +86,7 @@ namespace Quan.Word
         {
             // Setup the Quan Framework
             Framework.Construct<DefaultFrameworkConstruction>()
-                .AddFileLogger()
+                .AddFileLogger("QuanLog.txt")
                 .AddClientDataStore()
                 .AddQuanWordViewModels()
                 .AddQuanWordClientServices()
