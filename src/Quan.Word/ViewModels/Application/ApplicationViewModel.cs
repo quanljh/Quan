@@ -88,7 +88,7 @@ namespace Quan.Word
         public async Task HandleSuccessfulLoginAsync(UserProfileDetailsApiModel loginResult)
         {
             // Store this in the client data store
-            await ClientDataStore.SaveLoginCredentialsAsync(Mapper.Map<LoginCredentialsDataModel>(loginResult));
+            await ClientDataStore.SaveLoginCredentialsAsync(loginResult);
 
             // Load new settings
             await SettingsVM.LoadAsync();

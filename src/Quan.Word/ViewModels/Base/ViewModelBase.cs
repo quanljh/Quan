@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using Prism.Commands;
-using Prism.Events;
 using Prism.Mvvm;
 using Quan.Word.Core;
 using System;
@@ -11,7 +9,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Unity;
 
 namespace Quan.Word
 {
@@ -22,12 +19,6 @@ namespace Quan.Word
     public abstract class ViewModelBase : BindableBase, INotifyDataErrorInfo
     {
         public DelegateCommand FinishInteractionCommand { get; set; }
-
-        public IEventAggregator EventAggregator { get; }
-
-        public IUnityContainer Container { get; }
-
-        public IMapper Mapper { get; }
 
         private readonly Dictionary<string, List<string>> _errorsByPropertyName = new Dictionary<string, List<string>>();
 
@@ -43,9 +34,6 @@ namespace Quan.Word
             // Don't set when we are in design-mode
             if (ServiceLocator.IsLocationProviderSet)
             {
-                Container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-                EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
-                Mapper = ServiceLocator.Current.GetInstance<IMapper>();
             }
 
             FinishInteractionCommand = new DelegateCommand(() => { FinishInteraction?.Invoke(); });
@@ -63,7 +51,7 @@ namespace Quan.Word
         /// <param name="updatingFlag">The boolean property flag defining if the command is already running</param>
         /// <param name="action">The action to run if the command is not already running</param>
         /// <returns></returns>
-        protected async Task RunCommand(Expression<Func<bool>> updatingFlag, Func<Task> action)
+        protected async Task RunCommandAsync(Expression<Func<bool>> updatingFlag, Func<Task> action)
         {
             //Check if the flag property is true (meaning the function is already running)
             if (updatingFlag.GetPropertyValue())

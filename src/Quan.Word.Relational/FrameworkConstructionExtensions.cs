@@ -22,11 +22,11 @@ namespace Quan.Word.Relational
             {
                 // Setup connection string
                 options.UseSqlite(construction.Configuration.GetConnectionString("ClientDataStoreConnection"));
-            });
+            }, ServiceLifetime.Transient);
 
             // Add client data store for easy access/use of the backing data store
             // Make it scoped so we can inject the scoped DbContext
-            construction.Services.AddScoped<IClientDataStore>(
+            construction.Services.AddTransient<IClientDataStore>(
                 provider => new BaseClientDataStore(provider.GetService<ClientDataStoreDbContext>()));
 
             // Return framework for chaining

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Quan.Word.Core;
 
 namespace Quan.Word.Relational
@@ -16,7 +13,7 @@ namespace Quan.Word.Relational
         /// <summary>
         /// The client login credentials
         /// </summary>
-        public DbSet<LoginCredentialsDataModel> LoginCredentials { get; set; }
+        public DbSet<UserProfileDetailsApiModel> LoginCredentials { get; set; }
 
         #endregion
 
@@ -45,11 +42,11 @@ namespace Quan.Word.Relational
             // --------------------------
             //
             // Set Id as primary key
-            modelBuilder.Entity<LoginCredentialsDataModel>().HasKey(a => a.Id);
+            modelBuilder.Entity<UserProfileDetailsApiModel>().HasKey(a => a.Id);
 
 
             // TODO: Set up limits
-            //modelBuilder.Entity<LoginCredentialsDataModel>().Property(a => a.Firstname).HasMaxLength(50);
+            //modelBuilder.Entity<UserProfileDetailsApiModel>().Property(a => a.Firstname).HasMaxLength(50);
         }
 
         #endregion

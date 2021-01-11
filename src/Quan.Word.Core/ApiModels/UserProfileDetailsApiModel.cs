@@ -7,11 +7,12 @@
     {
         #region Public properties
 
+        public string Id { get; set; }
+
         /// <summary>
-        /// The authentication token used to stay authenticated through future requests
+        /// The users user name
         /// </summary>
-        /// <remarks>The Token is only provided when called from the login methods</remarks>
-        public string Token { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// The users first name
@@ -24,14 +25,15 @@
         public string LastName { get; set; }
 
         /// <summary>
-        /// The users user name
-        /// </summary>
-        public string UserName { get; set; }
-
-        /// <summary>
         /// The users email
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// The authentication token used to stay authenticated through future requests
+        /// </summary>
+        /// <remarks>The Token is only provided when called from the login methods</remarks>
+        public string Token { get; set; }
 
         #endregion
 

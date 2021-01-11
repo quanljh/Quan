@@ -1,9 +1,25 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="BackgroundLight">#efefef</Color>
-    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}" />
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.ControlLibrary">
 
-    <Color x:Key="BackgroundVeryLight">#fafafa</Color>
-    <SolidColorBrush x:Key="BackgroundVeryLightBrush" Color="{StaticResource BackgroundVeryLight}" />
+    <Color x:Key="Quan.Colors.Background">#ffffff</Color>
+    <Color x:Key="Quan.Colors.BackgroundLight">#fafafa</Color>
+    <Color x:Key="Quan.Colors.BorderBrush">#efefef</Color>
+    <Color x:Key="Quan.Colors.Foreground">#000000</Color>
+    <Color x:Key="Quan.Colors.ForegroundLight">#686868</Color>
+    <Color x:Key="Quan.Colors.ForegroundVeryLight">#bdbdbd</Color>
+
+    <Color x:Key="Quan.Colors.IconHover">#20000000</Color>
+    <Color x:Key="Quan.Colors.IconForeground">#ffffff</Color>
+
+    <Color x:Key="Quan.Colors.PrimaryColor">#3099c5</Color>
+    <Color x:Key="Quan.Colors.LightPrimaryColor">#45b6e5</Color>
+    <Color x:Key="Quan.Colors.VeryLightPrimaryColor">#c3e5f3</Color>
+    <Color x:Key="Quan.Colors.DarkPrimaryColor">#c3e5f3</Color>
+
+    <Color x:Key="Quan.Colors.WarningColor">#ffa800</Color>
+    <Color x:Key="Quan.Colors.ErrorColor">#ff4747</Color>
+    <Color x:Key="Quan.Colors.SuccessColor">#00c541</Color>
+    <Color x:Key="Quan.Colors.FocusColor">#ff82cf</Color>
+
 
     <Color x:Key="ForegroundMain">#686868</Color>
     <SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}" />
@@ -43,27 +59,6 @@
 
     <Color x:Key="WordGreen">#00c541</Color>
     <SolidColorBrush x:Key="WordGreenBrush" Color="{StaticResource WordGreen}" />
-
-    <!--  TextBox  -->
-    <SolidColorBrush x:Key="TextBox.Background.Default" Color="#ffffff" />
-    <SolidColorBrush x:Key="TextBox.Background.Focus" Color="#ff82cf" />
-    <SolidColorBrush x:Key="TextBox.Foreground.Default" Color="#000000" />
-    <SolidColorBrush x:Key="TextBox.Border.Default" Color="#bdbdbd" />
-    <SolidColorBrush x:Key="TextBox.Border.MouseOver" Color="#3099c5" />
-    <SolidColorBrush x:Key="TextBox.Border.Focus" Color="#0c6991" />
-    <SolidColorBrush x:Key="TextBox.Border.Error" Color="#ff4747" />
-
-    <!--  DataGrid  -->
-    <SolidColorBrush x:Key="DataGrid.Border.Common" Color="#bdbdbd" />
-    <SolidColorBrush x:Key="DataGrid.Border.LightGray" Color="#dddddd" />
-    <SolidColorBrush x:Key="DataGrid.Border.DarkGray" Color="#999999" />
-    <SolidColorBrush x:Key="DataGrid.Background.Common" Color="#4cc5e0" />
-    <SolidColorBrush x:Key="DataGrid.Background.MouseOver" Color="#93e0f5" />
-    <SolidColorBrush x:Key="DataGridRow.Background.Selection" Color="#85d7ed" />
-    <SolidColorBrush x:Key="DataGrid.Border.MouseOver" Color="#74d7f2" />
-    <SolidColorBrush x:Key="DataGrid.Background.Pressed" Color="#328fb8" />
-    <SolidColorBrush x:Key="DataGrid.Border.Pressed" Color="#328fb8" />
-    <SolidColorBrush x:Key="DataGrid.Background.Disabled" Color="#FFF4F4F4" />
 
 
 </ResourceDictionary>

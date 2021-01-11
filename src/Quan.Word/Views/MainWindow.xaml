@@ -26,10 +26,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
                         <!--  Outer border with the drop shadow margin  -->
-                        <Border
-                            Padding="{Binding OuterMarginSize, FallbackValue=0}"
-                            BorderBrush="{StaticResource ForegroundGrayBrush}"
-                            BorderThickness="{Binding FlatBorderThickness}">
+                        <Border Padding="{Binding OuterMarginSize, FallbackValue=0}" BorderBrush="{StaticResource ForegroundGrayBrush}" BorderThickness="{Binding FlatBorderThickness}">
                             <!--  Main window outline  -->
                             <Grid>
 
@@ -41,16 +38,10 @@
                                     CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
 
                                 <!--  Opacity mask for corners on grid  -->
-                                <Border
-                                    x:Name="Container"
-                                    Background="{StaticResource BackgroundLightBrush}"
-                                    CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
+                                <Border x:Name="Container" Background="{StaticResource BackgroundLightBrush}" CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
 
                                 <!--  Window border and drop shadow  -->
-                                <Border
-                                    x:Name="RadiusBorder"
-                                    Background="{StaticResource ForegroundLightBrush}"
-                                    CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}">
+                                <Border x:Name="RadiusBorder" Background="{StaticResource ForegroundLightBrush}" CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}">
                                     <Border.Effect>
                                         <DropShadowEffect Opacity="0.2" ShadowDepth="0.5" />
                                     </Border.Effect>
@@ -91,45 +82,24 @@
                                         </Button>
 
                                         <!--  Title  -->
-                                        <Viewbox
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="3"
-                                            Margin="5">
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
                                             <StackPanel>
-                                                <TextBlock
-                                                    Margin="0,0,0,-5"
-                                                    FontFamily="{StaticResource LatoBold}"
-                                                    FontSize="{StaticResource FontSizeLarge}">
+                                                <TextBlock Margin="0,0,0,-5" FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeLarge}">
                                                     <Run Foreground="{StaticResource WordOrangeBrush}" Text="W" /><Run Foreground="{StaticResource WordBlueBrush}" Text="O" /><Run Foreground="{StaticResource WordRedBrush}" Text="R" /><Run Foreground="{StaticResource WordGreenBrush}" Text="D" />
                                                 </TextBlock>
-                                                <TextBlock
-                                                    Foreground="{StaticResource ForegroundGrayBrush}"
-                                                    Text="By Quanljh"
-                                                    TextAlignment="Center" />
+                                                <TextBlock Foreground="{StaticResource ForegroundGrayBrush}" Text="By Quanljh" TextAlignment="Center" />
                                             </StackPanel>
                                         </Viewbox>
 
                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
-                                            <Button
-                                                Command="{Binding MinimizeCommand}"
-                                                Content="_"
-                                                Style="{StaticResource WindowControlButton}" />
-                                            <Button
-                                                Command="{Binding MaximizeCommand}"
-                                                Content="[ ]"
-                                                Style="{StaticResource WindowControlButton}" />
-                                            <Button
-                                                Command="{Binding CloseCommand}"
-                                                Content="X"
-                                                Style="{StaticResource WindowCloseButton}" />
+                                            <Button Command="{Binding MinimizeCommand}" Content="_" Style="{StaticResource WindowControlButton}" />
+                                            <Button Command="{Binding MaximizeCommand}" Content="[ ]" Style="{StaticResource WindowControlButton}" />
+                                            <Button Command="{Binding CloseCommand}" Content="X" Style="{StaticResource WindowCloseButton}" />
                                         </StackPanel>
                                     </Grid>
 
                                     <!--  Page Content  -->
-                                    <Border
-                                        Grid.Row="1"
-                                        Padding="{Binding InnerContentPadding}"
-                                        ClipToBounds="True">
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}" ClipToBounds="True">
                                         <AdornerDecorator>
                                             <ContentPresenter Content="{TemplateBinding Content}" />
                                         </AdornerDecorator>
@@ -170,10 +140,7 @@
             </Grid.ColumnDefinitions>
 
             <!--  Setting page  -->
-            <local:SettingsControl
-                Grid.ColumnSpan="2"
-                Panel.ZIndex="9"
-                local:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.SettingsMenuVisible, Source={x:Static local:ViewModelLocator.Instance}}" />
+            <local:SettingsControl Grid.ColumnSpan="2" Panel.ZIndex="9" local:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.SettingsMenuVisible, Source={x:Static local:ViewModelLocator.Instance}}" />
 
             <!--  Dimmed overlay  -->
             <Border
@@ -185,10 +152,7 @@
             </Border>
 
             <!--  Side Menu  -->
-            <local:SideMenuControl
-                Grid.Column="0"
-                Width="300"
-                local:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static local:ViewModelLocator.Instance}}">
+            <local:SideMenuControl Grid.Column="0" Width="300" local:AnimateSlideInFromeLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, Source={x:Static local:ViewModelLocator.Instance}}">
                 <local:ChatListControl />
             </local:SideMenuControl>
 

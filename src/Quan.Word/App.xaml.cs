@@ -1,13 +1,7 @@
-﻿using AutoMapper;
-using CommonServiceLocator;
-using Prism.Events;
-using Prism.Mvvm;
-using Quan.Word.Core;
+﻿using Quan.Word.Core;
 using Quan.Word.Relational;
 using System.Threading.Tasks;
 using System.Windows;
-using Unity;
-using Unity.ServiceLocation;
 using static Quan.FrameworkDI;
 using static Quan.Word.DI;
 
@@ -18,10 +12,6 @@ namespace Quan.Word
     /// </summary>
     public partial class App : Application
     {
-        private IUnityContainer Container { get; } = new UnityContainer();
-
-        private EventAggregator EventAggregator { get; } = new EventAggregator();
-
         /// <summary>
         /// Custom startup so we load our IoC immediately before anything else
         /// </summary>
@@ -30,9 +20,6 @@ namespace Quan.Word
         {
             // Let the base application do what it needs
             base.OnStartup(e);
-
-            // Initialize Unity Container
-            InitializeContainer();
 
             // Setup the main application
             await ApplicationSetupAsync();
@@ -49,7 +36,8 @@ namespace Quan.Word
                     // Otherwise, go to login page
                     ApplicationPage.Login);
 
-            var window = Container.Resolve<MainWindow>();
+            var window = new MainWindow();
+
             if (window.DataContext is ViewModelBase vb)
             {
                 vb.FinishInteraction = () =>
@@ -59,28 +47,6 @@ namespace Quan.Word
             }
             window.Show();
         }
-
-        private void InitializeContainer()
-        {
-            Container.RegisterInstance(typeof(IUnityContainer), Container);
-            Container.RegisterInstance(typeof(IEventAggregator), EventAggregator);
-
-            // Initialize a mapper configuration
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<QuanMapperProfile>());
-            // Create a mapper
-            var mapper = config.CreateMapper();
-            // Register the mapper instance
-            Container.RegisterInstance(typeof(IMapper), mapper);
-
-            //Create a UnityServiceLocator which inherits from ServiceLocatorImplBase implement the interface IServiceLocator
-            var provider = new UnityServiceLocator(Container);
-            //IoC 解耦(To lose the coupling between code and the IoC container)
-            ServiceLocator.SetLocatorProvider(() => provider);
-
-            //Override Activator.CreateInstance(type) to IUnityContainer and use it to resolve our view models
-            ViewModelLocationProvider.SetDefaultViewModelFactory(x => Container.Resolve(x));
-        }
-
 
         private async Task ApplicationSetupAsync()
         {

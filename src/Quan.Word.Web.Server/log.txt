@@ -1,0 +1,167 @@
+[2020-11-10 09:18:00]User profile is available. Using 'C:\Users\quanljh\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2020-11-10 09:18:01]Request starting HTTP/1.1 GET http://localhost:5000/  
+[2020-11-10 09:18:01]Executing endpoint 'Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server)'
+[2020-11-10 09:18:02]Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Quan.Word.Web.Server.HomeController (Quan.Word.Web.Server).
+[2020-11-10 09:18:02]Executing action method Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:18:03]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:18:04]Executed DbCommand (37ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+[2020-11-10 09:18:04]Executed DbCommand (181ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+[2020-11-10 09:18:04]Executed DbCommand (65ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Settings] AS [s]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+[2020-11-10 09:18:04]Executed action method Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2249.3008ms.
+[2020-11-10 09:18:04]Executing ViewResult, running view Index.
+[2020-11-10 09:18:04]Executed ViewResult - view Index executed in 116.7857ms.
+[2020-11-10 09:18:04]Executed action Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server) in 2960.5702ms
+[2020-11-10 09:18:04]Executed endpoint 'Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server)'
+[2020-11-10 09:18:05]Request finished in 3191.4312ms 200 text/html; charset=utf-8
+[2020-11-10 09:18:06]Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+[2020-11-10 09:18:06]Request finished in 31.3806ms 404 
+[2020-11-10 09:20:32]Request starting HTTP/1.1 POST http://localhost:5000/api/login application/json 64
+[2020-11-10 09:20:32]Executing endpoint 'Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:20:32]Route matched with {action = "LogIn", controller = "Api"}. Executing controller action with signature System.Threading.Tasks.Task`1[Quan.Word.Core.ApiResponse`1[Quan.Word.Core.UserProfileDetailsApiModel]] LogInAsync(Quan.Word.Core.LoginCredentialsApiModel) on controller Quan.Word.Web.Server.ApiController (Quan.Word.Web.Server).
+[2020-11-10 09:20:32]Executing action method Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:20:32]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:20:33]Executed DbCommand (56ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+[2020-11-10 09:20:33]Executed action method Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 175.6614ms.
+[2020-11-10 09:20:33]Executing ObjectResult, writing value of type 'Quan.Word.Core.ApiResponse`1[[Quan.Word.Core.UserProfileDetailsApiModel, Quan.Word.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2020-11-10 09:20:33]Executed action Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server) in 554.9671ms
+[2020-11-10 09:20:33]Executed endpoint 'Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:20:33]Request finished in 983.6122ms 200 application/json; charset=utf-8
+[2020-11-10 09:20:47]Request starting HTTP/1.1 POST http://localhost:5000/api/register application/json 105
+[2020-11-10 09:20:47]Executing endpoint 'Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:20:47]Route matched with {action = "Register", controller = "Api"}. Executing controller action with signature System.Threading.Tasks.Task`1[Quan.Word.Core.ApiResponse`1[Quan.Word.Core.RegisterResultApiModel]] RegisterAsync(Quan.Word.Core.RegisterCredentialsApiModel) on controller Quan.Word.Web.Server.ApiController (Quan.Word.Web.Server).
+[2020-11-10 09:20:47]Executing action method Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:20:47]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:20:47]Executed DbCommand (17ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+[2020-11-10 09:20:47]Executed DbCommand (0ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+[2020-11-10 09:20:47]Executed DbCommand (52ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [FirstName], [LastName], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+[2020-11-10 09:20:47]Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+[2020-11-10 09:20:47]Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+[2020-11-10 09:20:49]Executed action method Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2563.6063ms.
+[2020-11-10 09:20:49]Executing ObjectResult, writing value of type 'Quan.Word.Core.ApiResponse`1[[Quan.Word.Core.RegisterResultApiModel, Quan.Word.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2020-11-10 09:20:49]Executed action Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server) in 2688.0345ms
+[2020-11-10 09:20:49]Executed endpoint 'Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:20:49]Request finished in 2779.9751ms 200 application/json; charset=utf-8
+[2020-11-10 09:30:03]Request starting HTTP/1.1 POST http://localhost:5000/api/login application/json 49
+[2020-11-10 09:30:03]Executing endpoint 'Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:30:03]Route matched with {action = "LogIn", controller = "Api"}. Executing controller action with signature System.Threading.Tasks.Task`1[Quan.Word.Core.ApiResponse`1[Quan.Word.Core.UserProfileDetailsApiModel]] LogInAsync(Quan.Word.Core.LoginCredentialsApiModel) on controller Quan.Word.Web.Server.ApiController (Quan.Word.Web.Server).
+[2020-11-10 09:30:03]Executing action method Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:30:03]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:30:03]Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+[2020-11-10 09:30:03]Executed action method Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 71.0816ms.
+[2020-11-10 09:30:03]Executing ObjectResult, writing value of type 'Quan.Word.Core.ApiResponse`1[[Quan.Word.Core.UserProfileDetailsApiModel, Quan.Word.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2020-11-10 09:30:03]Executed action Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server) in 156.6934ms
+[2020-11-10 09:30:03]Executed endpoint 'Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:30:03]Request finished in 248.0765ms 200 application/json; charset=utf-8
+[2020-11-10 09:50:45]User profile is available. Using 'C:\Users\quanljh\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2020-11-10 09:50:46]Request starting HTTP/1.1 GET http://localhost:5000/  
+[2020-11-10 09:50:46]Executing endpoint 'Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server)'
+[2020-11-10 09:50:46]Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Quan.Word.Web.Server.HomeController (Quan.Word.Web.Server).
+[2020-11-10 09:50:46]Executing action method Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:50:47]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:50:48]Executed DbCommand (33ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+[2020-11-10 09:50:48]Executed DbCommand (59ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+[2020-11-10 09:50:48]Executed DbCommand (55ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Settings] AS [s]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+[2020-11-10 09:50:48]Executed action method Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1949.5416ms.
+[2020-11-10 09:50:48]Executing ViewResult, running view Index.
+[2020-11-10 09:50:48]Executed ViewResult - view Index executed in 172.4198ms.
+[2020-11-10 09:50:49]Executed action Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server) in 2524.194ms
+[2020-11-10 09:50:49]Executed endpoint 'Quan.Word.Web.Server.HomeController.Index (Quan.Word.Web.Server)'
+[2020-11-10 09:50:49]Request finished in 2830.4272ms 200 text/html; charset=utf-8
+[2020-11-10 09:51:06]Request starting HTTP/1.1 POST http://localhost:5000/api/register application/json 108
+[2020-11-10 09:51:06]Executing endpoint 'Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:51:06]Route matched with {action = "Register", controller = "Api"}. Executing controller action with signature System.Threading.Tasks.Task`1[Quan.Word.Core.ApiResponse`1[Quan.Word.Core.RegisterResultApiModel]] RegisterAsync(Quan.Word.Core.RegisterCredentialsApiModel) on controller Quan.Word.Web.Server.ApiController (Quan.Word.Web.Server).
+[2020-11-10 09:51:06]Executing action method Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:51:06]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:51:06]Executed DbCommand (51ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+[2020-11-10 09:51:07]Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+[2020-11-10 09:51:07]User 9bbc9760-4c7f-424b-a0a9-3ad9dc2069d7 validation failed: DuplicateUserName;DuplicateEmail.
+[2020-11-10 09:51:07]Executed action method Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 388.9316ms.
+[2020-11-10 09:51:07]Executing ObjectResult, writing value of type 'Quan.Word.Core.ApiResponse`1[[Quan.Word.Core.RegisterResultApiModel, Quan.Word.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2020-11-10 09:51:07]Executed action Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server) in 774.4681ms
+[2020-11-10 09:51:07]Executed endpoint 'Quan.Word.Web.Server.ApiController.RegisterAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:51:07]Request finished in 961.6219ms 200 application/json; charset=utf-8
+[2020-11-10 09:52:04]Request starting HTTP/1.1 POST http://localhost:5000/api/login application/json 64
+[2020-11-10 09:52:04]Executing endpoint 'Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:52:04]Route matched with {action = "LogIn", controller = "Api"}. Executing controller action with signature System.Threading.Tasks.Task`1[Quan.Word.Core.ApiResponse`1[Quan.Word.Core.UserProfileDetailsApiModel]] LogInAsync(Quan.Word.Core.LoginCredentialsApiModel) on controller Quan.Word.Web.Server.ApiController (Quan.Word.Web.Server).
+[2020-11-10 09:52:04]Executing action method Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server) - Validation state: Valid
+[2020-11-10 09:52:04]Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+[2020-11-10 09:52:04]Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+[2020-11-10 09:52:04]Executed action method Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 118.9223ms.
+[2020-11-10 09:52:04]Executing ObjectResult, writing value of type 'Quan.Word.Core.ApiResponse`1[[Quan.Word.Core.UserProfileDetailsApiModel, Quan.Word.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2020-11-10 09:52:04]Executed action Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server) in 274.1343ms
+[2020-11-10 09:52:04]Executed endpoint 'Quan.Word.Web.Server.ApiController.LogInAsync (Quan.Word.Web.Server)'
+[2020-11-10 09:52:04]Request finished in 369.4609ms 200 application/json; charset=utf-8

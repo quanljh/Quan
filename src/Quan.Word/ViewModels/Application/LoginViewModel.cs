@@ -53,6 +53,7 @@ namespace Quan.Word
 
         public LoginViewModel()
         {
+            // TODO:
             LoginCommand = new RelayCommand(async parameter => await LoginAsync(parameter));
 
             RegisterCommand = new RelayCommand(async () => await Register());
@@ -69,7 +70,7 @@ namespace Quan.Word
         /// <returns></returns>
         public async Task LoginAsync(object parameter)
         {
-            await RunCommand(() => LoginIsRunning, async () =>
+            await RunCommandAsync(() => LoginIsRunning, async () =>
             {
                 // Call the server and attempt to login with credentials
                 // TODO: Move all URLs and API routes to static class in core
