@@ -16,21 +16,21 @@
     <system:Double x:Key="FontSizeXLarge">24</system:Double>
     <system:Double x:Key="FontSizeXXLarge">30</system:Double>
 
-    <system:String x:Key="FontAweSomeChatIcon">&#xf086;</system:String>
-    <system:String x:Key="FontAweSomeUserIcon">&#xf007;</system:String>
-    <system:String x:Key="FontAweSomePictureIcon">&#xf1c5;</system:String>
-    <system:String x:Key="FontAweSomeCogIcon">&#xf013;</system:String>
-    <system:String x:Key="FontAweSomeSearchIcon">&#xf002;</system:String>
-    <system:String x:Key="FontAwesomeEllipsisIcon">&#xf141;</system:String>
-    <system:String x:Key="FontAweSomeEllipsisVerticalIcon">&#xf142;</system:String>
-    <system:String x:Key="FontAweSomePaperclipIcon">&#xf0c6;</system:String>
-    <system:String x:Key="FontAweSomeEmojiIcon">&#xf118;</system:String>
-    <system:String x:Key="FontAweSomeArrowleftIcon">&#xf060;</system:String>
-    <system:String x:Key="FontAwesomeTickIcon">&#xf00c;</system:String>
-    <system:String x:Key="FontAwesomeCloseIcon">&#xf00d;</system:String>
-    <system:String x:Key="FontAwesomeAngleUpIcon">&#xf106;</system:String>
-    <system:String x:Key="FontAwesomeAngleDownIcon">&#xf107;</system:String>
-    <system:String x:Key="FontAwesomePlusIcon">&#xf067;</system:String>
-    <system:String x:Key="FontAwesomeMinusIcon">&#xf068;</system:String>
+    <system:String x:Key="FontAweSomeChatIcon"><![CDATA[ &#xf086; ]]></system:String>
+    <system:String x:Key="FontAweSomeUserIcon"><![CDATA[ &#xf007; ]]></system:String>
+    <system:String x:Key="FontAweSomePictureIcon"><![CDATA[ &#xf1c5;]]></system:String>
+    <system:String x:Key="FontAweSomeCogIcon"><![CDATA[ &#xf013;]]></system:String>
+    <system:String x:Key="FontAweSomeSearchIcon"><![CDATA[ &#xf002;]]></system:String>
+    <system:String x:Key="FontAwesomeEllipsisIcon"><![CDATA[ &#xf141;]]></system:String>
+    <system:String x:Key="FontAweSomeEllipsisVerticalIcon"><![CDATA[ &#xf142;]]></system:String>
+    <system:String x:Key="FontAweSomePaperclipIcon"><![CDATA[ &#xf0c6;]]></system:String>
+    <system:String x:Key="FontAweSomeEmojiIcon"><![CDATA[ &#xf118;]]></system:String>
+    <system:String x:Key="FontAweSomeArrowleftIcon"><![CDATA[ &#xf060;]]></system:String>
+    <system:String x:Key="FontAwesomeTickIcon"><![CDATA[ &#xf00c;]]></system:String>
+    <system:String x:Key="FontAwesomeCloseIcon"><![CDATA[ &#xf00d;]]></system:String>
+    <system:String x:Key="FontAwesomeAngleUpIcon"><![CDATA[ &#xf106;]]></system:String>
+    <system:String x:Key="FontAwesomeAngleDownIcon"><![CDATA[ &#xf107;]]></system:String>
+    <system:String x:Key="FontAwesomePlusIcon"><![CDATA[ &#xf067;]]></system:String>
+    <system:String x:Key="FontAwesomeMinusIcon"><![CDATA[ &#xf068;]]></system:String>
 
 </ResourceDictionary>

@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;Component/Themes/Basic/Fonts.xaml" />
         <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;Component/Themes/Basic/Geometries.xaml" />
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;Component/Themes/Basic/ContentControl.xaml" />
         <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;Component/Themes/Styles/Controls/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -17,10 +18,10 @@
                     x:Name="PART_OuterDraggingBorder"
                     Panel.ZIndex="2"
                     BorderBrush="{DynamicResource Quan.Brushes.WarningColorBrush}"
-                    CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+                    CornerRadius="{TemplateBinding WindowCornerRadius}" />
 
                 <!--  Opacity mask for corners on grid  -->
-                <Border x:Name="Container" Background="{TemplateBinding Background}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+                <Border x:Name="Container" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding WindowCornerRadius}" />
 
                 <!--  Window border and drop shadow  -->
                 <Border
@@ -28,7 +29,7 @@
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+                    CornerRadius="{TemplateBinding WindowCornerRadius}">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.2" ShadowDepth="2.5" />
                     </Border.Effect>
@@ -50,7 +51,7 @@
                     </Grid.RowDefinitions>
 
                     <!--  Title Bar  -->
-                    <Grid Grid.Column="0" Panel.ZIndex="1">
+                    <Grid Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <!--  Icon  -->
                             <ColumnDefinition Width="Auto" />
@@ -77,10 +78,10 @@
 
                         <Image
                             x:Name="PART_Icon"
-                            Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                            MinWidth="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                            Width="22"
+                            Height="22"
+                            Margin="5,0,0,0"
                             VerticalAlignment="Center"
-                            Panel.ZIndex="1"
                             Focusable="False"
                             IsHitTestVisible="False"
                             Source="{TemplateBinding Icon}"
@@ -91,19 +92,20 @@
                             x:Name="PART_TitleBar"
                             Grid.Column="1"
                             Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center"
                             Content="{TemplateBinding Title}"
                             ContentTemplate="{TemplateBinding TitleTemplate}"
-                            Focusable="False" />
+                            Focusable="False"
+                            Style="{StaticResource Quan.Styles.ContentControl.Default}" />
 
                         <StackPanel Grid.Column="2" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
                             <Button
                                 x:Name="PART_MinButton"
                                 Width="45"
-                                local:IconGeometryProperty.Value="{StaticResource WindowMinGeometry}"
-                                local:IconHeightProperty.Value="10"
-                                local:IconWidthProperty.Value="10"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource WindowMinGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
                                 BorderThickness="1,0"
                                 Command="{x:Static SystemCommands.MinimizeWindowCommand}"
                                 Focusable="False"
@@ -112,9 +114,10 @@
                             <Button
                                 x:Name="PART_MaxButton"
                                 Width="45"
-                                local:IconGeometryProperty.Value="{StaticResource WindowMaxGeometry}"
-                                local:IconHeightProperty.Value="10"
-                                local:IconWidthProperty.Value="10"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource WindowMaxGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
                                 BorderThickness="1,0"
                                 Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                                 Focusable="False"
@@ -123,9 +126,10 @@
                             <Button
                                 x:Name="PART_RestoreButton"
                                 Width="45"
-                                local:IconGeometryProperty.Value="{StaticResource WindowRestoreGeometry}"
-                                local:IconHeightProperty.Value="10"
-                                local:IconWidthProperty.Value="10"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource WindowRestoreGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
                                 BorderThickness="1,0"
                                 Command="{x:Static SystemCommands.RestoreWindowCommand}"
                                 Focusable="False"
@@ -134,9 +138,10 @@
                             <Button
                                 x:Name="PART_CloseButton"
                                 Width="45"
-                                local:IconGeometryProperty.Value="{StaticResource CloseGeometry}"
-                                local:IconHeightProperty.Value="10"
-                                local:IconWidthProperty.Value="10"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource CloseGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
                                 BorderThickness="1,0,0,0"
                                 Command="{x:Static SystemCommands.CloseWindowCommand}"
                                 Focusable="False"

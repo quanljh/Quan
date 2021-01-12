@@ -17,11 +17,11 @@
 
     <Style x:Key="Quan.Styles.Button.Base" BasedOn="{StaticResource Quan.Styles.Button.BaseBase}" TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
-        <Setter Property="local:BorderCornerRadiusProperty.Value" Value="5" />
+        <Setter Property="local:BorderElement.CornerRadius" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderCornerRadiusProperty.Value), RelativeSource={RelativeSource TemplatedParent}}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
                         <StackPanel
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -29,9 +29,9 @@
                             Orientation="Horizontal">
                             <Path
                                 x:Name="IconContent"
-                                Width="{TemplateBinding local:IconWidthProperty.Value}"
-                                Height="{TemplateBinding local:IconHeightProperty.Value}"
-                                Data="{TemplateBinding local:IconGeometryProperty.Value}"
+                                Width="{TemplateBinding local:IconElement.Width}"
+                                Height="{TemplateBinding local:IconElement.Height}"
+                                Data="{TemplateBinding local:IconElement.Geometry}"
                                 Fill="{TemplateBinding Foreground}"
                                 SnapsToDevicePixels="True"
                                 Stretch="Uniform" />
@@ -47,7 +47,7 @@
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="local:IconGeometryProperty.Value" Value="{x:Null}">
+                        <Trigger Property="local:IconElement.Geometry" Value="{x:Null}">
                             <Setter TargetName="IconContent" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
                         </Trigger>
@@ -72,7 +72,7 @@
     <Style x:Key="Quan.Styles.Button.Icon" BasedOn="{StaticResource Quan.Styles.Button.Base}" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="local:BorderCornerRadiusProperty.Value" Value="0" />
+        <Setter Property="local:BorderElement.CornerRadius" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -80,16 +80,16 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{Binding Path=(local:BorderCornerRadiusProperty.Value), RelativeSource={RelativeSource TemplatedParent}}">
+                        CornerRadius="{Binding Path=(local:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
                         <ContentControl
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <Path
-                                Width="{TemplateBinding local:IconWidthProperty.Value}"
-                                Height="{TemplateBinding local:IconHeightProperty.Value}"
-                                Data="{TemplateBinding local:IconGeometryProperty.Value}"
+                                Width="{TemplateBinding local:IconElement.Width}"
+                                Height="{TemplateBinding local:IconElement.Height}"
+                                Data="{TemplateBinding local:IconElement.Geometry}"
                                 Fill="{TemplateBinding Foreground}"
                                 SnapsToDevicePixels="True"
                                 Stretch="Uniform" />

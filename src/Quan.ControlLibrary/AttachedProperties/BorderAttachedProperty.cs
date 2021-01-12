@@ -6,9 +6,16 @@ using System.Windows.Media;
 
 namespace Quan.ControlLibrary
 {
-    public class BorderCornerRadiusProperty : BaseAttachedProperty<BorderCornerRadiusProperty, CornerRadius>
+    public class BorderElement
     {
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(
+            "CornerRadius",
+            typeof(CornerRadius),
+            typeof(BorderElement),
+            new FrameworkPropertyMetadata(default(CornerRadius), FrameworkPropertyMetadataOptions.Inherits));
 
+        public static CornerRadius GetCornerRadius(DependencyObject element) => (CornerRadius)element.GetValue(CornerRadiusProperty);
+        public static void SetCornerRadius(DependencyObject element, CornerRadius value) => element.SetValue(CornerRadiusProperty, value);
     }
 
     /// <summary>
