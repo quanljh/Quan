@@ -241,13 +241,13 @@
       <!--  Main window outline  -->
       <Grid>
         <!--  Outer dragging border  -->
-        <Border x:Name="PART_OuterDraggingBorder" Panel.ZIndex="2" BorderBrush="{DynamicResource Quan.Brushes.WarningColorBrush}" CornerRadius="{TemplateBinding WindowCornerRadius}" />
+        <Border x:Name="PART_OuterDraggingBorder" Panel.ZIndex="2" BorderBrush="{DynamicResource Quan.Brushes.WarningColorBrush}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
         <!--  Opacity mask for corners on grid  -->
-        <Border x:Name="Container" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding WindowCornerRadius}" />
+        <Border x:Name="Container" Background="{DynamicResource Quan.Brushes.BorderBrush}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
         <!--  Window border and drop shadow  -->
-        <Border x:Name="RadiusBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding WindowCornerRadius}">
+        <Border x:Name="RadiusBorder" Background="{DynamicResource Quan.Brushes.BackgroundBrush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
           <Border.Effect>
-            <DropShadowEffect Opacity="0.2" ShadowDepth="2.5" />
+            <DropShadowEffect Opacity="0.5" ShadowDepth="2.5" />
           </Border.Effect>
         </Border>
         <!--  The main window content  -->
@@ -263,7 +263,7 @@
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
           <!--  Title Bar  -->
-          <Grid Grid.Column="0">
+          <Grid Grid.Column="0" Panel.ZIndex="1">
             <Grid.ColumnDefinitions>
               <!--  Icon  -->
               <ColumnDefinition Width="Auto" />
@@ -328,7 +328,6 @@
     </ControlTemplate.Triggers>
   </ControlTemplate>
   <Style x:Key="Quan.Styles.Window.Default" TargetType="{x:Type local:QuanWindow}">
-    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundBrush}" />
@@ -337,11 +336,6 @@
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Template" Value="{StaticResource Quan.Templates.Window.Default}" />
     <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeRegular}" />
-    <Setter Property="WindowChrome.WindowChrome">
-      <Setter.Value>
-        <WindowChrome CaptionHeight="{Binding TitleBarHeight, RelativeSource={RelativeSource AncestorType={x:Type local:QuanWindow}}}" CornerRadius="0" GlassFrameThickness="0" ResizeBorderThickness="{Binding ResizeBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type local:QuanWindow}}}" />
-      </Setter.Value>
-    </Setter>
   </Style>
   <Style BasedOn="{StaticResource Quan.Styles.Window.Default}" TargetType="{x:Type local:QuanWindow}" />
 </ResourceDictionary>

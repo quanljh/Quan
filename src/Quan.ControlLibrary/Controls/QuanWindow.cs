@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Shell;
 
 namespace Quan.ControlLibrary
 {
@@ -39,11 +41,6 @@ namespace Quan.ControlLibrary
         /// The last known dock position
         /// </summary>
         private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
-
-        /// <summary>
-        /// True if the window is currently being moved/dragged
-        /// </summary>
-        private bool _isWindowMoving;
 
         /// <summary>
         /// The radius of the edges of the window
@@ -152,6 +149,17 @@ namespace Quan.ControlLibrary
             CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, (sender, args) => SystemCommands.MaximizeWindow(this)));
             CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, (sender, args) => SystemCommands.RestoreWindow(this)));
             CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, (sender, args) => SystemCommands.CloseWindow(this)));
+
+            var chrome = new WindowChrome
+            {
+                CornerRadius = new CornerRadius(),
+                GlassFrameThickness = new Thickness(0, 0, 0, 0),
+                UseAeroCaptionButtons = false
+            };
+
+            BindingOperations.SetBinding(chrome, WindowChrome.CaptionHeightProperty, new Binding(TitleBarHeightProperty.Name) { Source = this });
+            BindingOperations.SetBinding(chrome, WindowChrome.ResizeBorderThicknessProperty, new Binding(ResizeBorderThicknessProperty.Name) { Source = this });
+            WindowChrome.SetWindowChrome(this, chrome);
         }
 
         #endregion
@@ -203,17 +211,12 @@ namespace Quan.ControlLibrary
 
         private void WindowResizerOnWindowStartedMove()
         {
-            // Update being moved flag
-            _isWindowMoving = true;
-
             _windowOuterDraggingBorder.BorderThickness = new Thickness(2);
 
         }
 
         private void WindowResizerOnWindowFinishedMove()
         {
-            _isWindowMoving = false;
-
             _windowOuterDraggingBorder.BorderThickness = new Thickness(0);
 
             // Check for moved to top of window and not at an edge

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.ControlLibrary">
     <ResourceDictionary.MergedDictionaries>
-        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;Component/Themes/Basic/Common.xaml" />
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="ButtonBase">
