@@ -1,150 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED265FC5-1049-4587-9317-48E5710DEF6F}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <RootNamespace>Quan.ControlLibrary</RootNamespace>
-    <AssemblyName>Quan.ControlLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <Deterministic>true</Deterministic>
+    <TargetFrameworks>netcoreapp3.0;netcoreapp3.1;net462;net47;net48;net5.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <None Remove="Resources\Fonts\fontawesome-webfont.ttf" />
+    <None Remove="Resources\Fonts\Lato-Black.ttf" />
+    <None Remove="Resources\Fonts\Lato-BlackItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Bold.ttf" />
+    <None Remove="Resources\Fonts\Lato-BoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Hairline.ttf" />
+    <None Remove="Resources\Fonts\Lato-HairlineItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Heavy.ttf" />
+    <None Remove="Resources\Fonts\Lato-HeavyItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Italic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Light.ttf" />
+    <None Remove="Resources\Fonts\Lato-LightItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Medium.ttf" />
+    <None Remove="Resources\Fonts\Lato-MediumItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Regular.ttf" />
+    <None Remove="Resources\Fonts\Lato-Semibold.ttf" />
+    <None Remove="Resources\Fonts\Lato-SemiboldItalic.ttf" />
+    <None Remove="Resources\Fonts\Lato-Thin.ttf" />
+    <None Remove="Resources\Fonts\Lato-ThinItalic.ttf" />
+    <None Remove="Resources\Images\Logo\quan.ico" />
+    <None Remove="Themes\Theme.txt" />
+    <None Remove="Themes\XamlCombine.exe" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Animation\AnimationSlideInDirection.cs" />
-    <Compile Include="Animation\FrameworkElementAnimations.cs" />
-    <Compile Include="Animation\PageAnimations.cs" />
-    <Compile Include="Animation\StoryboardHelpers.cs" />
-    <Compile Include="AttachedProperties\BaseAttachedProperty.cs" />
-    <Compile Include="AttachedProperties\BindingProxy.cs" />
-    <Compile Include="AttachedProperties\BorderAttachedProperty.cs" />
-    <Compile Include="AttachedProperties\ButtonAttachedProperty.cs" />
-    <Compile Include="AttachedProperties\ExpanderAttachedProperty.cs" />
-    <Compile Include="AttachedProperties\ExpanderRowDetailAttachedProperty.cs" />
-    <Compile Include="AttachedProperties\FrameworkElementAnimationAttachedProperties.cs" />
-    <Compile Include="AttachedProperties\IconElement.cs" />
-    <Compile Include="AttachedProperties\NoFrameHistoryProperty.cs" />
-    <Compile Include="AttachedProperties\PanelChildMarginProperty.cs" />
-    <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
-    <Compile Include="AttachedProperties\ScrollViewerAttachedProperties.cs" />
-    <Compile Include="AttachedProperties\TextAttachedProperty.cs" />
-    <Compile Include="Controls\QuanToolTip.cs" />
-    <Compile Include="Controls\QuanWindow.cs" />
-    <Compile Include="Converter\BaseValueConverter .cs" />
-    <Compile Include="Converter\BooleanToBorderThicknessConverter.cs" />
-    <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converter\StringToVisibilityConverter.cs" />
-    <Compile Include="Controls\QuanTextBox.cs" />
-    <Compile Include="Helper\DesignerHelper.cs" />
-    <Compile Include="Helper\ResourceHelper.cs" />
-    <Compile Include="Themes\SharedResourceDictionary.cs" />
-    <Compile Include="Helper\VisualTreeExtensions.cs" />
-    <Compile Include="Helper\WindowResizer.cs" />
-    <Compile Include="Helper\StyleSelector\GroupStyleSelector.cs" />
-    <Compile Include="Themes\Theme.cs" />
-    <Page Include="Themes\Basic\Common.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Basic\Brushes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Basic\ContentControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Basic\Geometries.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\SkinDefault.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Styles\Controls\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Basic\Colors\Colors.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Basic\Fonts.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Styles\Controls\PasswordBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Themes\Styles\CustomControls\QuanWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Styles\CustomControls\QuanTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="app.config" />
     <Resource Include="Resources\Fonts\fontawesome-webfont.ttf" />
     <Resource Include="Resources\Fonts\Lato-Black.ttf" />
     <Resource Include="Resources\Fonts\Lato-BlackItalic.ttf" />
@@ -164,25 +54,52 @@
     <Resource Include="Resources\Fonts\Lato-SemiboldItalic.ttf" />
     <Resource Include="Resources\Fonts\Lato-Thin.ttf" />
     <Resource Include="Resources\Fonts\Lato-ThinItalic.ttf" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations">
-      <Version>2020.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Quan.Framework">
-      <Version>1.0.7.2</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
     <Resource Include="Resources\Images\Logo\quan.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>..\..\Themes\XamlCombine.exe ..\..\Themes\Theme.txt Generic.xaml</PreBuildEvent>
-  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Basic\Brushes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Basic\Colors\Colors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Basic\Common.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Basic\ContentControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Basic\Fonts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Basic\Geometries.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Themes\SkinDefault.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\Controls\Button.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\Controls\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\CustomControls\QuanTextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\CustomControls\QuanWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="$(ProjectDir)Themes\XamlCombine.exe $(ProjectDir)Themes\Theme.txt Generic.xaml" />
+  </Target>
+
 </Project>

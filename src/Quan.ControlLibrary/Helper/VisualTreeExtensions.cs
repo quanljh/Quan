@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,7 +80,7 @@ namespace Quan.ControlLibrary
         /// <param name="itemContainerSearchType">The ItemContainer type of the ItemsControl</param>
         /// <returns>Return Null if we not found</returns>
         public static DependencyObject FindVisualParent(this DependencyObject d, Type itemSearchType,
-            [NotNull] ItemsControl itemsControl, [NotNull] Type itemContainerSearchType)
+             ItemsControl itemsControl, Type itemContainerSearchType)
         {
             if (itemsControl == null) throw new ArgumentNullException(nameof(itemsControl));
             if (itemContainerSearchType == null) throw new ArgumentNullException(nameof(itemContainerSearchType));
@@ -112,7 +111,7 @@ namespace Quan.ControlLibrary
         /// <summary>
         /// Find the visual ancestor by type and go through the visual tree until the given itemsControl will be found
         /// </summary>
-        public static DependencyObject FindVisualParent(this DependencyObject d, Type itemSearchType, [NotNull] ItemsControl itemsControl)
+        public static DependencyObject FindVisualParent(this DependencyObject d, Type itemSearchType, ItemsControl itemsControl)
         {
             if (itemsControl == null) throw new ArgumentNullException(nameof(itemsControl));
 
