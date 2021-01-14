@@ -6,7 +6,7 @@ Basic\Common.xaml
 Basic\ContentControl.xaml
 
 # Controls
-Styles\Controls\Button.xaml
-Styles\Controls\PasswordBox.xaml
-Styles\CustomControls\QuanTextBox.xaml
-Styles\CustomControls\QuanWindow.xaml
+Styles\Basic\Button.xaml
+Styles\Basic\PasswordBox.xaml
+Styles\QuanTextBox.xaml
+Styles\QuanWindow.xaml

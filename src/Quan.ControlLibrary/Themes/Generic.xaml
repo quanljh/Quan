@@ -241,29 +241,31 @@
       <!--  Main window outline  -->
       <Grid>
         <!--  Outer dragging border  -->
-        <Border x:Name="PART_OuterDraggingBorder" Panel.ZIndex="2" BorderBrush="{DynamicResource Quan.Brushes.WarningColorBrush}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Border x:Name="PART_OuterDraggingBorder" Panel.ZIndex="2" BorderBrush="{DynamicResource Quan.Brushes.WarningColorBrush}" CornerRadius="{TemplateBinding WindowCornerRadius}" />
         <!--  Opacity mask for corners on grid  -->
-        <Border x:Name="Container" Background="{DynamicResource Quan.Brushes.BorderBrush}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Border x:Name="PART_OpacityMask" Background="{DynamicResource Quan.Brushes.BackgroundBrush}" CornerRadius="{TemplateBinding WindowCornerRadius}" />
         <!--  Window border and drop shadow  -->
-        <Border x:Name="RadiusBorder" Background="{DynamicResource Quan.Brushes.BackgroundBrush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding WindowCornerRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+        <Border x:Name="RadiusBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding WindowCornerRadius}">
           <Border.Effect>
             <DropShadowEffect Opacity="0.5" ShadowDepth="2.5" />
           </Border.Effect>
         </Border>
         <!--  The main window content  -->
         <Grid>
-          <!--  Corner clipping  -->
-          <Grid.OpacityMask>
-            <VisualBrush Visual="{Binding ElementName=Container}" />
-          </Grid.OpacityMask>
           <Grid.RowDefinitions>
             <!--  Title Bar  -->
             <RowDefinition Height="Auto" />
             <!--  Window Content  -->
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
+          <!--  Dividing Line  -->
+          <Border Grid.Row="0" BorderBrush="{DynamicResource Quan.Brushes.ForegroundVeryLightBrush}" BorderThickness="0,0,0,0.5" ClipToBounds="True">
+            <Border.Effect>
+              <DropShadowEffect Direction="270" Opacity="0.5" ShadowDepth="0.5" />
+            </Border.Effect>
+          </Border>
           <!--  Title Bar  -->
-          <Grid Grid.Column="0" Panel.ZIndex="1">
+          <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
               <!--  Icon  -->
               <ColumnDefinition Width="Auto" />
@@ -273,17 +275,6 @@
               <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!--  icon  -->
-            <!--<ContentControl
-                            x:Name="PART_Icon"
-                            Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                            MinWidth="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
-                            Panel.ZIndex="1"
-                            Content="{TemplateBinding Icon}"
-                            ContentTemplate="{TemplateBinding IconTemplate}"
-                            Focusable="False"
-                            Visibility="{Binding ShowIconOnTitleBar, RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}}" />-->
             <Image x:Name="PART_Icon" Width="22" Height="22" Margin="5,0,0,0" VerticalAlignment="Center" Focusable="False" IsHitTestVisible="False" Source="{TemplateBinding Icon}" Visibility="{Binding ShowIconOnTitleBar, RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}}" />
             <!--  Title  -->
             <ContentControl x:Name="PART_TitleBar" Grid.Column="1" Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" VerticalContentAlignment="Center" Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}" Focusable="False" Style="{StaticResource Quan.Styles.ContentControl.Default}" />
@@ -300,6 +291,10 @@
               <ContentPresenter />
             </AdornerDecorator>
           </Border>
+          <!--  Corner clipping  -->
+          <Grid.OpacityMask>
+            <VisualBrush Visual="{Binding ElementName=PART_OpacityMask}" />
+          </Grid.OpacityMask>
         </Grid>
       </Grid>
     </Border>
@@ -328,6 +323,7 @@
     </ControlTemplate.Triggers>
   </ControlTemplate>
   <Style x:Key="Quan.Styles.Window.Default" TargetType="{x:Type local:QuanWindow}">
+    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundBrush}" />

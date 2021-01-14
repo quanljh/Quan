@@ -62,7 +62,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Basic\Colors\Colors.xaml">
-      <SubType>Designer</SubType>
+	    <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Basic\Common.xaml">
       <SubType>Designer</SubType>
@@ -77,21 +77,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
+	    <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\SkinDefault.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Styles\Controls\Button.xaml">
+    <Page Update="Themes\Styles\Basic\Button.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Styles\Controls\PasswordBox.xaml">
+    <Page Update="Themes\Styles\Basic\PasswordBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Styles\CustomControls\QuanTextBox.xaml">
+    <Page Update="Themes\Styles\QuanTextBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Styles\CustomControls\QuanWindow.xaml">
+    <Page Update="Themes\Styles\QuanWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
